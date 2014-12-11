@@ -27,3 +27,12 @@
 *.i*86
 *.x86_64
 *.hex
+
+# Personalized extensions
+
+### Linux ###
+*~
+
+# KDE directory preferences
+.directory
+
