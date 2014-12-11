@@ -8,15 +8,15 @@
 #include "utility.h"
 
 
-//#define DEBUG
+#define DEBUG
 
 struct timer_list exp_timer;
 
 static void do_somework(unsigned long delay)
 {
-        struct file *fp = file_open("/cenas", O_RDWR | O_CREAT, 0644);
+        struct file *fp = file_open("cenas", O_WRONLY | O_CREAT | O_APPEND, 0644);
 
-        char buffer [50];
+        char buffer [50] = "";
         sprintf (buffer, "Timer expired after %lu\n", delay);
 
         if (fp != NULL) {
