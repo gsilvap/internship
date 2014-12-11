@@ -11,7 +11,7 @@ Begin at ../12/2014
 Finished at 04/12/2014
 
 <b>Description</b>
-    Do a print, with printk, from x to x time, atraves de um trigger temporal, in kernel
+    Do a print, with printk, from x to x time, using a time trigger, in kernel
 
 <b>Module Compilation</b>
 
