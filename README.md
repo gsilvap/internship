@@ -9,18 +9,18 @@ Trabalho do estagio
 
 
 ##### Task1
-###### Atribuida a ??/11/2014
+Atribuida a ??/11/2014
 
-###### Compilação do Modulo
+- Compilação do Modulo
 make
 
-###### Instalação do Modulo
+- Instalação do Modulo
 sudo insmod timer.ko
 
-###### Remoção do Modulo
+- Remoção do Modulo
 sudo rmmod timer
 
 ##### Task2
-###### Atribuida a 04/12/2014
+Atribuida a 04/12/2014
 
 
