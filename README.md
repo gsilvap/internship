@@ -1,26 +1,39 @@
 Stage
 =====
 
-Trabalho do estagio
-
-#### Tarefas
-- [Fazer um print, com o printk, de x em x tempo, atraves de um trigger temporal, no kernel](#task1)
-- [Redirecionar o output para um ficheiro escolhido pelo utilizador e recebido por parametro](#task2)
+### Tasks
+- [printk](#task1-v01)
+- [redirect output](#task2)
 
 
-##### Task1
-Atribuida a ??/11/2014
+#### Task1 v0.1
+Begin at ../12/2014
+Finished at 04/12/2014
 
-- Compilação do Modulo
-make
+<b>Description</b>
+    Do a print, with printk, from x to x time, atraves de um trigger temporal, in kernel
 
-- Instalação do Modulo
-sudo insmod timer.ko
+<b>Module Compilation</b>
 
-- Remoção do Modulo
-sudo rmmod timer
+    make
 
-##### Task2
-Atribuida a 04/12/2014
+<b>Module Instalation</b>
+
+    sudo insmod timer.ko
+
+<b>Module Removal</b>
+
+    sudo rmmod timer
+
+<b>Explanation</b>
+
+
+#### Task2
+Begin at 04/12/2014
+Finished at ../12/2014
+
+<b>Description</b>
+    Redirect the output to a file given by the user as parameter
+
 
 
