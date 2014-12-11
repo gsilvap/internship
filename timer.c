@@ -14,10 +14,11 @@ struct timer_list exp_timer;
 
 static void do_somework(unsigned long delay)
 {
+        struct file *fp = file_open("/cenas", O_RDWR | O_CREAT, 0644);
+
         char buffer [50];
         sprintf (buffer, "Timer expired after %lu\n", delay);
 
-        struct file *fp = file_open("/cenas", O_RDWR | O_CREAT, 0644);
         if (fp != NULL) {
                 loff_t pos = 0;
                 file_write(fp, pos, buffer, sizeof(buffer));
