@@ -5,12 +5,30 @@
 #include <linux/timer.h>
 #include <linux/jiffies.h>
 #include <asm/param.h>
+#include "utility.h"
+
+
+//#define DEBUG
 
 struct timer_list exp_timer;
 
 static void do_somework(unsigned long delay)
 {
-        printk(KERN_INFO "Timer expired after %lu\n", delay);       
+        char buffer [50];
+        sprintf (buffer, "Timer expired after %lu\n", delay);
+
+        struct file *fp = file_open("/cenas", O_RDWR | O_CREAT, 0644);
+        if (fp != NULL) {
+                loff_t pos = 0;
+                file_write(fp, pos, buffer, sizeof(buffer));
+                //file_sync(fp);
+                file_close(fp);
+        }
+
+#ifdef DEBUG
+        printk(KERN_INFO "Timer expired after %lu\n", delay);   
+#endif    
+
         exp_timer.expires = jiffies + delay * HZ;
         //exp_timer.function = do_something;
 
@@ -20,8 +38,9 @@ static void do_somework(unsigned long delay)
 static int __init start_module(void)
 {       
         int delay = 60;
-
+#ifdef DEBUG
         printk(KERN_INFO "Init module\n");
+#endif 
 
         init_timer_on_stack(&exp_timer);
 
@@ -40,7 +59,11 @@ static int __init start_module(void)
 static void __exit exit_module(void)
 {       
         del_timer(&exp_timer);  
+
+#ifdef DEBUG
         printk(KERN_INFO "Exit module\n");
+#endif 
+
 }
 
 module_init(start_module);

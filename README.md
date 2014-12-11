@@ -7,8 +7,7 @@ Stage
 
 
 #### Task1 v0.1
-Begin at ../12/2014
-Finished at 04/12/2014
+Begin at 07/11/2014 and finished at 04/12/2014
 
 <b>Description</b>
     Do a print, with printk, from x to x time, using a time trigger, in kernel
@@ -29,8 +28,7 @@ Finished at 04/12/2014
 
 
 #### Task2
-Begin at 04/12/2014
-Finished at ../12/2014
+Begin at 04/12/2014 and finished at ../12/2014
 
 <b>Description</b>
     Redirect the output to a file given by the user as parameter
