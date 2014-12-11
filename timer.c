@@ -14,6 +14,14 @@ struct timer_list exp_timer;
 
 static void do_somework(unsigned long delay)
 {
+	// O_WRONLY Write Only
+	// O_CREAT Create file
+	// O_APPEND Adicionar informação ao ficheiro
+
+	// 0644 permissions, same of -rw-r--r--
+	// User: read & write
+	// Group: read
+	// Other: read
         struct file *fp = file_open("cenas", O_WRONLY | O_CREAT | O_APPEND, 0644);
 
         char buffer [50] = "";
