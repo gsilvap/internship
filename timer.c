@@ -34,9 +34,9 @@ static void do_somework(unsigned long delay)
                 file_close(fp);
         }
 
-#ifdef DEBUG
+        #ifdef DEBUG
         printk(KERN_INFO "Timer expired after %lu\n", delay);   
-#endif    
+        #endif
 
         exp_timer.expires = jiffies + delay * HZ;
         //exp_timer.function = do_something;
@@ -47,9 +47,10 @@ static void do_somework(unsigned long delay)
 static int __init start_module(void)
 {       
         int delay = 60;
-#ifdef DEBUG
+        
+        #ifdef DEBUG
         printk(KERN_INFO "Init module\n");
-#endif 
+        #endif
 
         init_timer_on_stack(&exp_timer);
 
@@ -67,12 +68,11 @@ static int __init start_module(void)
 
 static void __exit exit_module(void)
 {       
-        del_timer(&exp_timer);  
+        del_timer(&exp_timer);
 
-#ifdef DEBUG
+        #ifdef DEBUG
         printk(KERN_INFO "Exit module\n");
-#endif 
-
+        #endif
 }
 
 module_init(start_module);

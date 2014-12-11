@@ -28,7 +28,7 @@ Begin at 07/11/2014 and finished at 04/12/2014
 
 
 #### Task2
-Begin at 04/12/2014 and finished at ../12/2014
+Begin at 04/12/2014 and finished at 11/12/2014
 
 <b>Description</b>
     Redirect the output to a file given by the user as parameter
