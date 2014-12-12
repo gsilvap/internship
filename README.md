@@ -2,8 +2,8 @@ Stage
 =====
 
 ### Tasks
-- [printk](#task1-v01)
-- [redirect output](#task2)
+1 - [printk](#task1-v01)
+2 - [redirect output](#task2)
 
 
 #### Task1 v0.1
