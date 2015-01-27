@@ -1,0 +1,16 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}State of the Art}{2}{section.2}
+\contentsline {section}{\numberline {3}Tecnology}{3}{section.3}
+\contentsline {section}{\numberline {4}Requirements}{4}{section.4}
+\contentsline {section}{\numberline {5}Documentation}{5}{section.5}
+\contentsline {section}{\numberline {6}Estimation}{6}{section.6}
+\contentsline {section}{\numberline {7}Revision of code}{6}{section.7}
+\contentsline {section}{\numberline {8}Tests}{6}{section.8}
+\contentsline {section}{\numberline {9}Management}{7}{section.9}
+\contentsline {subsection}{\numberline {9.1}Reunions}{7}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Riscs}{7}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Planning and Tracking}{7}{subsection.9.3}
+\contentsline {section}{\numberline {10}Notes to future}{8}{section.10}
+\contentsline {section}{\numberline {11}Conclusions}{9}{section.11}
+\contentsline {section}{References}{10}{section*.2}

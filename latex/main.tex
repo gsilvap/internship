@@ -1,0 +1,57 @@
+%!TEX root = main.tex
+\documentclass[12pt,a4paper, english]{article}
+% portuguese
+% \usepackage[portuguese]{babel}
+\usepackage{babel}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+ %for embedding images
+\usepackage[pdftex]{graphicx}
+% para a cor do texto
+\usepackage[usenames, dvipsnames]{color}
+
+\usepackage{listings} 
+%for proper url entries
+
+\usepackage{url}
+%for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
+
+\usepackage{indentfirst}
+%\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+
+\begin{document}
+
+%\maketitle
+
+%include other pages
+\input{cover}
+
+\newpage
+\tableofcontents{}
+
+\newpage
+
+\input{intro}
+\input{stateofart}
+\input{tecnology}
+\input{requirements}
+\input{documentation}
+\input{estimation}
+\input{revision}
+\input{tests}
+\input{management}
+\input{notes}
+\input{conclusions}
+
+\cleardoublepage
+
+\phantomsection
+
+\addcontentsline{toc}{section}{References}
+
+%\newpage
+%%\addcontentsline{toc}{section}{Referencias}
+\bibliographystyle{unsrt}
+\bibliography{refs}
+\end{document}

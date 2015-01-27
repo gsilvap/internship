@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{duraes2006emulation}
+Joao~A Duraes and Henrique~S Madeira.
+\newblock Emulation of software faults: A field data study and a practical
+  approach.
+\newblock {\em Software Engineering, IEEE Transactions on}, 32(11):849--867,
+  2006.
+
+\bibitem{wolter2012resilience}
+Katinka Wolter, Alberto Avritzer, Marco Vieira, and Aad van Moorsel.
+\newblock {\em Resilience assessment and evaluation of computing systems}.
+\newblock Springer, 2012.
+
+\bibitem{avizzienisbasic}
+Algirdas Avizzienis, Jean-Claude Laprie, Brian Randell, and Carl Landwehr.
+\newblock Basic concepts and taxonomy of dependable and secure computing.
+
+\end{thebibliography}

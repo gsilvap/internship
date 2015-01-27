@@ -1,0 +1,779 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"c",
+				"c	@critical"
+			],
+			[
+				"Str",
+				"String"
+			],
+			[
+				"l",
+				"l	@low"
+			],
+			[
+				"li",
+				"li	Tag"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"back",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "latex/management.tex",
+			"settings":
+			{
+				"buffer_size": 168,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/tecnology.tex",
+			"settings":
+			{
+				"buffer_size": 61,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/stateofart.tex",
+			"settings":
+			{
+				"buffer_size": 896,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "latex/cover.tex",
+			"settings":
+			{
+				"buffer_size": 823,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/refs.bib",
+			"settings":
+			{
+				"buffer_size": 556,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stage.sublime-project",
+			"settings":
+			{
+				"buffer_size": 498,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"lat",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"bib",
+				"Snippet: BibTeX PhD Thesis"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"latextool",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"latex",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"upgra",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"packa",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"w",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"task",
+				"Tasks: View as HTML"
+			],
+			[
+				"tasks",
+				"Tasks: Complete"
+			],
+			[
+				"new do",
+				"Tasks: New document"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"wr",
+				"Word Wrap: Toggle"
+			],
+			[
+				"pro",
+				"Project: Close"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"jsp",
+				"Set Syntax: Java Server Page (JSP)"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"MarkdownEditing: Add Missing Link Labels"
+			],
+			[
+				"markdo",
+				"MarkdownEditing: Convert Underlined Headers to ATX"
+			],
+			[
+				"view",
+				"View: Toggle Minimap"
+			]
+		],
+		"width": 514.0
+	},
+	"console":
+	{
+		"height": 356.0,
+		"history":
+		[
+			"bibtex",
+			"/master/.config/sublime-text-2/Packages/LaTeXTools/builders/traditionalBuilder.py",
+			"pdflatex",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Dropbox/Materiais/Estagio/stage",
+		"/D/Dropbox/Materiais/Estagio/stage/latex"
+	],
+	"file_history":
+	[
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/notes.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/documentation.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/estimation.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/tecnology.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/tests.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/revision.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/requirements.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/intro.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.bbl",
+		"/C/Users/GonçaloSilva/Desktop/tese marisa/title.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/riscs.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.aux",
+		"/C/Users/GonçaloSilva/Desktop/tese marisa/abreviaturas.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.pdf",
+		"/D/Downloads/log",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/introducao.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/testes.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/notas.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/requisitos.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/revisao.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/riscos.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/tecnologias.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusoes.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/documentacao.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/estimativas.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/gestao.tex",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/CiteBibtex.sublime-settings",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/CiteBibtex/CiteBibtex.sublime-settings",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.blg",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/references.bib",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/youTube.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
+		"/C/Users/GonçaloSilva/Desktop/test.tex",
+		"/C/Users/GonçaloSilva/Desktop/cenas.tex",
+		"/D/MEI/SGD/TP1/Relatorio/file.tex",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/builders/traditionalBuilder.py",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/introducaoEquipa.tex",
+		"/C/Users/GonçaloSilva/AppData/Roaming/SumatraPDF/SumatraPDF-settings.txt",
+		"/D/Dropbox/Materiais/Estagio/stage/README.md",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/all.xsl",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj2/Crawler/data.xsl",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj2/Crawler/site/all.xsl",
+		"/C/Users/GonçaloSilva/Desktop/Youtube.TODO",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.096/RMIServer.java",
+		"/C/Users/GONALO~1/AppData/Local/Temp/Rar$DRa0.838/WEBServer/src/sd/model/DirestrutsBean.java",
+		"/C/Users/GONALO~1/AppData/Local/Temp/Rar$DRa0.570/WEBServer/src/sd/action/CreateTopicAction.java",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.409/Topic.java",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.979/README.txt",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj2/Crawler/cnn.xsd",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj2/tutorial-ejb/ejbModule/ejb/BusinessLogic.java",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj1/Crawler/site/all.xsl",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/all.xml",
+		"/C/Users/GonçaloSilva/Desktop/IS print/proj1/Crawler/src/data/Cnn.java",
+		"/C/Users/GonçaloSilva/Desktop/index.jsp",
+		"/D/Dropbox/estagio/README.md",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/data.xsl",
+		"/C/Users/GonçaloSilva/AppData/Local/NFS Underground 2/Test/Test",
+		"/C/Users/GonçaloSilva/Desktop/test/output.txt",
+		"/C/Users/GonçaloSilva/Desktop/running/download.bat",
+		"/C/Users/GonçaloSilva/Desktop/bd.txt",
+		"/D/Dropbox/estagio/.dropbox",
+		"/D/Dropbox/estagio/README.md.TODO",
+		"/C/Users/GonçaloSilva/Desktop/Documentação/GP docs/cover.tex",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/asia.xml",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1420542880563.xml",
+		"/D/MEO/software_upload/bd.txt",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1420542880562.xml",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/log.log",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1413475658557.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/backup/data_1420542880562.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/cnn.xsd",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/cnn.xml",
+		"/C/Users/GonçaloSilva/Desktop/apns-conf.xml",
+		"/D/Dropbox/Materiais/Estagio/stage/Utility.h",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/producer/t_stmp_1420536889133.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/africa.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/producer/stats.txt",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/backup/all.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/backup/t_stmp_1420536691624.xml",
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/url.xml",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/src/main/app/mule-deploy.properties",
+		"/D/Downloads/Torrents/Finished/Windows 10 Build 9901/Build 9901 Key.txt",
+		"/D/Linux Kernel/modulo/run",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Skype/My Skype Received Files/database_IS_TP3.sql",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/send.xml",
+		"/D/home/master/git/IS_TP3/bdreader/log.log",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/SOAPxmlClient/src/xml/SOAPClient.java",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/WebContent/index.html",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/WebContent/css/style.css",
+		"/D/Dropbox/Materiais/GP/git/GP2014-Youtube-Lyrics/src/youtube/Main.java",
+		"/D/Downloads/SubscribeAction (2)",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/index.jsp",
+		"/D/Windows 8.1/adhoc windows 8.txt",
+		"/D/Downloads/Torrents/Finished/AUTODATA 3.41 PT-PT/crack/crack.bat",
+		"/D/Downloads/Torrents/Finished/AUTODATA 3.41 PT-PT/COMO INSTALAR.txt",
+		"/D/Downloads/utility.h",
+		"/D/Downloads/termos_utilizacao_YouTube.txt",
+		"/D/timer.c",
+		"/D/Dropbox/Materiais/GP/git/GP2014-Youtube-Lyrics/output.txt",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.529/Work.txt",
+		"/D/MEO/software_upload/faults.c",
+		"/D/Linux Kernel/run~",
+		"/D/Downloads/Torrents/Finished/Shutter Island (2010) [1080p]/Shutter.Island.2010.1080p.BluRay.x264.YIFY.srt",
+		"/D/Windows 8.1/onetab3",
+		"/D/Linux Kernel/modulo/faults.c",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/main.jsp",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/css/style.css",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/WEB-INF/editUsers.html",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/main.html",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/index.html",
+		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/editUsers.html",
+		"/C/Users/GonçaloSilva/Desktop/SD/WEBServer/WebContent/bootstrap/dist/css/bootstrap.min.css",
+		"/D/Dropbox/Materiais/IS/git/IS/.gitignore",
+		"/D/HomePage/css/style.css",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/scp19937/home/lei2009/gsp/public_html/index.html",
+		"/D/public_html/css/style.css",
+		"/D/public_html/index.html",
+		"/D/Dropbox/Materiais/GP/git/GP2014-Youtube-Lyrics/README.md",
+		"/D/wildfly-8.1.0.Final/standalone/configuration/standalone-full.xml",
+		"/C/Users/GonçaloSilva/Desktop/SD/WEBServer/WebContent/index.jsp"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 89.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" \"",
+			"\"",
+			"traditional",
+			"simple",
+			"141",
+			"-F",
+			"135         mp4",
+			"135         mp4       854x480",
+			"854x480",
+			"1280x720",
+			"best",
+			"list",
+			"'We're in orbit!' Rosetta first probe to orbit comet - CNN.com",
+			"<year>2014</year>\n                <month>7</month>\n                <day>28</day>",
+			"<year>2014</year>\n                <month>7</month>\n                <day>31</day>",
+			"<year>2014</year>\n                <month>7</month>\n                <day>29</day>",
+			"<year>24</year><month>7</month><day>29</day>",
+			"<year></year><month></month><day></day>",
+			"<year></year>\n                <month></month>\n                <day></day>",
+			"<year>2014</year>\n                <month>7</month>\n                <day>1</day>",
+			"<year>2014</year>\n                <month>7</month>\n                <day>30</day>",
+			"active",
+			"btn",
+			"lass=\"col-lg-6\">\n                <div class=\"input-group\">\n                    <span class=\"input-group-addon beautiful\">\n                        <input type=\"checkbox\">\n                    </span>\n                    <input type=\"text\" class=\"form-control\">\n                </div>\n            </div>",
+			" ",
+			"\\",
+			" ",
+			"^\\t",
+			"\\t",
+			" ",
+			"^\\s*(.+)\\s*\\n",
+			"^\\n",
+			"'\\n'",
+			"www.lyrics.com/jamesarthur",
+			"www.lyrics.com/impossible-lyrics-james-arthur.html",
+			" .",
+			" !=",
+			"if",
+			"-->\n",
+			"main",
+			"\n			</div>\n		</div>",
+			"\n                    ",
+			"texto",
+			"bin",
+			"/\n",
+			"xml",
+			":\n",
+			"		",
+			"matches",
+			"444",
+			"url1",
+			"footer",
+			"clioteam",
+			"xda-dev",
+			"warez",
+			"http",
+			"irc",
+			"eware",
+			"advance",
+			"i9070",
+			"calendar",
+			"docs.googl",
+			"feedly",
+			"cportal",
+			"play",
+			"search?q=",
+			"google",
+			"pcdiga",
+			"'\\n'",
+			"master-",
+			"mysql",
+			"w3schools",
+			"bootstrap",
+			"estagios",
+			"pagina",
+			"github",
+			"olx",
+			"localhost",
+			"ile:",
+			"download",
+			"git",
+			"share",
+			"celsomen",
+			"facebook",
+			"inforest"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"\\\\",
+			"",
+			"\\1"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "latex/management.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "latex/tecnology.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "latex/stateofart.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								823,
+								823
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "latex/cover.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 823,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								208,
+								208
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "latex/refs.bib",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 556,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								327,
+								327
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "stage.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 498,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								251,
+								251
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 194.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 127.0
+	},
+	"project": "stage.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"Package Control Messages"
+			],
+			[
+				"tas",
+				"D:\\tasks.TODO"
+			],
+			[
+				"ind",
+				"WebContent\\index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\Dropbox\\Materiais\\Estagio\\stage\\stage.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 325.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
