@@ -20,6 +20,10 @@
 \usepackage{indentfirst}
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
 
+% package to use acronyms
+\usepackage{acro}
+\input{abbreviations.tex}
+
 \begin{document}
 
 %\maketitle
@@ -28,11 +32,17 @@
 \input{cover}
 
 \newpage
+
 \tableofcontents{}
-
-% lista de figuras
-
+\listoffigures
+\listoftables
+\thispagestyle{empty}
 \newpage
+
+
+\addcontentsline{toc}{section}{Abbreviations}
+\printacronyms[include-classes=abbrev,name=Abbreviations]		
+\newpage	
 
 \input{abstract}
 \input{intro}
