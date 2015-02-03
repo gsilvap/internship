@@ -1,12 +1,13 @@
-% !TEX root = main.tex
 \documentclass[12pt,a4paper, english]{article}
+% \documentclass[12pt,a4paper]{article}
 % portuguese
 % \usepackage[portuguese]{babel}
 \usepackage{babel}
 \usepackage{blindtext}
-\usepackage[utf8]{inputenc}
+
  %for embedding images
-\usepackage[pdftex]{graphicx}
+% \usepackage[pdftex]{graphicx}
+\usepackage[demo]{graphicx}
 % para a cor do texto
 \usepackage[usenames, dvipsnames]{color}
 
@@ -26,6 +27,12 @@
 
 \usepackage{marginnote}
 % \usepackage[top=1cm, bottom=1cm, outer=0.5cm, inner=0.5cm, heightrounded, marginparwidth=1cm, marginparsep=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage[numbers]{natbib}
+\usepackage{multibib}
+\newcites{wwwbib}{Links to Webpages}
+
 
 \begin{document}
 \pagenumbering{gobble}
@@ -38,7 +45,6 @@
 \pagenumbering{roman}
 \input{abstract}
 \newpage
-
 
 \tableofcontents
 \addcontentsline{toc}{section}{Contents}
@@ -59,26 +65,41 @@
 \pagenumbering{arabic}
 
 
+% \begin{figure}[!ht]  
+% \begin{center}  
+% \includegraphics{filename}  
+% \caption{\small \sl label.\label{fig:Stupendous}}  
+% \end{center}  
+% \end{figure}
+
 \input{intro}
 \input{stateofart}
-% \input{tecnology}
-% \input{requirements}
-% \input{documentation}
-% \input{estimation}
-% \input{revision}
-% \input{tests}
-\input{management}
 \input{notes}
 \input{conclusions}
 
-\cleardoublepage
+\newpage
+\appendix
+\section{Appendix A - Gantt diagram} \label{App:A}
+% the \\ insures the section title is centered below the phrase: AppendixA
+Gantt diagram
+%\newpage
+%\section{Appendix B} \label{App:B}
+%% the \\ insures the section title is centered below the phrase: Appendix B
+%Text of Appendix B is Here
+%\newpage
 
-\phantomsection
 
+% \cleardoublepage
 
+% \phantomsection
+\newpage
 
-\addcontentsline{toc}{section}{References}
 %%\addcontentsline{toc}{section}{Referencias}
+
+% \bibliographystyle{plainnat}
 \bibliographystyle{unsrt}
 \bibliography{refs}
+\addcontentsline{toc}{section}{References}
+% \nocite{*}
+
 \end{document}

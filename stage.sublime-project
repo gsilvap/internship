@@ -5,8 +5,9 @@
 			"file_exclude_patterns":
 			[
 				"*.aux",
+				"*.dmp",
+				"*.dvi",
 				"*.blg",
-				"*.log",
 				"*.lof",
 				"*.lot",
 				"*.bbl",
