@@ -1014,134 +1014,25 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="estagio-1915-avaliacao-da-robustez-de-plataformas-cloud"><a name="user-content-estagio-1915-avaliacao-da-robustez-de-plataformas-cloud" href="#estagio-1915-avaliacao-da-robustez-de-plataformas-cloud" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Estágio [1915] - Avaliação da Robustez de Plataformas Cloud</h1>
-<ul>
-<li><a href="#orientadores">Orientadores</a></li>
-<li><a href="#juri">Júri</a></li>
-<li><a href="#opcao-tematica">Opção Temática</a></li>
-<li><a href="#local-do-estagio">Local do Estágio</a></li>
-<li><a href="#enquadramento">Enquadramento</a></li>
-<li><a href="#objetivo">Objetivo</a></li>
-<li><a href="#plano-de-trabalhos-semestre-1">Plano de Trabalhos - Semestre 1</a></li>
-<li><a href="#plano-de-trabalhos-semestre-2">Plano de Trabalhos - Semestre 2</a></li>
-<li><a href="#condicoes">Condiçoes</a></li>
-<li><a href="#observacoes">Observações</a></li>
-</ul>
-<h3 id="reunioes"><a name="user-content-reunioes" href="#reunioes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniões</h3>
-<ul>
-<li><a href="#reuniao-20012015">Reunião do dia 20/01/2015</a></li>
-<li><a href="#reuniao-12012015">Reunião do dia 12/01/2015</a></li>
-</ul>
-<h3 id="orientadores"><a name="user-content-orientadores" href="#orientadores" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Orientadores</h3>
-<ul>
-<li>Orientador DEI: Raul Barbosa (<a href="mailto:rbarbosa@dei.uc.pt">rbarbosa@dei.uc.pt</a>) - RB</li>
-<li>Co-Orientador: Henrique Madeira(<a href="mailto:henrique@dei.uc.pt">henrique@dei.uc.pt</a>) - HM</li>
-</ul>
-<h3 id="juri"><a name="user-content-juri" href="#juri" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Júri</h3>
-<ul>
-<li>Juri Arguente: Filipe Araujo (<a href="mailto:filipius@dei.uc.pt">filipius@dei.uc.pt</a>)</li>
-<li>Juri Vogal: Antonio Jorge Silva Cardoso (<a href="mailto:jcardoso@dei.uc.pt">jcardoso@dei.uc.pt</a>)</li>
-</ul>
-<h4 id="reuniao-20012015"><a name="user-content-reuniao-20012015" href="#reuniao-20012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reunião 20/01/2015</h4>
-<p><b>Description</b></p>
-<p>Injeção de Falhas de software com 3 possibilidades:<br />
-    1 - <u> Ficheiro antes de compilar </u><br />
-    2 - Ficheiros em código objeto<br />
-    3 - <u> Programa a executar </u> </p>
-<p>Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar <br />
-ou então injetar falhas em programas a executar. <br />
-Porquê? <br />
-Existe a mesma probabilidade de acontecimento de ambas as falhas?</p>
-<p>HM direcciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles <br />
-já trabalharam e obtiveram resultados.</p>
-<p>Já existem 12? tipos de falhas de software documentadas no papper do Duraes.</p>
-<p>Usar o compilador gcc ou o llvm? porque? vantagens e desvantagens?</p>
-<pre><code>gcc
-    + mais maduro
-    + instalaçao facil
-    + compilador por defeito na maioria dos SO&rsquo;s
-    + usado anteriormente
-llvm
-    + bastante recente
-    + melhor feedback de erros
-    + por vezes executa mais rapido
-    + sem qualquer tipo de conhecimentos previos de utilização</code></pre>
-<p><a href="http://wpage.unina.it/roberto.natella">Robert Natella</a> desenvolveu uma ferramenta de injeção de falhas de software.<br />
-(enviado email no dia 27/01/2015)</p>
-<p>Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)</p>
-<h4 id="reuniao-12012015"><a name="user-content-reuniao-12012015" href="#reuniao-12012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reunião 12/01/2015</h4>
-<p><b>Tasks</b><br />
-    ☐ Leitura de documentos<br />
-    ☐ Escrita do estado da arte   </p>
+</style><title>README</title></head><body><article class="markdown-body"><h1 id="stage"><a name="user-content-stage" href="#stage" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Stage</h1>
+<h3 id="tasks"><a name="user-content-tasks" href="#tasks" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Tasks</h3>
+<p>1 - <a href="#task1-v01">printk</a><br />
+2 - <a href="#task2">redirect output</a></p>
+<h4 id="task1-v01"><a name="user-content-task1-v01" href="#task1-v01" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Task1 v0.1</h4>
+<p>Begin at 07/11/2014 and finished at 04/12/2014</p>
 <p><b>Description</b><br />
-    Discussão relativamente aos objetivos e às tarefas que vão ser atribuidas:</p>
-<pre><code>* Fred já tem grande parte do injetor de falhas de hardware feita
-* João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
-
-HM: Direcionar o estágio para software uma vez que a parte de hardware está 
-encaminhada ou ajudar ambos a integrar a aplicação de forma a meter tudo funcional?
-
-Definição de objetivos programada para Sexta, dia 16/01/2015
+    Do a print, with printk, from x to x time, using a time trigger, in kernel</p>
+<p><b>Module Compilation</b></p>
+<pre><code>make
 </code></pre>
-<p><b>Suggested modules</b></p>
-<pre><code>Bus, Cache, etc (HW)
-Software faults (muito trabalho)
-VM injection vs. host injection
-Web framework
+<p><b>Module Instalation</b></p>
+<pre><code>sudo insmod timer.ko
 </code></pre>
-<h3 id="opcao-tematica"><a name="user-content-opcao-tematica" href="#opcao-tematica" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Opção Temática</h3>
-<p>Engenharia de Software</p>
-<h3 id="local-do-estagio"><a name="user-content-local-do-estagio" href="#local-do-estagio" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Local do Estágio</h3>
-<p>DEI-FCTUC</p>
-<h3 id="enquadramento"><a name="user-content-enquadramento" href="#enquadramento" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Enquadramento</h3>
-<p>Tem-se assistido a um aumento da utilização de serviços em ambientes cloud, caracterizados pela colocação dos dados e do software em infraestruturas remotas. Apesar dos inúmeros benefícios, a fiabilidade destas plataformas não tem acompanhado as necessidades, sendo que os utilizadores confiam as suas aplicações a sistemas fora do controlo pessoal.</p>
-<p>Neste contexto, surge naturalmente o problema da confiança depositada na entidade que gere a plataforma onde as aplicações executam. Qualquer organização que coloque uma aplicação na cloud (por exemplo, no EC2 da Amazon ou Azure da Microsoft) terá de aceitar as garantias dadas pelo fornecedor do serviço.</p>
-<p>Este estágio aborda o desafio de avaliar a robustez de plataformas cloud. O fornecedor do serviço computacional usa virtualização para gerir e repartir o poder computacional em função das necessidades reais da aplicação. Apesar de existirem plataformas sólidas de virtualização, a tolerância a falhas é ainda um problema de investigação</p>
-<h3 id="objetivo"><a name="user-content-objetivo" href="#objetivo" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Objetivo</h3>
-<p>Este estágio tem dois objectivos fundamentais:</p>
-<ul>
-<li>
-<p>Integração de ferramentas de avaliação da robustez, por forma a realizar testes em máquinas virtuais.</p>
-</li>
-<li>
-<p>Definição e implementação de modelos de falha para ambientes cloud, suportados por tecnologias de virtualização.</p>
-</li>
-</ul>
-<p>Por forma a avaliar a robustez de plataformas cloud, é importante determinar o tipo de testes que devem ser realizados, bem como a forma de os realizar. Numa primeira análise, as aplicações que executam na cloud estão sujeitas tanto a falhas de hardware como de software. É então necessário definir claramente os modelos de falha que serão posteriormente considerados para testar as plataformas virtualizadas.</p>
-<p>O ambiente será então composto por um conjunto de máquinas virtuais, fazendo uso de Linux (por exemplo, Citrix ou CentOS) e uma plataforma de virtualização (por exemplo, Xen ou VMWare). Por forma a testar o sistema, pretende-se integrar um conjunto de ferramentas capazes de introduzir falhas e avaliar a resposta do sistema a essas mesmas falhas.</p>
-<h3 id="plano-de-trabalhos-semestre-1"><a name="user-content-plano-de-trabalhos-semestre-1" href="#plano-de-trabalhos-semestre-1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plano de Trabalhos - Semestre 1</h3>
-<p><b>- Estudo do estado da arte e levantamento de requisitos (mês 1).</p>
-<p>A primeira fase consistirá em tomar contacto com tecnologias de virtualização e aplicações para a cloud, bem como a familiarização com os desafios de segurança e confiabilidade acima referidos. Isto resultará numa clara formulação dos objectivos a alcançar por parte do estagiário.<br />
-</b><br />
-- Construção do ambiente cloud (meses 2 a 4).</p>
-<p>Esta tarefa consiste na selecção e instalação de uma plataforma de virtualização que permitirá realizar os testes para avaliar a sua robustez.</p>
-<ul>
-<li>Primeira fase de integração de ferramentas de avaliação (meses 2 a 4).</li>
-</ul>
-<p>Durante o primeiro semestre, pretende-se que a ferramenta de avaliação de robustez seja capaz de introduzir falhas muito simples, simulando falhas de <strike>hardware</strike>. Esta primeira fase permitirá obter um conjunto de resultados para demonstrar as capacidades da ferramenta.</p>
-<ul>
-<li>Escrita do relatório intermédio (mês 5).</li>
-</ul>
-<p>O estagiário deve apresentar as tarefas efectuadas durante o primeiro semestre e descrever o trabalho a realizar no segundo semestre, escrevendo para esse efeito um relatório intermédio e preparando uma apresentação pública para discussão.</p>
-<h3 id="plano-de-trabalhos-semestre-2"><a name="user-content-plano-de-trabalhos-semestre-2" href="#plano-de-trabalhos-semestre-2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plano de Trabalhos - Semestre 2</h3>
-<ul>
-<li>Desenho e implementação de meios de avaliação avançados (meses 6 e 7).</li>
-</ul>
-<p>Nesta tarefa o estagiário irá desenhar e implementar as primitivas que permitirão à ferramenta avaliar a robustez de aplicações virtualizadas em relação a falhas de software.</p>
-<ul>
-<li>Segunda fase de integração de ferramentas de avaliação (meses 8 e 9).</li>
-</ul>
-<p>Esta tarefa consiste na continuação do desenvolvimento da ferramenta de avaliação, elevando o seu nível de sofisticação por forma a representar da melhor forma um ambiente cloud. No final, deverá obter-se um ambiente o mais próximo da realidade e ser-se capaz de avaliar esse mesmo ambiente.</p>
-<ul>
-<li>Escrita do relatório final (mês 10).</li>
-</ul>
-<p>O estagiário deve apresentar todo o trabalho levado a cabo no decorrer do estágio. Para tal, deverá escrever uma tese descrevendo o problema e a sua solução, bem como preparar a sua apresentação e discussão pública.</p>
-<h3 id="condicoes"><a name="user-content-condicoes" href="#condicoes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Condiçoes</h3>
-<p>O trabalho irá ser realizado no Departamento de Engenharia Informática da Universidade de Coimbra e haverá possibilidade de candidatura a uma bolsa para estagiário com Licenciatura para apoiar os trabalhos do segundo semestre (745€ mensais).</p>
-<h3 id="observacoes"><a name="user-content-observacoes" href="#observacoes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Observações</h3>
-<p>Dar-se-á preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).</p>
-<h4 id="reuniao-x012015"><a name="user-content-reuniao-x012015" href="#reuniao-x012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reunião X/01/2015</h4>
-<p><b>Tasks</b><br />
-    ☐ task1</p>
-<p><b>Description</b></p>
-<p><b>Suggested modules</b></p></article></body></html>
+<p><b>Module Removal</b></p>
+<pre><code>sudo rmmod timer
+</code></pre>
+<p><b>Explanation</b></p>
+<h4 id="task2"><a name="user-content-task2" href="#task2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Task2</h4>
+<p>Begin at 04/12/2014 and finished at 11/12/2014</p>
+<p><b>Description</b><br />
+    Redirect the output to a file given by the user as parameter</p></article></body></html>
