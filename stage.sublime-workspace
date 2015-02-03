@@ -56,6 +56,28 @@
 			}
 		},
 		{
+			"contents": "@article{duraes2006emulation,\n  title={Emulation of software faults: A field data study and a practical approach},\n  author={Duraes, Joao A and Madeira, Henrique S},\n  journal={Software Engineering, IEEE Transactions on},\n  volume={32},\n  number={11},\n  pages={849--867},\n  year={2006},\n  publisher={IEEE}\n}\n\n@article{avizzienisbasic,\n  title={Basic Concepts and Taxonomy of Dependable and Secure Computing},\n  author={Avizzienis, Algirdas and Laprie, Jean-Claude and Randell, Brian and Landwehr, Carl}\n}\n\n\n------------------ BOOKS ------------------\n@book{wolter2012resilience,\n  title={Resilience assessment and evaluation of computing systems},\n  author={Wolter, Katinka and Avritzer, Alberto and Vieira, Marco and van Moorsel, Aad},\n  year={2012},\n  publisher={Springer}\n}\n\n------------------ MISC ------------------\n@misc{ref02,\n   author = {Pixar},\n   title = {Pixar Website},\n   howpublished = {\\url{www.pixar.com}},\n   year = {2001}\n}\n",
+			"file": "latex/cenas.bib",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 943,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "@article{duraes2006emulation,\n  title={Emulation of software faults: A field data study and a practical approach},\n  author={Duraes, Joao A and Madeira, Henrique S},\n  journal={Software Engineering, IEEE Transactions on},\n  volume={32},\n  number={11},\n  pages={849--867},\n  year={2006},\n  publisher={IEEE}\n}\n\n@article{avizzienisbasic,\n  title={Basic Concepts and Taxonomy of Dependable and Secure Computing},\n  author={Avizzienis, Algirdas and Laprie, Jean-Claude and Randell, Brian and Landwehr, Carl}\n}\n\n\n------------------ BOOKS ------------------\n@book{wolter2012resilience,\n  title={Resilience assessment and evaluation of computing systems},\n  author={Wolter, Katinka and Avritzer, Alberto and Vieira, Marco and van Moorsel, Aad},\n  year={2012},\n  publisher={Springer}\n}\n\n------------------ MISC ------------------\n@misc{ref02,\n   author = {Pixar},\n   title = {Pixar Website},\n   howpublished = {\\url{www.pixar.com}},\n   year = {2001}\n}\n",
+			"file": "latex/cenas.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 943,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "latex/abbreviations.tex",
 			"settings":
 			{
@@ -67,15 +89,23 @@
 			"file": "latex/intro.tex",
 			"settings":
 			{
-				"buffer_size": 1328,
+				"buffer_size": 1365,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/stateofart.tex",
+			"settings":
+			{
+				"buffer_size": 1193,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "latex/management.tex",
 			"settings":
 			{
-				"buffer_size": 2246,
+				"buffer_size": 2502,
 				"line_ending": "Unix"
 			}
 		},
@@ -83,25 +113,103 @@
 			"file": "latex/main.tex",
 			"settings":
 			{
-				"buffer_size": 2402,
+				"buffer_size": 2442,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "latex/main.synctex.gz(busy)",
+			"contents": "%!TEX root = main.tex\n\\section{Revision of code}\nRevision of code",
+			"file": "latex/revision.tex",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 65,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "%!TEX root = main.tex\n\\section{Tests}\nTests",
+			"file": "latex/tests.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 43,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "%!TEX root = main.tex\n\\newpage\n\\section{Estimation}\n\nestimation",
+			"file": "latex/estimation.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 63,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "%!TEX root = main.tex\n\\newpage\n\\section{Documentation}\n\nDocumentation",
+			"file": "latex/documentation.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 69,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "%!TEX root = main.tex\n\\newpage\n\\section{Requirements}\nRequirements",
+			"file": "latex/requirements.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 66,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "%!TEX root = main.tex\n\\newpage\n\\section{Tecnology}\n\ntecnology",
+			"file": "latex/tecnology.tex",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 61,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/refs.bib",
+			"settings":
+			{
+				"buffer_size": 1119,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 60.0,
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"latex",
+				"LaTexTools: Delete temporary files"
+			],
+			[
+				"build",
+				"Build: Build"
+			],
 			[
 				"rec",
 				"LaTeXTools: Reconfigure and migrate settings"
@@ -117,10 +225,6 @@
 			[
 				"lat",
 				"Set Syntax: LaTeX"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"remove",
@@ -141,10 +245,6 @@
 			[
 				"latextool",
 				"LaTeXTools: Reconfigure and migrate settings"
-			],
-			[
-				"latex",
-				"Set Syntax: LaTeX"
 			],
 			[
 				"upgra",
@@ -252,6 +352,11 @@
 	],
 	"file_history":
 	[
+		"/D/Dropbox/Materiais/Estagio/stage/.gitignore",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.bbl",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/test.bib",
+		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.log",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/refs.bib",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/tecnology.tex",
@@ -260,10 +365,8 @@
 		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/abstract.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.toc",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/main.bbl",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/notes.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/documentation.tex",
@@ -376,10 +479,7 @@
 		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/index.html",
 		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/editUsers.html",
 		"/C/Users/GonçaloSilva/Desktop/SD/WEBServer/WebContent/bootstrap/dist/css/bootstrap.min.css",
-		"/D/Dropbox/Materiais/IS/git/IS/.gitignore",
-		"/D/HomePage/css/style.css",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
-		"/C/Users/GonçaloSilva/AppData/Local/Temp/scp19937/home/lei2009/gsp/public_html/index.html"
+		"/D/Dropbox/Materiais/IS/git/IS/.gitignore"
 	],
 	"find":
 	{
@@ -533,11 +633,73 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "latex/cenas.bib",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 943,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "latex/cenas.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 943,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "latex/abbreviations.tex",
 					"semi_transient": false,
 					"settings":
@@ -564,24 +726,170 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "latex/intro.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1328,
+						"buffer_size": 1365,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								638,
-								638
+								1257,
+								1257
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "latex/stateofart.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1193,
+								1193
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 84.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "latex/management.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2502,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2371,
+								2371
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 281.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "latex/main.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2425,
+								2425
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 966.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "latex/revision.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 65,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								61,
+								65
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "latex/tests.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 43,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38,
+								43
 							]
 						],
 						"settings":
@@ -597,50 +905,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "latex/management.tex",
+					"buffer": 10,
+					"file": "latex/estimation.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2246,
+						"buffer_size": 63,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1138,
-								1138
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "latex/main.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2402,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1778,
-								1778
+								53,
+								63
 							]
 						],
 						"settings":
@@ -649,19 +927,19 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 84.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "latex/main.synctex.gz(busy)",
-					"semi_transient": true,
+					"buffer": 11,
+					"file": "latex/documentation.tex",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 69,
 						"regions":
 						{
 						},
@@ -675,13 +953,102 @@
 						"settings":
 						{
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "latex/requirements.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 66,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "latex/tecnology.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "latex/refs.bib",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1119,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								933,
+								933
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
 					"type": "text"
 				}
 			]

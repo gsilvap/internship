@@ -20,11 +20,11 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * Orientador DEI: Raul Barbosa (rbarbosa@dei.uc.pt) - RB
 * Co-Orientador: Henrique Madeira(henrique@dei.uc.pt) - HM
 
-### Júri
+### Juri
 * Juri Arguente: Filipe Araujo (filipius@dei.uc.pt)
 * Juri Vogal: Antonio Jorge Silva Cardoso (jcardoso@dei.uc.pt)
 
-#### Reunião 20/01/2015
+#### Reuniao 20/01/2015
 
 <b>Description</b>
     
@@ -62,7 +62,7 @@ Usar o compilador gcc ou o llvm? porque? vantagens e desvantagens?
 
 Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)
 
-#### Reunião 12/01/2015
+#### Reuniao 12/01/2015
 
 <b>Tasks</b>
     ☐ Leitura de documentos
@@ -87,11 +87,11 @@ Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)
     Web framework
 
 
-### Opção Temática
+### Opção Tematica
 
 Engenharia de Software
 
-### Local do Estágio
+### Local do Estagio
 
 DEI-FCTUC
 
@@ -155,7 +155,7 @@ O trabalho irá ser realizado no Departamento de Engenharia Informática da Univ
 
 Dar-se-á preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).
 
-#### Reunião X/01/2015
+#### Reuniao X/01/2015
 
 <b>Tasks</b>
     ☐ task1
