@@ -1,4 +1,4 @@
-%!TEX root = main.tex
+% !TEX root = main.tex
 \documentclass[12pt,a4paper, english]{article}
 % portuguese
 % \usepackage[portuguese]{babel}
@@ -15,7 +15,7 @@
 
 \usepackage{url}
 %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
-\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
+\usepackage[bookmarks, colorlinks=false, linkcolor=blue, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
 
 \usepackage{indentfirst}
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
@@ -24,27 +24,41 @@
 \usepackage{acro}
 \input{abbreviations.tex}
 
+\usepackage{marginnote}
+% \usepackage[top=1cm, bottom=1cm, outer=0.5cm, inner=0.5cm, heightrounded, marginparwidth=1cm, marginparsep=1cm]{geometry}
+
 \begin{document}
+\pagenumbering{gobble}
 
 %\maketitle
 
 %include other pages
 \input{cover}
 
+\pagenumbering{roman}
+\input{abstract}
 \newpage
 
-\tableofcontents{}
+
+\tableofcontents
+\addcontentsline{toc}{section}{Contents}
+\newpage
+
 \listoffigures
-\listoftables
-\thispagestyle{empty}
+\addcontentsline{toc}{section}{List of Figures}
 \newpage
 
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
+\newpage
 
-\addcontentsline{toc}{section}{Abbreviations}
 \printacronyms[include-classes=abbrev,name=Abbreviations]		
+\addcontentsline{toc}{section}{Abbreviations}
 \newpage	
 
-\input{abstract}
+\pagenumbering{arabic}
+
+
 \input{intro}
 \input{stateofart}
 % \input{tecnology}
@@ -61,9 +75,9 @@
 
 \phantomsection
 
-\addcontentsline{toc}{section}{References}
 
-%\newpage
+
+\addcontentsline{toc}{section}{References}
 %%\addcontentsline{toc}{section}{Referencias}
 \bibliographystyle{unsrt}
 \bibliography{refs}

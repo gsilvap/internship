@@ -1,15 +1,19 @@
 \select@language {english}
-\contentsline {section}{Abbreviations}{2}{section*.3}
-\contentsline {section}{\numberline {1}Abstract}{3}{section.1}
-\contentsline {section}{\numberline {2}Introduction}{3}{section.2}
-\contentsline {section}{\numberline {3}State of the Art}{4}{section.3}
-\contentsline {section}{\numberline {4}Research objectives and approach method}{5}{section.4}
-\contentsline {section}{\numberline {5}Current work and preliminary results}{6}{section.5}
-\contentsline {section}{\numberline {6}Work plan and implications}{7}{section.6}
-\contentsline {section}{\numberline {7}Management}{8}{section.7}
-\contentsline {subsection}{\numberline {7.1}Reunions}{8}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Riscs}{8}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}Planning and Tracking}{8}{subsection.7.3}
-\contentsline {section}{\numberline {8}Notes to future}{9}{section.8}
-\contentsline {section}{\numberline {9}Conclusions}{10}{section.9}
-\contentsline {section}{References}{11}{section*.5}
+\contentsline {section}{Abstract}{i}{section*.1}
+\contentsline {section}{Acknowledgements}{ii}{section*.2}
+\contentsline {section}{Contents}{iii}{section*.3}
+\contentsline {section}{List of Figures}{iv}{section*.4}
+\contentsline {section}{List of Tables}{v}{section*.5}
+\contentsline {section}{Abbreviations}{vi}{section*.6}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}State of the Art}{2}{section.2}
+\contentsline {section}{\numberline {3}Research objectives and approach method}{3}{section.3}
+\contentsline {section}{\numberline {4}Current work and preliminary results}{4}{section.4}
+\contentsline {section}{\numberline {5}Work plan and implications}{5}{section.5}
+\contentsline {section}{\numberline {6}Management}{6}{section.6}
+\contentsline {subsection}{\numberline {6.1}Meetings}{6}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Risks}{6}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Planning and Tracking}{6}{subsection.6.3}
+\contentsline {section}{\numberline {7}Notes to future}{7}{section.7}
+\contentsline {section}{\numberline {8}Conclusions}{8}{section.8}
+\contentsline {section}{References}{9}{section*.7}

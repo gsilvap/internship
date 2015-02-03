@@ -60,10 +60,13 @@
 			}
 		},
 		{
+			"contents": "%!TEX root = main.tex\n\\newpage\n\\section{State of the Art}\n\nNowadays, people use lot's of services based in cloud and lot's of companies choose to use them too.\n\nBecause, using it, companies reduce the costs of IT infraestructure and people don't buy ``physical storage\" and don't care where are the data. The cloud service provide that the data is secure.\nBut, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important caracteristic.\n\nThe increased use of cloud is related with a low usage of many dedicated servers, and their migration \n\n\n\nWith this work, I want to inject software faults and analyse how the system react to them.\n\nA lot of studies show that the software faults it's the main cause of computer failures.\n\nIn this work\ndeliberate how \n\n\\cite{duraes2006emulation}\n\\cite{wolter2012resilience}\n\\cite{avizzienisbasic}\n\n\\marginnote{especificar as abreviaturas...}[0cm]\n% \\ac{cots}\n% \\ac{g-swfit}\n% \\ac{odc}\n% \\ac{swifi}\n\n\n\\newpage\n\\section{Research objectives and approach method}\n\n\\newpage\n\\section{Current work and preliminary results}\n\n\\newpage\n\\section{Work plan and implications}",
 			"file": "latex/stateofart.tex",
+			"file_size": 1231,
+			"file_write_time": 130673056454228439,
 			"settings":
 			{
-				"buffer_size": 1082,
+				"buffer_size": 1191,
 				"line_ending": "Windows"
 			}
 		},
@@ -71,7 +74,7 @@
 			"file": "latex/main.tex",
 			"settings":
 			{
-				"buffer_size": 1538,
+				"buffer_size": 1697,
 				"line_ending": "Unix"
 			}
 		},
@@ -79,7 +82,7 @@
 			"file": "latex/abbreviations.tex",
 			"settings":
 			{
-				"buffer_size": 126,
+				"buffer_size": 652,
 				"line_ending": "Unix"
 			}
 		},
@@ -87,7 +90,7 @@
 			"file": "latex/abstract.tex",
 			"settings":
 			{
-				"buffer_size": 130,
+				"buffer_size": 140,
 				"line_ending": "Unix"
 			}
 		},
@@ -95,7 +98,7 @@
 			"file": "latex/cover.tex",
 			"settings":
 			{
-				"buffer_size": 823,
+				"buffer_size": 974,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,7 +114,7 @@
 			"file": "stage.sublime-project",
 			"settings":
 			{
-				"buffer_size": 498,
+				"buffer_size": 524,
 				"line_ending": "Unix"
 			}
 		}
@@ -119,9 +122,13 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 210.0,
+		"height": 160.0,
 		"selected_items":
 		[
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
 			[
 				"lat",
 				"Set Syntax: LaTeX"
@@ -264,6 +271,7 @@
 	],
 	"file_history":
 	[
+		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
@@ -390,8 +398,7 @@
 		"/D/public_html/css/style.css",
 		"/D/public_html/index.html",
 		"/D/Dropbox/Materiais/GP/git/GP2014-Youtube-Lyrics/README.md",
-		"/D/wildfly-8.1.0.Final/standalone/configuration/standalone-full.xml",
-		"/C/Users/GonçaloSilva/Desktop/SD/WEBServer/WebContent/index.jsp"
+		"/D/wildfly-8.1.0.Final/standalone/configuration/standalone-full.xml"
 	],
 	"find":
 	{
@@ -515,7 +522,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -531,8 +538,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								168,
+								168
 							]
 						],
 						"settings":
@@ -544,7 +551,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -573,7 +580,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -582,15 +589,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1082,
+						"buffer_size": 1191,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1082,
-								1082
+								899,
+								899
 							]
 						],
 						"settings":
@@ -611,15 +618,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1538,
+						"buffer_size": 1697,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								981,
-								981
+								1123,
+								1123
 							]
 						],
 						"settings":
@@ -628,10 +635,10 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 168.0,
+						"translation.y": 190.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -640,21 +647,23 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 126,
+						"buffer_size": 652,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								126,
-								126
+								652,
+								652
 							]
 						],
 						"settings":
 						{
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -669,15 +678,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 130,
+						"buffer_size": 140,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								130,
-								130
+								140,
+								140
 							]
 						],
 						"settings":
@@ -689,7 +698,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -698,15 +707,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 823,
+						"buffer_size": 974,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								748,
-								748
+								972,
+								972
 							]
 						],
 						"settings":
@@ -718,7 +727,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -734,8 +743,8 @@
 						"selection":
 						[
 							[
-								848,
-								848
+								574,
+								574
 							]
 						],
 						"settings":
@@ -758,15 +767,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 498,
+						"buffer_size": 524,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								251,
-								251
+								369,
+								369
 							]
 						],
 						"settings":
@@ -779,7 +788,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
