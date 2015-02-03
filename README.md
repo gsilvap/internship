@@ -147,11 +147,11 @@ Esta tarefa consiste na continuação do desenvolvimento da ferramenta de avalia
 
 O estagiário deve apresentar todo o trabalho levado a cabo no decorrer do estágio. Para tal, deverá escrever uma tese descrevendo o problema e a sua solução, bem como preparar a sua apresentação e discussão pública.
 
-### Condiçoes
+### Condicoes
 
 O trabalho irá ser realizado no Departamento de Engenharia Informática da Universidade de Coimbra e haverá possibilidade de candidatura a uma bolsa para estagiário com Licenciatura para apoiar os trabalhos do segundo semestre (745€ mensais).
 
-### Observações
+### Observacoes
 
 Dar-se-á preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).
 
