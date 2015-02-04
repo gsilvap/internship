@@ -2,12 +2,14 @@ Stage
 =====
 
 Leituras
-1 - [Resilience Assessment and Evaluation of Computing Systems](#1)
-2 - [Emulation of Software Faults - A Field Data Study and a Practical Approach](#2)
-3 - [Basic Concepts and Taxonomy of Desendable and Secure Computing](#3)
+1 - [Resilience Assessment and Evaluation of Computing Systems](#1-resilience-assessment-and-evaluation-of-computing-systems)
+2 - [Emulation of Software Faults - A Field Data Study and a Practical Approach](#2-emulation-of-software-faults-a-field-data-study-and-a-practical-approach)
+3 - [Basic Concepts and Taxonomy of Desendable and Secure Computing](#3-basic-concepts-and-taxonomy-of-desendable-and-secure-computing)
 
 
 #### 1 <b>Resilience Assessment and Evaluation of Computing Systems</b>
+
+<b>Capitulo 4</b>
 Cloud Computing - novo paradigma
 providencia recursos prontos para entregar (disponiveis)
 
@@ -50,8 +52,7 @@ Perturbações externas:
 
 SLA's - Service Level Agreement
 
-#### 2
-<b>Emulation of Software Faults - A Field Data Study and a Practical Approach</b>
+#### 2 <b>Emulation of Software Faults - A Field Data Study and a Practical Approach</b>
 COTS - Components of the shelf
 
 Important emulation requirements
@@ -119,8 +120,7 @@ Escolha de aplicações:
  - devem produzir output deterministico
  - o codigo deve estar disponivel
 
-#### 3
-<b>Basic Concepts and Taxonomy of Desendable and Secure Computing</b>
+#### 3 <b>Basic Concepts and Taxonomy of Desendable and Secure Computing</b>
 Taxonomy Paper
 Definição de conceitos base:
 - dependability encompasses:

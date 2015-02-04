@@ -4,6 +4,8 @@
 		{
 			"file_exclude_patterns":
 			[
+				".gitignore",
+				"*.html",
 				"*.aux",
 				"*.dmp",
 				"*.dvi",
