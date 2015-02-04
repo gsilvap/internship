@@ -1,0 +1,26 @@
+%!TEX root = main.tex
+
+% supress page number
+% \pagenumbering{gobble}
+
+% \maketitle
+
+% include other pages
+\pagenumbering{roman}
+\input{acknowledgements}
+\newpage
+
+\tableofcontents \label{toc}
+\addcontentsline{toc}{section}{Contents}
+\newpage
+
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+\newpage
+
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
+\newpage
+
+\printacronyms[include-classes=abbrev,name=Abbreviations]		
+\addcontentsline{toc}{section}{Abbreviations}

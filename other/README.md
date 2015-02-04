@@ -96,7 +96,7 @@ Stage
 
     Granjal
         - Porque o XEN? Porque não o KVM?
-        - Benchmark reiliencia para a cloud
+        - Benchmark resiliencia para a cloud
         - unvervolting & bitflip/register flip, qual a ligaçao?
         - Resultados representativos para outros sistemas? Sim ou nao? pk?
         - Falar sobre fault injection!!!

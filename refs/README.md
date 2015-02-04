@@ -9,7 +9,7 @@ Leituras
 
 #### 1 <b>Resilience Assessment and Evaluation of Computing Systems</b>
 
-<b>Capitulo 4</b>
+<b>Capitulo 4 - Providing Dependability and Resilience in the Cloud: Challenges and Opportunites</b>
 Cloud Computing - novo paradigma
 providencia recursos prontos para entregar (disponiveis)
 
@@ -51,6 +51,11 @@ Perturbações externas:
     -  Worms e DDOS attacks
 
 SLA's - Service Level Agreement
+
+<b>Capitulo 13 - Fault Injection</b>
+
+<b>Capitulo 14 - Resilience Benchmarking</b>
+
 
 #### 2 <b>Emulation of Software Faults - A Field Data Study and a Practical Approach</b>
 COTS - Components of the shelf
