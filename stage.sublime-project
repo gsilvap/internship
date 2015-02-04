@@ -13,7 +13,6 @@
 				"*.bbl",
 				"*.synctex.gz",
 				"*.toc",
-				"*.pdf",
 				"*.out",
 				"*.pyc",
 				"*.pyo",
