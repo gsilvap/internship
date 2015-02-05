@@ -147,10 +147,10 @@ Sistemas de comunicação e computadores caraterizados por:
     - adaptability
 - cost
 
-Fault prevention,  prevenção
-Fault tolerance,   tolerancia
-Fault removal,     remoção
-Fault forecasting, previsão
+Fault prevention  , prevenção
+Fault tolerance   , tolerancia
+Fault removal     , remoção
+Fault forecasting , previsão
 
 http://sebokwiki.org/wiki/FAA_Advanced_Automation_System_%28AAS%29_Vignette
 

@@ -13,6 +13,7 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 05/02/2015](#reuniao-05022015)
 * [Reunião do dia 20/01/2015](#reuniao-20012015)
 * [Reunião do dia 12/01/2015](#reuniao-12012015)
 
@@ -23,6 +24,37 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 ### Juri
 * Juri Arguente: Filipe Araujo (filipius@dei.uc.pt)
 * Juri Vogal: Antonio Jorge Silva Cardoso (jcardoso@dei.uc.pt)
+
+#### Reuniao 05/02/2015
+<b>Description</b># ## # ## # ## ## ## # # ## 
+Decisão: Injeção de falhas de software em ficheiros antes de compilar
+
+Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc
+
+Xen         vs      KVM
+  +
+Citrix ✔  (CentOS ✔-)
+
+
+Foco em:
+    
+    Parser GCC
+    .C (devido à seleção do tipo de falhas feita anteriormente pelo João Durães.)
+.Java
+
+Ratings das linguagens mais usadas:
+[Comparação jan 2014 vs jan 2015](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html)
+[Ultimo update 25 Outubro 2013](http://langpop.com/)
+
+Validar/Verificar:
+C semelhante/igual ao parser?
+
+|    |   SW  |   HW  |
+|:--:|-------|-------|
+| HW |   ?   |  HWFI |
+| SW | SWIFI | SWIFI |
+
+
 
 #### Reuniao 20/01/2015
 
