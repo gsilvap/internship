@@ -2,35 +2,70 @@ Tarefas gerais:
 ☐ Template Latex
 ☐ Falar com o professor Raul Barbosa de forma a ESPECIFICAR OS OBJETIVOS E OS REQUISITOS DO ESTAGIO   @critical
   Gestão do projeto Agile
-☐ Resposta do Robert Natella ao email? @toggle(15-01-27 15:05) @toggle(15-02-05 15:49)
- Enviado mail a 27/01 (foi visto, mas sem resposta)
- Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)
+
 ☐ Possiveis programas onde se possam injetar falhas de software (kernel e mais?)                      @high
   Restrições:
      Open Source
      Linguagem C
      
 Tarefas até à próxima reunião:
+ ☐ Verificar se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM
   2 Threads principais:
-   ☐ Estudar o funcionamento do GCC parser
-   ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
- ☐ Verifiacr se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM
+     ☐ Estudar o funcionamento do GCC parser
+       Possibilidade de utilizar bibliotecas em java: CDT Parser API
+       GCC: gcc -fdump-tree-original-raw test.c
+       CLANG: clang -Wall test.c -Xclang -ast-dump
+     ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
 
 Dúvidas do email:
  ☐ Recomenda alguma leitura relativamente às técnicas G-SWFIT e SWIFI? Têm diferenças? Quais?
     Generic Software Fault Injection Technique
     Software Implemented Fault Injection
 
+Fault Types - Missing:
+    ☐ MIFS - if construct plus statements
+      Missing "If (cond) { statement(s) }"
+    ☐ MLAC - AND sub-expr in expression used as branch condition
+    ☐ MFC - Function call
+    ☐ MIA - if contruct around statements
+    ☐ MLOC - OR sub-expr in expression used as branch condition
+    ☐ MLPA - small and localized part of the algorithm
+    ☐ MVAE - variable assignment using an expression
+    ☐ MFCT - functionality
+    ☐ MVAV - variable assignment using an value
+    ☐ MIEB - if contruct plus tatements plus else before statements
+    ☐ MVIV - variable initialization
+Fault Types - Wrong:
+    ☐ WLEC - logical expression used as branch condition
+    ☐ WALL - algorithm - large modifications
+    ☐ WVAV - value assigned to variable
+    ☐ WAEP - arithmetic expression in parameter of function call
+    ☐ WSUT - data types or conversion used 
+    ☐ WPFV - variable used in parameter of function call 
+Fault Types - Extraneous:
+    ☐ EVAV - variable assignment using another variable
+
+
 Literatura:
- ☐ On the Emulation of Software Faults by Software Fault Injection
+ ☐ *On the Emulation of Software Faults by Software Fault Injection
  ☐ Resilience Assessment and Evaluation of Computing Systems cap13 e 14 ? (Lido anteriormente: cap4)
- ☐ Xception: Software Fault Injection and Monitoring in Processor Functional Units
- ☐ SWIFT: Software Implemented Fault Tolerance
+ ☐ *Xception: Software Fault Injection and Monitoring in Processor Functional Units
+ ☐ *SWIFT: Software Implemented Fault Tolerance
  ☐ Dependable Computing and Fault-Tolerant Systems Vol.5
- ☐ Orthogonal Defect Classification Cap.9
+ ☐ *Orthogonal Defect Classification Cap.9
  ☐ Injection of faults at component interfaces and inside the component code: are they equivalent?
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Resposta do Robert Natella ao email?   @done (15-02-10 16:50)
+  @toggle(15-01-27 15:05) Enviado mail a 27/01 (foi visto, mas sem resposta)
+  @toggle(15-02-05 15:49) Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)
+  @toggle(15-02-09 16:14) Enviado mail ao Henrique Madeira
+  @toggle(15-02-10 14:05) 
+  Hi Henrique,
+  I am happy that you and Gonçalo contacted me, and to share our work with you! I postponed to reply to him since I needed to find some documentation about the tool, but then I forgot… I will contact him as soon as possible!
+  We also have other work ongoing on the topic of sw fault injection tools, based on Anna Lanzaro’s PhD thesis, I will let you know as soon as we have a mature enough
+  draft to share :)
+  Cheers, Roberto
  ✔ É necessário fazer relatórios de progresso para submeter na plataforma de estágios? Com que regularidade o devo fazer? @done (15-02-05 15:45) @project(Dúvidas do email)
   Sim, a plataforma avisa quando se devem fazer os relatorios de progresso, mas provavelmente é mensalmente.
   Ferreira: Nunca submeteu qualquer tipo de relatorio na plataforma.

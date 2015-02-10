@@ -48,66 +48,53 @@
 	"buffers":
 	[
 		{
+			"file": "refs/README.md",
+			"settings":
+			{
+				"buffer_size": 6201,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "latex/main.tex",
 			"settings":
 			{
-				"buffer_size": 2307,
+				"buffer_size": 2500,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "latex/intro.tex",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 1400,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/index.tex",
-			"settings":
-			{
-				"buffer_size": 493,
+				"buffer_size": 8519,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "latex/appendix.tex",
+			"contents": "Tarefas gerais:\n☐ Template Latex\n☐ Falar com o professor Raul Barbosa de forma a ESPECIFICAR OS OBJETIVOS E OS REQUISITOS DO ESTAGIO   @critical\n  Gestão do projeto Agile\n☐ Resposta do Robert Natella ao email?  \n @toggle(15-01-27 15:05) Enviado mail a 27/01 (foi visto, mas sem resposta)\n @toggle(15-02-05 15:49) Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)\n @toggle(15-02-09 16:14) Enviado mail ao Henrique Madeira\n @toggle(15-02-10 14:05) \nHi Henrique,\nI am happy that you and Gonçalo contacted me, and to share our work with you! I postponed to reply to him since I needed to find some documentation about the tool, but then I forgot… I will contact him as soon as possible!\nWe also have other work ongoing on the topic of sw fault injection tools, based on Anna Lanzaro’s PhD thesis, I will let you know as soon as we have a mature enough\ndraft to share :)\nCheers, Roberto\n\n☐ Possiveis programas onde se possam injetar falhas de software (kernel e mais?)                      @high\n  Restrições:\n     Open Source\n     Linguagem C\n     \nTarefas até à próxima reunião:\n ☐ Verificar se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM\n  2 Threads principais:\n     ☐ Estudar o funcionamento do GCC parser\n     ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação\n\nDúvidas do email:\n ☐ Recomenda alguma leitura relativamente às técnicas G-SWFIT e SWIFI? Têm diferenças? Quais?\n    Generic Software Fault Injection Technique\n    Software Implemented Fault Injection\n\nFault Types - Missing:\n    ☐ MIFS - if construct plus statements\n      Missing \"If (cond) { statement(s) }\"\n    ☐ MLAC - AND sub-expr in expression used as branch condition\n    ☐ MFC - Function call\n    ☐ MIA - if contruct around statements\n    ☐ MLOC - OR sub-expr in expression used as branch condition\n    ☐ MLPA - small and localized part of the algorithm\n    ☐ MVAE - variable assignment using an expression\n    ☐ MFCT - functionality\n    ☐ MVAV - variable assignment using an value\n    ☐ MIEB - if contruct plus tatements plus else before statements\n    ☐ MVIV - variable initialization\nFault Types - Wrong:\n    ☐ WLEC - logical expression used as branch condition\n    ☐ WALL - algorithm - large modifications\n    ☐ WVAV - value assigned to variable\n    ☐ WAEP - arithmetic expression in parameter of function call\n    ☐ WSUT - data types or conversion used \n    ☐ WPFV - variable used in parameter of function call \nFault Types - Extraneous:\n    ☐ EVAV - variable assignment using another variable\n\n\nLiteratura:\n ☐ *On the Emulation of Software Faults by Software Fault Injection\n ☐ Resilience Assessment and Evaluation of Computing Systems cap13 e 14 ? (Lido anteriormente: cap4)\n ☐ *Xception: Software Fault Injection and Monitoring in Processor Functional Units\n ☐ *SWIFT: Software Implemented Fault Tolerance\n ☐ Dependable Computing and Fault-Tolerant Systems Vol.5\n ☐ *Orthogonal Defect Classification Cap.9\n ☐ Injection of faults at component interfaces and inside the component code: are they equivalent?\n＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿\nArchive:\n ✔ É necessário fazer relatórios de progresso para submeter na plataforma de estágios? Com que regularidade o devo fazer? @done (15-02-05 15:45) @project(Dúvidas do email)\n  Sim, a plataforma avisa quando se devem fazer os relatorios de progresso, mas provavelmente é mensalmente.\n  Ferreira: Nunca submeteu qualquer tipo de relatorio na plataforma.\n ✔ Numa das reuniões falou-se que o João Durães tinha especificado e documentado 12 falhas de software, mas no paper, não estão bem explicitas, ou então eu não percebi muito bem quais foram as 12. Ele faz inicialmente a separação  através do tipo do ODC (Assignment, Checking, Interface, Algorithm, Function), e depois em cada tipo, em missing construct, wrong construct ou extraneous construct. Finalmente retira as que são mais representativas (acontecem mais vezes). @done (15-02-05 15:44) @project(Dúvidas do email)\n  Foram selecionadas as 13 falhas mais representativas, mas so foram implementadas 12, uma vez que a única extraneous construct era dificil de implementar e o duraes foi ?calão?\n ✔ O João Durães criou uma aplicação para injecção de falhas de software, certo? SIM @done (15-02-05 15:41) @project(Dúvidas do email)\n  Vou ter acesso à mesma? Não, uma vez que ele injetou as falhas ao nivel da  execução dos programas e não ao nivel do código antes de compilar\n ✔ Gantt (especificar mais os requesitos, tabela de riscos? ) @done (15-02-05 15:38) @project(Reunião)\n  Não é necessário, só depois para o relatorio de estagio intermédio e final\n ✔ Conselhos relativamente à decisão 1 @done (15-02-05 15:38) @project(Reunião)\n  1 - Ficheiro antes de compilar\n ✔ Ler paper do Duraes             @critical  @done (15-02-03 22:55)\n ✔ Imprimir materiais do estágio   @done (15-02-03 22:55)\n",
+			"file": "tasks.todo",
+			"file_size": 4708,
+			"file_write_time": 130680451523412508,
 			"settings":
 			{
-				"buffer_size": 343,
+				"buffer_size": 4917,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "latex/abstract.tex",
+			"file": "code/parser/cmd",
 			"settings":
 			{
-				"buffer_size": 310,
+				"buffer_size": 65,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "latex/acknowledgements.tex",
+			"file": "code/parser/parser.y",
 			"settings":
 			{
-				"buffer_size": 894,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "latex/cover.tex",
-			"settings":
-			{
-				"buffer_size": 1015,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/management.tex",
-			"settings":
-			{
-				"buffer_size": 2502,
+				"buffer_size": 11336,
 				"line_ending": "Unix"
 			}
 		}
@@ -115,9 +102,101 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 117.0,
 		"selected_items":
 		[
+			[
+				"yacc",
+				"Set Syntax: OCamlyacc"
+			],
+			[
+				"syntax c",
+				"Set Syntax: C"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"c",
+				"Set Syntax: C"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"latex",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"markdown",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"consol",
+				"Set Syntax: R Console"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git sta",
+				"Git: Status"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"git p",
+				"Git: Push"
+			],
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"git s",
+				"Git: Status"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"title",
+				"Convert Case: Title Case"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
 			[
 				"ins",
 				"Package Control: Install Package"
@@ -131,28 +210,12 @@
 				"Word Wrap: Toggle"
 			],
 			[
-				"wra",
-				"Word Wrap: Toggle"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"latex",
-				"LaTexTools: Delete temporary files"
-			],
-			[
 				"build",
 				"Build: Build"
 			],
 			[
 				"rec",
 				"LaTeXTools: Reconfigure and migrate settings"
-			],
-			[
-				"wrap",
-				"Word Wrap: Toggle"
 			],
 			[
 				"lower",
@@ -163,16 +226,8 @@
 				"Set Syntax: LaTeX"
 			],
 			[
-				"remove",
-				"Package Control: Remove Package"
-			],
-			[
 				"close",
 				"Project: Close"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
 			],
 			[
 				"bib",
@@ -231,10 +286,6 @@
 				"Set Syntax: Java Server Page (JSP)"
 			],
 			[
-				"mark",
-				"MarkdownEditing: Add Missing Link Labels"
-			],
-			[
 				"markdo",
 				"MarkdownEditing: Convert Underlined Headers to ATX"
 			],
@@ -243,7 +294,7 @@
 				"View: Toggle Minimap"
 			]
 		],
-		"width": 514.0
+		"width": 447.0
 	},
 	"console":
 	{
@@ -267,35 +318,62 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Dropbox/Materiais/Estagio/stage",
-		"/D/Dropbox/Materiais/Estagio/stage/latex"
+		"/media/Dados/Dropbox/Materiais/Estagio/stage",
+		"/media/Dados/Dropbox/Materiais/Estagio/stage/latex",
+		"/media/Dados/Dropbox/Materiais/Estagio/stage/refs"
 	],
 	"file_history":
 	[
+		"/media/Dados/Dropbox/Materiais/Estagio/stage/code/parser/parser.yacc",
+		"/media/Dados/Dropbox/Materiais/Estagio/stage/code/parser/parser.lex",
+		"/home/master/Desktop/cenas/test.c",
+		"/home/master/Desktop/cenas/treeviz.awk",
+		"/home/master/Desktop/cenas/see_ast.py",
+		"/home/master/Desktop/cenas/dot2png.sh",
+		"/home/master/Desktop/cenas/tree.dot",
+		"/home/master/Desktop/cenas/ast-raw.sh",
+		"/home/master/Desktop/cenas/test.c.003t.original",
+		"/home/master/Desktop/cenas/ast2dot.sh",
+		"/home/master/Desktop/cenas/pre.awk",
+		"/home/master/.config/sublime-text-3/Packages/User/LaTeXTools.sublime-settings",
+		"/home/master/.config/sublime-text-3/Packages/PlainTasks/PlainTasks (Linux).sublime-settings",
+		"/home/master/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/PlainTasks.sublime-settings",
+		"/D/Dropbox/Materiais/Estagio/stage/refs/papers/Basic Concepts and Taxonomy of Dependable and Secure Computing.pdf",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/main.log",
+		"/D/Dropbox/Materiais/Estagio/stage/code/Makefile",
 		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
-		"/C/Users/GonçaloSilva/Desktop/tese marisa/thesis.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/acknowledgements.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/code/README.md",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/README.md",
+		"/D/Dropbox/Materiais/Estagio/stage/other/README.md",
+		"/D/Dropbox/Materiais/Estagio/stage/code/timer.c",
+		"/D/Dropbox/shortcuts/PlainTasks.todo",
+		"/D/Dropbox/shortcuts/PlainTasks.txt",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/refs.bib",
+		"/D/Dropbox/Materiais/Estagio/stage/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/intro.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/index.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/abstract.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/tasks.TODO",
+		"/D/Dropbox/Materiais/Estagio/stage/code/utility.h",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/appendix.tex",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/GonçaloSilva/Desktop/tese marisa/thesis.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/refs/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/notes.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/other/README.md",
-		"/D/Dropbox/Materiais/Estagio/stage/README.md",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/abstract.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/stateofart.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/main.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/acknowledgements.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/images.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/refs/presentations/Basic Concepts and Taxonomy of Dependable and Secure Computing-1.pdf",
 		"/D/Dropbox/Materiais/Estagio/stage/refs/books/Resilience Assessment and Evaluation of Computing Systems [Lorenzo Strigini, Katinka Wolter,Albe.pdf",
-		"/D/Dropbox/Materiais/Estagio/stage/refs/papers/Basic Concepts and Taxonomy of Dependable and Secure Computing.pdf",
 		"/D/Dropbox/Materiais/Estagio/stage/refs/papers/Emulation of Software Faults A Field Data Study and a Practical Approach - 20.pdf",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.pdf",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/refs.bib",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/tecnology.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/requirements.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/documentation.tex",
@@ -304,13 +382,9 @@
 		"/D/Dropbox/Materiais/Estagio/stage/latex/revision.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/cenas.bib",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/cenas.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/.gitignore",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.bbl",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/test.bib",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/main.log",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.toc",
 		"/C/Users/GonçaloSilva/Desktop/tese marisa/title.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/riscs.tex",
@@ -377,33 +451,11 @@
 		"/D/Dropbox/Materiais/Estagio/stage/Utility.h",
 		"/D/Dropbox/Materiais/IS/git/IS/Crawler/producer/t_stmp_1420536889133.xml",
 		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/africa.xml",
-		"/D/Dropbox/Materiais/IS/git/IS/Crawler/producer/stats.txt",
-		"/D/Dropbox/Materiais/IS/git/IS/Crawler/backup/all.xml",
-		"/D/Dropbox/Materiais/IS/git/IS/Crawler/backup/t_stmp_1420536691624.xml",
-		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/url.xml",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/src/main/app/mule-deploy.properties",
-		"/D/Downloads/Torrents/Finished/Windows 10 Build 9901/Build 9901 Key.txt",
-		"/D/Linux Kernel/modulo/run",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Skype/My Skype Received Files/database_IS_TP3.sql",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/send.xml",
-		"/D/home/master/git/IS_TP3/bdreader/log.log",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/SOAPxmlClient/src/xml/SOAPClient.java",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/WebContent/index.html",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/subscribe/WebContent/css/style.css",
-		"/D/Dropbox/Materiais/GP/git/GP2014-Youtube-Lyrics/src/youtube/Main.java",
-		"/D/Downloads/SubscribeAction (2)",
-		"/D/Dropbox/Materiais/IS/git/IS/tutorial-web/WebContent/index.jsp",
-		"/D/Windows 8.1/adhoc windows 8.txt",
-		"/D/Downloads/Torrents/Finished/AUTODATA 3.41 PT-PT/crack/crack.bat",
-		"/D/Downloads/Torrents/Finished/AUTODATA 3.41 PT-PT/COMO INSTALAR.txt",
-		"/D/Downloads/utility.h",
-		"/D/Downloads/termos_utilizacao_YouTube.txt",
-		"/D/timer.c"
+		"/D/Dropbox/Materiais/IS/git/IS/Crawler/producer/stats.txt"
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -417,6 +469,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"atomic",
+			"latexmk",
+			"command",
+			"entre",
 			"here",
 			"chapter",
 			" \"",
@@ -525,111 +581,56 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "latex/main.tex",
+					"file": "refs/README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2307,
+						"buffer_size": 6201,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2047,
-								2047
+								1162,
+								1162
 							]
 						],
 						"settings":
 						{
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "latex/intro.tex",
+					"file": "latex/main.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1400,
+						"buffer_size": 2500,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1255,
-								1255
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "latex/index.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 493,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								108,
-								121
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "latex/appendix.tex",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 343,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								1240,
+								1240
 							]
 						],
 						"settings":
@@ -645,119 +646,128 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "latex/abstract.tex",
+					"buffer": 2,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 310,
+						"buffer_size": 8519,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								310,
-								310
+								846,
+								846
+							]
+						],
+						"settings":
+						{
+							"parser": "markdown",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"target": "disk",
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 31.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "tasks.todo",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1127,
+								1127
 							]
 						],
 						"settings":
 						{
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"spell_check": false,
+							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "code/parser/cmd",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 65,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								65,
+								65
+							]
+						],
+						"settings":
+						{
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "latex/acknowledgements.tex",
+					"file": "code/parser/parser.y",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 894,
+						"buffer_size": 11336,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								729,
-								729
+								6475,
+								6475
 							]
 						],
 						"settings":
 						{
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/OCaml/OCamlyacc.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3539.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "latex/cover.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1015,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								923,
-								923
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "latex/management.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2502,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								807,
-								807
-							]
-						],
-						"settings":
-						{
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -765,7 +775,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 21.0
 	},
 	"input":
 	{
@@ -796,11 +806,15 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 210.0
+		"height": 144.0
 	},
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 165.0
 	},
 	"output.markdown":
 	{
@@ -817,6 +831,34 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"taks",
+				"tasks.todo"
+			],
+			[
+				"main",
+				"latex\\main.tex"
+			],
+			[
+				"cover",
+				"latex\\cover.tex"
+			],
+			[
+				"read",
+				"other\\README.md"
+			],
+			[
+				"readme",
+				"README.md"
+			],
+			[
+				"tasks",
+				"tasks.TODO"
+			],
+			[
+				"reamd",
+				"refs\\README.md"
+			],
 			[
 				"",
 				"Package Control Messages"
@@ -837,6 +879,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"sta",
+				"/media/Dados/Dropbox/Materiais/Estagio/stage/stage.sublime-project"
+			],
 			[
 				"maria",
 				"C:\\Users\\GonçaloSilva\\Desktop\\tese marisa\\teseMarisa.sublime-workspace"
@@ -864,7 +910,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 274.0,
+	"side_bar_width": 208.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
