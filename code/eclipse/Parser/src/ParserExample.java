@@ -1,13 +1,12 @@
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
 import org.eclipse.cdt.core.dom.ast.DOMException;
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTAttribute;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
-import org.eclipse.cdt.core.dom.ast.IASTFileLocation;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
@@ -34,7 +33,8 @@ public class ParserExample
   public static void main(String[] args)
     throws Exception
   {
-    FileContent fileContent = FileContent.createForExternalFileLocation("./docs/test.c");
+//    FileContent fileContent = FileContent.createForExternalFileLocation("./docs/test.c");
+    FileContent fileContent = FileContent.createForExternalFileLocation("./docs/mergesort.c");
 
     Map definedSymbols = new HashMap();
     String[] includePaths = new String[0];
@@ -45,6 +45,10 @@ public class ParserExample
 
     int opts = 8;
     IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, emptyIncludes, null, opts, log);
+    
+//    System.out.println(GPPLanguage.getDefault().getKeywords());
+//    System.out.println(translationUnit.getDeclarations().getClass().getName());
+    
 
     IASTPreprocessorIncludeStatement[] includes = translationUnit.getIncludeDirectives();
     for (IASTPreprocessorIncludeStatement include : includes) {
@@ -64,9 +68,11 @@ public class ParserExample
     {
       public int visit(IASTName name)
       {
+//    	  System.out.println(name.getParent().getClass().getDeclaredMethods());
+    	  
         if ((name.getParent() instanceof CPPASTFunctionDeclarator)) {
           System.out.println("IASTName: " + name.getClass().getSimpleName() + "(" + name.getRawSignature() + ") - > parent: " + name.getParent().getClass().getSimpleName());
-          System.out.println("-- isVisible: " + ParserExample.isVisible(name));
+//          System.out.println("-- isVisible: " + ParserExample.isVisible(name));
         }
 
         return 3;
@@ -150,6 +156,7 @@ public class ParserExample
     visitor.shouldVisitTypeIds = true;
 
     translationUnit.accept(visitor);
+    
   }
 
   private static void printTree(IASTNode node, int index) {
@@ -163,6 +170,9 @@ public class ParserExample
 
     String offset = "";
     try {
+    	
+      IASTNode test =	node.copy();
+      
       offset = node.getSyntax() != null ? " (offset: " + node.getFileLocation().getNodeOffset() + "," + node.getFileLocation().getNodeLength() + ")" : "";
       printContents = node.getFileLocation().getNodeLength() < 30;
     } catch (ExpansionOverlapsBoundaryException e) {
@@ -171,8 +181,11 @@ public class ParserExample
       offset = "UnsupportedOperationException";
     }
 
-    System.out.println(String.format(new StringBuilder("%1$").append(index * 2).append("s").toString(), new Object[] { "-" }) + node.getClass().getSimpleName() + offset + " -> " + (printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, node.getRawSignature().indexOf("\n"))));
-
+    if (node.getRawSignature().indexOf("\n") != -1)
+    	System.out.println(String.format(new StringBuilder("%1$").append(index * 2).append("s").toString(), new Object[] { "-" }) + node.getClass().getSimpleName() + offset + " -> " + (printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, node.getRawSignature().indexOf("\n"))));
+    else
+    	System.out.println(String.format(new StringBuilder("%1$").append(index * 2).append("s").toString(), new Object[] { "-" }) + node.getClass().getSimpleName() + offset + " -> " + (printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, 5)));
+    
     for (IASTNode iastNode : children)
       printTree(iastNode, index + 1);
   }

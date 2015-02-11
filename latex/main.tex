@@ -7,7 +7,8 @@
 
 %for embedding images
 % \usepackage[pdftex]{graphicx}
-\usepackage[demo]{graphicx}
+% \usepackage[demo]{graphicx}
+\usepackage{graphicx}
 % para a cor do texto
 \usepackage[usenames, dvipsnames]{color}
 
@@ -32,8 +33,18 @@
 % \usepackage[top=1cm, bottom=1cm, outer=0.5cm, inner=0.5cm, heightrounded, marginparwidth=1cm, marginparsep=1cm]{geometry}
 \usepackage[utf8]{inputenc}
 
+% append another pdfs
+\usepackage{pdfpages}
 
+% to use landscape mode
+\usepackage{lscape}
 	
+% \usepackage[export]{adjustbox}
+
+% \usepackage[portrait]{gmeometric} 
+
+\newcommand*{\red}{\textcolor{red}}
+
 % edit footer and header
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -58,6 +69,7 @@
 \input{index}
 \input{abstract}
 \input{intro}
+\input{management}
 \input{stateofart}
 \input{conclusions}
 \input{appendix}

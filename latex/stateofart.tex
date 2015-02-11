@@ -2,14 +2,12 @@
 \newpage
 \section{State of the Art}
 
-Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too.
-
-Because, using it, companies reduce the costs of IT infraestructure and people don't buy ``physical storage" and don't care where are the data. The cloud service provide that the data is secure.
+Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infraestructure and people don't buy ``physical storage" and don't care where are the data. The cloud service provide that the data is secure.
 But, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important caracteristic.
 
-The increased use of cloud is related with a low usage of many dedicated servers, and their migration 
+The increased use of cloud is related with a low usage of many dedicated servers, lower voltage levels, reduce noise margins and increase clock rates \cite{wolter2012resilience}.
 
-
+The cloud providers offers resources ready to deliver \cite{wolter2012resilience}.
 
 With this work, I want to inject software faults and analyse how the system react to them.
 
@@ -19,8 +17,9 @@ In this work
 deliberate how 
 
 \cite{duraes2006emulation}
-\cite{wolter2012resilience}
 \cite{avizzienisbasic}
+
+About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}.
 
 % \marginnote{especificar as abreviaturas...}[0cm]
 % \ac{cots}
@@ -33,6 +32,24 @@ deliberate how
 \section{Research objectives and approach method}
 
 \subsection{Cloud Computing}
+
+Three levels of Cloud Computing:
+
+\begin{itemize}
+	\item \ac{iaas};
+	\item \ac{paas};
+	\item \ac{saas}.
+\end{itemize}
+
+The cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most importants are:
+\begin{itemize}
+ 	\item Security attacks;
+ 	\item Accidents;
+ 	\item Power surges;
+ 	\item Workload faults;
+ 	\item Malfunction;
+ 	\item Worms and \ac{ddos} atacks.
+ \end{itemize} 
 
 \newpage
 \section{Current work and preliminary results}

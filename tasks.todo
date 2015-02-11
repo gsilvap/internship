@@ -2,60 +2,85 @@ Tarefas gerais:
 ☐ Template Latex
 ☐ Falar com o professor Raul Barbosa de forma a ESPECIFICAR OS OBJETIVOS E OS REQUISITOS DO ESTAGIO   @critical
   Gestão do projeto Agile
-
 ☐ Possiveis programas onde se possam injetar falhas de software (kernel e mais?)                      @high
   Restrições:
      Open Source
      Linguagem C
+
+Módulos:
+  ☐ 1 Deriva do código fonte original um conjunto de ficheiros alterados com mutações
+  ☐ 2 Determina qual o efeito produzido por uma falha
+  ☐ 3 Gere a compilação, que se pode resumir ao make file do projeto original
+
      
 Tarefas até à próxima reunião:
  ☐ Verificar se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM
   2 Threads principais:
-     ☐ Estudar o funcionamento do GCC parser
-       Possibilidade de utilizar bibliotecas em java: CDT Parser API
-       GCC: gcc -fdump-tree-original-raw test.c
+     ☐ Estudar o funcionamento do GCC parser (Gramática e forma de automatizar a injeção das falhas) 
+       JAVA : CDT Parser API
+       GCC  : gcc -fdump-tree-original-raw test.c
        CLANG: clang -Wall test.c -Xclang -ast-dump
      ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
+      Fault Types - Missing:
+          ☐ MIFS - if construct plus statements
+            Missing "If (cond) { statement(s) }"
+            Eliminar uma instrução if e as intruções desse bloco
 
-Dúvidas do email:
- ☐ Recomenda alguma leitura relativamente às técnicas G-SWFIT e SWIFI? Têm diferenças? Quais?
-    Generic Software Fault Injection Technique
-    Software Implemented Fault Injection
+            Restrição: eliminar os else's associados ? vs MIEB
+          ☐ MLAC - AND sub-expr in expression used as branch condition
 
-Fault Types - Missing:
-    ☐ MIFS - if construct plus statements
-      Missing "If (cond) { statement(s) }"
-    ☐ MLAC - AND sub-expr in expression used as branch condition
-    ☐ MFC - Function call
-    ☐ MIA - if contruct around statements
-    ☐ MLOC - OR sub-expr in expression used as branch condition
-    ☐ MLPA - small and localized part of the algorithm
-    ☐ MVAE - variable assignment using an expression
-    ☐ MFCT - functionality
-    ☐ MVAV - variable assignment using an value
-    ☐ MIEB - if contruct plus tatements plus else before statements
-    ☐ MVIV - variable initialization
-Fault Types - Wrong:
-    ☐ WLEC - logical expression used as branch condition
-    ☐ WALL - algorithm - large modifications
-    ☐ WVAV - value assigned to variable
-    ☐ WAEP - arithmetic expression in parameter of function call
-    ☐ WSUT - data types or conversion used 
-    ☐ WPFV - variable used in parameter of function call 
-Fault Types - Extraneous:
-    ☐ EVAV - variable assignment using another variable
+            Eliminar o AND e a condição associada
+          ☐ MFC  - Function call
+            Eliminar a chamada de função
+
+          ☐ MIA  - if contruct around statements
+
+          ☐ MLOC - OR sub-expr in expression used as branch condition
+            Eliminar o OR e a condição associada
+
+          ☐ MLPA - small and localized part of the algorithm
+
+          ☐ MVAE - variable assignment using an expression
+
+          ☐ MFCT - functionality
+
+          ☐ MVAV - variable assignment using an value
+
+          ☐ MIEB - if contruct plus statements plus else before statements
+
+
+          ☐ MVIV - variable initialization
+
+      Fault Types - Wrong:
+          
+          ☐ WLEC - logical expression used as branch condition
+          ☐ WALL - algorithm - large modifications
+          ☐ WVAV - value assigned to variable
+          ☐ WAEP - arithmetic expression in parameter of function call
+          ☐ WSUT - data types or conversion used 
+          ☐ WPFV - variable used in parameter of function call 
+      Fault Types - Extraneous:
+
+          ☐ EVAV - variable assignment using another variable
 
 
 Literatura:
- ☐ *On the Emulation of Software Faults by Software Fault Injection
- ☐ Resilience Assessment and Evaluation of Computing Systems cap13 e 14 ? (Lido anteriormente: cap4)
- ☐ *Xception: Software Fault Injection and Monitoring in Processor Functional Units
- ☐ *SWIFT: Software Implemented Fault Tolerance
- ☐ Dependable Computing and Fault-Tolerant Systems Vol.5
- ☐ *Orthogonal Defect Classification Cap.9
- ☐ Injection of faults at component interfaces and inside the component code: are they equivalent?
+ ☐ 4  - *On the Emulation of Software Faults by Software Fault Injection
+ ☐ 5  - Resilience Assessment and Evaluation of Computing Systems cap13 e 14 ? (Lido anteriormente: cap4)
+ ☐ 6  - *Xception: Software Fault Injection and Monitoring in Processor Functional Units
+ ☐ 7  - *SWIFT: Software Implemented Fault Tolerance
+ ☐ 8  - Dependable Computing and Fault-Tolerant Systems Vol.5
+ ☐ 9  - *Orthogonal Defect Classification Cap.9
+ ☐ 10 - Injection of faults at component interfaces and inside the component code: are they equivalent?
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Recomenda alguma leitura relativamente às técnicas G-SWFIT e SWIFI? Têm diferenças? Quais? @done (15-02-10 17:28) @project(Dúvidas do email)
+  Generic Software Fault Injection Technique
+  Software Implemented Fault Injection
+  |    |   SW  |   HW  |
+  |:--:|-------|-------|
+  | HW |   ?   |  HWFI |
+  | SW | SWIFI | SWIFI |
  ✔ Resposta do Robert Natella ao email?   @done (15-02-10 16:50)
   @toggle(15-01-27 15:05) Enviado mail a 27/01 (foi visto, mas sem resposta)
   @toggle(15-02-05 15:49) Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)

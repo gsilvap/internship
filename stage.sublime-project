@@ -36,6 +36,7 @@
 				"*.class",
 				"*.psd",
 				"*.db",
+				"*.fdb_latexmk",
 				"*.sublime-workspace"
 			],
 			"follow_symlinks": true,
