@@ -25,6 +25,24 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * Juri Arguente: Filipe Araujo (filipius@dei.uc.pt)
 * Juri Vogal: Antonio Jorge Silva Cardoso (jcardoso@dei.uc.pt)
 
+#### Reuniao 13/02/2015
+
+Vantagens e desvantagens GCC parser vs Bison/Yacc vs CDT Parser
+
+GCC Parser
+- mais limpo e sustentável que o Bison
+- maior performance, melhor feedback de erros, capacidade de recuperar de problemas
+- Recursive-descent parser
+- Performance: something that you've hand-optimized for your particular task will almost always perform better than a general solution. Abstraction usually has a performance hit
+- Timing: at least in the case of GCC, GCC predates a lot of free developer tools (came out in 1987). There was no free version of yacc, etc. at the time, which I'd imagine would've been a priority to the people at the FSF.
+
+Bison
+- 
+
+CDT Parser
+- Java
+
+
 #### Reuniao 05/02/2015
 <b>Description</b># ## # ## # ## ## ## # # ## 
 Decisão: Injeção de falhas de software em ficheiros antes de compilar

@@ -2,19 +2,21 @@
 \newpage
 \section{State of the Art}
 
-Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infraestructure and people don't buy ``physical storage" and don't care where are the data. The cloud service provide that the data is secure.
-But, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important caracteristic.
+Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and people don't buy ``physical storage" and don't care where are the data. The cloud service provide that the data is secure.
+But, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important characteristic.
 
 The increased use of cloud is related with a low usage of many dedicated servers, lower voltage levels, reduce noise margins and increase clock rates \cite{wolter2012resilience}.
 
 The cloud providers offers resources ready to deliver \cite{wolter2012resilience}.
 
-With this work, I want to inject software faults and analyse how the system react to them.
+With this work, I want to inject software faults and analyze how the system react to them.
 
 A lot of studies show that the software faults it's the main cause of computer failures.
 
 In this work
 deliberate how 
+
+I had access to the application of Robert Natella, called SAFE, that inject software faults, as I also have to do.
 
 \cite{duraes2006emulation}
 \cite{avizzienisbasic}
@@ -30,6 +32,9 @@ About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}
 
 \newpage
 \section{Research objectives and approach method}
+
+\subsection{GCC Parser vs CDT Parser vs Bison}
+
 
 \subsection{Cloud Computing}
 
@@ -48,11 +53,66 @@ The cloud computing isn't free of external disturbances\cite{wolter2012resilienc
  	\item Power surges;
  	\item Workload faults;
  	\item Malfunction;
- 	\item Worms and \ac{ddos} atacks.
+ 	\item Worms
+ 	\item \ac{ddos} attacks.
  \end{itemize} 
+
+\subsection{Applications to inject faults}
 
 \newpage
 \section{Current work and preliminary results}
 
 \newpage
 \section{Work plan and implications}
+
+Built three separated modules:
+
+\begin{itemize}
+	\item Generate the derivations of main code of selected programs;
+	\item Verify and analyze the effect of produced faults;
+	\item Compile the programs with injected faults, by using make file.
+\end{itemize}
+
+\subsection{Generate derivations}
+
+I chose to use the most representative faults \cite{duraes2006emulation}, divided into missing, wrong and extraneous, specified individually further down:
+
+\subsubsection{Fault Types - Missing:}
+\begin{itemize}
+	\item \textbf{MIFS} - if construct plus statements
+	\item \textbf{MLAC} - AND sub-expr in expression used as branch condition
+	\item \textbf{MFC}  - function call
+	\item \textbf{MIA}  - if construct around statements
+	\item \textbf{MLOC} - OR sub-expr in expression used as branch condition
+	\item \textbf{MLPA} - small and localized part of the algorithm
+	\item \textbf{MVAE} - variable assignment using an expression
+	\item \textbf{MFCT} - functionality
+	\item \textbf{MVAV} - variable assignment using an value
+	\item \textbf{MIEB} - if construct plus statements plus else before statements
+	\item \textbf{MVIV} - variable initialization
+\end{itemize}
+
+\subsubsection{Fault Types - Wrong:}
+\begin{itemize}
+	\item \textbf{WLEC} - logical expression used as branch condition
+	\item \textbf{WALL} - algorithm - large modifications
+	\item \textbf{WVAV} - value assigned to variable
+	\item \textbf{WAEP} - arithmetic expression in parameter of function call
+	\item \textbf{WSUT} - data types or conversion used 
+	\item \textbf{WPFV} - variable used in parameter of function call 
+\end{itemize}
+
+\subsubsection{Fault Types - Extraneous:}
+\begin{itemize}
+	\item \textbf{EVAV} - variable assignment using another variable
+\end{itemize}
+
+
+\subsection{Analyze the effects}
+
+The fault injected results is equal to the real software faults?
+
+\subsection{Compile programs}
+
+Select five to ten programs to test.
+

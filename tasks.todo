@@ -81,7 +81,7 @@ Archive:
   |:--:|-------|-------|
   | HW |   ?   |  HWFI |
   | SW | SWIFI | SWIFI |
- ✔ Resposta do Robert Natella ao email?   @done (15-02-10 16:50)
+ ✔ Resposta do Robert Natella ao email?                                                       @done (15-02-10 16:50)
   @toggle(15-01-27 15:05) Enviado mail a 27/01 (foi visto, mas sem resposta)
   @toggle(15-02-05 15:49) Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)
   @toggle(15-02-09 16:14) Enviado mail ao Henrique Madeira
@@ -94,13 +94,13 @@ Archive:
  ✔ É necessário fazer relatórios de progresso para submeter na plataforma de estágios? Com que regularidade o devo fazer? @done (15-02-05 15:45) @project(Dúvidas do email)
   Sim, a plataforma avisa quando se devem fazer os relatorios de progresso, mas provavelmente é mensalmente.
   Ferreira: Nunca submeteu qualquer tipo de relatorio na plataforma.
- ✔ Numa das reuniões falou-se que o João Durães tinha especificado e documentado 12 falhas de software, mas no paper, não estão bem explicitas, ou então eu não percebi muito bem quais foram as 12. Ele faz inicialmente a separação  através do tipo do ODC (Assignment, Checking, Interface, Algorithm, Function), e depois em cada tipo, em missing construct, wrong construct ou extraneous construct. Finalmente retira as que são mais representativas (acontecem mais vezes). @done (15-02-05 15:44) @project(Dúvidas do email)
+ ✔ Numa das reuniões falou-se que o João Durães tinha especificado e documentado 12 falhas de software, mas no paper, não estão bem explicitas, ou então eu não percebi muito bem quais foram as 12. Ele faz inicialmente a separação  através do tipo do ODC (Assignment, Checking, Interface, Algorithm, Function), e depois em cada tipo, em missing construct, wrong construct ou extraneous construct. Finalmente retira as que são mais representativas (acontecem mais vezes).                               @done (15-02-05 15:44) @project(Dúvidas do email)
   Foram selecionadas as 13 falhas mais representativas, mas so foram implementadas 12, uma vez que a única extraneous construct era dificil de implementar e o duraes foi ?calão?
- ✔ O João Durães criou uma aplicação para injecção de falhas de software, certo? SIM @done (15-02-05 15:41) @project(Dúvidas do email)
+ ✔ O João Durães criou uma aplicação para injecção de falhas de software, certo? SIM          @done (15-02-05 15:41) @project(Dúvidas do email)
   Vou ter acesso à mesma? Não, uma vez que ele injetou as falhas ao nivel da  execução dos programas e não ao nivel do código antes de compilar
- ✔ Gantt (especificar mais os requesitos, tabela de riscos? ) @done (15-02-05 15:38) @project(Reunião)
+ ✔ Gantt (especificar mais os requesitos, tabela de riscos? )                                 @done (15-02-05 15:38) @project(Reunião)
   Não é necessário, só depois para o relatorio de estagio intermédio e final
- ✔ Conselhos relativamente à decisão 1 @done (15-02-05 15:38) @project(Reunião)
+ ✔ Conselhos relativamente à decisão 1                                                        @done (15-02-05 15:38) @project(Reunião)
   1 - Ficheiro antes de compilar
- ✔ Ler paper do Duraes             @critical  @done (15-02-03 22:55)
- ✔ Imprimir materiais do estágio   @done (15-02-03 22:55)
+ ✔ Ler paper do Duraes                                                              critical  @done (15-02-03 22:55)
+ ✔ Imprimir materiais do estágio                                                              @done (15-02-03 22:55)

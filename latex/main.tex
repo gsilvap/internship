@@ -18,7 +18,22 @@
 \usepackage{url}
 %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
 % \usepackage[bookmarks, colorlinks=false, linkcolor=red, pdfborder={0 0 0}, pdftitle={Tese}, pdfauthor={Goncalo Silva Pereira - 2009111643}, pdfsubject={Evaluate the robusteness of Cloud}, pdfkeywords={Faults, Errors, Failures, Vulnerabilities, Fault Injection, Fault Tolerance, Security, Robustness}, linktoc=section, citecolor=green, filecolor=cyan, urlcolor=magenta, urlbordercolor={0 1 1}, citebordercolor={0 1 0}, linkbordercolor={1 0 0}]{hyperref} 
-\usepackage[pdftitle={Tese}, pdfauthor={Goncalo Silva Pereira - 2009111643}, pdfsubject={Evaluate the robusteness of Cloud}, pdfkeywords={Faults, Errors, Failures, Vulnerabilities, Fault Injection, Fault Tolerance, Security, Robustness}, linktoc=all]{hyperref} 
+% \usepackage[bookmarks=true, pdftitle={Tese}, pdfauthor={Goncalo Silva Pereira - 2009111643}, pdfsubject={Evaluate the robusteness of Cloud}, pdfkeywords={Faults, Errors, Failures, Vulnerabilities, Fault Injection, Fault Tolerance, Security, Robustness}, linktoc=all]{hyperref}
+\usepackage{hyperref}
+\hypersetup{
+	% bookmarks,
+	pdftitle={Tese}
+	,pdfauthor={Goncalo Silva Pereira - 2009111643}
+	,pdfsubject={Evaluate the robustness of Cloud}
+	,pdfkeywords={Faults, Errors, Failures, Vulnerabilities, Fault Injection, Fault Tolerance, Security, Robustness}
+	,linktoc=all
+} 
+
+% to go to the begin of figures
+\usepackage{caption}
+% \usepackage[all]{hypcap}
+
+\usepackage{bookmark}
 
 % indent first paragraph
 \usepackage{indentfirst}
@@ -54,6 +69,21 @@
 \cfoot{\hyperref[toc]{\thepage}}
 % \fancyhead[L]{}
 % \renewcommand{\headrulewidth}{0pt}
+
+
+% to reduce font size of table of contents
+% THESE COUPLE LINES ARE THAT YOU NEED FOR THE 2ND PART
+\AtBeginDocument{
+  \addtocontents{toc}{\tiny}
+  \addtocontents{lof}{\tiny}
+}
+% THESE COUPLE LINES ARE THAT YOU NEED FOR THE 1ST PART
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\tableofcontents}{\contentsname \@mkboth}{\small\contentsname \@mkboth}{}{}
+\xpatchcmd{\listoffigures}{\chapter *{\listfigurename }}{\chapter *{\small\listfigurename }}{}{}
+\makeatother
+
 
 % view frame in page, arround all areas, page, footer, header
 % \usepackage{showframe}
