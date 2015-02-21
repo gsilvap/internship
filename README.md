@@ -8,11 +8,12 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Enquadramento](#enquadramento)
 * [Objetivo](#objetivo)
 * [Plano de Trabalhos - Semestre 1](#plano-de-trabalhos-semestre-1)
-* [Plano de Trabalhos - Semestre 2](#plano-de-tra:balhos-semestre-2)
+* [Plano de Trabalhos - Semestre 2](#plano-de-trabalhos-semestre-2)
 * [Condiçoes](#condicoes)
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 13/02/2015](#reuniao-13022015)
 * [Reunião do dia 05/02/2015](#reuniao-05022015)
 * [Reunião do dia 20/01/2015](#reuniao-20012015)
 * [Reunião do dia 12/01/2015](#reuniao-12012015)

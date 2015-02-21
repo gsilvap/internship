@@ -48,42 +48,35 @@
 	"buffers":
 	[
 		{
-			"file": "code/eclipse/Parser/docs/test.c",
+			"contents": "Writing a C parser is quicker than reading, analysing and replying to\nhundreds of list messages discussing how to implement OpenMP and what\nshould or should not be replaced to do so, so I just wrote one over\nthe past week.  This is a hand-written, recursive-descent parser for C\nthat parses the same GNU C language as the Bison parser, just\nreplacing the parser and not other code at the same time.  It does not\nyet have Objective-C support, although that should not be hard to add\n(the lexer support and Objective-C parts in actions for C syntax\nproductions are present, but the Objective-C productions are not\nhandled); it does however handle the complete C language the old\nparser did; with the present patch C uses the new parser and\nObjective-C the old one.  There are many ??? comments where some\naspect of the language as accepted by the old parser seemed doubtful\nbut was duly preserved so all language changes can be considered\nindependently of a parser change.\n\nFile sizes for comparison:\n-rw-r--r--  1 jsm28 jsm28 100399 Oct 19 19:40 c-parse.in\n-rw-rw-r--  1 jsm28 jsm28 143561 Oct 22 20:24 c-parser.c\n-rw-r--r--  1 jsm28 jsm28 488242 Oct 21 13:12 cp/parser.c\n\nError recovery may also need more work; parts are copied from the C++\nparser, but it needs testing and tuning.  Although various places\nwhere error location differed from the Bison parser have been\nadjusted, more may need adjusting (as shown by GCC and GDB testsuite\nruns), and ultimately the right solution after this parser is in is to\ndefine exactly which token gives the location for each message and\npass location_t values around as necessary, using %H in diagnostics,\nto get messages at a well-defined place rather than relying at all on\ninput_location.  (I will however be changing the lookahead strategy so\nit only looks at the next token when required - as is done for the\nsecond lookahead token - rather than always automatically keeping one\nlookahead token, which should reduce some of the differences in this\nregard from the Bison parser, and is also needed to avoid handling\npragmas prematurely until C moves to lexing up front, which is a\nchange I want to keep separate from the parser replacement.)\n\nThis parser should be clearer and more maintainable than the Bison\nparser (for example, many cases needing duplication of similar rules\nin a Bison parser can be handled without such duplication using\nappropriate flags); it should assist in the implementation of OpenMP\nand other extensions which fit naturally into such a parser structure;\nthere are compile-time improvements (about 2% at -O0 on .i files of\ncc1; subsequent changes such as lexing up front should improve things\nfurther, but lexing up front could be done in principle with either\nparser), but it isn't really ready to benchmark definitively until\nObjective-C support (which will have runtime conditionals between\nlanguages) is there, and lexer lookahead strategy and error recovery\nare more nearly in their final state; and in future it might\nfacilitate better diagnostic location (e.g. fixing bug 8927).\n\nUndoubtedly there is much scope for improvement in this parser; the\nparsing structure and actions of the old parser are followed closely\nto minimise the change involved in going to a new parser, but once the\nold parser is superseded individual minimal changes to the new parser\ncan gradually clean it up and move away from aspects that aren't ideal\nbut were dictated by following the old parser.\n\nRequirements to go on mainline (not yet met) are that performance is\nno worse (and preferably better) on .i files of cc1, at -O0; that\nthere are tests in the testsuite giving 100% coverage of the old and\nnew parsers; that error recovery as indicated by the testsuite is no\nworse than the old parser; that testcases are updated for changed\nerror locations (which should be avoided if possible until after the\nmerge) and error recovery, and as updated there are no GCC or GDB\ntestsuite regressions; that ObjC support is included; that any changes\nnot strictly needing to be part of this patch are merged separately.\nI would expect the start of 4.1 development to be a likely time for\nthis to go on mainline (though if other people want this in 4.0 for\nthe performance improvements and it seems ready before 4.0 is ready to\nbranch, I won't rule that out altogether; it just seems too\npotentially destabilising to me for this to be likely to make sense).\n\nThis patch serves to provide a recursive-descent parser (facilitating\nOpenMP, etc.) within reasonably forseeable time, unlike other\nalternatives such as \"merge the C and C++ front ends\".\n\nBootstrapped (with some regressions), C only, on i686-pc-linux-gnu.\nAn earlier version was bootstrapped covering other languages as well;\nsome easy regressions found from the C testsuite were fixed to produce\nthis version.\n\nThe next development stage of this patch will be adding Objective-C\nsupport and adequate testcases.  Once that is done it may be ready for\nwider testing (e.g. distribution builds; and I'll test it with Plum\nHall, but can't report the results).\n\nAs regards the suggestion of working on gomp-branch, I don't want to\nmix these changes with any not really required by them, as the aim is\nfor a minimal patch to apply to mainline; and before there is full\ntestsuite coverage with no regressions, it would destabilise\ngomp-branch, but once there is full coverage with no regressions, it\nis ready for mainline.  It is intended that all testcases will go on\nmainline as developed (testing the old parser's messages on mainline),\nso the final patch will add the new parser, remove the old and make\ncorresponding build system, documentation and testsuite adjustments\nbut make no other changes to the compiler.  (The new flags in\nc_declspecs would go in separately just before the parser itself, as\nthey are independent of it but aren't actually useful until the parser\nis ready to go in so if they went in now they'd just be dead code.)\n\nSpecific ObjC changes that would be helpful: if some patch along the\nlines of that in\n<http://gcc.gnu.org/ml/gcc-patches/2004-10/msg00951.html> or the\nrelevant part thereof went in to get rid of RID_ID that would simplify\nthe Objective-C grammar that needs to be implemented.  Is there some\nreason why CLASSNAME isn't included as an alternative in\nafter_type_declarator and parm_declarator_starttypename?  If it should\nbe included, then that also simplifies the grammar.  Additionally,\ntestcases covering all the existing Objective-C syntax productions /\nalternatives / actions would be helpful to ensure that their handling\nremains the same under the new parser.\n\n-- \nJoseph S. Myers               http://www.srcf.ucam.org/~jsm28/gcc/\n    jsm@polyomino.org.uk (personal mail)\n    joseph@codesourcery.com (CodeSourcery mail)\n    jsm28@gcc.gnu.org (Bugzilla assignments and CCs)\n\ndiff -rupN GCC.orig/gcc/Makefile.in GCC/gcc/Makefile.in\n--- GCC.orig/gcc/Makefile.in	2004-10-15 10:05:02.000000000 +0000\n+++ GCC/gcc/Makefile.in	2004-10-16 18:31:46.000000000 +0000\n@@ -191,7 +191,6 @@ gcc.o-warn = -Wno-error\n build/insn-conditions.o-warn = -Wno-error\n # Bison-1.75 output often yields (harmless) -Wtraditional warnings\n build/gengtype-yacc.o-warn = -Wno-error\n-c-parse.o-warn = -Wno-error\n # flex output may yield harmless \"no previous prototype\" warnings\n build/gengtype-lex.o-warn = -Wno-error\n # SYSCALLS.c misses prototypes\n@@ -882,7 +881,7 @@ C_AND_OBJC_OBJS = attribs.o c-errors.o c\n   c-gimplify.o tree-mudflap.o c-pretty-print.o\n \n # Language-specific object files for C.\n-C_OBJS = c-parse.o c-lang.o stub-objc.o $(C_AND_OBJC_OBJS)\n+C_OBJS = c-parser.o c-lang.o stub-objc.o $(C_AND_OBJC_OBJS)\n \n # Language-independent object files.\n OBJS-common = \\\n@@ -1348,24 +1347,15 @@ s-crt0:	$(CRT0_S) $(MCRT0_S) $(GCC_PASSE\n \n c-errors.o: c-errors.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \\\n     $(C_TREE_H) $(FLAGS_H) $(DIAGNOSTIC_H) $(TM_P_H)\n-c-parse.o : c-parse.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \\\n+c-parser.o : c-parser.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \\\n     $(GGC_H) intl.h $(C_TREE_H) input.h $(FLAGS_H) toplev.h output.h \\\n-    $(CPPLIB_H) varray.h gt-c-parse.h langhooks.h $(C_COMMON_H) $(C_PRAGMA_H)\n+    $(CPPLIB_H) varray.h gt-c-parser.h langhooks.h $(C_COMMON_H) $(C_PRAGMA_H)\n \n srcextra: gcc.srcextra lang.srcextra\n \n-gcc.srcextra: c-parse.y c-parse.c gengtype-lex.c gengtype-yacc.c gengtype-yacc.h\n+gcc.srcextra: gengtype-lex.c gengtype-yacc.c gengtype-yacc.h\n 	-cp -p $^ $(srcdir)\n \n-c-parse.c: c-parse.y\n-	-$(BISON) $(BISONFLAGS) -o $@ $<\n-\n-c-parse.y: c-parse.in\n-	echo '/*WARNING: This file is automatically generated!*/' >tmp-c-parse.y\n-	sed -e \"/^@@ifobjc.*/,/^@@end_ifobjc.*/d\" \\\n-	    -e \"/^@@ifc.*/d\" -e \"/^@@end_ifc.*/d\" $< >>tmp-c-parse.y\n-	$(SHELL) $(srcdir)/../move-if-change tmp-c-parse.y $@\n-\n c-incpath.o: c-incpath.c c-incpath.h $(CONFIG_H) $(SYSTEM_H) $(CPPLIB_H) \\\n 		intl.h prefix.h coretypes.h $(TM_H) cppdefault.h $(TARGET_H) \\\n 		$(MACHMODE_H)\n@@ -2417,7 +2407,7 @@ GTFILES = $(srcdir)/input.h $(srcdir)/co\n   $(srcdir)/sdbout.c $(srcdir)/stor-layout.c \\\n   $(srcdir)/stringpool.c $(srcdir)/tree.c $(srcdir)/varasm.c \\\n   $(srcdir)/tree-mudflap.c $(srcdir)/tree-flow.h \\\n-  $(srcdir)/c-objc-common.c $(srcdir)/c-common.c $(srcdir)/c-parse.in \\\n+  $(srcdir)/c-objc-common.c $(srcdir)/c-common.c $(srcdir)/c-parser.c \\\n   $(srcdir)/tree-ssanames.c $(srcdir)/tree-eh.c \\\n   $(srcdir)/tree-phinodes.c $(srcdir)/tree-cfg.c \\\n   $(srcdir)/tree-dfa.c $(srcdir)/tree-ssa-propagate.c \\\n@@ -2439,7 +2429,7 @@ gt-emit-rtl.h gt-explow.h gt-stor-layout\n gt-lists.h gt-alias.h gt-cselib.h gt-fold-const.h gt-gcse.h \\\n gt-expr.h gt-sdbout.h gt-optabs.h gt-bitmap.h gt-dojump.h \\\n gt-dwarf2out.h gt-ra-build.h gt-reg-stack.h gt-dwarf2asm.h \\\n-gt-dbxout.h gt-c-common.h gt-c-decl.h gt-c-parse.h \\\n+gt-dbxout.h gt-c-common.h gt-c-decl.h gt-c-parser.h \\\n gt-c-pragma.h gtype-c.h gt-input.h gt-cfglayout.h \\\n gt-tree-mudflap.h \\\n gt-tree-ssa-ccp.h gt-tree-eh.h \\\n@@ -3109,7 +3099,7 @@ distclean: clean lang.distclean\n 	-rm -f Makefile *.oaux\n 	-rm -f gthr-default.h\n 	-rm -f */stage1 */stage2 */stage3 */stage4 */include */stageprofile */stagefeedback\n-	-rm -f c-parse.y c-parse.c c-parse.output TAGS */TAGS\n+	-rm -f TAGS */TAGS\n 	-rm -f *.asm\n 	-rm -f site.exp site.bak testsuite/site.exp testsuite/site.bak\n 	-rm -f testsuite/*.log testsuite/*.sum\n@@ -3130,7 +3120,6 @@ maintainer-clean:\n 	@echo 'This command is intended for maintainers to use; it'\n 	@echo 'deletes files that may need special tools to rebuild.'\n 	$(MAKE) lang.maintainer-clean distclean\n-	-rm -f $(srcdir)/c-parse.y $(srcdir)/c-parse.c\n 	-rm -f cpp.??s cpp.*aux\n 	-rm -f gcc.??s gcc.*aux\n 	-rm -f $(docdir)/*.info $(docdir)/*.1 $(docdir)/*.7 $(docdir)/*.dvi\n@@ -3604,7 +3593,7 @@ TAGS: lang.tags\n 	    incs=\"$$incs --include $$dir/TAGS.sub\";	\\\n 	  fi;						\\\n 	done;						\\\n-	etags -o TAGS.sub *.y *.h *.c -l yacc c-parse.in; \\\n+	etags -o TAGS.sub *.y *.h *.c; \\\n 	etags --include TAGS.sub $$incs)\n \n # ------------------------------------------------------\ndiff -rupN GCC.orig/gcc/c-config-lang.in GCC/gcc/c-config-lang.in\n--- GCC.orig/gcc/c-config-lang.in	2002-12-27 19:38:52.000000000 +0000\n+++ GCC/gcc/c-config-lang.in	2004-10-21 23:47:38.000000000 +0000\n@@ -23,4 +23,4 @@\n # files used by C that have garbage collection GTY macros in them\n # which therefore need to be scanned by gengtype.c.\n \n-gtfiles=\"\\$(srcdir)/c-lang.c \\$(srcdir)/c-parse.in \\$(srcdir)/c-tree.h \\$(srcdir)/c-decl.c \\$(srcdir)/c-common.c \\$(srcdir)/c-common.h \\$(srcdir)/c-pragma.c \\$(srcdir)/c-objc-common.c\"\n+gtfiles=\"\\$(srcdir)/c-lang.c \\$(srcdir)/c-tree.h \\$(srcdir)/c-decl.c \\$(srcdir)/c-common.c \\$(srcdir)/c-common.h \\$(srcdir)/c-pragma.c \\$(srcdir)/c-objc-common.c \\$(srcdir)/c-parser.c\"\ndiff -rupN GCC.orig/gcc/c-decl.c GCC/gcc/c-decl.c\n--- GCC.orig/gcc/c-decl.c	2004-10-15 10:05:02.000000000 +0000\n+++ GCC/gcc/c-decl.c	2004-10-16 21:51:00.000000000 +0000\n@@ -6680,6 +6680,8 @@ build_null_declspecs (void)\n   ret->attrs = 0;\n   ret->typespec_word = cts_none;\n   ret->storage_class = csc_none;\n+  ret->declspecs_seen_p = false;\n+  ret->type_seen_p = false;\n   ret->non_sc_seen_p = false;\n   ret->typedef_p = false;\n   ret->tag_defined_p = false;\n@@ -6709,6 +6711,7 @@ declspecs_add_qual (struct c_declspecs *\n   enum rid i;\n   bool dupe = false;\n   specs->non_sc_seen_p = true;\n+  specs->declspecs_seen_p = true;\n   gcc_assert (TREE_CODE (qual) == IDENTIFIER_NODE\n 	      && C_IS_RESERVED_WORD (qual));\n   i = C_RID_CODE (qual);\n@@ -6742,6 +6745,8 @@ declspecs_add_type (struct c_declspecs *\n {\n   tree type = spec.spec;\n   specs->non_sc_seen_p = true;\n+  specs->declspecs_seen_p = true;\n+  specs->type_seen_p = true;\n   if (TREE_DEPRECATED (type))\n     specs->deprecated_p = true;\n \n@@ -7036,6 +7041,7 @@ declspecs_add_scspec (struct c_declspecs\n   enum rid i;\n   enum c_storage_class n = csc_none;\n   bool dupe = false;\n+  specs->declspecs_seen_p = true;\n   gcc_assert (TREE_CODE (scspec) == IDENTIFIER_NODE\n 	      && C_IS_RESERVED_WORD (scspec));\n   i = C_RID_CODE (scspec);\n@@ -7118,6 +7124,7 @@ struct c_declspecs *\n declspecs_add_attrs (struct c_declspecs *specs, tree attrs)\n {\n   specs->attrs = chainon (attrs, specs->attrs);\n+  specs->declspecs_seen_p = true;\n   return specs;\n }\n \ndiff -rupN GCC.orig/gcc/c-parser.c GCC/gcc/c-parser.c\n--- GCC.orig/gcc/c-parser.c	1970-01-01 00:00:00.000000000 +0000\n+++ GCC/gcc/c-parser.c	2004-10-22 20:24:05.000000000 +0000\n@@ -0,0 +1,4775 @@\n+/* Parser for C and Objective-C.\n+   Copyright (C) 1987, 1988, 1989, 1992, 1993, 1994, 1995, 1996, 1997,\n+   1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.\n+\n+   Parser actions based on the old Bison parser; structure somewhat\n+   influenced by and fragments based on the C++ parser.\n+\n+This file is part of GCC.\n+\n+GCC is free software; you can redistribute it and/or modify it under\n+the terms of the GNU General Public License as published by the Free\n+Software Foundation; either version 2, or (at your option) any later\n+version.\n+\n+GCC is distributed in the hope that it will be useful, but WITHOUT ANY\n+WARRANTY; without even the implied warranty of MERCHANTABILITY or\n+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n+for more details.\n+\n+You should have received a copy of the GNU General Public License\n+along with GCC; see the file COPYING.  If not, write to the Free\n+Software Foundation, 59 Temple Place - Suite 330, Boston, MA\n+02111-1307, USA.  */\n+\n+/* TODO:\n+\n+   Support Objective-C.\n+\n+   Make sure all relevant comments, and all relevant code from all\n+   actions, brought over from old parser.\n+\n+   Include full syntax for GNU C, including erroneous cases accepted\n+   with error messages, in syntax productions in comments.\n+\n+   Avoid needing to adjust input_location when calling parser actions\n+   by making more diagnostics in the front end generally take an\n+   explicit location rather than implicitly using input_location.  */\n+\n+#include \"config.h\"\n+#include \"system.h\"\n+#include \"coretypes.h\"\n+#include \"tm.h\"\n+#include \"tree.h\"\n+#include \"langhooks.h\"\n+#include \"input.h\"\n+#include \"cpplib.h\"\n+#include \"timevar.h\"\n+#include \"c-pragma.h\"\n+#include \"c-tree.h\"\n+#include \"flags.h\"\n+#include \"output.h\"\n+#include \"toplev.h\"\n+#include \"ggc.h\"\n+#include \"c-common.h\"\n+\n+\n+/* Miscellaneous data and functions needed for lexer and parser.  */\n+\n+int yydebug;\n+\n+/* Objective-C specific parser/lexer information.  */\n+\n+static int objc_pq_context = 0;\n+\n+/* The following flag is needed to contextualize ObjC lexical\n+   analysis.  In some cases (e.g., 'int NSObject;'), it is undesirable\n+   to bind an identifier to an ObjC class, even if a class with that\n+   name exists.  */\n+static int objc_need_raw_identifier = 0;\n+#define OBJC_NEED_RAW_IDENTIFIER(VAL)		\\\n+  do {						\\\n+    if (c_dialect_objc ())			\\\n+      objc_need_raw_identifier = VAL;		\\\n+  } while (0)\n+\n+/* The reserved keyword table.  */\n+struct resword\n+{\n+  const char *word;\n+  ENUM_BITFIELD(rid) rid : 16;\n+  unsigned int disable   : 16;\n+};\n+\n+/* Disable mask.  Keywords are disabled if (reswords[i].disable &\n+   mask) is _true_.  */\n+#define D_C89	0x01	/* not in C89 */\n+#define D_EXT	0x02	/* GCC extension */\n+#define D_EXT89	0x04	/* GCC extension incorporated in C99 */\n+#define D_OBJC	0x08	/* Objective C only */\n+\n+static const struct resword reswords[] =\n+{\n+  { \"_Bool\",		RID_BOOL,	0 },\n+  { \"_Complex\",		RID_COMPLEX,	0 },\n+  { \"__FUNCTION__\",	RID_FUNCTION_NAME, 0 },\n+  { \"__PRETTY_FUNCTION__\", RID_PRETTY_FUNCTION_NAME, 0 },\n+  { \"__alignof\",	RID_ALIGNOF,	0 },\n+  { \"__alignof__\",	RID_ALIGNOF,	0 },\n+  { \"__asm\",		RID_ASM,	0 },\n+  { \"__asm__\",		RID_ASM,	0 },\n+  { \"__attribute\",	RID_ATTRIBUTE,	0 },\n+  { \"__attribute__\",	RID_ATTRIBUTE,	0 },\n+  { \"__builtin_choose_expr\", RID_CHOOSE_EXPR, 0 },\n+  { \"__builtin_offsetof\", RID_OFFSETOF, 0 },\n+  { \"__builtin_types_compatible_p\", RID_TYPES_COMPATIBLE_P, 0 },\n+  { \"__builtin_va_arg\",	RID_VA_ARG,	0 },\n+  { \"__complex\",	RID_COMPLEX,	0 },\n+  { \"__complex__\",	RID_COMPLEX,	0 },\n+  { \"__const\",		RID_CONST,	0 },\n+  { \"__const__\",	RID_CONST,	0 },\n+  { \"__extension__\",	RID_EXTENSION,	0 },\n+  { \"__func__\",		RID_C99_FUNCTION_NAME, 0 },\n+  { \"__imag\",		RID_IMAGPART,	0 },\n+  { \"__imag__\",		RID_IMAGPART,	0 },\n+  { \"__inline\",		RID_INLINE,	0 },\n+  { \"__inline__\",	RID_INLINE,	0 },\n+  { \"__label__\",	RID_LABEL,	0 },\n+  { \"__real\",		RID_REALPART,	0 },\n+  { \"__real__\",		RID_REALPART,	0 },\n+  { \"__restrict\",	RID_RESTRICT,	0 },\n+  { \"__restrict__\",	RID_RESTRICT,	0 },\n+  { \"__signed\",		RID_SIGNED,	0 },\n+  { \"__signed__\",	RID_SIGNED,	0 },\n+  { \"__thread\",		RID_THREAD,	0 },\n+  { \"__typeof\",		RID_TYPEOF,	0 },\n+  { \"__typeof__\",	RID_TYPEOF,	0 },\n+  { \"__volatile\",	RID_VOLATILE,	0 },\n+  { \"__volatile__\",	RID_VOLATILE,	0 },\n+  { \"asm\",		RID_ASM,	D_EXT },\n+  { \"auto\",		RID_AUTO,	0 },\n+  { \"break\",		RID_BREAK,	0 },\n+  { \"case\",		RID_CASE,	0 },\n+  { \"char\",		RID_CHAR,	0 },\n+  { \"const\",		RID_CONST,	0 },\n+  { \"continue\",		RID_CONTINUE,	0 },\n+  { \"default\",		RID_DEFAULT,	0 },\n+  { \"do\",		RID_DO,		0 },\n+  { \"double\",		RID_DOUBLE,	0 },\n+  { \"else\",		RID_ELSE,	0 },\n+  { \"enum\",		RID_ENUM,	0 },\n+  { \"extern\",		RID_EXTERN,	0 },\n+  { \"float\",		RID_FLOAT,	0 },\n+  { \"for\",		RID_FOR,	0 },\n+  { \"goto\",		RID_GOTO,	0 },\n+  { \"if\",		RID_IF,		0 },\n+  { \"inline\",		RID_INLINE,	D_EXT89 },\n+  { \"int\",		RID_INT,	0 },\n+  { \"long\",		RID_LONG,	0 },\n+  { \"register\",		RID_REGISTER,	0 },\n+  { \"restrict\",		RID_RESTRICT,	D_C89 },\n+  { \"return\",		RID_RETURN,	0 },\n+  { \"short\",		RID_SHORT,	0 },\n+  { \"signed\",		RID_SIGNED,	0 },\n+  { \"sizeof\",		RID_SIZEOF,	0 },\n+  { \"static\",		RID_STATIC,	0 },\n+  { \"struct\",		RID_STRUCT,	0 },\n+  { \"switch\",		RID_SWITCH,	0 },\n+  { \"typedef\",		RID_TYPEDEF,	0 },\n+  { \"typeof\",		RID_TYPEOF,	D_EXT },\n+  { \"union\",		RID_UNION,	0 },\n+  { \"unsigned\",		RID_UNSIGNED,	0 },\n+  { \"void\",		RID_VOID,	0 },\n+  { \"volatile\",		RID_VOLATILE,	0 },\n+  { \"while\",		RID_WHILE,	0 },\n+  /* Objective-C keyword.  */\n+  { \"id\",		RID_ID,			D_OBJC },\n+  /* These objc keywords are recognized only immediately after\n+     an '@'.  */\n+  { \"class\",		RID_AT_CLASS,		D_OBJC },\n+  { \"compatibility_alias\", RID_AT_ALIAS,	D_OBJC },\n+  { \"defs\",		RID_AT_DEFS,		D_OBJC },\n+  { \"encode\",		RID_AT_ENCODE,		D_OBJC },\n+  { \"end\",		RID_AT_END,		D_OBJC },\n+  { \"implementation\",	RID_AT_IMPLEMENTATION,	D_OBJC },\n+  { \"interface\",	RID_AT_INTERFACE,	D_OBJC },\n+  { \"private\",		RID_AT_PRIVATE,		D_OBJC },\n+  { \"protected\",	RID_AT_PROTECTED,	D_OBJC },\n+  { \"protocol\",		RID_AT_PROTOCOL,	D_OBJC },\n+  { \"public\",		RID_AT_PUBLIC,		D_OBJC },\n+  { \"selector\",		RID_AT_SELECTOR,	D_OBJC },\n+  { \"throw\",		RID_AT_THROW,		D_OBJC },\n+  { \"try\",		RID_AT_TRY,		D_OBJC },\n+  { \"catch\",		RID_AT_CATCH,		D_OBJC },\n+  { \"finally\",		RID_AT_FINALLY,		D_OBJC },\n+  { \"synchronized\",	RID_AT_SYNCHRONIZED,	D_OBJC },\n+  /* These are recognized only in protocol-qualifier context\n+     (see above) */\n+  { \"bycopy\",		RID_BYCOPY,		D_OBJC },\n+  { \"byref\",		RID_BYREF,		D_OBJC },\n+  { \"in\",		RID_IN,			D_OBJC },\n+  { \"inout\",		RID_INOUT,		D_OBJC },\n+  { \"oneway\",		RID_ONEWAY,		D_OBJC },\n+  { \"out\",		RID_OUT,		D_OBJC },\n+};\n+#define N_reswords (sizeof reswords / sizeof (struct resword))\n+\n+/* Initialize the reserved word identifiers.  */\n+\n+static void\n+init_reswords (void)\n+{\n+  unsigned int i;\n+  tree id;\n+  int mask = (flag_isoc99 ? 0 : D_C89)\n+	      | (flag_no_asm ? (flag_isoc99 ? D_EXT : D_EXT|D_EXT89) : 0);\n+\n+  if (!c_dialect_objc ())\n+     mask |= D_OBJC;\n+\n+  ridpointers = GGC_CNEWVEC (tree, (int) RID_MAX);\n+  for (i = 0; i < N_reswords; i++)\n+    {\n+      /* If a keyword is disabled, do not enter it into the table\n+	 and so create a canonical spelling that isn't a keyword.  */\n+      if (reswords[i].disable & mask)\n+	continue;\n+\n+      id = get_identifier (reswords[i].word);\n+      C_RID_CODE (id) = reswords[i].rid;\n+      C_IS_RESERVED_WORD (id) = 1;\n+      ridpointers [(int) reswords[i].rid] = id;\n+    }\n+}\n+\n+/* Initialization routine for this file.  */\n+\n+void\n+c_parse_init (void)\n+{\n+  init_reswords ();\n+}\n+\n+/* The C lexer intermediates between the lexer in cpplib and c-lex.c\n+   and the C parser.  Identifiers are separated into ordinary\n+   identifiers, type names, keywords and some other Objective-C types\n+   of identifiers, and some look-ahead is maintained.\n+\n+   ??? It might be a good idea to lex the whole file up front (as for\n+   C++).  It should then be possible to share more of the C and C++\n+   lexer code.  */\n+\n+/* The following local token type is used.  */\n+\n+/* A keyword.  */\n+#define CPP_KEYWORD ((enum cpp_ttype) (N_TTYPES + 1))\n+\n+/* The number of token types, including C-specific ones.  */\n+#define N_C_TTYPES ((int) (CPP_KEYWORD + 1))\n+\n+/* More information about the type of a CPP_NAME token.  */\n+typedef enum c_id_kind {\n+  /* An ordinary identifier.  */\n+  C_ID_ID,\n+  /* An identifier declared as a typedef name.  */\n+  C_ID_TYPENAME,\n+  /* An identifier declared as an Objective-C class name.  */\n+  C_ID_CLASSNAME,\n+  /* Not an identifier.  */\n+  C_ID_NONE\n+} c_id_kind;\n+\n+/* A single C token after string literal concatenation and conversion\n+   of preprocessing tokens to tokens.  */\n+typedef struct c_token GTY (())\n+{\n+  /* The kind of token.  */\n+  ENUM_BITFIELD (cpp_ttype) type : 8;\n+  /* If this token is a CPP_NAME, this value indicates whether also\n+     declared as some kind of type.  Otherwise, it is C_ID_NONE.  */\n+  ENUM_BITFIELD (c_id_kind) id_kind : 8;\n+  /* If this token is a keyword, this value indicates which keyword.\n+     Otherwise, this value is RID_MAX.  */\n+  ENUM_BITFIELD (rid) keyword : 8;\n+  /* True if this token is from a system header.  */\n+  BOOL_BITFIELD in_system_header : 1;\n+  /* The value associated with this token, if any.  */\n+  tree value;\n+  /* The location at which this token was found.  */\n+  location_t location;\n+} c_token;\n+\n+/* A lexer with up to two tokens of look-ahead; more are not needed\n+   for C.  */\n+typedef struct c_lexer GTY (())\n+{\n+  /* The look-ahead tokens.  */\n+  c_token tokens[2];\n+  /* How many look-ahead tokens are available (1 or 2).  */\n+  int tokens_avail;\n+} c_lexer;\n+\n+/* Read in and lex a single token, storing it in *TOKEN.  */\n+\n+static void\n+c_lex_one_token (c_token *token)\n+{\n+  timevar_push (TV_LEX);\n+  token->type = c_lex (&token->value);\n+  token->location = input_location;\n+  token->in_system_header = in_system_header;\n+  switch (token->type)\n+    {\n+    case CPP_NAME:\n+      token->id_kind = C_ID_NONE;\n+      token->keyword = RID_MAX;\n+      {\n+	tree decl;\n+\n+	int objc_force_identifier = objc_need_raw_identifier;\n+	OBJC_NEED_RAW_IDENTIFIER (0);\n+\n+	if (C_IS_RESERVED_WORD (token->value))\n+	  {\n+	    enum rid rid_code = C_RID_CODE (token->value);\n+\n+	    if (c_dialect_objc ())\n+	      {\n+		/* Turn non-typedefed refs to \"id\" into plain identifiers; this\n+		   allows constructs like \"void foo(id id);\" to work.  */\n+		if (rid_code == RID_ID)\n+		  {\n+		    decl = lookup_name (token->value);\n+		    if (decl == NULL_TREE || TREE_CODE (decl) != TYPE_DECL)\n+		      {\n+			token->id_kind = C_ID_ID;\n+			break;\n+		      }\n+		  }\n+\n+		if (!OBJC_IS_AT_KEYWORD (rid_code)\n+		    && (!OBJC_IS_PQ_KEYWORD (rid_code) || objc_pq_context))\n+		  {\n+		    /* Return the canonical spelling for this keyword.  */\n+		    token->value = ridpointers[(int) rid_code];\n+		    token->type = CPP_KEYWORD;\n+		    token->keyword = rid_code;\n+		    break;\n+		  }\n+	      }\n+	    else\n+	      {\n+		/* Return the canonical spelling for this keyword.  */\n+		token->value = ridpointers[(int) rid_code];\n+		token->type = CPP_KEYWORD;\n+		token->keyword = rid_code;\n+		break;\n+	      }\n+	  }\n+\n+	decl = lookup_name (token->value);\n+	if (decl)\n+	  {\n+	    if (TREE_CODE (decl) == TYPE_DECL)\n+	      {\n+		token->id_kind = C_ID_TYPENAME;\n+		break;\n+	      }\n+	  }\n+	else if (c_dialect_objc ())\n+	  {\n+	    tree objc_interface_decl = objc_is_class_name (token->value);\n+	    /* ObjC class names are in the same namespace as variables and\n+	       typedefs, and hence are shadowed by local declarations.  */\n+	    if (objc_interface_decl\n+		&& (global_bindings_p ()\n+		    || (!objc_force_identifier && !decl)))\n+	      {\n+		token->value = objc_interface_decl;\n+		token->id_kind = C_ID_CLASSNAME;\n+		break;\n+	      }\n+	  }\n+      }\n+      token->id_kind = C_ID_ID;\n+      break;\n+    case CPP_AT_NAME:\n+      /* This only happens in Objective-C; it must be a keyword.  */\n+      token->type = CPP_KEYWORD;\n+      token->id_kind = C_ID_NONE;\n+      token->keyword = C_RID_CODE (token->value);\n+      break;\n+    case CPP_COLON:\n+    case CPP_COMMA:\n+    case CPP_CLOSE_PAREN:\n+    case CPP_SEMICOLON:\n+      /* These tokens may affect the interpretation of any identifiers\n+	 following, if doing Objective-C.  */\n+      OBJC_NEED_RAW_IDENTIFIER (0);\n+      token->id_kind = C_ID_NONE;\n+      token->keyword = RID_MAX;\n+      break;\n+    default:\n+      token->id_kind = C_ID_NONE;\n+      token->keyword = RID_MAX;\n+      break;\n+    }\n+  timevar_pop (TV_LEX);\n+}\n+\n+/* Allocate a new lexer.  */\n+\n+static c_lexer *\n+c_lexer_new (void)\n+{\n+  c_lexer *ret;\n+  ret = GGC_CNEW (c_lexer);\n+  return ret;\n+}\n+\n+/* Initialize LEXER by reading in the first token.  */\n+\n+static void\n+c_lexer_init (c_lexer *lexer)\n+{\n+  gcc_assert (lexer->tokens_avail == 0);\n+  c_lex_one_token (&lexer->tokens[0]);\n+  lexer->tokens_avail = 1;\n+}\n+\n+/* Return a pointer to the next token from LEXER.  */\n+\n+static inline c_token *\n+c_lexer_peek_token (c_lexer *lexer)\n+{\n+  return &lexer->tokens[0];\n+}\n+\n+/* Return true if the next token from LEXER has the indicated TYPE.  */\n+\n+static inline bool\n+c_lexer_next_token_is (c_lexer *lexer, enum cpp_ttype type)\n+{\n+  return c_lexer_peek_token (lexer)->type == type;\n+}\n+\n+/* Return true if the next token from LEXER does not have the\n+   indicated TYPE.  */\n+\n+static inline bool\n+c_lexer_next_token_is_not (c_lexer *lexer, enum cpp_ttype type)\n+{\n+  return !c_lexer_next_token_is (lexer, type);\n+}\n+\n+/* Return true if the next token from LEXER is the indicated\n+   KEYWORD.  */\n+\n+static inline bool\n+c_lexer_next_token_is_keyword (c_lexer *lexer, enum rid keyword)\n+{\n+  c_token *token;\n+\n+  /* Peek at the next token.  */\n+  token = c_lexer_peek_token (lexer);\n+  /* Check to see if it is the indicated keyword.  */\n+  return token->keyword == keyword;\n+}\n+\n+/* Return true if TOKEN can start a type name,\n+   false otherwise.  */\n+static bool\n+c_token_starts_typename (c_token *token)\n+{\n+  switch (token->type)\n+    {\n+    case CPP_NAME:\n+      return (token->id_kind == C_ID_TYPENAME);\n+    case CPP_KEYWORD:\n+      switch (token->keyword)\n+	{\n+	case RID_UNSIGNED:\n+	case RID_LONG:\n+	case RID_SHORT:\n+	case RID_SIGNED:\n+	case RID_COMPLEX:\n+	case RID_INT:\n+	case RID_CHAR:\n+	case RID_FLOAT:\n+	case RID_DOUBLE:\n+	case RID_VOID:\n+	case RID_BOOL:\n+	case RID_ENUM:\n+	case RID_STRUCT:\n+	case RID_UNION:\n+	case RID_TYPEOF:\n+	case RID_CONST:\n+	case RID_VOLATILE:\n+	case RID_RESTRICT:\n+	case RID_ATTRIBUTE:\n+	  return true;\n+	default:\n+	  return false;\n+	}\n+    default:\n+      return false;\n+    }\n+}\n+\n+/* Return true if the next token from LEXER can start a type name,\n+   false otherwise.  */\n+static inline bool\n+c_lexer_next_token_starts_typename (c_lexer *lexer)\n+{\n+  c_token *token = c_lexer_peek_token (lexer);\n+  return c_token_starts_typename (token);\n+}\n+\n+/* Return true if TOKEN can start declaration specifiers, false\n+   otherwise.  */\n+static bool\n+c_token_starts_declspecs (c_token *token)\n+{\n+  switch (token->type)\n+    {\n+    case CPP_NAME:\n+      return (token->id_kind == C_ID_TYPENAME);\n+    case CPP_KEYWORD:\n+      switch (token->keyword)\n+	{\n+	case RID_STATIC:\n+	case RID_EXTERN:\n+	case RID_REGISTER:\n+	case RID_TYPEDEF:\n+	case RID_INLINE:\n+	case RID_AUTO:\n+	case RID_THREAD:\n+	case RID_UNSIGNED:\n+	case RID_LONG:\n+	case RID_SHORT:\n+	case RID_SIGNED:\n+	case RID_COMPLEX:\n+	case RID_INT:\n+	case RID_CHAR:\n+	case RID_FLOAT:\n+	case RID_DOUBLE:\n+	case RID_VOID:\n+	case RID_BOOL:\n+	case RID_ENUM:\n+	case RID_STRUCT:\n+	case RID_UNION:\n+	case RID_TYPEOF:\n+	case RID_CONST:\n+	case RID_VOLATILE:\n+	case RID_RESTRICT:\n+	case RID_ATTRIBUTE:\n+	  return true;\n+	default:\n+	  return false;\n+	}\n+    default:\n+      return false;\n+    }\n+}\n+\n+/* Return true if the next token from LEXER can start declaration\n+   specifiers, false otherwise.  */\n+static inline bool\n+c_lexer_next_token_starts_declspecs (c_lexer *lexer)\n+{\n+  c_token *token = c_lexer_peek_token (lexer);\n+  return c_token_starts_declspecs (token);\n+}\n+\n+/* Return a pointer to the next-but-one token from LEXER, reading it\n+   in if necessary.  */\n+\n+static c_token *\n+c_lexer_peek_2nd_token (c_lexer *lexer)\n+{\n+  if (lexer->tokens_avail >= 2)\n+    return &lexer->tokens[1];\n+  gcc_assert (lexer->tokens_avail == 1);\n+  gcc_assert (lexer->tokens[0].type != CPP_EOF);\n+  c_lex_one_token (&lexer->tokens[1]);\n+  lexer->tokens_avail = 2;\n+  return &lexer->tokens[1];\n+}\n+\n+/* Consume the next token from LEXER, reading in another if\n+   necessary.  */\n+\n+static void\n+c_lexer_consume_token (c_lexer *lexer)\n+{\n+  if (lexer->tokens_avail == 2)\n+    {\n+      lexer->tokens[0] = lexer->tokens[1];\n+      lexer->tokens_avail--;\n+    }\n+  else\n+    {\n+      gcc_assert (lexer->tokens_avail == 1);\n+      gcc_assert (lexer->tokens[0].type != CPP_EOF);\n+      c_lex_one_token (&lexer->tokens[0]);\n+    }\n+}\n+\n+/* Update the globals input_location and in_system_header from TOKEN.   */\n+static inline void\n+c_lexer_set_source_position_from_token (c_token *token)\n+{\n+  if (token->type != CPP_EOF)\n+    {\n+      input_location = token->location;\n+      in_system_header = token->in_system_header;\n+    }\n+}\n+\n+/* A parser structure recording information about the state and\n+   context of parsing.  */\n+typedef struct c_parser GTY(())\n+{\n+  /* The lexer.  */\n+  c_lexer *lexer;\n+  /* True if a syntax error is being recovered from; false otherwise.\n+     c_parser_error sets this flag.  It should clear this flag when\n+     enough tokens have been consumed to recover from the error.  */\n+  BOOL_BITFIELD error : 1;\n+} c_parser;\n+\n+/* Allocate a new parser.  */\n+\n+static c_parser *\n+c_parser_new (void)\n+{\n+  /* Use local storage to lex the first token because loading a PCH\n+     file may cause garbage collection.  */\n+  struct c_lexer tlexer;\n+  c_parser *ret;\n+  memset (&tlexer, 0, sizeof tlexer);\n+  c_lexer_init (&tlexer);\n+  ret = GGC_NEW (c_parser);\n+  ret->lexer = c_lexer_new ();\n+  memcpy (ret->lexer, &tlexer, sizeof tlexer);\n+  ret->error = false;\n+  return ret;\n+}\n+\n+/* Issue a diagnostic of the form\n+      FILE:LINE: MESSAGE before TOKEN\n+   where TOKEN is the next token in the input stream of PARSER.\n+   MESSAGE (specified by the caller) is usually of the form \"expected\n+   OTHER-TOKEN\".\n+\n+   Do not issue a diagnostic if still recovering from an error.\n+\n+   ??? This is taken from the C++ parser, but building up messages in\n+   this way is not i18n-friendly and some other approach should be\n+   used.  */\n+\n+static void\n+c_parser_error (c_parser *parser, const char *msgid)\n+{\n+  c_token *token = c_lexer_peek_token (parser->lexer);\n+  if (parser->error)\n+    return;\n+  parser->error = true;\n+  if (!msgid)\n+    return;\n+  /* This diagnostic makes more sense if it is tagged to the line of\n+     the token we just peeked at.  */\n+  c_lexer_set_source_position_from_token (token);\n+  c_parse_error (msgid,\n+		 /* Because c_parse_error does not understand\n+		    CPP_KEYWORD, keywords are treated like\n+		    identifiers.  */\n+		 (token->type == CPP_KEYWORD ? CPP_NAME : token->type),\n+		 token->value);\n+}\n+\n+/* If the next token is of the indicated TYPE, consume it.  Otherwise,\n+   issue the error MSGID.  If MSGID is NULL then a message has already\n+   been produced and no message will be produced this time.  Returns\n+   true if found, false otherwise.  */\n+\n+static bool\n+c_parser_require (c_parser *parser,\n+		  enum cpp_ttype type,\n+		  const char *msgid)\n+{\n+  if (c_lexer_next_token_is (parser->lexer, type))\n+    {\n+      c_lexer_consume_token (parser->lexer);\n+      return true;\n+    }\n+  else\n+    {\n+      c_parser_error (parser, msgid);\n+      return false;\n+    }\n+}\n+\n+/* Like c_parser_require, except that tokens will be skipped until the\n+   desired token is found.  An error message is still produced if the\n+   next token is not as expected.  If MSGID is NULL then a message has\n+   already been produced and no message will be produced this\n+   time.  */\n+\n+static void\n+c_parser_skip_until_found (c_parser *parser,\n+			   enum cpp_ttype type,\n+			   const char *msgid)\n+{\n+  unsigned nesting_depth = 0;\n+\n+  if (c_parser_require (parser, type, msgid))\n+    return;\n+\n+  /* Skip tokens until the desired token is found.  */\n+  while (true)\n+    {\n+      /* Peek at the next token.  */\n+      c_token *token = c_lexer_peek_token (parser->lexer);\n+      /* If we've reached the token we want, consume it and stop.  */\n+      if (token->type == type && !nesting_depth)\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  return;\n+	}\n+      /* If we've run out of tokens, stop.  */\n+      if (token->type == CPP_EOF)\n+	return;\n+      if (token->type == CPP_OPEN_BRACE\n+	  || token->type == CPP_OPEN_PAREN\n+	  || token->type == CPP_OPEN_SQUARE)\n+	++nesting_depth;\n+      else if (token->type == CPP_CLOSE_BRACE\n+	       || token->type == CPP_CLOSE_PAREN\n+	       || token->type == CPP_CLOSE_SQUARE)\n+	{\n+	  if (nesting_depth-- == 0)\n+	    {\n+	      parser->error = false;\n+	      return;\n+	    }\n+	}\n+      /* Consume this token.  */\n+      c_lexer_consume_token (parser->lexer);\n+      parser->error = false;\n+    }\n+}\n+\n+/* Skip tokens until we have consumed an entire block, or until we\n+   have consumed a non-nested ';'.  */\n+\n+static void\n+c_parser_skip_to_end_of_block_or_statement (c_parser *parser)\n+{\n+  unsigned nesting_depth = 0;\n+\n+  while (true)\n+    {\n+      c_token *token;\n+\n+      /* Peek at the next token.  */\n+      token = c_lexer_peek_token (parser->lexer);\n+      /* If we've run out of tokens, stop.  */\n+      if (token->type == CPP_EOF)\n+	break;\n+      /* If the next token is a ';', we have reached the end of the\n+	 statement.  */\n+      if (token->type == CPP_SEMICOLON && !nesting_depth)\n+	{\n+	  /* Consume the ';'.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	}\n+      /* If the next token is a non-nested '}', then we have reached\n+	 the end of the current block.  */\n+      if (token->type == CPP_CLOSE_BRACE\n+	  && (nesting_depth == 0 || --nesting_depth == 0))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	}\n+      /* If it the next token is a '{', then we are entering a new\n+	 block.  Consume the entire block.  */\n+      if (token->type == CPP_OPEN_BRACE)\n+	++nesting_depth;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  parser->error = false;\n+}\n+\n+/* If the next token is the indicated keyword, consume it.  Otherwise,\n+   issue the error MSGID.  Returns true if found, false otherwise.  */\n+\n+static bool\n+c_parser_require_keyword (c_parser *parser,\n+			  enum rid keyword,\n+			  const char *msgid)\n+{\n+  if (c_lexer_next_token_is_keyword (parser->lexer, keyword))\n+    {\n+      c_lexer_consume_token (parser->lexer);\n+      return true;\n+    }\n+  else\n+    {\n+      c_parser_error (parser, msgid);\n+      return false;\n+    }\n+}\n+\n+\n+/* For __extension__, save/restore the warning flags which are\n+   controlled by __extension__.  */\n+#define SAVE_EXT_FLAGS(var)			\\\n+  do {						\\\n+    var = (pedantic				\\\n+	   | (warn_pointer_arith << 1)		\\\n+	   | (warn_traditional << 2)		\\\n+	   | (flag_iso << 3));			\\\n+     pedantic = 0;				\\\n+     warn_pointer_arith = 0;			\\\n+     warn_traditional = 0;			\\\n+     flag_iso = 0;				\\\n+  } while (0)\n+\n+#define RESTORE_EXT_FLAGS(val)			\\\n+  do {						\\\n+    pedantic = val & 1;				\\\n+    warn_pointer_arith = (val >> 1) & 1;	\\\n+    warn_traditional = (val >> 2) & 1;		\\\n+    flag_iso = (val >> 3) & 1;			\\\n+  } while (0)\n+\n+/* Possibly kinds of declarator to parse.  */\n+typedef enum c_dtr_syn {\n+  /* A normal declarator with an identifier.  */\n+  C_DTR_NORMAL,\n+  /* An abstract declarator (maybe empty).  */\n+  C_DTR_ABSTRACT,\n+  /* A parameter declarator: may be either, but after a type name does\n+     not redeclare a typedef name as an identifier if it can\n+     alternatively be interpreted as a typedef name.  For example,\n+     given a typedef T, \"int T\" and \"int *T\" are valid parameter\n+     declarations redeclaring T, while \"int (T)\" and \"int * (T)\" and\n+     \"int (T[])\" and \"int (T (int))\" are abstract declarators rather\n+     than involving redundant parentheses; the same applies with\n+     attributes inside the parentheses before \"T\".  */\n+  C_DTR_PARM\n+} c_dtr_syn;\n+\n+static void c_parser_external_declaration (c_parser *);\n+static void c_parser_asm_definition (c_parser *);\n+static void c_parser_declaration_or_fndef (c_parser *, bool, bool, bool, bool);\n+static void c_parser_declspecs (c_parser *, struct c_declspecs *, bool, bool,\n+				bool);\n+static struct c_typespec c_parser_enum_specifier (c_parser *);\n+static struct c_typespec c_parser_struct_or_union_specifier (c_parser *);\n+static tree c_parser_struct_declaration (c_parser *);\n+static struct c_typespec c_parser_typeof_specifier (c_parser *);\n+static struct c_declarator *c_parser_declarator (c_parser *, bool, c_dtr_syn,\n+						 bool *);\n+static struct c_declarator *c_parser_direct_declarator (c_parser *, bool,\n+							c_dtr_syn, bool *);\n+static struct c_declarator *c_parser_direct_declarator_inner (c_parser *,\n+							      bool,\n+							      struct c_declarator *);\n+static struct c_arg_info *c_parser_parms_declarator (c_parser *, bool, tree);\n+static struct c_arg_info *c_parser_parms_list_declarator (c_parser *, tree);\n+static tree c_parser_simple_asm_expr (c_parser *);\n+static tree c_parser_attributes (c_parser *);\n+static struct c_type_name *c_parser_type_name (c_parser *);\n+static struct c_expr c_parser_initializer (c_parser *);\n+static struct c_expr c_parser_braced_init (c_parser *, tree, bool);\n+static void c_parser_initelt (c_parser *);\n+static void c_parser_initval (c_parser *);\n+static tree c_parser_compound_statement (c_parser *, location_t *);\n+static void c_parser_compound_statement_nostart (c_parser *, location_t *);\n+static void c_parser_label (c_parser *);\n+static void c_parser_statement (c_parser *);\n+static void c_parser_statement_after_labels (c_parser *);\n+static void c_parser_if_statement (c_parser *);\n+static void c_parser_switch_statement (c_parser *);\n+static void c_parser_while_statement (c_parser *);\n+static void c_parser_do_statement (c_parser *);\n+static void c_parser_for_statement (c_parser *);\n+static tree c_parser_asm_statement (c_parser *);\n+static tree c_parser_asm_operands (c_parser *);\n+static tree c_parser_asm_clobbers (c_parser *);\n+static struct c_expr c_parser_expr_no_commas (c_parser *);\n+static struct c_expr c_parser_conditional_expression (c_parser *);\n+static struct c_expr c_parser_binary_expression (c_parser *);\n+static struct c_expr c_parser_cast_expression (c_parser *);\n+static struct c_expr c_parser_unary_expression (c_parser *);\n+static struct c_expr c_parser_sizeof_expression (c_parser *);\n+static struct c_expr c_parser_alignof_expression (c_parser *);\n+static struct c_expr c_parser_postfix_expression (c_parser *);\n+static struct c_expr c_parser_postfix_expression_after_paren_type (c_parser *,\n+								   struct c_type_name *);\n+static struct c_expr c_parser_postfix_expression_after_primary (c_parser *,\n+								struct c_expr);\n+static struct c_expr c_parser_expression (c_parser *);\n+static tree c_parser_expr_list (c_parser *);\n+\n+/* Parse a translation unit (C90 6.7, C99 6.9).\n+\n+   translation-unit:\n+     external-declaration\n+     translation-unit external-declaration\n+\n+   GNU extension: empty translation units.  */\n+\n+static void\n+c_parser_translation_unit (c_parser *parser)\n+{\n+  if (c_lexer_next_token_is (parser->lexer, CPP_EOF))\n+    {\n+      if (pedantic)\n+	pedwarn (\"ISO C forbids an empty source file\");\n+    }\n+  else\n+    {\n+      while (c_lexer_next_token_is_not (parser->lexer, CPP_EOF))\n+	{\n+	  void *obstack_position = obstack_alloc (&parser_obstack, 0);\n+	  ggc_collect ();\n+	  c_parser_external_declaration (parser);\n+	  obstack_free (&parser_obstack, obstack_position);\n+	}\n+    }\n+}\n+\n+/* Parse an external declaration (C90 6.7, C99 6.9).\n+\n+   external-declaration:\n+     function-definition\n+     declaration\n+\n+   GNU extensions:\n+     asm-definition\n+     __extension__ external-declaration\n+     TODO: Objective-C.  */\n+\n+static void\n+c_parser_external_declaration (c_parser *parser)\n+{\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_EXTENSION))\n+    {\n+      int ext;\n+      SAVE_EXT_FLAGS (ext);\n+      c_lexer_consume_token (parser->lexer);\n+      c_parser_external_declaration (parser);\n+      RESTORE_EXT_FLAGS (ext);\n+    }\n+  else if (c_lexer_next_token_is_keyword (parser->lexer, RID_ASM))\n+    {\n+      c_parser_asm_definition (parser);\n+    }\n+  else\n+    {\n+      /* A declaration or a function definition.  We can only tell\n+	 which after parsing the declaration specifiers, if any, and\n+	 the first declarator.  */\n+      c_parser_declaration_or_fndef (parser, true, true, false, true);\n+    }\n+}\n+\n+/* Parse a declaration or function definition (C90 6.5, 6.7.1, C99\n+   6.7, 6.9.1).  If FNDEF_OK is true, a function definition is\n+   accepted; otherwise (old-style parameter declarations) only other\n+   declarations are accepted.  If NESTED is true, we are inside a\n+   function or parsing old-style parameter declarations; any functions\n+   encountered are nested functions and declaration specifiers are\n+   required; otherwise we are at top level and functions are normal\n+   functions and declaration specifiers may be optional.  If EMPTY_OK\n+   is true, empty declarations are OK; otherwise (old-style parameter\n+   declarations) they are diagnosed.  If START_ATTR_OK is true, the\n+   declaration specifiers may start with attributes; otherwise they\n+   may not.\n+\n+   declaration:\n+     declaration-specifiers init-declarator-list[opt] ;\n+\n+   function-definition:\n+     declaration-specifiers[opt] declarator declaration-list[opt]\n+       compound-statement\n+\n+   init-declarator-list:\n+     init-declarator\n+     init-declarator-list , init-declarator\n+\n+   init-declarator:\n+     declarator simple-asm-expr[opt] attributes[opt]\n+     declarator simple-asm-expr[opt] attributes[opt] = initializer\n+\n+   The simple-asm-expr and attributes are GNU extensions.\n+\n+   This function does not handle __extension__; that is handled in its\n+   callers.  ??? Following the old parser, __extension__ may start\n+   extenal declarations, declarations in functions and declarations at\n+   the start of \"for\" loops, but not old-style parameter declarations.\n+\n+   C99 requires declaration specifiers in a function definition; the\n+   absence is diagnosed through the diagnosis of implicit int.  In GNU\n+   C we also allow but diagnose declarations without declaration\n+   specifiers, but only at top level (elsewhere they conflict with\n+   other syntax).  At top level in GNU C we also allow stray ';'\n+   outside a function.  */\n+\n+static void\n+c_parser_declaration_or_fndef (c_parser *parser, bool fndef_ok, bool empty_ok,\n+			       bool nested, bool start_attr_ok)\n+{\n+  struct c_declspecs *specs;\n+  tree prefix_attrs;\n+  tree all_prefix_attrs;\n+  bool diagnosed_no_specs = false;\n+  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+    {\n+      if (pedantic)\n+	pedwarn (\"ISO C does not allow extra %<;%> outside of a function\");\n+      c_lexer_consume_token (parser->lexer);\n+      return;\n+    }\n+  specs = build_null_declspecs ();\n+  c_parser_declspecs (parser, specs, true, true, start_attr_ok);\n+  if (parser->error)\n+    {\n+      c_parser_skip_to_end_of_block_or_statement (parser);\n+      return;\n+    }\n+  finish_declspecs (specs);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+    {\n+      if (empty_ok)\n+	shadow_tag (specs);\n+      else\n+	{\n+	  shadow_tag_warned (specs, 1);\n+	  pedwarn (\"empty declaration\");\n+	}\n+      c_lexer_consume_token (parser->lexer);\n+      return;\n+    }\n+  pending_xref_error ();\n+  prefix_attrs = specs->attrs;\n+  all_prefix_attrs = prefix_attrs;\n+  specs->attrs = NULL_TREE;\n+  while (true)\n+    {\n+      struct c_declarator *declarator;\n+      bool dummy = false;\n+      tree fnbody;\n+      location_t fnend_loc, save_loc;\n+      /* Declaring either one or more declarators (in which case we\n+	 should diagnose if there were no declaration specifiers) or a\n+	 function definition (in which case the diagnostic for\n+	 implicit int suffices).  */\n+      declarator = c_parser_declarator (parser, specs->type_seen_p,\n+					C_DTR_NORMAL, &dummy);\n+      if (declarator == NULL)\n+	{\n+	  c_parser_skip_to_end_of_block_or_statement (parser);\n+	  return;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_EQ)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_COMMA)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON)\n+	  || c_lexer_next_token_is_keyword (parser->lexer, RID_ASM)\n+	  || c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	{\n+	  tree asm_name = NULL_TREE;\n+	  tree postfix_attrs = NULL_TREE;\n+	  if (!diagnosed_no_specs && !specs->declspecs_seen_p)\n+	    {\n+	      diagnosed_no_specs = true;\n+	      /* ??? This is what the old parser did but is not a proper\n+		 use of pedantic.  */\n+	      if (pedantic)\n+		error (\"ISO C forbids data definition with no type \"\n+		       \"or storage class\");\n+	      else\n+		warning (\"data definition has no type or storage class\");\n+	    }\n+	  /* Having seen a data definition, there cannot now be a\n+	     function definition.  */\n+	  fndef_ok = false;\n+	  if (c_lexer_next_token_is_keyword (parser->lexer, RID_ASM))\n+	    asm_name = c_parser_simple_asm_expr (parser);\n+	  if (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	    postfix_attrs = c_parser_attributes (parser);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_EQ))\n+	    {\n+	      tree d;\n+	      struct c_expr init;\n+	      c_lexer_consume_token (parser->lexer);\n+	      /* The declaration of the variable is in effect while\n+		 its initializer is parsed.  */\n+	      d = start_decl (declarator, specs, true,\n+			      chainon (postfix_attrs, all_prefix_attrs));\n+	      start_init (d, asm_name, global_bindings_p ());\n+	      init = c_parser_initializer (parser);\n+	      finish_init ();\n+	      maybe_warn_string_init (TREE_TYPE (d), init);\n+	      finish_decl (d, init.value, asm_name);\n+	    }\n+	  else\n+	    {\n+	      tree d = start_decl (declarator, specs, false,\n+				   chainon (postfix_attrs,\n+					    all_prefix_attrs));\n+	      finish_decl (d, NULL_TREE, asm_name);\n+	    }\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      if (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+		all_prefix_attrs = chainon (c_parser_attributes (parser),\n+					    prefix_attrs);\n+	      else\n+		all_prefix_attrs = prefix_attrs;\n+	      continue;\n+	    }\n+	  else if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      return;\n+	    }\n+	  else\n+	    {\n+	      c_parser_error (parser, \"expected ',' or ';'\");\n+	      c_parser_skip_to_end_of_block_or_statement (parser);\n+	      return;\n+	    }\n+	}\n+      else if (!fndef_ok)\n+	{\n+	  c_parser_error (parser,\n+			  \"expected '=', ',', ';', 'asm' or '__attribute__'\");\n+	  c_parser_skip_to_end_of_block_or_statement (parser);\n+	  return;\n+	}\n+      /* Function definition (nested or otherwise).  */\n+      if (nested)\n+	{\n+	  if (pedantic)\n+	    pedwarn (\"ISO C forbids nested functions\");\n+	  push_function_context ();\n+	}\n+      if (!start_function (specs, declarator, all_prefix_attrs))\n+	{\n+	  /* This can appear in many cases looking nothing like a\n+	     function definition, so we don't give a more specific\n+	     error suggesting there was one.  */\n+	  c_parser_error (parser,\n+			  \"expected '=', ',', ';', 'asm' or '__attribute__'\");\n+	  if (nested)\n+	    pop_function_context ();\n+	  break;\n+	}\n+      /* Parse old-style parameter declarations.  */\n+      while (c_lexer_next_token_is_not (parser->lexer, CPP_EOF)\n+	     && c_lexer_next_token_is_not (parser->lexer, CPP_OPEN_BRACE))\n+	c_parser_declaration_or_fndef (parser, false, false, true, false);\n+      DECL_SOURCE_LOCATION (current_function_decl) = input_location;\n+      store_parm_decls ();\n+      fnbody = c_parser_compound_statement (parser, &fnend_loc);\n+      save_loc = input_location;\n+      input_location = fnend_loc;\n+      if (nested)\n+	{\n+	  tree decl = current_function_decl;\n+	  add_stmt (fnbody);\n+	  finish_function ();\n+	  pop_function_context ();\n+	  add_stmt (build_stmt (DECL_EXPR, decl));\n+	}\n+      else\n+	{\n+	  add_stmt (fnbody);\n+	  finish_function ();\n+	}\n+      input_location = save_loc;\n+      break;\n+    }\n+}\n+\n+/* Parse an asm-definition (asm() outside a function body).  This is a\n+   GNU extension.\n+\n+   asm-definition:\n+     simple-asm-expr ;\n+*/\n+\n+static void\n+c_parser_asm_definition (c_parser *parser)\n+{\n+  tree asm_str = c_parser_simple_asm_expr (parser);\n+  if (asm_str)\n+    assemble_asm (asm_str);\n+  c_parser_skip_until_found (parser, CPP_SEMICOLON, \"expected ';'\");\n+}\n+\n+/* Parse some declaration specifiers (possibly none) (C90 6.5, C99\n+   6.7), adding them to SPECS (which may already include some).\n+   Storage class specifiers are accepted iff SCSPEC_OK; type\n+   specifiers are accepted iff TYPESPEC_OK; attributes are accepted at\n+   the start iff START_ATTR_OK.\n+\n+   declaration-specifiers:\n+     storage-class-specifier declaration-specifiers[opt]\n+     type-specifier declaration-specifiers[opt]\n+     type-qualifier declaration-specifiers[opt]\n+     function-specifier declaration-specifiers[opt]\n+\n+   Function specifiers (inline) are from C99, and are currently\n+   handled as storage class specifiers, as is __thread.\n+\n+   GNU extension:\n+     attributes declaration-specifiers[opt]\n+     TODO: Objective-C.\n+\n+   C90 6.5.1, C99 6.7.1:\n+   storage-class-specifier:\n+     typedef\n+     extern\n+     static\n+     auto\n+     register\n+\n+   GNU extension:\n+     __thread\n+\n+   C99 6.7.4:\n+   function-specifier:\n+     inline\n+\n+   C90 6.5.2, C99 6.7.2:\n+   type-specifier:\n+     void\n+     char\n+     short\n+     int\n+     long\n+     float\n+     double\n+     signed\n+     unsigned\n+     _Bool\n+     _Complex\n+     [_Imaginary removed in C99 TC2]\n+     struct-or-union-specifier\n+     enum-specifier\n+     typedef-name\n+\n+   (_Bool and _Complex are new in C99.)\n+\n+   GNU extension:\n+     typeof-specifier\n+\n+   C90 6.5.3, C99 6.7.3:\n+\n+   type-qualifier:\n+     const\n+     restrict\n+     volatile\n+\n+   (restrict is new in C99.)\n+*/\n+\n+static void\n+c_parser_declspecs (c_parser *parser, struct c_declspecs *specs,\n+		    bool scspec_ok, bool typespec_ok, bool start_attr_ok)\n+{\n+  bool attrs_ok = start_attr_ok;\n+  bool seen_type = specs->type_seen_p;\n+  while (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	 || c_lexer_next_token_is (parser->lexer, CPP_KEYWORD))\n+    {\n+      struct c_typespec t;\n+      tree attrs;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	{\n+	  /* This finishes the specifiers unless a type name is OK, it\n+	     is declared as a type name and a type name hasn't yet\n+	     been seen.  */\n+	  if (!typespec_ok || seen_type\n+	      || c_lexer_peek_token (parser->lexer)->id_kind != C_ID_TYPENAME)\n+	    break;\n+	  seen_type = true;\n+	  attrs_ok = true;\n+	  t.kind = ctsk_typedef;\n+	  /* For a typedef name, record the meaning, not the name.\n+	     In case of 'foo foo, bar;'.  */\n+	  t.spec = lookup_name (c_lexer_peek_token (parser->lexer)->value);\n+	  declspecs_add_type (specs, t);\n+	  c_lexer_consume_token (parser->lexer);\n+	  continue;\n+	}\n+      switch (c_lexer_peek_token (parser->lexer)->keyword)\n+	{\n+	case RID_STATIC:\n+	case RID_EXTERN:\n+	case RID_REGISTER:\n+	case RID_TYPEDEF:\n+	case RID_INLINE:\n+	case RID_AUTO:\n+	case RID_THREAD:\n+	  if (!scspec_ok)\n+	    goto out;\n+	  attrs_ok = true;\n+	  declspecs_add_scspec (specs,\n+				c_lexer_peek_token (parser->lexer)->value);\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	case RID_UNSIGNED:\n+	case RID_LONG:\n+	case RID_SHORT:\n+	case RID_SIGNED:\n+	case RID_COMPLEX:\n+	case RID_INT:\n+	case RID_CHAR:\n+	case RID_FLOAT:\n+	case RID_DOUBLE:\n+	case RID_VOID:\n+	case RID_BOOL:\n+	  if (!typespec_ok)\n+	    goto out;\n+	  attrs_ok = true;\n+	  seen_type = true;\n+	  OBJC_NEED_RAW_IDENTIFIER (1);\n+	  t.kind = ctsk_resword;\n+	  t.spec = c_lexer_peek_token (parser->lexer)->value;\n+	  declspecs_add_type (specs, t);\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	case RID_ENUM:\n+	  if (!typespec_ok)\n+	    goto out;\n+	  attrs_ok = true;\n+	  seen_type = true;\n+	  t = c_parser_enum_specifier (parser);\n+	  declspecs_add_type (specs, t);\n+	  break;\n+	case RID_STRUCT:\n+	case RID_UNION:\n+	  if (!typespec_ok)\n+	    goto out;\n+	  attrs_ok = true;\n+	  seen_type = true;\n+	  t = c_parser_struct_or_union_specifier (parser);\n+	  declspecs_add_type (specs, t);\n+	  break;\n+	case RID_TYPEOF:\n+	  /* ??? The old parser rejected typeof after other type\n+	     specifiers, but is a syntax error the best way of\n+	     handling this?  */\n+	  if (!typespec_ok || seen_type)\n+	    goto out;\n+	  attrs_ok = true;\n+	  seen_type = true;\n+	  t = c_parser_typeof_specifier (parser);\n+	  declspecs_add_type (specs, t);\n+	  break;\n+	case RID_CONST:\n+	case RID_VOLATILE:\n+	case RID_RESTRICT:\n+	  attrs_ok = true;\n+	  declspecs_add_qual (specs,\n+			      c_lexer_peek_token (parser->lexer)->value);\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	case RID_ATTRIBUTE:\n+	  if (!attrs_ok)\n+	    goto out;\n+	  attrs = c_parser_attributes (parser);\n+	  declspecs_add_attrs (specs, attrs);\n+	  break;\n+	default:\n+	  goto out;\n+	}\n+    }\n+ out: ;\n+}\n+\n+/* Parse an enum specifier (C90 6.5.2.2, C99 6.7.2.2).\n+\n+   enum-specifier:\n+     enum attributes[opt] identifier[opt] { enumerator-list } attributes[opt]\n+     enum attributes[opt] identifier[opt] { enumerator-list , } attributes[opt]\n+     enum attributes[opt] identifier\n+\n+   The form with trailing comma is new in C99.  The forms with\n+   attributes are GNU extensions.  In GNU C, we accept any expression\n+   without commas in the syntax (assignment expressions, not just\n+   conditional expressions); assignment expressions will be diagnosed\n+   as non-constant.\n+\n+   enumerator-list:\n+     enumerator\n+     enumerator-list , enumerator\n+\n+   enumerator:\n+     enumeration-constant\n+     enumeration-constant = constant-expression\n+*/\n+\n+static struct c_typespec\n+c_parser_enum_specifier (c_parser *parser)\n+{\n+  struct c_typespec ret;\n+  tree attrs;\n+  tree ident = NULL_TREE;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_ENUM));\n+  c_lexer_consume_token (parser->lexer);\n+  attrs = c_parser_attributes (parser);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+    {\n+      ident = c_lexer_peek_token (parser->lexer)->value;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+    {\n+      /* Parse an enum definition.  */\n+      tree type = start_enum (ident);\n+      tree postfix_attrs;\n+      /* We chain the enumerators in reverse order, then put them in\n+	 forward order at the end.  */\n+      tree values = NULL_TREE;\n+      c_lexer_consume_token (parser->lexer);\n+      while (true)\n+	{\n+	  tree enum_id;\n+	  tree enum_value;\n+	  tree enum_decl;\n+	  bool seen_comma;\n+	  if (c_lexer_next_token_is_not (parser->lexer, CPP_NAME))\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_BRACE, NULL);\n+	      values = error_mark_node;\n+	      break;\n+	    }\n+	  enum_id = c_lexer_peek_token (parser->lexer)->value;\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_EQ))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      enum_value = c_parser_expr_no_commas (parser).value;\n+	    }\n+	  else\n+	    enum_value = NULL_TREE;\n+	  enum_decl = build_enumerator (enum_id, enum_value);\n+	  TREE_CHAIN (enum_decl) = values;\n+	  values = enum_decl;\n+	  seen_comma = false;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	    {\n+	      seen_comma = true;\n+	      c_lexer_consume_token (parser->lexer);\n+	    }\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+	    {\n+	      if (seen_comma && pedantic && !flag_isoc99)\n+		pedwarn (\"comma at end of enumerator list\");\n+	      c_lexer_consume_token (parser->lexer);\n+	      break;\n+	    }\n+	  if (!seen_comma)\n+	    {\n+	      c_parser_error (parser, \"expected ',' or '}'\");\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_BRACE, NULL);\n+	      values = error_mark_node;\n+	      break;\n+	    }\n+	}\n+      postfix_attrs = c_parser_attributes (parser);\n+      ret.spec = finish_enum (type, nreverse (values),\n+			      chainon (attrs, postfix_attrs));\n+      ret.kind = ctsk_tagdef;\n+      return ret;\n+    }\n+  else if (!ident)\n+    {\n+      c_parser_error (parser, \"expected '{'\");\n+      ret.spec = error_mark_node;\n+      ret.kind = ctsk_tagref;\n+      return ret;\n+    }\n+  ret = parser_xref_tag (ENUMERAL_TYPE, ident);\n+  /* In ISO C, enumerated types can be referred to only if already\n+     defined.  */\n+  if (pedantic && !COMPLETE_TYPE_P (ret.spec))\n+    pedwarn (\"ISO C forbids forward references to %<enum%> types\");\n+  return ret;\n+}\n+\n+/* Parse a struct or union specifier (C90 6.5.2.1, C99 6.7.2.1).\n+\n+   struct-or-union-specifier:\n+     struct-or-union attributes[opt] identifier[opt]\n+       { struct-declaration-list } attributes[opt]\n+     struct-or-union attributes[opt] identifier\n+\n+   struct-declaration-list:\n+     struct-declaration\n+     struct-declaration-list struct-declaration\n+\n+   TODO: Objective-C.\n+\n+   GNU extensions: the semicolon at the end may be omitted; extra\n+   semicolons may be included between, before or after\n+   struct-declarations.  */\n+\n+static struct c_typespec\n+c_parser_struct_or_union_specifier (c_parser *parser)\n+{\n+  struct c_typespec ret;\n+  tree attrs;\n+  tree ident = NULL_TREE;\n+  enum tree_code code;\n+  switch (c_lexer_peek_token (parser->lexer)->keyword)\n+    {\n+    case RID_STRUCT:\n+      code = RECORD_TYPE;\n+      break;\n+    case RID_UNION:\n+      code = UNION_TYPE;\n+      break;\n+    default:\n+      gcc_unreachable ();\n+    }\n+  c_lexer_consume_token (parser->lexer);\n+  attrs = c_parser_attributes (parser);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+    {\n+      ident = c_lexer_peek_token (parser->lexer)->value;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+    {\n+      /* Parse a struct or union definition.  */\n+      tree type = start_struct (code, ident);\n+      tree postfix_attrs;\n+      /* We chain the components in reverse order, then put them in\n+	 forward order at the end.  Each struct-declaration may\n+	 declare multiple components (comma-separated), so we must use\n+	 chainon to join them, although when parsing each\n+	 struct-declaration we can use TREE_CHAIN directly.\n+\n+	 The theory behind all this is that there will be more\n+	 semicolon separated fields than comma separated fields, and\n+	 so we'll be minimizing the number of node traversals required\n+	 by chainon.  */\n+      tree contents = NULL_TREE;\n+      c_lexer_consume_token (parser->lexer);\n+      /* Parse the struct-declarations and semicolons.  Problems with\n+	 semicolons are diagnosed here; empty structures are diagnosed\n+	 elsewhere.  */\n+      while (true)\n+	{\n+	  tree decls;\n+	  /* Parse any stray semicolon.  */\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	    {\n+	      if (pedantic)\n+		pedwarn (\"extra semicolon in struct or union specified\");\n+	      c_lexer_consume_token (parser->lexer);\n+	      continue;\n+	    }\n+	  /* Stop if at the end of the struct or union contents.  */\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      break;\n+	    }\n+	  /* Parse some comma-separated declarations, but not the\n+	     trailing semicolon if any.  */\n+	  decls = c_parser_struct_declaration (parser);\n+	  contents = chainon (decls, contents);\n+	  /* If no semicolon follows, either we have a parse error or\n+	     are at the end of the struct or union and should\n+	     pedwarn.  */\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	    c_lexer_consume_token (parser->lexer);\n+	  else\n+	    {\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+		pedwarn (\"no semicolon at end of struct or union\");\n+	      else\n+		{\n+		  c_parser_error (parser, \"expected ';'\");\n+		  c_parser_skip_until_found (parser, CPP_CLOSE_BRACE, NULL);\n+		  break;\n+		}\n+	    }\n+	}\n+      postfix_attrs = c_parser_attributes (parser);\n+      ret.spec = finish_struct (type, nreverse (contents),\n+				chainon (attrs, postfix_attrs));\n+      ret.kind = ctsk_tagdef;\n+      return ret;\n+    }\n+  else if (!ident)\n+    {\n+      c_parser_error (parser, \"expected '{'\");\n+      ret.spec = error_mark_node;\n+      ret.kind = ctsk_tagref;\n+    }\n+  ret = parser_xref_tag (code, ident);\n+  return ret;\n+}\n+\n+/* Parse a struct-declaration (C90 6.5.2.1, C99 6.7.2.1), *without*\n+   the trailing semicolon.\n+\n+   struct-declaration:\n+     specifier-qualifier-list struct-declarator-list\n+\n+   specifier-qualifier-list:\n+     type-specifier specifier-qualifier-list[opt]\n+     type-qualifier specifier-qualifier-list[opt]\n+     attributes specifier-qualifier-list[opt]\n+\n+   struct-declarator-list:\n+     struct-declarator\n+     struct-declarator-list , attributes[opt] struct-declarator\n+\n+   struct-declarator:\n+     declarator attributes[opt]\n+     declarator[opt] : constant-expression attributes[opt]\n+\n+   GNU extensions: semicolons are handled elsewhere; attributes may be\n+   used where shown; a struct-declarator-list may be empty;\n+   __extension__ may be used at the start of a struct-declaration.  In\n+   GNU C, we accept any expression without commas in the syntax\n+   (assignment expressions, not just conditional expressions);\n+   assignment expressions will be diagnosed as non-constant.  */\n+\n+static tree\n+c_parser_struct_declaration (c_parser *parser)\n+{\n+  struct c_declspecs *specs;\n+  tree prefix_attrs;\n+  tree all_prefix_attrs;\n+  tree decls;\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_EXTENSION))\n+    {\n+      int ext;\n+      tree decl;\n+      SAVE_EXT_FLAGS (ext);\n+      c_lexer_consume_token (parser->lexer);\n+      decl = c_parser_struct_declaration (parser);\n+      RESTORE_EXT_FLAGS (ext);\n+      return decl;\n+    }\n+  specs = build_null_declspecs ();\n+  c_parser_declspecs (parser, specs, false, true, true);\n+  if (parser->error)\n+    return error_mark_node;\n+  if (!specs->declspecs_seen_p)\n+    {\n+      c_parser_error (parser, \"expected specifier-qualifier-list\");\n+      return NULL_TREE;\n+    }\n+  finish_declspecs (specs);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+    {\n+      tree ret;\n+      if (!specs->type_seen_p)\n+	{\n+	  if (pedantic)\n+	    pedwarn (\"ISO C forbids member declarations with no members\");\n+	  shadow_tag_warned (specs, pedantic);\n+	  ret = NULL_TREE;\n+	}\n+      else\n+	{\n+	  /* Support for unnamed structs or unions as members of\n+	     structs or unions (which is [a] useful and [b] supports\n+	     MS P-SDK).  */\n+	  ret = grokfield (build_id_declarator (NULL_TREE), specs, NULL_TREE);\n+	}\n+      return ret;\n+    }\n+  pending_xref_error ();\n+  prefix_attrs = specs->attrs;\n+  all_prefix_attrs = prefix_attrs;\n+  specs->attrs = NULL_TREE;\n+  decls = NULL_TREE;\n+  while (true)\n+    {\n+      /* Declaring one or more declarators or un-named bit-fields.  */\n+      struct c_declarator *declarator;\n+      bool dummy = false;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_COLON))\n+	declarator = build_id_declarator (NULL_TREE);\n+      else\n+	declarator = c_parser_declarator (parser, specs->type_seen_p,\n+					  C_DTR_NORMAL, &dummy);\n+      if (declarator == NULL)\n+	{\n+	  c_parser_skip_to_end_of_block_or_statement (parser);\n+	  break;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_COLON)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_COMMA)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON)\n+	  || c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	{\n+	  tree postfix_attrs = NULL_TREE;\n+	  tree width = NULL_TREE;\n+	  tree d;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COLON))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      width = c_parser_expr_no_commas (parser).value;\n+	    }\n+	  if (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	    postfix_attrs = c_parser_attributes (parser);\n+	  d = grokfield (declarator, specs, width);\n+	  decl_attributes (&d, chainon (postfix_attrs,\n+					all_prefix_attrs), 0);\n+	  TREE_CHAIN (d) = decls;\n+	  decls = d;\n+	  if (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	    all_prefix_attrs = chainon (c_parser_attributes (parser),\n+					prefix_attrs);\n+	  else\n+	    all_prefix_attrs = prefix_attrs;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	    c_lexer_consume_token (parser->lexer);\n+	  else if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	    {\n+	      /* Semicolon consumed in caller.  */\n+	      break;\n+	    }\n+	  else\n+	    {\n+	      c_parser_error (parser, \"expected ',' or ';'\");\n+	      break;\n+	    }\n+	}\n+      else\n+	{\n+	  c_parser_error (parser,\n+			  \"expected ':', ',', ';' or '__attribute__'\");\n+	  break;\n+	}\n+    }\n+  return decls;\n+}\n+\n+/* Parse a typeof specifier (a GNU extension).\n+\n+   typeof-specifier:\n+     typeof ( expression )\n+     typeof ( type-name )\n+*/\n+\n+static struct c_typespec\n+c_parser_typeof_specifier (c_parser *parser)\n+{\n+  struct c_typespec ret;\n+  ret.kind = ctsk_typeof;\n+  ret.spec = error_mark_node;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_TYPEOF));\n+  c_lexer_consume_token (parser->lexer);\n+  skip_evaluation++;\n+  in_typeof++;\n+  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    {\n+      skip_evaluation--;\n+      in_typeof--;\n+      return ret;\n+    }\n+  if (c_lexer_next_token_starts_typename (parser->lexer))\n+    {\n+      struct c_type_name *type = c_parser_type_name (parser);\n+      skip_evaluation--;\n+      in_typeof--;\n+      if (type != NULL)\n+	{\n+	  ret.spec = groktypename (type);\n+	  pop_maybe_used (variably_modified_type_p (ret.spec, NULL_TREE));\n+	}\n+    }\n+  else\n+    {\n+      struct c_expr expr = c_parser_expression (parser);\n+      skip_evaluation--;\n+      in_typeof--;\n+      if (TREE_CODE (expr.value) == COMPONENT_REF\n+	  && DECL_C_BIT_FIELD (TREE_OPERAND (expr.value, 1)))\n+	error (\"%<typeof%> applied to a bit-field\");\n+      ret.spec = TREE_TYPE (expr.value);\n+      pop_maybe_used (variably_modified_type_p (ret.spec, NULL_TREE));\n+    }\n+  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+  return ret;\n+}\n+\n+/* Parse a declarator, possibly an abstract declarator (C90 6.5.4,\n+   6.5.5, C99 6.7.5, 6.7.6).  If TYPE_SEEN_P then a typedef name may\n+   be redeclared; otherwise it may not.  KIND indicates which kind of\n+   declarator is wanted.  Returns a valid declarator except in the\n+   case of a syntax error in which case NULL is returned.  *SEEN_ID is\n+   set to true if an identifier being declared is seen; this is used\n+   to diagnose bad forms of abstract array declarators and to\n+   determine whether an identifer list is syntactically permitted.\n+\n+   declarator:\n+     pointer[opt] direct-declarator\n+\n+   direct-declarator:\n+     identifier\n+     ( attributes[opt] declarator )\n+     direct-declarator array-declarator\n+     direct-declarator ( parameter-type-list )\n+     direct-declarator ( identifier-list[opt] )\n+\n+   pointer:\n+     * type-qualifier-list[opt]\n+     * type-qualifier-list[opt] pointer\n+\n+   type-qualifier-list:\n+     type-qualifier\n+     attributes\n+     type-qualifier-list type-qualifier\n+     type-qualifier-list attributes\n+\n+   parameter-type-list:\n+     parameter-list\n+     parameter-list , ...\n+\n+   parameter-list:\n+     parameter-declaration\n+     parameter-list , parameter-declaration\n+\n+   parameter-declaration:\n+     declaration-specifiers declarator attributes[opt]\n+     declaration-specifiers abstract-declarator[opt] attributes[opt]\n+\n+   identifier-list:\n+     identifier\n+     identifier-list , identifier\n+\n+   abstract-declarator:\n+     pointer\n+     pointer[opt] direct-abstract-declarator\n+\n+   direct-abstract-declarator:\n+     ( attributes[opt] abstract-declarator )\n+     direct-abstract-declarator[opt] array-declarator\n+     direct-abstract-declarator[opt] ( parameter-type-list[opt] )\n+\n+   Some forms of array declarator are not included in C99 in the\n+   syntax for abstract declarators; these are disallowed elsewhere.\n+   This may be a defect (DR#289).\n+\n+   This function also accepts an omitted abstract declarator as being\n+   an abstract declarator, although not part of the formal syntax.\n+\n+   GNU extensions: the uses of attributes shown above; forward\n+   declarations of parameters (not shown in syntax above).  */\n+\n+static struct c_declarator *\n+c_parser_declarator (c_parser *parser, bool type_seen_p, c_dtr_syn kind,\n+		     bool *seen_id)\n+{\n+  /* Parse any initial pointer part.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_MULT))\n+    {\n+      struct c_declspecs *quals_attrs = build_null_declspecs ();\n+      struct c_declarator *inner;\n+      c_lexer_consume_token (parser->lexer);\n+      c_parser_declspecs (parser, quals_attrs, false, false, true);\n+      inner = c_parser_declarator (parser, type_seen_p, kind, seen_id);\n+      if (inner == NULL)\n+	return NULL;\n+      else\n+	return make_pointer_declarator (quals_attrs, inner);\n+    }\n+  /* Now we have a direct declarator, direct abstract declarator or\n+     nothing (which counts as a direct abstract declarator here).  */\n+  return c_parser_direct_declarator (parser, type_seen_p, kind, seen_id);\n+}\n+\n+/* Parse a direct declarator or direct abstract declarator; arguments\n+   as c_parser_declarator.  */\n+\n+static struct c_declarator *\n+c_parser_direct_declarator (c_parser *parser, bool type_seen_p, c_dtr_syn kind,\n+			    bool *seen_id)\n+{\n+  /* The direct declarator must start with an identifier (possibly\n+     omitted) or a parenthesized declarator (possibly abstract).  In\n+     an ordinary declarator, initial parentheses must start a\n+     parenthesized declarator.  In an abstract declarator or parameter\n+     declarator, they could start a parenthesized declarator or a\n+     parameter list.  To tell which, the open parenthesis and any\n+     following attributes must be read.  If a declaration specifier\n+     follows, then it is a parameter list; if the specifier is a\n+     typedef name, there might be an ambiguity about redeclaring it,\n+     which is resolved in the direction of treating it as a typedef\n+     name.  If a close parenthesis follows, it is also an empty\n+     parameter list, as the syntax does not permit empty abstract\n+     declarators.  Otherwise, it is a parenthesised declarator (in\n+     which case the analysis may be repeated inside it, recursively).\n+\n+     ??? There is an ambiguity in a parameter declaration \"int\n+     (__attribute__((foo)) x)\", where x is not a typedef name: it\n+     could be an abstract declarator for a function, or declare x with\n+     parentheses.  The proper resolution of this ambiguity needs\n+     documenting.  At present we follow an accident of the old\n+     parser's implementation, whereby the first parameter must have\n+     some declaration specifiers other than just attributes.  Thus as\n+     a parameter declaration it is treated as a parenthesised\n+     parameter named x, and as an abstract declarator it is\n+     rejected.\n+\n+     ??? Also following the old parser, attributes inside an empty\n+     parameter list are ignored, making it a list not yielding a\n+     prototype, rather than giving an error or making it have one\n+     parameter with implicit type int.  */\n+\n+  if (kind != C_DTR_ABSTRACT\n+      && c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+      && (type_seen_p\n+	  || c_lexer_peek_token (parser->lexer)->id_kind == C_ID_ID))\n+    {\n+      struct c_declarator *inner\n+	= build_id_declarator (c_lexer_peek_token (parser->lexer)->value);\n+      *seen_id = true;\n+      c_lexer_consume_token (parser->lexer);\n+      return c_parser_direct_declarator_inner (parser, *seen_id, inner);\n+    }\n+\n+  if (kind != C_DTR_NORMAL\n+      && c_lexer_next_token_is (parser->lexer, CPP_OPEN_SQUARE))\n+    {\n+      struct c_declarator *inner = build_id_declarator (NULL_TREE);\n+      return c_parser_direct_declarator_inner (parser, *seen_id, inner);\n+    }\n+\n+  /* Either we are at the end of an abstract declarator, or we have\n+     parentheses.  */\n+\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_PAREN))\n+    {\n+      tree attrs;\n+      struct c_declarator *inner;\n+      c_lexer_consume_token (parser->lexer);\n+      attrs = c_parser_attributes (parser);\n+      if (kind != C_DTR_NORMAL\n+	  && (c_lexer_next_token_starts_declspecs (parser->lexer)\n+	      || c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN)))\n+	{\n+	  struct c_arg_info *args\n+	    = c_parser_parms_declarator (parser, kind == C_DTR_NORMAL,\n+					 attrs);\n+	  if (args == NULL)\n+	    return NULL;\n+	  else\n+	    {\n+	      inner\n+		= build_function_declarator (args,\n+					     build_id_declarator (NULL_TREE));\n+	      return c_parser_direct_declarator_inner (parser, *seen_id,\n+						       inner);\n+	    }\n+	}\n+      /* A parenthesized declarator.  */\n+      inner = c_parser_declarator (parser, type_seen_p, kind, seen_id);\n+      if (inner != NULL && attrs != NULL)\n+	inner = build_attrs_declarator (attrs, inner);\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (inner == NULL)\n+	    return NULL;\n+	  else\n+	    return c_parser_direct_declarator_inner (parser, *seen_id, inner);\n+	}\n+      else\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  return NULL;\n+	}\n+    }\n+  else\n+    {\n+      if (kind == C_DTR_NORMAL)\n+	{\n+	  c_parser_error (parser, \"expected identifier or '('\");\n+	  return NULL;\n+	}\n+      else\n+	return build_id_declarator (NULL_TREE);\n+    }\n+}\n+\n+/* Parse part of a direct declarator or direct abstract declarator,\n+   given that some (in INNER) has already been parsed; ID_PRESENT is\n+   true if an identifier is present, false for an abstract\n+   declarator.  */\n+\n+static struct c_declarator *\n+c_parser_direct_declarator_inner (c_parser *parser, bool id_present,\n+				  struct c_declarator *inner)\n+{\n+  /* Parse a sequence of array declarators and parameter lists.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_SQUARE))\n+    {\n+      struct c_declarator *declarator;\n+      struct c_declspecs *quals_attrs = build_null_declspecs ();\n+      bool static_seen;\n+      bool star_seen;\n+      tree dimen;\n+      c_lexer_consume_token (parser->lexer);\n+      c_parser_declspecs (parser, quals_attrs, false, false, true);\n+      static_seen = c_lexer_next_token_is_keyword (parser->lexer, RID_STATIC);\n+      if (static_seen)\n+	c_lexer_consume_token (parser->lexer);\n+      if (static_seen && !quals_attrs->declspecs_seen_p)\n+	c_parser_declspecs (parser, quals_attrs, false, false, true);\n+      if (!quals_attrs->declspecs_seen_p)\n+	quals_attrs = NULL;\n+      /* If \"static\" is present, there must be an array dimension.\n+	 Otherwise, there may be a dimension, \"*\", or no\n+	 dimension.  */\n+      if (static_seen)\n+	{\n+	  star_seen = false;\n+	  dimen = c_parser_expr_no_commas (parser).value;\n+	}\n+      else\n+	{\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_SQUARE))\n+	    {\n+	      dimen = NULL_TREE;\n+	      star_seen = false;\n+	    }\n+	  else if (c_lexer_next_token_is (parser->lexer, CPP_MULT))\n+	    {\n+	      if (c_lexer_peek_2nd_token (parser->lexer)->type\n+		  == CPP_CLOSE_SQUARE)\n+		{\n+		  dimen = NULL_TREE;\n+		  star_seen = true;\n+		  c_lexer_consume_token (parser->lexer);\n+		}\n+	      else\n+		{\n+		  star_seen = false;\n+		  dimen = c_parser_expr_no_commas (parser).value;\n+		}\n+	    }\n+	  else\n+	    {\n+	      star_seen = false;\n+	      dimen = c_parser_expr_no_commas (parser).value;\n+	    }\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_SQUARE))\n+	c_lexer_consume_token (parser->lexer);\n+      else\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE, \"expected ']'\");\n+	  return NULL;\n+	}\n+      declarator = build_array_declarator (dimen, quals_attrs, static_seen,\n+					   star_seen);\n+      inner = set_array_declarator_inner (declarator, inner, !id_present);\n+      return c_parser_direct_declarator_inner (parser, id_present, inner);\n+    }\n+  else if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_PAREN))\n+    {\n+      tree attrs;\n+      struct c_arg_info *args;\n+      c_lexer_consume_token (parser->lexer);\n+      attrs = c_parser_attributes (parser);\n+      args = c_parser_parms_declarator (parser, id_present, attrs);\n+      if (args == NULL)\n+	return NULL;\n+      else\n+	{\n+	  inner = build_function_declarator (args, inner);\n+	  return c_parser_direct_declarator_inner (parser, id_present, inner);\n+	}\n+    }\n+  return inner;\n+}\n+\n+/* Parse a parameter list or identifier list, including the closing\n+   parenthesis but not the opening one.  ATTRS are the attributes at\n+   the start of the list.  ID_LIST_OK is true if an identifier list is\n+   acceptable; such a list must not have attributes at the start.  */\n+\n+static struct c_arg_info *\n+c_parser_parms_declarator (c_parser *parser, bool id_list_ok, tree attrs)\n+{\n+  push_scope ();\n+  declare_parm_level ();\n+  /* If the list starts with an identifier, it is an identifier list.\n+     Otherwise, it is either a prototype list or an empty list.  */\n+  if (id_list_ok\n+      && !attrs\n+      && c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+      && c_lexer_peek_token (parser->lexer)->id_kind == C_ID_ID)\n+    {\n+      tree list = NULL_TREE;\n+      while (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	     && c_lexer_peek_token (parser->lexer)->id_kind == C_ID_ID)\n+	{\n+	  list = chainon (list, build_tree_list (NULL_TREE,\n+						 c_lexer_peek_token (parser->lexer)->value));\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is_not (parser->lexer, CPP_COMMA))\n+	    break;\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      break;\n+	    }\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	{\n+	  struct c_arg_info *ret = XOBNEW (&parser_obstack, struct c_arg_info);\n+	  ret->parms = 0;\n+	  ret->tags = 0;\n+	  ret->types = list;\n+	  ret->others = 0;\n+	  c_lexer_consume_token (parser->lexer);\n+	  pop_scope ();\n+	  return ret;\n+	}\n+      else\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  pop_scope ();\n+	  return NULL;\n+	}\n+    }\n+  else\n+    {\n+      struct c_arg_info *ret = c_parser_parms_list_declarator (parser, attrs);\n+      pop_scope ();\n+      return ret;\n+    }\n+}\n+\n+/* Parse a parameter list (possibly empty), including the closing\n+   parenthesis but not the opening one.  ATTRS are the attributes at\n+   the start of the list.  */\n+\n+static struct c_arg_info *\n+c_parser_parms_list_declarator (c_parser *parser, tree attrs)\n+{\n+  /* ??? Following the old parser, forward parameter declarations may\n+     use abstract declarators, and if no real parameter declarations\n+     follow the forward declarations then this is not diagnosed.  Also\n+     note as above that attributes are ignored as the only contents of\n+     the parentheses, or as the only contents after forward\n+     declarations.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    {\n+      struct c_arg_info *ret = XOBNEW (&parser_obstack, struct c_arg_info);\n+      ret->parms = 0;\n+      ret->tags = 0;\n+      ret->types = 0;\n+      ret->others = 0;\n+      c_lexer_consume_token (parser->lexer);\n+      return ret;\n+    }\n+  if (c_lexer_next_token_is (parser->lexer, CPP_ELLIPSIS))\n+    {\n+      struct c_arg_info *ret = XOBNEW (&parser_obstack, struct c_arg_info);\n+      ret->parms = 0;\n+      ret->tags = 0;\n+      ret->others = 0;\n+      /* Suppress -Wold-style-definition for this case.  */\n+      ret->types = error_mark_node;\n+      error (\"ISO C requires a named argument before %<...%>\");\n+      c_lexer_consume_token (parser->lexer);\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  return ret;\n+	}\n+      else\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  return NULL;\n+	}\n+    }\n+  /* Nonempty list of parameters, either terminated with semicolon\n+     (forward declarations; recurse) or with close parenthesis (normal\n+     function) or with \", ... )\" (variadic function).  */\n+  while (true)\n+    {\n+      /* Parse a parameter.  */\n+      struct c_declspecs *specs;\n+      struct c_declarator *declarator;\n+      tree prefix_attrs;\n+      tree postfix_attrs = NULL_TREE;\n+      bool dummy = false;\n+      if (!c_lexer_next_token_starts_declspecs (parser->lexer))\n+	{\n+	  c_parser_error (parser, \"expected declaration specifiers or '...'\");\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	  return NULL;\n+	}\n+      specs = build_null_declspecs ();\n+      if (attrs)\n+	{\n+	  declspecs_add_attrs (specs, attrs);\n+	  attrs = NULL_TREE;\n+	}\n+      c_parser_declspecs (parser, specs, true, true, true);\n+      finish_declspecs (specs);\n+      pending_xref_error ();\n+      prefix_attrs = specs->attrs;\n+      specs->attrs = NULL_TREE;\n+      declarator = c_parser_declarator (parser, specs->type_seen_p,\n+					C_DTR_PARM, &dummy);\n+      if (declarator == NULL)\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	  return NULL;\n+	}\n+      if (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+	postfix_attrs = c_parser_attributes (parser);\n+      push_parm_decl (build_c_parm (specs,\n+				    chainon (postfix_attrs,\n+					     prefix_attrs), declarator));\n+      if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	{\n+	  tree new_attrs;\n+	  c_lexer_consume_token (parser->lexer);\n+	  new_attrs = c_parser_attributes (parser);\n+	  return c_parser_parms_list_declarator (parser, new_attrs);\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  return get_parm_info (false);\n+	}\n+      if (!c_parser_require (parser, CPP_COMMA, \"expected ';', ',' or ')'\"))\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	  return NULL;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_ELLIPSIS))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      return get_parm_info (true);\n+	    }\n+	  else\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN,\n+					 \"expected ')'\");\n+	      return NULL;\n+	    }\n+	}\n+    }\n+}\n+\n+/* Parse a simple asm expression.  This is used in restricted\n+   contexts, where a full expression with inputs and outputs does not\n+   make sense.  This is a GNU extension.\n+\n+   simple-asm-expr:\n+     asm ( string-literal )\n+*/\n+\n+static tree\n+c_parser_simple_asm_expr (c_parser *parser)\n+{\n+  tree str;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_ASM));\n+  c_lex_string_translate = 0;\n+  c_lexer_consume_token (parser->lexer);\n+  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    {\n+      c_lex_string_translate = 1;\n+      return NULL_TREE;\n+    }\n+  /* ??? The old parser accepted wide string literals here, but do we\n+     want to?  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_STRING)\n+      || c_lexer_next_token_is (parser->lexer, CPP_WSTRING))\n+    {\n+      str = c_lexer_peek_token (parser->lexer)->value;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  else\n+    {\n+      c_lex_string_translate = 1;\n+      c_parser_error (parser, \"expected string literal\");\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  c_lex_string_translate = 1;\n+  if (!c_parser_require (parser, CPP_CLOSE_PAREN, \"expected ')'\"))\n+    {\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  return str;\n+}\n+\n+/* Parse (possibly empty) attributes.  This is a GNU extension.\n+\n+   attributes:\n+     empty\n+     attributes attribute\n+\n+   attribute:\n+     __attribute__ ( ( attribute-list ) )\n+\n+   attribute-list:\n+     attrib\n+     attribute_list , attrib\n+\n+   attrib:\n+     empty\n+     any-word\n+     any-word ( identifier )\n+     any-word ( identifier , nonempty-expr-list )\n+     any-word ( expr-list )\n+\n+   where the \"identifier\" must not be declared as a type, and\n+   \"any-word\" may be any identifier (including one declared as a\n+   type), a reserved word storage class specifier, type specifier or\n+   type qualifier.  ??? This still leaves out most reserved keywords\n+   (following the old parser), shouldn't we include them, and why not\n+   allow identifiers declared as types to start the arguments?  */\n+\n+static tree\n+c_parser_attributes (c_parser *parser)\n+{\n+  tree attrs = NULL_TREE;\n+  while (c_lexer_next_token_is_keyword (parser->lexer, RID_ATTRIBUTE))\n+    {\n+      c_lex_string_translate = 0;\n+      c_lexer_consume_token (parser->lexer);\n+      if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	{\n+	  c_lex_string_translate = 1;\n+	  return attrs;\n+	}\n+      if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	{\n+	  c_lex_string_translate = 1;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	  return attrs;\n+	}\n+      /* Parse the attribute list.  */\n+      while (c_lexer_next_token_is (parser->lexer, CPP_COMMA)\n+	     || c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	     || c_lexer_next_token_is (parser->lexer, CPP_KEYWORD))\n+	{\n+	  tree attr, attr_name, attr_args;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      continue;\n+	    }\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_KEYWORD))\n+	    {\n+	      /* ??? See comment above about what keywords are\n+		 accepted here.  */\n+	      bool ok;\n+	      switch (c_lexer_peek_token (parser->lexer)->keyword)\n+		{\n+		case RID_STATIC:\n+		case RID_UNSIGNED:\n+		case RID_LONG:\n+		case RID_CONST:\n+		case RID_EXTERN:\n+		case RID_REGISTER:\n+		case RID_TYPEDEF:\n+		case RID_SHORT:\n+		case RID_INLINE:\n+		case RID_VOLATILE:\n+		case RID_SIGNED:\n+		case RID_AUTO:\n+		case RID_RESTRICT:\n+		case RID_COMPLEX:\n+		case RID_THREAD:\n+		case RID_INT:\n+		case RID_CHAR:\n+		case RID_FLOAT:\n+		case RID_DOUBLE:\n+		case RID_VOID:\n+		case RID_BOOL:\n+		  ok = true;\n+		  break;\n+		default:\n+		  ok = false;\n+		  break;\n+		}\n+	      if (!ok)\n+		break;\n+	    }\n+	  attr_name = c_lexer_peek_token (parser->lexer)->value;\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is_not (parser->lexer, CPP_OPEN_PAREN))\n+	    {\n+	      attr = build_tree_list (attr_name, NULL_TREE);\n+	      attrs = chainon (attrs, attr);\n+	      continue;\n+	    }\n+	  c_lexer_consume_token (parser->lexer);\n+	  /* Parse the attribute contents.  If they start with an\n+	     identifier which is followed by a comma or close\n+	     parenthesis, then the arguments start with that\n+	     identifier; otherwise they are an expression list.  */\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	      && c_lexer_peek_token (parser->lexer)->id_kind == C_ID_ID\n+	      && ((c_lexer_peek_2nd_token (parser->lexer)->type == CPP_COMMA)\n+		  || (c_lexer_peek_2nd_token (parser->lexer)->type\n+		      == CPP_CLOSE_PAREN)))\n+	    {\n+	      tree arg1 = c_lexer_peek_token (parser->lexer)->value;\n+	      c_lexer_consume_token (parser->lexer);\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+		attr_args = build_tree_list (NULL_TREE, arg1);\n+	      else\n+		{\n+		  c_lexer_consume_token (parser->lexer);\n+		  attr_args = tree_cons (NULL_TREE, arg1,\n+					 c_parser_expr_list (parser));\n+		}\n+	    }\n+	  else\n+	    {\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+		attr_args = NULL_TREE;\n+	      else\n+		attr_args = c_parser_expr_list (parser);\n+	    }\n+	  attr = build_tree_list (attr_name, attr_args);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	    c_lexer_consume_token (parser->lexer);\n+	  else\n+	    {\n+	      c_lex_string_translate = 1;\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN,\n+					 \"expected ')'\");\n+	      return attrs;\n+	    }\n+	  attrs = chainon (attrs, attr);\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	c_lexer_consume_token (parser->lexer);\n+      else\n+	{\n+	  c_lex_string_translate = 1;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  return attrs;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	c_lexer_consume_token (parser->lexer);\n+      else\n+	{\n+	  c_lex_string_translate = 1;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  return attrs;\n+	}\n+      c_lex_string_translate = 1;\n+    }\n+  return attrs;\n+}\n+\n+/* Parse a type name (C90 6.5.5, C99 6.7.6).\n+\n+   type-name:\n+     specifier-qualifier-list abstract-declarator[opt]\n+*/\n+\n+static struct c_type_name *\n+c_parser_type_name (c_parser *parser)\n+{\n+  struct c_declspecs *specs = build_null_declspecs ();\n+  struct c_declarator *declarator;\n+  struct c_type_name *ret;\n+  bool dummy = false;\n+  c_parser_declspecs (parser, specs, false, true, true);\n+  if (!specs->declspecs_seen_p)\n+    {\n+      c_parser_error (parser, \"expected specifier-qualifier-list\");\n+      return NULL;\n+    }\n+  pending_xref_error ();\n+  finish_declspecs (specs);\n+  declarator = c_parser_declarator (parser, specs->type_seen_p,\n+				    C_DTR_ABSTRACT, &dummy);\n+  if (declarator == NULL)\n+    return NULL;\n+  ret = XOBNEW (&parser_obstack, struct c_type_name);\n+  ret->specs = specs;\n+  ret->declarator = declarator;\n+  return ret;\n+}\n+\n+/* Parse an initializer (C90 6.5.7, C99 6.7.8).\n+\n+   initializer:\n+     assignment-expression\n+     { initializer-list }\n+     { initializer-list , }\n+\n+   initializer-list:\n+     designation[opt] initializer\n+     initializer-list , designation[opt] initializer\n+\n+   designation:\n+     designator-list =\n+\n+   designator-list:\n+     designator\n+     designator-list designator\n+\n+   designator:\n+     [ constant-expression ]\n+     . identifier\n+\n+   GNU extensions:\n+\n+   initializer:\n+     { }\n+\n+   designation:\n+     designator\n+     identifier :\n+\n+   designator:\n+     [ constant-expression ... constant-expression ]\n+\n+   Any expression without commas is accepted in the syntax for the\n+   constant-expressions, with non-constant expressions rejected later.\n+\n+   ??? Allowing old-style [n] designators has as a side-effect (copied\n+   from the old parser) allowing \".member\" without \"=\" as a\n+   designator, but perhaps as this has never been documented (and only\n+   worked from 2.95.x onwards) it could be freely removed.\n+\n+   This function is only used for top-level initializers; for nested\n+   ones, see c_parser_initval.  */\n+\n+static struct c_expr\n+c_parser_initializer (c_parser *parser)\n+{\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+    return c_parser_braced_init (parser, NULL_TREE, false);\n+  else\n+    return c_parser_expr_no_commas (parser);\n+}\n+\n+/* Parse a braced initializer list.  TYPE is the type specified for a\n+   compound literal, and NULL_TREE for other initializers and for\n+   nested braced lists.  NESTED_P is true for nested braced lists,\n+   false for the list of a compound literal or the list that is the\n+   top-level initializer in a declaration.  */\n+\n+static struct c_expr\n+c_parser_braced_init (c_parser *parser, tree type, bool nested_p)\n+{\n+  gcc_assert (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE));\n+  c_lexer_consume_token (parser->lexer);\n+  if (nested_p)\n+    push_init_level (0);\n+  else\n+    really_start_incremental_init (type);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+    {\n+      if (pedantic)\n+	pedwarn (\"ISO C forbids empty initializer braces\");\n+    }\n+  else\n+    {\n+      /* Parse a non-empty initializer list, possibly with a trailing\n+	 comma.  */\n+      while (true)\n+	{\n+	  c_parser_initelt (parser);\n+	  if (parser->error)\n+	    break;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	    c_lexer_consume_token (parser->lexer);\n+	  else\n+	    break;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+	    break;\n+	}\n+    }\n+  if (c_lexer_next_token_is_not (parser->lexer, CPP_CLOSE_BRACE))\n+    {\n+      struct c_expr ret;\n+      ret.value = error_mark_node;\n+      ret.original_code = ERROR_MARK;\n+      c_parser_skip_until_found (parser, CPP_CLOSE_BRACE, \"expected '}'\");\n+      return ret;\n+    }\n+  c_lexer_consume_token (parser->lexer);\n+  return pop_init_level (0);\n+}\n+\n+/* Parse a nested initializer, including designators.  */\n+\n+static void\n+c_parser_initelt (c_parser *parser)\n+{\n+  /* Parse any designator or designator list.  A single designator may\n+     have the subsequent \"=\" omitted in GNU C, but a longer list may\n+     not.  See ??? comment above about \".foo\" case without \"=\".  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+      && c_lexer_peek_2nd_token (parser->lexer)->type == CPP_COLON)\n+    {\n+      /* Old-style structure member designator.  */\n+      set_init_label (c_lexer_peek_token (parser->lexer)->value);\n+      if (pedantic)\n+	pedwarn (\"obsolete use of designated initializer with %<:%>\");\n+      c_lexer_consume_token (parser->lexer);\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  else\n+    {\n+      int des_seen = 0;\n+      while (c_lexer_next_token_is (parser->lexer, CPP_OPEN_SQUARE)\n+	     || c_lexer_next_token_is (parser->lexer, CPP_DOT))\n+	{\n+	  if (des_seen < 2)\n+	    des_seen++;\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_DOT))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+		{\n+		  set_init_label (c_lexer_peek_token (parser->lexer)->value);\n+		  c_lexer_consume_token (parser->lexer);\n+		}\n+	      else\n+		{\n+		  c_parser_error (parser, \"expected identifier\");\n+		  return;\n+		}\n+	    }\n+	  else\n+	    {\n+	      tree first, second;\n+	      c_lexer_consume_token (parser->lexer);\n+	      first = c_parser_expr_no_commas (parser).value;\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_ELLIPSIS))\n+		{\n+		  c_lexer_consume_token (parser->lexer);\n+		  second = c_parser_expr_no_commas (parser).value;\n+		}\n+	      else\n+		second = NULL_TREE;\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_SQUARE))\n+		{\n+		  c_lexer_consume_token (parser->lexer);\n+		  set_init_index (first, second);\n+		  if (pedantic && second)\n+		    pedwarn (\"ISO C forbids specifying range of \"\n+			     \"elements to initialize\");\n+		}\n+	      else\n+		c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE,\n+					   \"expected ']'\");\n+	    }\n+	}\n+      if (des_seen >= 1)\n+	{\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_EQ))\n+	    {\n+	      if (pedantic && !flag_isoc99)\n+		pedwarn (\"ISO C90 forbids specifying subobject to initialize\");\n+	      c_lexer_consume_token (parser->lexer);\n+	    }\n+	  else\n+	    {\n+	      if (des_seen == 1)\n+		{\n+		  if (pedantic)\n+		    pedwarn (\"obsolete use of designated initializer \"\n+			     \"without %<=%>\");\n+		}\n+	      else\n+		{\n+		  c_parser_error (parser, \"expected '='\");\n+		  return;\n+		}\n+	    }\n+	}\n+    }\n+  c_parser_initval (parser);\n+}\n+\n+/* Parse a nested initializer; as c_parser_initializer but parses\n+   initializers within braced lists, after any designators have been\n+   applied.  */\n+\n+static void\n+c_parser_initval (c_parser *parser)\n+{\n+  struct c_expr init;\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+    init = c_parser_braced_init (parser, NULL_TREE, true);\n+  else\n+    init = c_parser_expr_no_commas (parser);\n+  process_init_element (init);\n+}\n+\n+/* Parse a compound statement (possibly a function body) (C90 6.6.2,\n+   C99 6.8.2).  The location of the closing brace is stored in\n+   *END_LOC if that is not NULL.\n+\n+   compound-statement:\n+     { block-item-list[opt] }\n+     { label-decls block-item-list }\n+\n+   label-decls:\n+     label-decl\n+     label-decls label-decl\n+\n+   label-decl:\n+     __label__ identifier-list ;\n+\n+   block-item-list:\n+     block-item\n+     block-item-list block-item\n+\n+   block-item:\n+     declaration\n+     statement\n+\n+   Label-decls are a GNU extension.  Allowing the mixing of\n+   declarations and code is new in C99.  The GNU syntax also permits\n+   (not shown above) labels at the end of compound statements, which\n+   yield an error.  ??? The syntax follows the old parser in requiring\n+   something after label declarations.  Although they are erroneous if\n+   the labels declared aren't defined, is it useful for the syntax to\n+   be this way?  */\n+\n+static tree\n+c_parser_compound_statement (c_parser *parser, location_t *end_loc)\n+{\n+  tree stmt;\n+  if (!c_parser_require (parser, CPP_OPEN_BRACE, \"expected '{'\"))\n+    return NULL_TREE;\n+  stmt = c_begin_compound_stmt (true);\n+  c_parser_compound_statement_nostart (parser, end_loc);\n+  return c_end_compound_stmt (stmt, true);\n+}\n+\n+/* Parse a compound statement except for the opening brace.  This is\n+   used for parsing both compound statements and statement expressions\n+   (which follow different paths to handling the opening).  */\n+\n+static void\n+c_parser_compound_statement_nostart (c_parser *parser, location_t *end_loc)\n+{\n+  bool last_stmt = false;\n+  bool last_label = false;\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+    {\n+      if (end_loc)\n+	*end_loc = c_lexer_peek_token (parser->lexer)->location;\n+      c_lexer_consume_token (parser->lexer);\n+      return;\n+    }\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_LABEL))\n+    {\n+      while (c_lexer_next_token_is_keyword (parser->lexer, RID_LABEL))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  /* Any identifiers, including those declared as type names,\n+	     are OK here.  */\n+	  if (c_lexer_next_token_is_not (parser->lexer, CPP_NAME))\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      c_parser_skip_until_found (parser, CPP_SEMICOLON, NULL);\n+	      continue;\n+	    }\n+	  while (true)\n+	    {\n+	      tree label;\n+	      if (c_lexer_next_token_is_not (parser->lexer, CPP_NAME))\n+		{\n+		  c_parser_error (parser, \"expected identifier\");\n+		  break;\n+		}\n+	      label\n+		= declare_label (c_lexer_peek_token (parser->lexer)->value);\n+	      C_DECLARED_LABEL_FLAG (label) = 1;\n+	      add_stmt (build_stmt (DECL_EXPR, label));\n+	      c_lexer_consume_token (parser->lexer);\n+	      if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+		c_lexer_consume_token (parser->lexer);\n+	      else\n+		break;\n+	    }\n+	  c_parser_skip_until_found (parser, CPP_SEMICOLON, \"expected ';'\");\n+	}\n+      if (pedantic)\n+	pedwarn (\"ISO C forbids label declarations\");\n+    }\n+  /* We must now have at least one statement, label or declaration.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_BRACE))\n+    {\n+      c_parser_error (parser, \"expected declaration or statement\");\n+      if (end_loc)\n+	*end_loc = c_lexer_peek_token (parser->lexer)->location;\n+      c_lexer_consume_token (parser->lexer);\n+      return;\n+    }\n+  while (c_lexer_next_token_is_not (parser->lexer, CPP_CLOSE_BRACE))\n+    {\n+      location_t loc = c_lexer_peek_token (parser->lexer)->location;\n+      if (c_lexer_next_token_is_keyword (parser->lexer, RID_CASE)\n+	  || c_lexer_next_token_is_keyword (parser->lexer, RID_DEFAULT)\n+	  || (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	      && c_lexer_peek_2nd_token (parser->lexer)->type == CPP_COLON))\n+	{\n+	  last_label = true;\n+	  last_stmt = false;\n+	  c_parser_label (parser);\n+	}\n+      else if (!last_label\n+	       && c_lexer_next_token_starts_declspecs (parser->lexer))\n+	{\n+	  last_label = false;\n+	  c_parser_declaration_or_fndef (parser, true, true, true, true);\n+	  if (last_stmt\n+	      && ((pedantic && !flag_isoc99)\n+		  || warn_declaration_after_statement))\n+	    pedwarn_c90 (\"%HISO C90 forbids mixed declarations and code\",\n+			 &loc);\n+	  last_stmt = false;\n+	}\n+      else if (!last_label\n+	       && c_lexer_next_token_is_keyword (parser->lexer, RID_EXTENSION))\n+	{\n+	  /* __extension__ can start a declaration, but is also an\n+	     unary operator that can start an expression.  Consume all\n+	     but the last of a possible series of __extension__ to\n+	     determine which.  */\n+	  while (c_lexer_peek_2nd_token (parser->lexer)->type == CPP_KEYWORD\n+		 && (c_lexer_peek_2nd_token (parser->lexer)->keyword\n+		     == RID_EXTENSION))\n+	    c_lexer_consume_token (parser->lexer);\n+	  if (c_token_starts_declspecs (c_lexer_peek_2nd_token (parser->lexer)))\n+	    {\n+	      int ext;\n+	      SAVE_EXT_FLAGS (ext);\n+	      c_lexer_consume_token (parser->lexer);\n+	      last_label = false;\n+	      c_parser_declaration_or_fndef (parser, true, true, true, true);\n+	      /* Following the old parser, __extension__ does not\n+		 disable this diagnostic.  */\n+	      RESTORE_EXT_FLAGS (ext);\n+	      if (last_stmt\n+		  && ((pedantic && !flag_isoc99)\n+		      || warn_declaration_after_statement))\n+		pedwarn_c90 (\"%HISO C90 forbids mixed declarations and code\",\n+			     &loc);\n+	      last_stmt = false;\n+	    }\n+	  else\n+	    goto statement;\n+	}\n+      else\n+	{\n+	statement:\n+	  last_label = false;\n+	  last_stmt = true;\n+	  c_parser_statement_after_labels (parser);\n+	}\n+    }\n+  if (last_label)\n+    error (\"label at end of compound statement\");\n+  if (end_loc)\n+    *end_loc = c_lexer_peek_token (parser->lexer)->location;\n+  c_lexer_consume_token (parser->lexer);\n+}\n+\n+/* Parse a label (C90 6.6.1, C99 6.8.1).\n+\n+   label:\n+     identifier : attributes[opt]\n+     case constant-expression :\n+     default :\n+\n+   GNU extension:\n+     case constant-expression ... constant-expression :\n+\n+   The use of attributes on labels is a GNU extension.  The syntax in\n+   GNU C accepts any expressions without commas, non-constant\n+   expressions being rejected later.  */\n+\n+static void\n+c_parser_label (c_parser *parser)\n+{\n+  location_t loc1 = c_lexer_peek_token (parser->lexer)->location;\n+  tree label = NULL_TREE;\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_CASE))\n+    {\n+      tree exp1, exp2;\n+      c_lexer_consume_token (parser->lexer);\n+      exp1 = c_parser_expr_no_commas (parser).value;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_COLON))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  label = do_case (exp1, NULL_TREE);\n+	}\n+      else if (c_lexer_next_token_is (parser->lexer, CPP_ELLIPSIS))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  exp2 = c_parser_expr_no_commas (parser).value;\n+	  if (c_parser_require (parser, CPP_COLON, \"expected ':'\"))\n+	    label = do_case (exp1, exp2);\n+	}\n+      else\n+	c_parser_error (parser, \"expected ':' or '...'\");\n+    }\n+  else if (c_lexer_next_token_is_keyword (parser->lexer, RID_DEFAULT))\n+    {\n+      c_lexer_consume_token (parser->lexer);\n+      if (c_parser_require (parser, CPP_COLON, \"expected ':'\"))\n+	label = do_case (NULL_TREE, NULL_TREE);\n+    }\n+  else\n+    {\n+      tree name = c_lexer_peek_token (parser->lexer)->value;\n+      tree tlab;\n+      location_t loc2;\n+      tree attrs;\n+      gcc_assert (c_lexer_next_token_is (parser->lexer, CPP_NAME));\n+      c_lexer_consume_token (parser->lexer);\n+      gcc_assert (c_lexer_next_token_is (parser->lexer, CPP_COLON));\n+      loc2 = c_lexer_peek_token (parser->lexer)->location;\n+      c_lexer_consume_token (parser->lexer);\n+      attrs = c_parser_attributes (parser);\n+      tlab = define_label (loc2, name);\n+      if (tlab)\n+	{\n+	  decl_attributes (&tlab, attrs, 0);\n+	  label = add_stmt (build_stmt (LABEL_EXPR, tlab));\n+	}\n+    }\n+  if (label)\n+    SET_EXPR_LOCATION (label, loc1);\n+}\n+\n+/* Parse a statement (C90 6.6, C99 6.8).\n+\n+   statement:\n+     labeled-statement\n+     compound-statement\n+     expression-statement\n+     selection-statement\n+     iteration-statement\n+     jump-statement\n+\n+   GNU extension:\n+     asm-statement\n+\n+   GNU extension to jump-statement:\n+     goto * expression ;\n+\n+   TODO: Objective-C.  */\n+\n+static void\n+c_parser_statement (c_parser *parser)\n+{\n+  while (c_lexer_next_token_is_keyword (parser->lexer, RID_CASE)\n+	 || c_lexer_next_token_is_keyword (parser->lexer, RID_DEFAULT)\n+	 || (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	     && c_lexer_peek_2nd_token (parser->lexer)->type == CPP_COLON))\n+    c_parser_label (parser);\n+  c_parser_statement_after_labels (parser);\n+}\n+\n+/* Parse a statement, other than a labeled statement.  */\n+\n+static void\n+c_parser_statement_after_labels (c_parser *parser)\n+{\n+  location_t loc = c_lexer_peek_token (parser->lexer)->location;\n+  tree stmt = NULL_TREE;\n+  switch (c_lexer_peek_token (parser->lexer)->type)\n+    {\n+    case CPP_OPEN_BRACE:\n+      add_stmt (c_parser_compound_statement (parser, NULL));\n+      break;\n+    case CPP_KEYWORD:\n+      switch (c_lexer_peek_token (parser->lexer)->keyword)\n+	{\n+	case RID_IF:\n+	  c_parser_if_statement (parser);\n+	  break;\n+	case RID_SWITCH:\n+	  c_parser_switch_statement (parser);\n+	  break;\n+	case RID_WHILE:\n+	  c_parser_while_statement (parser);\n+	  break;\n+	case RID_DO:\n+	  c_parser_do_statement (parser);\n+	  break;\n+	case RID_FOR:\n+	  c_parser_for_statement (parser);\n+	  break;\n+	case RID_GOTO:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	    {\n+	      stmt = c_finish_goto_label (c_lexer_peek_token (parser->lexer)->value);\n+	      c_lexer_consume_token (parser->lexer);\n+	    }\n+	  else if (c_lexer_next_token_is (parser->lexer, CPP_MULT))\n+	    {\n+	      c_lexer_consume_token (parser->lexer);\n+	      stmt = c_finish_goto_ptr (c_parser_expression (parser).value);\n+	    }\n+	  else\n+	    c_parser_error (parser, \"expected identifier or '*'\");\n+	  goto expect_semicolon;\n+	case RID_CONTINUE:\n+	  c_lexer_consume_token (parser->lexer);\n+	  stmt = c_finish_bc_stmt (&c_cont_label, false);\n+	  goto expect_semicolon;\n+	case RID_BREAK:\n+	  c_lexer_consume_token (parser->lexer);\n+	  stmt = c_finish_bc_stmt (&c_break_label, true);\n+	  goto expect_semicolon;\n+	case RID_RETURN:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	    {\n+	      stmt = c_finish_return (NULL_TREE);\n+	      c_lexer_consume_token (parser->lexer);\n+	    }\n+	  else\n+	    {\n+	      stmt = c_finish_return (c_parser_expression (parser).value);\n+	      goto expect_semicolon;\n+	    }\n+	  break;\n+	case RID_ASM:\n+	  stmt = c_parser_asm_statement (parser);\n+	  break;\n+	default:\n+	  goto expr_stmt;\n+	}\n+      break;\n+    case CPP_SEMICOLON:\n+      c_lexer_consume_token (parser->lexer);\n+      break;\n+    default:\n+    expr_stmt:\n+      stmt = c_finish_expr_stmt (c_parser_expression (parser).value);\n+    expect_semicolon:\n+      c_parser_skip_until_found (parser, CPP_SEMICOLON, \"expected ';'\");\n+      break;\n+    }\n+  /* Two cases cannot and do not have line numbers associated: If stmt\n+     is degenerate, such as \"2;\", then stmt is an INTEGER_CST, which\n+     cannot hold line numbers.  But that's ok because the statement\n+     will either be changed to a MODIFY_EXPR during gimplification of\n+     the statement expr, or discarded.  If stmt was compound, but\n+     without new variables, we will have skipped the creation of a\n+     BIND and will have a bare STATEMENT_LIST.  But that's ok because\n+     (recursively) all of the component statments should already have\n+     line numbers assigned.  */\n+  if (stmt && EXPR_P (stmt))\n+    SET_EXPR_LOCATION (stmt, loc);\n+}\n+\n+/* Parse a parenthesized condition from an if, do or while statement.\n+\n+   condition:\n+     ( expression )\n+*/\n+static tree\n+c_parser_paren_condition (c_parser *parser)\n+{\n+  location_t loc;\n+  tree cond;\n+  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    return error_mark_node;\n+  loc = c_lexer_peek_token (parser->lexer)->location;\n+  cond = lang_hooks.truthvalue_conversion (c_parser_expression (parser).value);\n+  if (EXPR_P (cond))\n+    SET_EXPR_LOCATION (cond, loc);\n+  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+  return cond;\n+}\n+\n+/* Parse a statement which is a block in C99.  */\n+\n+static tree\n+c_parser_c99_block_statement (c_parser *parser)\n+{\n+  tree block = c_begin_compound_stmt (flag_isoc99);\n+  c_parser_statement (parser);\n+  return c_end_compound_stmt (block, flag_isoc99);\n+}\n+\n+/* Parse the body of an if statement or the else half thereof.  This\n+   is just parsing a statement but (a) it is a block in C99, (b) we\n+   track whether the body is an if statement for the sake of\n+   -Wparentheses warnings, (c) we handle an empty body specially for\n+   the sake of -Wextra warnings.  */\n+\n+static tree\n+c_parser_if_body (c_parser *parser, bool *if_p)\n+{\n+  tree block = c_begin_compound_stmt (flag_isoc99);\n+  while (c_lexer_next_token_is_keyword (parser->lexer, RID_CASE)\n+	 || c_lexer_next_token_is_keyword (parser->lexer, RID_DEFAULT)\n+	 || (c_lexer_next_token_is (parser->lexer, CPP_NAME)\n+	     && c_lexer_peek_2nd_token (parser->lexer)->type == CPP_COLON))\n+    c_parser_label (parser);\n+  *if_p = c_lexer_next_token_is_keyword (parser->lexer, RID_IF);\n+  if (extra_warnings && c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+    add_stmt (build (NOP_EXPR, NULL_TREE, NULL_TREE));\n+  c_parser_statement_after_labels (parser);\n+  return c_end_compound_stmt (block, flag_isoc99);\n+}\n+\n+/* Parse an if statement (C90 6.6.4, C99 6.8.4).\n+\n+   if-statement:\n+     if ( expression ) statement\n+     if ( expression ) statement else statement\n+*/\n+\n+static void\n+c_parser_if_statement (c_parser *parser)\n+{\n+  tree block;\n+  location_t loc;\n+  tree cond;\n+  bool first_if = false, second_if = false;\n+  tree first_body, second_body;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_IF));\n+  c_lexer_consume_token (parser->lexer);\n+  block = c_begin_compound_stmt (flag_isoc99);\n+  loc = c_lexer_peek_token (parser->lexer)->location;\n+  cond = c_parser_paren_condition (parser);\n+  first_body = c_parser_if_body (parser, &first_if);\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_ELSE))\n+    {\n+      c_lexer_consume_token (parser->lexer);\n+      second_body = c_parser_if_body (parser, &second_if);\n+    }\n+  else\n+    second_body = NULL_TREE;\n+  c_finish_if_stmt (loc, cond, first_body, second_body, first_if);\n+  add_stmt (c_end_compound_stmt (block, flag_isoc99));\n+}\n+\n+/* Parse a switch statement (C90 6.6.4, C99 6.8.4).\n+\n+   switch-statement:\n+     switch (expression) statement\n+*/\n+\n+static void\n+c_parser_switch_statement (c_parser *parser)\n+{\n+  tree block, expr, body, save_break;\n+  location_t loc, save_loc;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_SWITCH));\n+  c_lexer_consume_token (parser->lexer);\n+  block = c_begin_compound_stmt (flag_isoc99);\n+  if (c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    {\n+      expr = c_parser_expression (parser).value;\n+      /* ??? Following the old parser, the location at the time of\n+	 c_start_case is the location of the close parenthesis.  But\n+	 the location of the \"switch\" keyword might make more sense,\n+	 and it would be a better interface to pass a location_t to\n+	 c_start_case rather than saving and restoring\n+	 input_location.  */\n+      loc = c_lexer_peek_token (parser->lexer)->location;\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+    }\n+  else\n+    {\n+      loc = input_location;\n+      expr = error_mark_node;\n+    }\n+  save_loc = input_location;\n+  input_location = loc;\n+  c_start_case (expr);\n+  input_location = save_loc;\n+  save_break = c_break_label;\n+  c_break_label = NULL_TREE;\n+  body = c_parser_c99_block_statement (parser);\n+  c_finish_case (body);\n+  if (c_break_label)\n+    add_stmt (build (LABEL_EXPR, void_type_node, c_break_label));\n+  c_break_label = save_break;\n+  add_stmt (c_end_compound_stmt (block, flag_isoc99));\n+}\n+\n+/* Parse a while statement (C90 6.6.5, C99 6.8.5).\n+\n+   while-statement:\n+      while (expression) statement\n+*/\n+\n+static void\n+c_parser_while_statement (c_parser *parser)\n+{\n+  tree block, cond, body, save_break, save_cont;\n+  location_t loc;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_WHILE));\n+  c_lexer_consume_token (parser->lexer);\n+  block = c_begin_compound_stmt (flag_isoc99);\n+  loc = c_lexer_peek_token (parser->lexer)->location;\n+  cond = c_parser_paren_condition (parser);\n+  save_break = c_break_label;\n+  c_break_label = NULL_TREE;\n+  save_cont = c_cont_label;\n+  c_cont_label = NULL_TREE;\n+  body = c_parser_c99_block_statement (parser);\n+  c_finish_loop (loc, cond, NULL, body, c_break_label, c_cont_label, true);\n+  add_stmt (c_end_compound_stmt (block, flag_isoc99));\n+  c_break_label = save_break;\n+  c_cont_label = save_cont;\n+}\n+\n+/* Parse a do statement (C90 6.6.5, C99 6.8.5).\n+\n+   do-statement:\n+     do statement while ( expression ) ;\n+*/\n+\n+static void\n+c_parser_do_statement (c_parser *parser)\n+{\n+  tree block, cond, body, save_break, save_cont, new_break, new_cont;\n+  location_t loc;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_DO));\n+  c_lexer_consume_token (parser->lexer);\n+  block = c_begin_compound_stmt (flag_isoc99);\n+  loc = c_lexer_peek_token (parser->lexer)->location;\n+  save_break = c_break_label;\n+  c_break_label = NULL_TREE;\n+  save_cont = c_cont_label;\n+  c_cont_label = NULL_TREE;\n+  body = c_parser_c99_block_statement (parser);\n+  c_parser_require_keyword (parser, RID_WHILE, \"expected 'while'\");\n+  new_break = c_break_label;\n+  c_break_label = save_break;\n+  new_cont = c_cont_label;\n+  c_cont_label = save_cont;\n+  cond = c_parser_paren_condition (parser);\n+  if (!c_parser_require (parser, CPP_SEMICOLON, \"expected ';'\"))\n+    c_parser_skip_to_end_of_block_or_statement (parser);\n+  c_finish_loop (loc, cond, NULL, body, new_break, new_cont, false);\n+  add_stmt (c_end_compound_stmt (block, flag_isoc99));\n+}\n+\n+/* Parse a for statement (C90 6.6.5, C99 6.8.5).\n+\n+   for-statement:\n+     for ( expression[opt] ; expression[opt] ; expression[opt] ) statement\n+     for ( declaration expression[opt] ; expression[opt] ) statement\n+\n+   The form with a declaration is new in C99.\n+\n+   ??? In accordance with the old parser, the declaration may be a\n+   nested function, which is then rejected in check_for_loop_decls,\n+   but does it make any sense for this to be included in the\n+   grammar?  */\n+\n+static void\n+c_parser_for_statement (c_parser *parser)\n+{\n+  tree block, cond, incr, save_break, save_cont, body;\n+  location_t loc;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_FOR));\n+  c_lexer_consume_token (parser->lexer);\n+  block = c_begin_compound_stmt (flag_isoc99);\n+  if (c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    {\n+      /* Parse the initialization declaration or expression.  */\n+      if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  c_finish_expr_stmt (NULL_TREE);\n+	}\n+      else if (c_lexer_next_token_starts_declspecs (parser->lexer))\n+	{\n+	  c_parser_declaration_or_fndef (parser, true, true, true, true);\n+	  check_for_loop_decls ();\n+	}\n+      else if (c_lexer_next_token_is_keyword (parser->lexer, RID_EXTENSION))\n+	{\n+	  /* __extension__ can start a declaration, but is also an\n+	     unary operator that can start an expression.  Consume all\n+	     but the last of a possible series of __extension__ to\n+	     determine which.  */\n+	  while (c_lexer_peek_2nd_token (parser->lexer)->type == CPP_KEYWORD\n+		 && (c_lexer_peek_2nd_token (parser->lexer)->keyword\n+		     == RID_EXTENSION))\n+	    c_lexer_consume_token (parser->lexer);\n+	  if (c_token_starts_declspecs (c_lexer_peek_2nd_token (parser->lexer)))\n+	    {\n+	      int ext;\n+	      SAVE_EXT_FLAGS (ext);\n+	      c_lexer_consume_token (parser->lexer);\n+	      c_parser_declaration_or_fndef (parser, true, true, true, true);\n+	      RESTORE_EXT_FLAGS (ext);\n+	      check_for_loop_decls ();\n+	    }\n+	  else\n+	    goto init_expr;\n+	}\n+      else\n+	{\n+	init_expr:\n+	  c_finish_expr_stmt (c_parser_expression (parser).value);\n+	  c_parser_skip_until_found (parser, CPP_SEMICOLON, \"expected ';'\");\n+	}\n+      /* Parse the loop condition.  */\n+      loc = input_location;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_SEMICOLON))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  cond = NULL_TREE;\n+	}\n+      else\n+	{\n+	  tree ocond = c_parser_expression (parser).value;\n+	  cond = lang_hooks.truthvalue_conversion (ocond);\n+	  if (EXPR_P (cond))\n+	    SET_EXPR_LOCATION (cond, loc);\n+	  c_parser_skip_until_found (parser, CPP_SEMICOLON, \"expected ';'\");\n+	}\n+      /* Parse the increment expression.  */\n+      if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	incr = c_process_expr_stmt (NULL_TREE);\n+      else\n+	incr = c_process_expr_stmt (c_parser_expression (parser).value);\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+    }\n+  else\n+    {\n+      cond = error_mark_node;\n+      incr = error_mark_node;\n+    }\n+  save_break = c_break_label;\n+  c_break_label = NULL_TREE;\n+  save_cont = c_cont_label;\n+  c_cont_label = NULL_TREE;\n+  body = c_parser_c99_block_statement (parser);\n+  c_finish_loop (loc, cond, incr, body, c_break_label, c_cont_label, true);\n+  add_stmt (c_end_compound_stmt (block, flag_isoc99));\n+  c_break_label = save_break;\n+  c_cont_label = save_cont;\n+}\n+\n+/* Parse an asm statement, a GNU extension.\n+\n+   asm-statement:\n+     asm type-qualifier[opt] ( asm-argument ) ;\n+\n+   asm-argument:\n+     string-literal\n+     string-literal : asm-operands[opt]\n+     string-literal : asm-operands[opt] : asm-operands[opt]\n+     string-literal : asm-operands[opt] : asm-operands[opt] : asm-clobbers\n+\n+   asm-clobbers:\n+     string-literal\n+     asm-clobbers , string-literal\n+\n+   Qualifiers other than volatile are accepted in the syntax but\n+   warned for.\n+\n+   ??? The old parser accepted wide strings here, but do we want\n+   to?  */\n+\n+static tree\n+c_parser_asm_statement (c_parser *parser)\n+{\n+  tree quals, str, outputs, inputs, clobbers, ret;\n+  bool simple;\n+  location_t loc_end, save_loc;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_ASM));\n+  c_lexer_consume_token (parser->lexer);\n+  if (c_lexer_next_token_is_keyword (parser->lexer, RID_VOLATILE))\n+    {\n+      quals = c_lexer_peek_token (parser->lexer)->value;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  else if (c_lexer_next_token_is_keyword (parser->lexer, RID_CONST)\n+	   || c_lexer_next_token_is_keyword (parser->lexer, RID_RESTRICT))\n+    {\n+      warning (\"%E qualifier ignored on asm\",\n+	       c_lexer_peek_token (parser->lexer)->value);\n+      quals = NULL_TREE;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  else\n+    quals = NULL_TREE;\n+  c_lex_string_translate = 0;\n+  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+    {\n+      c_lex_string_translate = 1;\n+      return NULL_TREE;\n+    }\n+  if (c_lexer_next_token_is (parser->lexer, CPP_STRING)\n+      || c_lexer_next_token_is (parser->lexer, CPP_WSTRING))\n+    {\n+      str = c_lexer_peek_token (parser->lexer)->value;\n+      c_lexer_consume_token (parser->lexer);\n+    }\n+  else\n+    {\n+      c_lex_string_translate = 1;\n+      c_parser_error (parser, \"expected string literal\");\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    {\n+      simple = true;\n+      outputs = NULL_TREE;\n+      inputs = NULL_TREE;\n+      clobbers = NULL_TREE;\n+      goto done_asm;\n+    }\n+  if (!c_parser_require (parser, CPP_COLON, \"expected ':' or ')'\"))\n+    {\n+      c_lex_string_translate = 1;\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  simple = false;\n+  /* Parse outputs.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_COLON)\n+      || c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    outputs = NULL_TREE;\n+  else\n+    outputs = c_parser_asm_operands (parser);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    {\n+      inputs = NULL_TREE;\n+      clobbers = NULL_TREE;\n+      goto done_asm;\n+    }\n+  if (!c_parser_require (parser, CPP_COLON, \"expected ':' or ')'\"))\n+    {\n+      c_lex_string_translate = 1;\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  /* Parse inputs.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_COLON)\n+      || c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    inputs = NULL_TREE;\n+  else\n+    inputs = c_parser_asm_operands (parser);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+    {\n+      clobbers = NULL_TREE;\n+      goto done_asm;\n+    }\n+  if (!c_parser_require (parser, CPP_COLON, \"expected ':' or ')'\"))\n+    {\n+      c_lex_string_translate = 1;\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  /* Parse clobbers.  */\n+  clobbers = c_parser_asm_clobbers (parser);\n+ done_asm:\n+  c_lex_string_translate = 1;\n+  if (!c_parser_require (parser, CPP_CLOSE_PAREN, \"expected ')'\"))\n+    {\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+      return NULL_TREE;\n+    }\n+  loc_end = c_lexer_peek_token (parser->lexer)->location;\n+  if (!c_parser_require (parser, CPP_SEMICOLON, \"expected ';'\"))\n+    c_parser_skip_to_end_of_block_or_statement (parser);\n+  save_loc = input_location;\n+  input_location = loc_end;\n+  ret = build_asm_stmt (quals, build_asm_expr (str, outputs, inputs,\n+					       clobbers, simple));\n+  input_location = save_loc;\n+  return ret;\n+}\n+\n+/* Parse asm operands, a GNU extension.\n+\n+   asm-operands:\n+     asm-operand\n+     asm-operands , asm-operand\n+\n+   asm-operand:\n+     string-literal ( expression )\n+     [ identifier ] string-literal ( expression )\n+\n+   ??? The old parser accepted wide strings here, but do we want\n+   to?  */\n+\n+static tree\n+c_parser_asm_operands (c_parser *parser)\n+{\n+  tree list = NULL_TREE;\n+  while (true)\n+    {\n+      tree name, str, expr;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_SQUARE))\n+	{\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	    {\n+	      tree id = c_lexer_peek_token (parser->lexer)->value;\n+	      c_lexer_consume_token (parser->lexer);\n+	      name = build_string (IDENTIFIER_LENGTH (id),\n+				   IDENTIFIER_POINTER (id));\n+	    }\n+	  else\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE, NULL);\n+	      return NULL_TREE;\n+	    }\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE, \"expected ']'\");\n+	}\n+      else\n+	name = NULL_TREE;\n+      if (c_lexer_next_token_is (parser->lexer, CPP_STRING)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_WSTRING))\n+	{\n+	  str = c_lexer_peek_token (parser->lexer)->value;\n+	  c_lexer_consume_token (parser->lexer);\n+	}\n+      else\n+	{\n+	  c_parser_error (parser, \"expected string literal\");\n+	  return NULL_TREE;\n+	}\n+      c_lex_string_translate = 1;\n+      if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	{\n+	  c_lex_string_translate = 0;\n+	  return NULL_TREE;\n+	}\n+      expr = c_parser_expression (parser).value;\n+      c_lex_string_translate = 0;\n+      if (!c_parser_require (parser, CPP_CLOSE_PAREN, \"expected ')'\"))\n+	{\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	  return NULL_TREE;\n+	}\n+      list = chainon (list, build_tree_list (build_tree_list (name, str),\n+					     expr));\n+      if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	c_lexer_consume_token (parser->lexer);\n+      else\n+	break;\n+    }\n+  return list;\n+}\n+\n+/* Parse asm clobbers, a GNU extension.\n+\n+   asm-clobbers:\n+     string-literal\n+     asm-clobbers , string-literal\n+\n+   ??? The old parser accepted wide strings here, but do we want\n+   to?  */\n+\n+static tree\n+c_parser_asm_clobbers (c_parser *parser)\n+{\n+  tree list = NULL_TREE;\n+  while (true)\n+    {\n+      if (c_lexer_next_token_is (parser->lexer, CPP_STRING)\n+	  || c_lexer_next_token_is (parser->lexer, CPP_WSTRING))\n+	{\n+	  tree str = c_lexer_peek_token (parser->lexer)->value;\n+	  c_lexer_consume_token (parser->lexer);\n+	  list = tree_cons (NULL_TREE, str, list);\n+	}\n+      else\n+	{\n+	  c_parser_error (parser, \"expected string literal\");\n+	  return NULL_TREE;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+	c_lexer_consume_token (parser->lexer);\n+      else\n+	break;\n+    }\n+  return list;\n+}\n+\n+/* Parse an expression other than a compound expression; that is, an\n+   assignment expression (C90 6.3.16, C99 6.5.16).\n+\n+   assignment-expression:\n+     conditional-expression\n+     unary-expression assignment-operator assignment-expression\n+\n+   assignment-operator: one of\n+     = *= /= %= += -= <<= >>= &= ^= |=\n+\n+   In GNU C we accept any conditional expression on the LHS and\n+   diagnose the invalid lvalue rather than producing a syntax\n+   error.  */\n+\n+static struct c_expr\n+c_parser_expr_no_commas (c_parser *parser)\n+{\n+  struct c_expr lhs, rhs, ret;\n+  enum tree_code code;\n+  lhs = c_parser_conditional_expression (parser);\n+  switch (c_lexer_peek_token (parser->lexer)->type)\n+    {\n+    case CPP_EQ:\n+      code = NOP_EXPR;\n+      break;\n+    case CPP_MULT_EQ:\n+      code = MULT_EXPR;\n+      break;\n+    case CPP_DIV_EQ:\n+      code = TRUNC_DIV_EXPR;\n+      break;\n+    case CPP_MOD_EQ:\n+      code = TRUNC_MOD_EXPR;\n+      break;\n+    case CPP_PLUS_EQ:\n+      code = PLUS_EXPR;\n+      break;\n+    case CPP_MINUS_EQ:\n+      code = MINUS_EXPR;\n+      break;\n+    case CPP_LSHIFT_EQ:\n+      code = LSHIFT_EXPR;\n+      break;\n+    case CPP_RSHIFT_EQ:\n+      code = RSHIFT_EXPR;\n+      break;\n+    case CPP_AND_EQ:\n+      code = BIT_AND_EXPR;\n+      break;\n+    case CPP_XOR_EQ:\n+      code = BIT_XOR_EXPR;\n+      break;\n+    case CPP_OR_EQ:\n+      code = BIT_IOR_EXPR;\n+      break;\n+    default:\n+      return lhs;\n+    }\n+  c_lexer_consume_token (parser->lexer);\n+  rhs = c_parser_expr_no_commas (parser);\n+  ret.value = build_modify_expr (lhs.value, code, rhs.value);\n+  if (code == NOP_EXPR)\n+    ret.original_code = MODIFY_EXPR;\n+  else\n+    {\n+      TREE_NO_WARNING (ret.value) = 1;\n+      ret.original_code = ERROR_MARK;\n+    }\n+  return ret;\n+}\n+\n+/* Parse a conditional expression (C90 6.3.15, C99 6.5.15).\n+\n+   conditional-expression:\n+     logical-OR-expression\n+     logical-OR-expression ? expression : conditional-expression\n+\n+   GNU extension:\n+     logical-OR-expression ? : conditional-expression\n+*/\n+\n+static struct c_expr\n+c_parser_conditional_expression (c_parser *parser)\n+{\n+  struct c_expr cond, exp1, exp2, ret;\n+  cond = c_parser_binary_expression (parser);\n+  if (c_lexer_next_token_is_not (parser->lexer, CPP_QUERY))\n+    return cond;\n+  c_lexer_consume_token (parser->lexer);\n+  if (c_lexer_next_token_is (parser->lexer, CPP_COLON))\n+    {\n+      if (pedantic)\n+	pedwarn (\"ISO C forbids omitting the middle term of a ?: expression\");\n+      /* Make sure first operand is calculated only once.  */\n+      exp1.value = save_expr (default_conversion (cond.value));\n+      cond.value = lang_hooks.truthvalue_conversion (exp1.value);\n+      skip_evaluation += cond.value == truthvalue_true_node;\n+    }\n+  else\n+    {\n+      cond.value\n+	= lang_hooks.truthvalue_conversion (default_conversion (cond.value));\n+      skip_evaluation += cond.value == truthvalue_false_node;\n+      exp1 = c_parser_expression (parser);\n+      skip_evaluation += ((cond.value == truthvalue_true_node)\n+			  - (cond.value == truthvalue_false_node));\n+    }\n+  if (!c_parser_require (parser, CPP_COLON, \"expected ':'\"))\n+    {\n+      skip_evaluation -= cond.value == truthvalue_true_node;\n+      ret.value = error_mark_node;\n+      ret.original_code = ERROR_MARK;\n+      return ret;\n+    }\n+  exp2 = c_parser_conditional_expression (parser);\n+  skip_evaluation -= cond.value == truthvalue_true_node;\n+  ret.value = build_conditional_expr (cond.value, exp1.value, exp2.value);\n+  ret.original_code = ERROR_MARK;\n+  return ret;\n+}\n+\n+/* Parse a binary expression; that is, a logical-OR-expression (C90\n+   6.3.5-6.3.14, C99 6.5.5-6.5.14).\n+\n+   multiplicative-expression:\n+     cast-expression\n+     multiplicative-expression * cast-expression\n+     multiplicative-expression / cast-expression\n+     multiplicative-expression % cast-expression\n+\n+   additive-expression:\n+     multiplicative-expression\n+     additive-expression + multiplicative-expression\n+     additive-expression - multiplicative-expression\n+\n+   shift-expression:\n+     additive-expression\n+     shift-expression << additive-expression\n+     shift-expression >> additive-expression\n+\n+   relational-expression:\n+     shift-expression\n+     relational-expression < shift-expression\n+     relational-expression > shift-expression\n+     relational-expression <= shift-expression\n+     relational-expression >= shift-expression\n+\n+   equality-expression:\n+     relational-expression\n+     equality-expression == relational-expression\n+     equality-expression != relational-expression\n+\n+   AND-expression:\n+     equality-expression\n+     AND-expression & equality-expression\n+\n+   exclusive-OR-expression:\n+     AND-expression\n+     exclusive-OR-expression ^ AND-expression\n+\n+   inclusive-OR-expression:\n+     exclusive-OR-expression\n+     inclusive-OR-expression | exclusive-OR-expression\n+\n+   logical-AND-expression:\n+     inclusive-OR-expression\n+     logical-AND-expression && inclusive-OR-expression\n+\n+   logical-OR-expression:\n+     logical-AND-expression\n+     logical-OR-expression || logical-AND-expression\n+*/\n+\n+static struct c_expr\n+c_parser_binary_expression (c_parser *parser)\n+{\n+  /* A binary expression is parsed using operator-precedence parsing,\n+     with the operands being cast expressions.  All the binary\n+     operators are left-associative.  Thus a binary expression is of\n+     form:\n+\n+     E0 op1 E1 op2 E2 ...\n+\n+     which we represent on a stack.  On the stack, the precedence\n+     levels are strictly increasing.  When a new operator is\n+     encountered of higher precedence than that at the top of the\n+     stack, it is pushed; its LHS is the top expression, and its RHS\n+     is everything parsed until it is popped.  When a new operator is\n+     encountered with precedence less than or equal to that at the top\n+     of the stack, triples E[i-1] op[i] E[i] are popped and replaced\n+     by the result of the operation until the operator at the top of\n+     the stack has lower precedence than the new operator or there is\n+     only one element on the stack; then the top expression is the LHS\n+     of the new operator.  In the case of logical AND and OR\n+     expressions, we also need to adjust skip_evaluation as\n+     appropriate when the operators are pushed and popped.  */\n+\n+  /* The precedence levels, where 0 is a dummy lowest level used for\n+     the bottom of the stack.  */\n+  enum prec {\n+    PREC_NONE,\n+    PREC_LOGOR,\n+    PREC_LOGAND,\n+    PREC_BITOR,\n+    PREC_BITXOR,\n+    PREC_BITAND,\n+    PREC_EQ,\n+    PREC_REL,\n+    PREC_SHIFT,\n+    PREC_ADD,\n+    PREC_MULT,\n+    NUM_PRECS\n+  };\n+  struct {\n+    /* The expression at this stack level.  */\n+    struct c_expr expr;\n+    /* The precedence of the operator on its left, PREC_NONE at the\n+       bottom of the stack.  */\n+    enum prec prec;\n+    /* The operation on its left.  */\n+    enum tree_code op;\n+  } stack[NUM_PRECS];\n+  int sp;\n+#define POP								      \\\n+  do {									      \\\n+    switch (stack[sp].op)						      \\\n+      {									      \\\n+      case TRUTH_ANDIF_EXPR:						      \\\n+	skip_evaluation -= stack[sp - 1].expr.value == truthvalue_false_node; \\\n+	break;								      \\\n+      case TRUTH_ORIF_EXPR:						      \\\n+	skip_evaluation -= stack[sp - 1].expr.value == truthvalue_true_node;  \\\n+	break;								      \\\n+      default:								      \\\n+	break;								      \\\n+      }									      \\\n+    stack[sp - 1].expr = parser_build_binary_op (stack[sp].op,		      \\\n+						 stack[sp - 1].expr,	      \\\n+						 stack[sp].expr);	      \\\n+    sp--;								      \\\n+  } while (0)\n+  stack[0].expr = c_parser_cast_expression (parser);\n+  stack[0].prec = PREC_NONE;\n+  sp = 0;\n+  while (true)\n+    {\n+      enum prec oprec;\n+      enum tree_code ocode;\n+      if (parser->error)\n+	goto out;\n+      switch (c_lexer_peek_token (parser->lexer)->type)\n+	{\n+	case CPP_MULT:\n+	  oprec = PREC_MULT;\n+	  ocode = MULT_EXPR;\n+	  break;\n+	case CPP_DIV:\n+	  oprec = PREC_MULT;\n+	  ocode = TRUNC_DIV_EXPR;\n+	  break;\n+	case CPP_MOD:\n+	  oprec = PREC_MULT;\n+	  ocode = TRUNC_MOD_EXPR;\n+	  break;\n+	case CPP_PLUS:\n+	  oprec = PREC_ADD;\n+	  ocode = PLUS_EXPR;\n+	  break;\n+	case CPP_MINUS:\n+	  oprec = PREC_ADD;\n+	  ocode = MINUS_EXPR;\n+	  break;\n+	case CPP_LSHIFT:\n+	  oprec = PREC_SHIFT;\n+	  ocode = LSHIFT_EXPR;\n+	  break;\n+	case CPP_RSHIFT:\n+	  oprec = PREC_SHIFT;\n+	  ocode = RSHIFT_EXPR;\n+	  break;\n+	case CPP_LESS:\n+	  oprec = PREC_REL;\n+	  ocode = LT_EXPR;\n+	  break;\n+	case CPP_GREATER:\n+	  oprec = PREC_REL;\n+	  ocode = GT_EXPR;\n+	  break;\n+	case CPP_LESS_EQ:\n+	  oprec = PREC_REL;\n+	  ocode = LE_EXPR;\n+	  break;\n+	case CPP_GREATER_EQ:\n+	  oprec = PREC_REL;\n+	  ocode = GE_EXPR;\n+	  break;\n+	case CPP_EQ_EQ:\n+	  oprec = PREC_EQ;\n+	  ocode = EQ_EXPR;\n+	  break;\n+	case CPP_NOT_EQ:\n+	  oprec = PREC_EQ;\n+	  ocode = NE_EXPR;\n+	  break;\n+	case CPP_AND:\n+	  oprec = PREC_BITAND;\n+	  ocode = BIT_AND_EXPR;\n+	  break;\n+	case CPP_XOR:\n+	  oprec = PREC_BITXOR;\n+	  ocode = BIT_XOR_EXPR;\n+	  break;\n+	case CPP_OR:\n+	  oprec = PREC_BITOR;\n+	  ocode = BIT_IOR_EXPR;\n+	  break;\n+	case CPP_AND_AND:\n+	  oprec = PREC_LOGAND;\n+	  ocode = TRUTH_ANDIF_EXPR;\n+	  break;\n+	case CPP_OR_OR:\n+	  oprec = PREC_LOGOR;\n+	  ocode = TRUTH_ORIF_EXPR;\n+	  break;\n+	default:\n+	  /* Not a binary operator, so end of the binary\n+	     expression.  */\n+	  goto out;\n+	}\n+      c_lexer_consume_token (parser->lexer);\n+      while (oprec <= stack[sp].prec)\n+	POP;\n+      switch (ocode)\n+	{\n+	case TRUTH_ANDIF_EXPR:\n+	  stack[sp].expr.value = lang_hooks.truthvalue_conversion\n+	    (default_conversion (stack[sp].expr.value));\n+	  skip_evaluation += stack[sp].expr.value == truthvalue_false_node;\n+	  break;\n+	case TRUTH_ORIF_EXPR:\n+	  stack[sp].expr.value = lang_hooks.truthvalue_conversion\n+	    (default_conversion (stack[sp].expr.value));\n+	  skip_evaluation += stack[sp].expr.value == truthvalue_true_node;\n+	  break;\n+	default:\n+	  break;\n+	}\n+      sp++;\n+      stack[sp].expr = c_parser_cast_expression (parser);\n+      stack[sp].prec = oprec;\n+      stack[sp].op = ocode;\n+    }\n+ out:\n+  while (sp > 0)\n+    POP;\n+  return stack[0].expr;\n+#undef POP\n+}\n+\n+/* Parse a cast expression (C90 6.3.4, C99 6.5.4).\n+\n+   cast-expression:\n+     unary-expression\n+     ( type-name ) unary-expression\n+*/\n+\n+static struct c_expr\n+c_parser_cast_expression (c_parser *parser)\n+{\n+  /* If the expression begins with a parenthesized type name, it may\n+     be either a cast or a compound literal; we need to see whether\n+     the next character is '{' to tell the difference.  If not, it is\n+     an unary expression.  */\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_PAREN)\n+      && c_token_starts_typename (c_lexer_peek_2nd_token (parser->lexer)))\n+    {\n+      struct c_type_name *type_name;\n+      struct c_expr ret;\n+      tree expr;\n+      c_lexer_consume_token (parser->lexer);\n+      type_name = c_parser_type_name (parser);\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+      if (type_name == NULL)\n+	{\n+	  ret.value = error_mark_node;\n+	  ret.original_code = ERROR_MARK;\n+	  return ret;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+	return c_parser_postfix_expression_after_paren_type (parser,\n+							     type_name);\n+      expr = c_parser_cast_expression (parser).value;\n+      ret.value = c_cast_expr (type_name, expr);\n+      ret.original_code = ERROR_MARK;\n+      return ret;\n+    }\n+  else\n+    return c_parser_unary_expression (parser);\n+}\n+\n+/* Parse an unary expression (C90 6.3.3, C99 6.5.3).\n+\n+   unary-expression:\n+     postfix-expression\n+     ++ unary-expression\n+     -- unary-expression\n+     unary-operator cast-expression\n+     sizeof unary-expression\n+     sizeof ( type-name )\n+\n+   unary-operator: one of\n+     & * + - ~ !\n+\n+   GNU extensions:\n+\n+   unary-expression:\n+     __alignof__ unary-expression\n+     __alignof__ ( type-name )\n+     && identifier\n+\n+   unary-operator: one of\n+     __extension__ __real__ __imag__\n+\n+   In addition, the GNU syntax treats ++ and -- as unary operators, so\n+   they may be applied to cast expressions with errors for non-lvalues\n+   given later.  */\n+\n+static struct c_expr\n+c_parser_unary_expression (c_parser *parser)\n+{\n+  int ext;\n+  struct c_expr ret;\n+  ret.original_code = ERROR_MARK;\n+  switch (c_lexer_peek_token (parser->lexer)->type)\n+    {\n+    case CPP_PLUS_PLUS:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (PREINCREMENT_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_MINUS_MINUS:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (PREDECREMENT_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_AND:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (ADDR_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_MULT:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_indirect_ref (c_parser_cast_expression (parser).value,\n+				      \"unary *\");\n+      return ret;\n+    case CPP_PLUS:\n+      c_lexer_consume_token (parser->lexer);\n+      if (!c_dialect_objc () && warn_traditional && !in_system_header)\n+	warning (\"traditional C rejects the unary plus operator\");\n+      ret.value = build_unary_op (CONVERT_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_MINUS:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (NEGATE_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_COMPL:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (BIT_NOT_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_NOT:\n+      c_lexer_consume_token (parser->lexer);\n+      ret.value = build_unary_op (TRUTH_NOT_EXPR,\n+				  c_parser_cast_expression (parser).value, 0);\n+      overflow_warning (ret.value);\n+      return ret;\n+    case CPP_AND_AND:\n+      c_lexer_consume_token (parser->lexer);\n+      if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	{\n+	  ret.value = finish_label_address_expr\n+	    (c_lexer_peek_token (parser->lexer)->value);\n+	  c_lexer_consume_token (parser->lexer);\n+	  return ret;\n+	}\n+      else\n+	{\n+	  c_parser_error (parser, \"expected identifier\");\n+	  ret.value = error_mark_node;\n+	  return ret;\n+	}\n+    case CPP_KEYWORD:\n+      switch (c_lexer_peek_token (parser->lexer)->keyword)\n+	{\n+	case RID_SIZEOF:\n+	  return c_parser_sizeof_expression (parser);\n+	case RID_ALIGNOF:\n+	  return c_parser_alignof_expression (parser);\n+	case RID_EXTENSION:\n+	  c_lexer_consume_token (parser->lexer);\n+	  SAVE_EXT_FLAGS (ext);\n+	  ret = c_parser_cast_expression (parser);\n+	  RESTORE_EXT_FLAGS (ext);\n+	  return ret;\n+	case RID_REALPART:\n+	  c_lexer_consume_token (parser->lexer);\n+	  ret.value = build_unary_op (REALPART_EXPR,\n+				      c_parser_cast_expression (parser).value,\n+				      0);\n+	  return ret;\n+	case RID_IMAGPART:\n+	  c_lexer_consume_token (parser->lexer);\n+	  ret.value = build_unary_op (IMAGPART_EXPR,\n+				      c_parser_cast_expression (parser).value,\n+				      0);\n+	  return ret;\n+	default:\n+	  return c_parser_postfix_expression (parser);\n+	}\n+    default:\n+      return c_parser_postfix_expression (parser);\n+    }\n+}\n+\n+/* Parse a sizeof expression.  */\n+\n+static struct c_expr\n+c_parser_sizeof_expression (c_parser *parser)\n+{\n+  struct c_expr expr;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_SIZEOF));\n+  c_lexer_consume_token (parser->lexer);\n+  skip_evaluation++;\n+  in_sizeof++;\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_PAREN)\n+      && c_token_starts_typename (c_lexer_peek_2nd_token (parser->lexer)))\n+    {\n+      /* Either sizeof ( type-name ) or sizeof unary-expression\n+	 starting with a compound literal.  */\n+      struct c_type_name *type_name;\n+      c_lexer_consume_token (parser->lexer);\n+      type_name = c_parser_type_name (parser);\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+      if (type_name == NULL)\n+	{\n+	  struct c_expr ret;\n+	  skip_evaluation--;\n+	  in_sizeof--;\n+	  ret.value = error_mark_node;\n+	  ret.original_code = ERROR_MARK;\n+	  return ret;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+	{\n+	  expr = c_parser_postfix_expression_after_paren_type (parser,\n+							       type_name);\n+	  goto sizeof_expr;\n+	}\n+      /* sizeof ( type-name ).  */\n+      skip_evaluation--;\n+      in_sizeof--;\n+      return c_expr_sizeof_type (type_name);\n+    }\n+  else\n+    {\n+      expr = c_parser_unary_expression (parser);\n+    sizeof_expr:\n+      skip_evaluation--;\n+      in_sizeof--;\n+      if (TREE_CODE (expr.value) == COMPONENT_REF\n+	  && DECL_C_BIT_FIELD (TREE_OPERAND (expr.value, 1)))\n+	error (\"%<sizeof%> applied to a bit-field\");\n+      return c_expr_sizeof_expr (expr);\n+    }\n+}\n+\n+/* Parse an alignof expression.  */\n+\n+static struct c_expr\n+c_parser_alignof_expression (c_parser *parser)\n+{\n+  struct c_expr expr;\n+  gcc_assert (c_lexer_next_token_is_keyword (parser->lexer, RID_ALIGNOF));\n+  c_lexer_consume_token (parser->lexer);\n+  skip_evaluation++;\n+  in_alignof++;\n+  if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_PAREN)\n+      && c_token_starts_typename (c_lexer_peek_2nd_token (parser->lexer)))\n+    {\n+      /* Either __alignof__ ( type-name ) or __alignof__\n+	 unary-expression starting with a compound literal.  */\n+      struct c_type_name *type_name;\n+      struct c_expr ret;\n+      c_lexer_consume_token (parser->lexer);\n+      type_name = c_parser_type_name (parser);\n+      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+      if (type_name == NULL)\n+	{\n+	  struct c_expr ret;\n+	  skip_evaluation--;\n+	  in_alignof--;\n+	  ret.value = error_mark_node;\n+	  ret.original_code = ERROR_MARK;\n+	  return ret;\n+	}\n+      if (c_lexer_next_token_is (parser->lexer, CPP_OPEN_BRACE))\n+	{\n+	  expr = c_parser_postfix_expression_after_paren_type (parser,\n+							       type_name);\n+	  goto alignof_expr;\n+	}\n+      /* alignof ( type-name ).  */\n+      skip_evaluation--;\n+      in_alignof--;\n+      ret.value = c_alignof (groktypename (type_name));\n+      ret.original_code = ERROR_MARK;\n+      return ret;\n+    }\n+  else\n+    {\n+      struct c_expr ret;\n+      expr = c_parser_unary_expression (parser);\n+    alignof_expr:\n+      skip_evaluation--;\n+      in_alignof--;\n+      ret.value = c_alignof_expr (expr.value);\n+      ret.original_code = ERROR_MARK;\n+      return ret;\n+    }\n+}\n+\n+/* Parse a postfix expression (C90 6.3.1-6.3.2, C99 6.5.1-6.5.2).\n+\n+   postfix-expression:\n+     primary-expression\n+     postfix-expression [ expression ]\n+     postfix-expression ( argument-expression-list[opt] )\n+     postfix-expression . identifier\n+     postfix-expression -> identifier\n+     postfix-expression ++\n+     postfix-expression --\n+     ( type-name ) { initializer-list }\n+     ( type-name ) { initializer-list , }\n+\n+   argument-expression-list:\n+     argument-expression\n+     argument-expression-list , argument-expression\n+\n+   primary-expression:\n+     identifier\n+     constant\n+     string-literal\n+     ( expression )\n+\n+   GNU extensions to primary-expression:\n+     __func__\n+       (treated as a keyword in GNU C)\n+     __FUNCTION__\n+     __PRETTY_FUNCTION__\n+     ( compound-statement )\n+     __builtin_va_arg ( assignment-expression , type-name )\n+     __builtin_offsetof ( type-name , offsetof-member-designator )\n+     __builtin_choose_expr ( assignment-expression ,\n+			     assignment-expression ,\n+			     assignment-expression )\n+     __builtin_types_compatible_p ( type-name , type-name )\n+\n+   offsetof-member-designator:\n+     identifier\n+     offsetof-member-designator . identifier\n+     offsetof-member-designator [ expression ]\n+\n+   TODO: Objective-C.  */\n+\n+static struct c_expr\n+c_parser_postfix_expression (c_parser *parser)\n+{\n+  struct c_expr expr, e1, e2, e3;\n+  struct c_type_name *t1, *t2;\n+  switch (c_lexer_peek_token (parser->lexer)->type)\n+    {\n+    case CPP_NUMBER:\n+    case CPP_CHAR:\n+    case CPP_WCHAR:\n+      expr.value = c_lexer_peek_token (parser->lexer)->value;\n+      expr.original_code = ERROR_MARK;\n+      c_lexer_consume_token (parser->lexer);\n+      break;\n+    case CPP_STRING:\n+    case CPP_WSTRING:\n+      expr.value = c_lexer_peek_token (parser->lexer)->value;\n+      expr.original_code = STRING_CST;\n+      c_lexer_consume_token (parser->lexer);\n+      break;\n+    case CPP_NAME:\n+      if (c_lexer_peek_token (parser->lexer)->id_kind != C_ID_ID)\n+	{\n+	  c_parser_error (parser, \"expected expression\");\n+	  expr.value = error_mark_node;\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	}\n+      expr.value = build_external_ref\n+	(c_lexer_peek_token (parser->lexer)->value,\n+	 c_lexer_peek_2nd_token (parser->lexer)->type == CPP_OPEN_PAREN);\n+      expr.original_code = ERROR_MARK;\n+      c_lexer_consume_token (parser->lexer);\n+      break;\n+    case CPP_OPEN_PAREN:\n+      /* A parenthesized expression, statement expression or compound\n+	 literal.  */\n+      if (c_lexer_peek_2nd_token (parser->lexer)->type == CPP_OPEN_BRACE)\n+	{\n+	  /* A statement expression.  */\n+	  tree stmt;\n+	  c_lexer_consume_token (parser->lexer);\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (cur_stmt_list == NULL)\n+	    {\n+	      error (\"braced-group within expression allowed \"\n+		     \"only inside a function\");\n+	      parser->error = true;\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_BRACE, NULL);\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  stmt = c_begin_stmt_expr ();\n+	  c_parser_compound_statement_nostart (parser, NULL);\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  if (pedantic)\n+	    pedwarn (\"ISO C forbids braced-groups within expressions\");\n+	  expr.value = c_finish_stmt_expr (stmt);\n+	  expr.original_code = ERROR_MARK;\n+	}\n+      else if (c_token_starts_typename (c_lexer_peek_2nd_token (parser->lexer)))\n+	{\n+	  /* A compound literal.  ??? Can we actually get here rather\n+	     than going directly to\n+	     c_parser_postfix_expression_after_paren_type from\n+	     elsewhere?  */\n+	  struct c_type_name *type_name;\n+	  c_lexer_consume_token (parser->lexer);\n+	  type_name = c_parser_type_name (parser);\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  if (type_name == NULL)\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	    }\n+	  else\n+	    expr = c_parser_postfix_expression_after_paren_type (parser,\n+								 type_name);\n+	}\n+      else\n+	{\n+	  /* A parenthesized expression.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  expr = c_parser_expression (parser);\n+	  if (TREE_CODE (expr.value) == MODIFY_EXPR)\n+	    TREE_NO_WARNING (expr.value) = 1;\n+	  expr.original_code = ERROR_MARK;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	}\n+      break;\n+    case CPP_KEYWORD:\n+      switch (c_lexer_peek_token (parser->lexer)->keyword)\n+	{\n+	case RID_FUNCTION_NAME:\n+	case RID_PRETTY_FUNCTION_NAME:\n+	case RID_C99_FUNCTION_NAME:\n+	  expr.value = fname_decl (c_lexer_peek_token (parser->lexer)->keyword,\n+				   c_lexer_peek_token (parser->lexer)->value);\n+	  expr.original_code = ERROR_MARK;\n+	  c_lexer_consume_token (parser->lexer);\n+	  break;\n+	case RID_VA_ARG:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  e1 = c_parser_expr_no_commas (parser);\n+	  if (!c_parser_require (parser, CPP_COMMA, \"expected ','\"))\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  t1 = c_parser_type_name (parser);\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  if (t1 == NULL)\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	    }\n+	  else\n+	    {\n+	      expr.value = build_va_arg (e1.value, groktypename (t1));\n+	      expr.original_code = ERROR_MARK;\n+	    }\n+	  break;\n+	case RID_OFFSETOF:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  t1 = c_parser_type_name (parser);\n+	  if (t1 == NULL)\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  if (!c_parser_require (parser, CPP_COMMA, \"expected ','\"))\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  {\n+	    tree type = groktypename (t1);\n+	    tree offsetof_ref;\n+	    if (type == error_mark_node)\n+	      offsetof_ref = error_mark_node;\n+	    else\n+	      offsetof_ref = build1 (INDIRECT_REF, type, NULL);\n+	    /* Parse the second argument to __builtin_offsetof.  We\n+	       must have one identifier, and beyond that we want to\n+	       accept sub structure and sub array references.  */\n+	    if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	      {\n+		offsetof_ref = build_component_ref\n+		  (offsetof_ref, c_lexer_peek_token (parser->lexer)->value);\n+		c_lexer_consume_token (parser->lexer);\n+		while (c_lexer_next_token_is (parser->lexer, CPP_DOT)\n+		       || c_lexer_next_token_is (parser->lexer,\n+						 CPP_OPEN_SQUARE))\n+		  {\n+		    if (c_lexer_next_token_is (parser->lexer, CPP_DOT))\n+		      {\n+			c_lexer_consume_token (parser->lexer);\n+			if (c_lexer_next_token_is_not (parser->lexer,\n+						       CPP_NAME))\n+			  {\n+			    c_parser_error (parser, \"expected identifier\");\n+			    break;\n+			  }\n+			offsetof_ref = build_component_ref\n+			  (offsetof_ref,\n+			   c_lexer_peek_token (parser->lexer)->value);\n+			c_lexer_consume_token (parser->lexer);\n+		      }\n+		    else\n+		      {\n+			tree idx;\n+			c_lexer_consume_token (parser->lexer);\n+			idx = c_parser_expression (parser).value;\n+			c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE,\n+						   \"expected ']'\");\n+			offsetof_ref = build_array_ref (offsetof_ref, idx);\n+		      }\n+		  }\n+	      }\n+	    else\n+	      c_parser_error (parser, \"expected identifier\");\n+	    c_parser_skip_until_found (parser, CPP_CLOSE_PAREN,\n+				       \"expected ')'\");\n+	    expr.value = fold_offsetof (offsetof_ref);\n+	    expr.original_code = ERROR_MARK;\n+	  }\n+	  break;\n+	case RID_CHOOSE_EXPR:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  e1 = c_parser_expr_no_commas (parser);\n+	  if (!c_parser_require (parser, CPP_COMMA, \"expected ','\"))\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  e2 = c_parser_expr_no_commas (parser);\n+	  if (!c_parser_require (parser, CPP_COMMA, \"expected ','\"))\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  e3 = c_parser_expr_no_commas (parser);\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  {\n+	    tree c;\n+\n+	    c = fold (e1.value);\n+	    STRIP_NOPS (c);\n+	    if (TREE_CODE (c) != INTEGER_CST)\n+	      error (\"first argument to __builtin_choose_expr not\"\n+		     \" a constant\");\n+	    expr = integer_zerop (c) ? e3 : e2;\n+	  }\n+	  break;\n+	case RID_TYPES_COMPATIBLE_P:\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (!c_parser_require (parser, CPP_OPEN_PAREN, \"expected '('\"))\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  t1 = c_parser_type_name (parser);\n+	  if (t1 == NULL)\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  if (!c_parser_require (parser, CPP_COMMA, \"expected ','\"))\n+	    {\n+	      c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, NULL);\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  t2 = c_parser_type_name (parser);\n+	  if (t2 == NULL)\n+	    {\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      break;\n+	    }\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  {\n+	    tree e1, e2;\n+\n+	    e1 = TYPE_MAIN_VARIANT (groktypename (t1));\n+	    e2 = TYPE_MAIN_VARIANT (groktypename (t2));\n+\n+	    expr.value = comptypes (e1, e2)\n+	      ? build_int_cst (NULL_TREE, 1)\n+	      : build_int_cst (NULL_TREE, 0);\n+	    expr.original_code = ERROR_MARK;\n+	  }\n+	  break;\n+	default:\n+	  c_parser_error (parser, \"expected expression\");\n+	  expr.value = error_mark_node;\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	}\n+      break;\n+    default:\n+      c_parser_error (parser, \"expected expression\");\n+      expr.value = error_mark_node;\n+      expr.original_code = ERROR_MARK;\n+      break;\n+    }\n+  return c_parser_postfix_expression_after_primary (parser, expr);\n+}\n+\n+/* Parse a postfix expression after a parenthesized type name: the\n+   brace-enclosed initializer of a compound literal, possibly followed\n+   by some postfix operators.  This is separate because it is not\n+   possible to tell until after the type name whether a cast\n+   expression has a cast or a compound literal, or whether the operand\n+   of sizeof is a parenthesized type name or starts with a compound\n+   literal.  */\n+\n+static struct c_expr\n+c_parser_postfix_expression_after_paren_type (c_parser *parser,\n+					      struct c_type_name *type_name)\n+{\n+  tree type;\n+  struct c_expr init;\n+  struct c_expr expr;\n+  start_init (NULL_TREE, NULL, 0);\n+  type = groktypename (type_name);\n+  if (C_TYPE_VARIABLE_SIZE (type))\n+    {\n+      error (\"compound literal has variable size\");\n+      type = error_mark_node;\n+    }\n+  init = c_parser_braced_init (parser, type, false);\n+  finish_init ();\n+  maybe_warn_string_init (type, init);\n+\n+  if (pedantic && !flag_isoc99)\n+    pedwarn (\"ISO C90 forbids compound literals\");\n+  expr.value = build_compound_literal (type, init.value);\n+  expr.original_code = ERROR_MARK;\n+  return c_parser_postfix_expression_after_primary (parser, expr);\n+}\n+\n+/* Parse a postfix expression after the initial primary or compound\n+   literal; that is, parse a series of postfix operators.  */\n+\n+static struct c_expr\n+c_parser_postfix_expression_after_primary (c_parser *parser,\n+					   struct c_expr expr)\n+{\n+  tree ident, idx, exprlist;\n+  location_t loc, save_loc;\n+  while (true)\n+    {\n+      switch (c_lexer_peek_token (parser->lexer)->type)\n+	{\n+	case CPP_OPEN_SQUARE:\n+	  /* Array reference.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  idx = c_parser_expression (parser).value;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_SQUARE, \"expected ']'\");\n+	  expr.value = build_array_ref (expr.value, idx);\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	case CPP_OPEN_PAREN:\n+	  /* Function call.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_CLOSE_PAREN))\n+	    exprlist = NULL_TREE;\n+	  else\n+	    exprlist = c_parser_expr_list (parser);\n+	  loc = c_lexer_peek_token (parser->lexer)->location;\n+	  c_parser_skip_until_found (parser, CPP_CLOSE_PAREN, \"expected ')'\");\n+	  save_loc = input_location;\n+	  input_location = loc;\n+	  expr.value = build_function_call (expr.value, exprlist);\n+	  expr.original_code = ERROR_MARK;\n+	  input_location = save_loc;\n+	  break;\n+	case CPP_DOT:\n+	  /* Structure element reference.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	    ident = c_lexer_peek_token (parser->lexer)->value;\n+	  else\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      return expr;\n+	    }\n+	  c_lexer_consume_token (parser->lexer);\n+	  expr.value = build_component_ref (expr.value, ident);\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	case CPP_DEREF:\n+	  /* Structure element reference.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  if (c_lexer_next_token_is (parser->lexer, CPP_NAME))\n+	    ident = c_lexer_peek_token (parser->lexer)->value;\n+	  else\n+	    {\n+	      c_parser_error (parser, \"expected identifier\");\n+	      expr.value = error_mark_node;\n+	      expr.original_code = ERROR_MARK;\n+	      return expr;\n+	    }\n+	  c_lexer_consume_token (parser->lexer);\n+	  expr.value = build_component_ref (build_indirect_ref (expr.value,\n+								\"->\"), ident);\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	case CPP_PLUS_PLUS:\n+	  /* Postincrement.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  expr.value = build_unary_op (POSTINCREMENT_EXPR, expr.value, 0);\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	case CPP_MINUS_MINUS:\n+	  /* Postdecrement.  */\n+	  c_lexer_consume_token (parser->lexer);\n+	  expr.value = build_unary_op (POSTDECREMENT_EXPR, expr.value, 0);\n+	  expr.original_code = ERROR_MARK;\n+	  break;\n+	default:\n+	  return expr;\n+	}\n+    }\n+}\n+\n+/* Parse an expression (C90 6.3.17, C99 6.5.17).\n+\n+   expression:\n+     assignment-expression\n+     expression , assignment-expression\n+*/\n+\n+static struct c_expr\n+c_parser_expression (c_parser *parser)\n+{\n+  struct c_expr expr;\n+  expr = c_parser_expr_no_commas (parser);\n+  while (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+    {\n+      struct c_expr next;\n+      c_lexer_consume_token (parser->lexer);\n+      next = c_parser_expr_no_commas (parser);\n+      expr.value = build_compound_expr (expr.value, next.value);\n+      expr.original_code = COMPOUND_EXPR;\n+    }\n+  return expr;\n+}\n+\n+/* Parse a non-empty list of expressions.\n+\n+   nonempty-expr-list:\n+     assignment-expression\n+     nonempty-expr-list , assignment-expression\n+*/\n+\n+static tree\n+c_parser_expr_list (c_parser *parser)\n+{\n+  struct c_expr expr;\n+  tree ret;\n+  expr = c_parser_expr_no_commas (parser);\n+  ret = build_tree_list (NULL_TREE, expr.value);\n+  while (c_lexer_next_token_is (parser->lexer, CPP_COMMA))\n+    {\n+      c_lexer_consume_token (parser->lexer);\n+      expr = c_parser_expr_no_commas (parser);\n+      ret = chainon (ret, build_tree_list (NULL_TREE, expr.value));\n+    }\n+  return ret;\n+}\n+\n+\n+/* The actual parser and external interface.  */\n+\n+static GTY (()) c_parser *the_parser;\n+\n+/* Parse a single source file.  */\n+\n+void\n+c_parse_file (void)\n+{\n+  the_parser = c_parser_new ();\n+  c_parser_translation_unit (the_parser);\n+  the_parser = NULL;\n+}\n+\n+#include \"gt-c-parser.h\"\ndiff -rupN GCC.orig/gcc/c-tree.h GCC/gcc/c-tree.h\n--- GCC.orig/gcc/c-tree.h	2004-10-14 00:31:11.000000000 +0000\n+++ GCC/gcc/c-tree.h	2004-10-16 21:50:02.000000000 +0000\n@@ -204,6 +204,10 @@ struct c_declspecs {\n   enum c_typespec_keyword typespec_word;\n   /* The storage class specifier, or csc_none if none.  */\n   enum c_storage_class storage_class;\n+  /* Whether any declaration specifiers have been seen at all.  */\n+  BOOL_BITFIELD declspecs_seen_p : 1;\n+  /* Whether a type specifier has been seen.  */\n+  BOOL_BITFIELD type_seen_p : 1;\n   /* Whether something other than a storage class specifier or\n      attribute has been seen.  This is used to warn for the\n      obsolescent usage of storage class specifiers other than at the",
 			"settings":
 			{
-				"buffer_size": 110,
+				"buffer_size": 162538,
+				"line_ending": "Windows",
+				"name": "Writing a C parser is quicker than reading, analys"
+			}
+		},
+		{
+			"file": "latex/management.tex",
+			"settings":
+			{
+				"buffer_size": 2698,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "latex/appendix.tex",
+			"file": "latex/stateofart.tex",
 			"settings":
 			{
-				"buffer_size": 1115,
+				"buffer_size": 3958,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "latex/abstract.tex",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 367,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "code/parser/cmd",
-			"settings":
-			{
-				"buffer_size": 65,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "refs/README.md",
-			"settings":
-			{
-				"buffer_size": 6201,
+				"buffer_size": 9202,
 				"line_ending": "Windows"
 			}
 		},
@@ -94,22 +87,22 @@
 				"buffer_size": 6243,
 				"line_ending": "Windows"
 			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 8519,
-				"line_ending": "Windows"
-			}
 		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"wrp",
+				"Word Wrap: Toggle"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -235,10 +228,6 @@
 				"Set Syntax: LaTeX"
 			],
 			[
-				"close",
-				"Project: Close"
-			],
-			[
 				"bib",
 				"Snippet: BibTeX PhD Thesis"
 			],
@@ -303,7 +292,7 @@
 				"View: Toggle Minimap"
 			]
 		],
-		"width": 514.0
+		"width": 536.0
 	},
 	"console":
 	{
@@ -331,35 +320,48 @@
 		"/D/Dropbox/Materiais/Estagio/stage",
 		"/D/Dropbox/Materiais/Estagio/stage/code",
 		"/D/Dropbox/Materiais/Estagio/stage/latex",
-		"/D/Dropbox/Materiais/Estagio/stage/other"
+		"/D/Dropbox/Materiais/Estagio/stage/other",
+		"/D/Dropbox/Materiais/Estagio/stage/refs",
+		"/D/Dropbox/Materiais/Estagio/stage/refs/papers"
 	],
 	"file_history":
 	[
-		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/README.md",
+		"/D/desktop/gcc/pph/gcc/cp/parser.c",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/main.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/bh_core.sublime-settings",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/appendix.tex",
-		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/BracketHighlighter/bh_core.sublime-settings",
-		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/Parser/src/ParserExample.java",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/abstract.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/refs.bib",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/stateofart.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/acknowledgements.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/intro.tex",
-		"/D/Dropbox/Materiais/Estagio/stage/latex/index.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/cover.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/appendix.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/acknowledgements.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/abstract.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/abbreviations.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/stateofart.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/management.tex",
+		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
+		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/.metadata/.plugins/org.jboss.tools.common.projecttemplates/templates/jsppreview/struts-template.jpt",
+		"/D/Dropbox/Materiais/Estagio/stage/tasks.todo",
+		"/D/Dropbox/Materiais/Estagio/stage/refs/README.md",
+		"/D/Dropbox/Materiais/Estagio/stage/code/parser/cmd",
+		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/Parser/docs/test.c",
+		"/D/Dropbox/Materiais/Estagio/stage/texput.log",
 		"/D/Dropbox/Materiais/Estagio/stage/latex/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/other/README.md",
+		"/D/Dropbox/Materiais/Estagio/stage/code/hacking/README.md",
+		"/D/desktop/gcc/pph/gcc/tree-ssa-alias.c",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar Folders/Main.sublime-menu",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/conclusions.tex",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/bh_core.sublime-settings",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/BracketHighlighter/bh_core.sublime-settings",
+		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/Parser/src/ParserExample.java",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/refs.bib",
+		"/D/Dropbox/Materiais/Estagio/stage/latex/index.tex",
 		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache",
-		"/D/Dropbox/Materiais/Estagio/stage/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/.metadata/.plugins/org.eclipse.ltk.core.refactoring/.refactorings/Parser/2015/2/7/refactorings.index",
-		"/D/Dropbox/Materiais/Estagio/stage/refs/README.md",
 		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/Parser/docs/mergesort.c",
 		"/D/Dropbox/Materiais/Estagio/stage/code/eclipse/Parser/docs/TestFile.cpp",
 		"/C/Users/GonçaloSilva/AppData/Roaming/SumatraPDF/SumatraPDF-settings.txt",
-		"/D/Dropbox/Materiais/Estagio/stage/stage.sublime-project",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
 		"/D/Dropbox/Materiais/Estagio/stage/code/parser/parser.y",
 		"/media/Dados/Dropbox/Materiais/Estagio/stage/code/parser/parser.yacc",
@@ -451,22 +453,11 @@
 		"/D/Dropbox/estagio/README.md",
 		"/D/Dropbox/Materiais/IS/git/IS/Crawler/data.xsl",
 		"/C/Users/GonçaloSilva/AppData/Local/NFS Underground 2/Test/Test",
-		"/C/Users/GonçaloSilva/Desktop/test/output.txt",
-		"/C/Users/GonçaloSilva/Desktop/running/download.bat",
-		"/C/Users/GonçaloSilva/Desktop/bd.txt",
-		"/D/Dropbox/estagio/.dropbox",
-		"/D/Dropbox/estagio/README.md.TODO",
-		"/C/Users/GonçaloSilva/Desktop/Documentação/GP docs/cover.tex",
-		"/D/Dropbox/Materiais/IS/git/IS/Crawler/site/asia.xml",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1420542880563.xml",
-		"/D/MEO/software_upload/bd.txt",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1420542880562.xml",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/log.log",
-		"/D/Dropbox/Materiais/IS/AnyPointStudio/IS_TP3/bdreader/data_1413475658557.xml"
+		"/C/Users/GonçaloSilva/Desktop/test/output.txt"
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 22.0
 	},
 	"find_in_files":
 	{
@@ -480,6 +471,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"installed",
 			",",
 			"}\n",
 			"printTree",
@@ -601,26 +593,66 @@
 			[
 				{
 					"buffer": 0,
-					"file": "code/eclipse/Parser/docs/test.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 110,
+						"buffer_size": 162538,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								110,
-								110
+								6146,
+								6146
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
+							"auto_name": "Writing a C parser is quicker than reading, analys",
 							"bh_regions":
 							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -635,73 +667,34 @@
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_unmatched_content"
 							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1218.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "latex/appendix.tex",
+					"file": "latex/management.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1115,
+						"buffer_size": 2698,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								561,
-								561
+								1367,
+								1367
 							]
 						],
 						"settings":
@@ -709,6 +702,46 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -723,50 +756,101 @@
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_unmatched_content"
+							],
+							"side_bar_folders_auto_load_folder": 1,
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 42.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "latex/stateofart.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3958,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1348,
+								1348
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
-								"bh_square_content"
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -774,22 +858,28 @@
 					},
 					"stack_index": 1,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
 				{
-					"buffer": 2,
-					"file": "latex/abstract.tex",
+					"buffer": 3,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 367,
+						"buffer_size": 9202,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								268,
-								365
+								1524,
+								1524
 							]
 						],
 						"settings":
@@ -797,6 +887,46 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -811,180 +941,25 @@
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_unmatched_content"
 							],
+							"history_list_is_closing": true,
+							"parser": "markdown",
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"target": "browser",
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "code/parser/cmd",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 65,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								65,
-								65
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "refs/README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1540,
-								1540
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 594.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "tasks.todo",
 					"semi_transient": false,
 					"settings":
@@ -996,8 +971,8 @@
 						"selection":
 						[
 							[
-								3369,
-								3369
+								456,
+								456
 							]
 						],
 						"settings":
@@ -1005,6 +980,46 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1019,148 +1034,19 @@
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_unmatched_content"
 							],
+							"history_list_is_closing": true,
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1188.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8519,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1650,
-								1650
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 756.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1168,7 +1054,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 36.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -1183,11 +1069,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1199,7 +1092,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 223.0
+		"height": 127.0
 	},
 	"output.find_results":
 	{
@@ -1225,12 +1118,20 @@
 		"selected_items":
 		[
 			[
-				"abra",
-				"latex\\abstract.tex"
+				"readm",
+				"README.md"
 			],
 			[
 				"main",
 				"latex\\main.tex"
+			],
+			[
+				"task",
+				"tasks.todo"
+			],
+			[
+				"abra",
+				"latex\\abstract.tex"
 			],
 			[
 				"app",
@@ -1239,10 +1140,6 @@
 			[
 				"read",
 				"README.md"
-			],
-			[
-				"task",
-				"tasks.todo"
 			],
 			[
 				"ab",
@@ -1259,10 +1156,6 @@
 			[
 				"abr",
 				"latex\\abstract.tex"
-			],
-			[
-				"readm",
-				"README.md"
 			],
 			[
 				"taks",
@@ -1327,7 +1220,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1335,7 +1228,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 210.0,
+	"side_bar_width": 283.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
