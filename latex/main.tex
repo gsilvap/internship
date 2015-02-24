@@ -71,18 +71,18 @@
 % \renewcommand{\headrulewidth}{0pt}
 
 
-% to reduce font size of table of contents
-% THESE COUPLE LINES ARE THAT YOU NEED FOR THE 2ND PART
-\AtBeginDocument{
-  \addtocontents{toc}{\tiny}
-  \addtocontents{lof}{\tiny}
-}
-% THESE COUPLE LINES ARE THAT YOU NEED FOR THE 1ST PART
-\usepackage{xpatch}
-\makeatletter
-\xpatchcmd{\tableofcontents}{\contentsname \@mkboth}{\small\contentsname \@mkboth}{}{}
-\xpatchcmd{\listoffigures}{\chapter *{\listfigurename }}{\chapter *{\small\listfigurename }}{}{}
-\makeatother
+% % to reduce font size of table of contents
+% % THESE COUPLE LINES ARE THAT YOU NEED FOR THE 2ND PART
+% \AtBeginDocument{
+%   \addtocontents{toc}{\tiny}
+%   \addtocontents{lof}{\tiny}
+% }
+% % THESE COUPLE LINES ARE THAT YOU NEED FOR THE 1ST PART
+% \usepackage{xpatch}
+% \makeatletter
+% \xpatchcmd{\tableofcontents}{\contentsname \@mkboth}{\small\contentsname \@mkboth}{}{}
+% \xpatchcmd{\listoffigures}{\chapter *{\listfigurename }}{\chapter *{\small\listfigurename }}{}{}
+% \makeatother
 
 
 % view frame in page, arround all areas, page, footer, header
@@ -93,6 +93,31 @@
 % \title{Evaluate the robusteness of Cloud coisas}
 % \author{Gonçalo Silva Pereira}
 % \date{\today}
+
+% block quote with big quotation marks 
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage{graphicx}
+\usepackage{framed}
+
+\newcommand*\openquote{\makebox(25,-22){\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(25,-22){\scalebox{5}{''}}}
+% \definecolor{BlueLUH}{cmyk}{1.0,0.7,0,0}
+\definecolor{BlueLUH}{cmyk}{0.0,0.0,0,0}
+% sombreado
+\colorlet{shadecolor}{BlueLUH!80!black!20}
+% branco
+\colorlet{shadecolor}{BlueLUH!0!black!0}
+
+\makeatletter
+\newif\if@right
+\def\shadequote{\@righttrue\shadequote@i}
+\def\shadequote@i{\begin{snugshade}\begin{quote}\openquote}
+\def\endshadequote{%
+  \if@right\hfill\fi\closequote\end{quote}\end{snugshade}}
+\@namedef{shadequote*}{\@rightfalse\shadequote@i}
+\@namedef{endshadequote*}{\endshadequote}
+% end block quote
 
 \begin{document}
 \input{cover}
