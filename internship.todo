@@ -1,0 +1,119 @@
+Tarefas gerais:
+☐ Template Latex
+☐ Falar com o professor Raul Barbosa de forma a ESPECIFICAR OS OBJETIVOS E OS REQUISITOS DO ESTAGIO   @critical
+  Gestão do projeto Agile
+☐ Possiveis programas onde se possam injetar falhas de software (kernel e mais?)                      @high
+☐ Diagrama com a arquitectura
+  Restrições:
+     Open Source
+     Linguagem C
+
+     Apache         aproximadamente 242 mil linhas de codigo C
+     Codeblocks
+
+Módulos:
+  ☐ 1 Deriva do código fonte original um conjunto de ficheiros alterados com mutações
+    Fazer o parsing
+    Procurar na arvore de parsing o local a injetar a falha
+    Gerar um ficheiro patch com as modificações efetuadas ao ficheiro original
+
+  ☐ 2 Determina qual o efeito produzido por uma falha
+    Sistema de logs da execução ?
+
+  ☐ 3 Gere a compilação, que se pode resumir ao make file do projeto original
+    Aplica cada um dos patch aos ficheiros originais e instala o programa / make
+
+
+Tarefas até à próxima reunião:
+ ☐ Verificar se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM
+  2 Threads principais:
+     ☐ Estudar o funcionamento do GCC parser (Gramática e forma de automatizar a injeção das falhas)
+       JAVA : CDT Parser API
+       GCC  : gcc -fdump-tree-original-raw test.c
+       CLANG: clang -Wall test.c -Xclang -ast-dump
+
+
+     ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
+      Fault Types - Missing:
+          ☐ MIFS - if construct plus statements
+            Missing "If (cond) { statement(s) }"
+            Eliminar uma instrução if e as intruções desse bloco
+
+            Restrição: eliminar os else's associados ? vs MIEB
+          ☐ MLAC - AND sub-expr in expression used as branch condition
+
+            Eliminar o AND e a condição associada
+          ☐ MFC  - Function call
+            Eliminar a chamada de função
+
+          ☐ MIA  - if contruct around statements
+
+          ☐ MLOC - OR sub-expr in expression used as branch condition
+            Eliminar o OR e a condição associada
+
+          ☐ MLPA - small and localized part of the algorithm
+
+          ☐ MVAE - variable assignment using an expression
+
+          ☐ MFCT - functionality
+
+          ☐ MVAV - variable assignment using an value
+
+          ☐ MIEB - if contruct plus statements plus else before statements
+
+
+          ☐ MVIV - variable initialization
+
+      Fault Types - Wrong:
+
+          ☐ WLEC - logical expression used as branch condition
+          ☐ WALL - algorithm - large modifications
+          ☐ WVAV - value assigned to variable
+          ☐ WAEP - arithmetic expression in parameter of function call
+          ☐ WSUT - data types or conversion used
+          ☐ WPFV - variable used in parameter of function call
+      Fault Types - Extraneous:
+
+          ☐ EVAV - variable assignment using another variable
+
+
+Literatura:
+ ☐ 4  - *On the Emulation of Software Faults by Software Fault Injection
+ ☐ 5  - Resilience Assessment and Evaluation of Computing Systems cap13 e 14 ? (Lido anteriormente: cap4)
+ ☐ 6  - *Xception: Software Fault Injection and Monitoring in Processor Functional Units
+ ☐ 7  - *SWIFT: Software Implemented Fault Tolerance
+ ☐ 8  - Dependable Computing and Fault-Tolerant Systems Vol.5
+ ☐ 9  - *Orthogonal Defect Classification Cap.9
+ ☐ 10 - Injection of faults at component interfaces and inside the component code: are they equivalent?
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ Recomenda alguma leitura relativamente às técnicas G-SWFIT e SWIFI? Têm diferenças? Quais? @done (15-02-10 17:28) @project(Dúvidas do email)
+  Generic Software Fault Injection Technique
+  Software Implemented Fault Injection
+  |    |   SW  |   HW  |
+  |:--:|-------|-------|
+  | HW |   ?   |  HWFI |
+  | SW | SWIFI | SWIFI |
+ ✔ Resposta do Robert Natella ao email?                                                       @done (15-02-10 16:50)
+  @toggle(15-01-27 15:05) Enviado mail a 27/01 (foi visto, mas sem resposta)
+  @toggle(15-02-05 15:49) Enviado mail novamente a 05/02 (ainda sem resposta, não foi visto)
+  @toggle(15-02-09 16:14) Enviado mail ao Henrique Madeeira
+  @toggle(15-02-10 14:05)
+  Hi Henrique,
+  I am happy that you and Gonçalo contacted me, and to share our work with you! I postponed to reply to him since I needed to find some documentation about the tool, but then I forgot… I will contact him as soon as possible!
+  We also have other work ongoing on the topic of sw fault injection tools, based on Anna Lanzaro’s PhD thesis, I will let you know as soon as we have a mature enough
+  draft to share :)
+  Cheers, Roberto
+ ✔ É necessário fazer relatórios de progresso para submeter na plataforma de estágios? Com que regularidade o devo fazer? @done (15-02-05 15:45) @project(Dúvidas do email)
+  Sim, a plataforma avisa quando se devem fazer os relatorios de progresso, mas provavelmente é mensalmente.
+  Ferreira: Nunca submeteu qualquer tipo de relatorio na plataforma.
+ ✔ Numa das reuniões falou-se que o João Durães tinha especificado e documentado 12 falhas de software, mas no paper, não estão bem explicitas, ou então eu não percebi muito bem quais foram as 12. Ele faz inicialmente a separação  através do tipo do ODC (Assignment, Checking, Interface, Algorithm, Function), e depois em cada tipo, em missing construct, wrong construct ou extraneous construct. Finalmente retira as que são mais representativas (acontecem mais vezes).                               @done (15-02-05 15:44) @project(Dúvidas do email)
+  Foram selecionadas as 13 falhas mais representativas, mas so foram implementadas 12, uma vez que a única extraneous construct era dificil de implementar e o duraes foi ?calão?
+ ✔ O João Durães criou uma aplicação para injecção de falhas de software, certo? SIM          @done (15-02-05 15:41) @project(Dúvidas do email)
+  Vou ter acesso à mesma? Não, uma vez que ele injetou as falhas ao nivel da  execução dos programas e não ao nivel do código antes de compilar
+ ✔ Gantt (especificar mais os requesitos, tabela de riscos? )                                 @done (15-02-05 15:38) @project(Reunião)
+  Não é necessário, só depois para o relatorio de estagio intermédio e final
+ ✔ Conselhos relativamente à decisão 1                                                        @done (15-02-05 15:38) @project(Reunião)
+  1 - Ficheiro antes de compilar
+ ✔ Ler paper do Duraes                                                              critical  @done (15-02-03 22:55)
+ ✔ Imprimir materiais do estágio                                                              @done (15-02-03 22:55)

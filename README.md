@@ -14,6 +14,8 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 03/03/2015](#reuniao-03032015)
+* [Reunião do dia 26/02/2015](#reuniao-26022015)
 * [Reunião do dia 13/02/2015](#reuniao-13022015)
 * [Reunião do dia 05/02/2015](#reuniao-05022015)
 * [Reunião do dia 20/01/2015](#reuniao-20012015)
@@ -27,6 +29,23 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * Juri Arguente: Filipe Araujo (filipius@dei.uc.pt)
 * Juri Vogal: Antonio Jorge Silva Cardoso (jcardoso@dei.uc.pt)
 
+#### Reuniao 03/03/2015
+Decisão entre:
+ - Bison - 
+ - Yacc - 
+ - GCC Parser - Curva de aprendizagem bastante grande e dificilmente mantivel
+ - API Eclipse CDT - API em Java, facilmente mantivel
+ - MCPP - Anteriormente utilizado pelo Natella
+
+2 Fluxos:
+ - CDT - estudar o fluxo e fazer a aplicação de um operador na arvore
+ - SAFE - Conhecer melhor o fluxo, e a forma que o Natella usa para injetar as falhas
+
+#### Reuniao 26/02/2015
+
+Continuar o estudo das diferentes ferramentas de parsing.
+Examinar com maior detalhe a ferramenta do Natella.
+
 #### Reuniao 13/02/2015
 
 Vantagens e desvantagens GCC parser vs Bison/Yacc vs CDT Parser
@@ -39,11 +58,7 @@ GCC Parser
 - Timing: at least in the case of GCC, GCC predates a lot of free developer tools (came out in 1987). There was no free version of yacc, etc. at the time, which I'd imagine would've been a priority to the people at the FSF.
 
 Bison
-- a
-
 CDT Parser
-- Java
-
 MCPP - Portable C PreProcessor - Robert Natella - SAFE
 
 #### Reuniao 05/02/2015

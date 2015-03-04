@@ -35,7 +35,7 @@ static void do_somework(unsigned long delay)
         }
 
         #ifdef DEBUG
-        printk(KERN_INFO "Timer expired after %lu\n", delay);   
+        printk(KERN_INFO "Timer expired after %lu\n", delay);
         #endif
 
         exp_timer.expires = jiffies + delay * HZ;
@@ -45,9 +45,9 @@ static void do_somework(unsigned long delay)
 }
 
 static int __init start_module(void)
-{       
+{
         int delay = 60;
-        
+
         #ifdef DEBUG
         printk(KERN_INFO "Init module\n");
         #endif
@@ -67,7 +67,7 @@ static int __init start_module(void)
 }
 
 static void __exit exit_module(void)
-{       
+{
         del_timer(&exp_timer);
 
         #ifdef DEBUG

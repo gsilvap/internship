@@ -19,6 +19,7 @@ import org.eclipse.cdt.core.dom.ast.IScope;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTVisibilityLabel;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
+import org.eclipse.cdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.cdt.core.parser.DefaultLogService;
 import org.eclipse.cdt.core.parser.FileContent;
 import org.eclipse.cdt.core.parser.IParserLogService;
@@ -27,6 +28,7 @@ import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
+import org.eclipse.cdt.internal.ui.refactoring.ModificationCollector;
 
 public class ParserExample
 {
@@ -59,6 +61,11 @@ public class ParserExample
 //    System.out.println(translationUnit.getFileLocation().getNodeLength());
     
     printTree(translationUnit, 1);
+    
+//    TODO arranjar forma de editar a arvore de codigo aplicando 1 operador
+    ModificationCollector mc = new ModificationCollector();
+    ASTRewrite r = mc.rewriterForTranslationUnit(translationUnit);
+//    r.
 
     System.out.println("-----------------------------------------------------");
     System.out.println("-----------------------------------------------------");
@@ -152,7 +159,9 @@ public class ParserExample
 
     visitor.shouldVisitDeclarators = true;
     visitor.shouldVisitAttributes = true;
-    visitor.shouldVisitStatements = false;
+//    visitor.shouldVisitStatements = false;
+    visitor.shouldVisitStatements = true;
+    
     visitor.shouldVisitTypeIds = true;
 
     translationUnit.accept(visitor);
