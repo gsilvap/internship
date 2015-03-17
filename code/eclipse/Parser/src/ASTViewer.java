@@ -29,7 +29,7 @@ public class ASTViewer{
 	public ASTViewer() throws CoreException {
         JFrame frame = new JFrame("ASTViewer");
 
-        FileContent fileContent = FileContent.createForExternalFileLocation("./docs/mergesort.c");
+        FileContent fileContent = FileContent.createForExternalFileLocation("./docs/helloworld.c");
 
         Map definedSymbols = new HashMap();
         String[] includePaths = new String[0];

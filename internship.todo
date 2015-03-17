@@ -35,7 +35,7 @@ Tarefas até à próxima reunião:
 
      ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
       Fault Types - Missing:
-          ☐ MIFS - if construct plus statements
+          ✔ MIFS - if construct plus statements @done (15-03-17 14:00)
             Missing "If (cond) { statement(s) }"
             Eliminar uma instrução if e as intruções desse bloco
 

@@ -7,7 +7,6 @@
 				".gitignore",
 				"*.html",
 				"~$*.xlsx",
-				"*.aux",
 				"*.dmp",
 				"*.dvi",
 				"*.blg",
