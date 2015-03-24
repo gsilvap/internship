@@ -14,7 +14,7 @@ With this work, I want to inject software faults and analyze how the system reac
 A lot of studies show that the software faults it's the main cause of computer failures.
 
 In this work
-deliberate how 
+deliberate how
 
 I had access to the application of Robert Natella, called SAFE, that inject software faults, as I also have to do.
 
@@ -57,7 +57,7 @@ The cloud computing isn't free of external disturbances\cite{wolter2012resilienc
  	\item Malfunction;
  	\item Worms
  	\item \ac{ddos} attacks.
- \end{itemize} 
+ \end{itemize}
 
 \subsection{Applications to inject faults}
 
@@ -79,9 +79,33 @@ Built three separated modules:
 
 I chose to use the most representative faults \cite{duraes2006emulation}, divided into missing, wrong and extraneous, specified individually further down:
 
+\subsection{Contraints}
+
+The contraints defined below was specified by João Durães in ... .
+
+\begin{table}[h]
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Constraint} & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
+\textbf{C01}       \label{C01}  & Return value of the function must not being used                              \\ \hline
+\textbf{C02}       \label{C02}  & Call must not be the only statement in the block                              \\ \hline
+\textbf{C03}       \label{C03}  & Variable must be inside stack frame                                           \\ \hline
+\textbf{C04}       \label{C04}  & Must be the first assignment for that variable in the module                  \\ \hline
+\textbf{C05}       \label{C05}  & Assignment must not be inside a loop                                          \\ \hline
+\textbf{C06}       \label{C06}  & Assignment must not be part of a for construct                                \\ \hline
+\textbf{C07}       \label{C07}  & Must not be the first assignment for that variable in the module              \\ \hline
+\textbf{C08}       \label{C08}  & The if construct must not be associated to an else construct                  \\ \hline
+\textbf{C09}       \label{C09}  & Statements must not include more than five statemens and not include loops    \\ \hline
+\textbf{C10}       \label{C010} & Statements are in the same block, do not include more than 5 stats. nor loops \\ \hline
+\textbf{C11}       \label{C011} & There must be at leat two variables in this module                            \\ \hline
+\end{tabular}
+\end{table}
+
 \subsubsection{Fault Types - Missing:}
 \begin{itemize}
 	\item \textbf{MIFS} - if construct plus statements
+
+	This operator is based in the remotion of one conditional if. To do that, i need to verify the constraints \ref{C01}
 	\item \textbf{MLAC} - AND sub-expr in expression used as branch condition
 	\item \textbf{MFC}  - function call
 	\item \textbf{MIA}  - if construct around statements
@@ -100,8 +124,8 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 	\item \textbf{WALL} - algorithm - large modifications
 	\item \textbf{WVAV} - value assigned to variable
 	\item \textbf{WAEP} - arithmetic expression in parameter of function call
-	\item \textbf{WSUT} - data types or conversion used 
-	\item \textbf{WPFV} - variable used in parameter of function call 
+	\item \textbf{WSUT} - data types or conversion used
+	\item \textbf{WPFV} - variable used in parameter of function call
 \end{itemize}
 
 \subsubsection{Fault Types - Extraneous:}

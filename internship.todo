@@ -35,43 +35,43 @@ Tarefas até à próxima reunião:
 
      ☐ Especificar como é que vão ser implementadas e quais as contraints envolvidas na sua implementação
       Fault Types - Missing:
-          ✔ MIFS - if construct plus statements @done (15-03-17 14:00)
+          ✔ MIFS - if construct plus statements @done (15-03-17 14:00) @critical
             Missing "If (cond) { statement(s) }"
             Eliminar uma instrução if e as intruções desse bloco
 
             Restrição: eliminar os else's associados ? vs MIEB
-          ☐ MLAC - AND sub-expr in expression used as branch condition
+          ☐ MLAC - AND sub-expr in expression used as branch condition @critical
 
             Eliminar o AND e a condição associada
-          ☐ MFC  - Function call
+          ☐ MFC  - Function call @critical
             Eliminar a chamada de função
 
-          ☐ MIA  - if contruct around statements
+          ☐ MIA  - if contruct around statements @critical
 
-          ☐ MLOC - OR sub-expr in expression used as branch condition
+          ☐ MLOC - OR sub-expr in expression used as branch condition @critical
             Eliminar o OR e a condição associada
 
-          ☐ MLPA - small and localized part of the algorithm
+          ☐ MLPA - small and localized part of the algorithm @critical
 
-          ☐ MVAE - variable assignment using an expression
+          ☐ MVAE - variable assignment using an expression @critical
 
           ☐ MFCT - functionality
 
-          ☐ MVAV - variable assignment using an value
+          ☐ MVAV - variable assignment using an value @critical
 
-          ☐ MIEB - if contruct plus statements plus else before statements
+          ☐ MIEB - if contruct plus statements plus else before statements @critical
 
 
-          ☐ MVIV - variable initialization
+          ☐ MVIV - variable initialization @critical
 
       Fault Types - Wrong:
 
           ☐ WLEC - logical expression used as branch condition
           ☐ WALL - algorithm - large modifications
-          ☐ WVAV - value assigned to variable
-          ☐ WAEP - arithmetic expression in parameter of function call
+          ☐ WVAV - value assigned to variable @critical
+          ☐ WAEP - arithmetic expression in parameter of function call @critical
           ☐ WSUT - data types or conversion used
-          ☐ WPFV - variable used in parameter of function call
+          ☐ WPFV - variable used in parameter of function call @critical
       Fault Types - Extraneous:
 
           ☐ EVAV - variable assignment using another variable
