@@ -33,6 +33,15 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 
 #### Reuniao 26/03/2015
 
+1 - Implementar os 18 OPERADORES da tabela dos mais representativos (Table 11).
+2 - Continuar o estudo da API e quiçá, fazer um patch para conseguir reescrever a árvore
+3 - Estudar melhor o resto dos operadores, principalmente os que o João Durães não especificou:
+    - MFCT
+    - WLEC
+    - WALL
+    - WSUT
+    - EVAV
+
 
 #### Reuniao 17/03/2015
 
@@ -117,7 +126,7 @@ ou então injetar falhas em programas a executar.
 Porquê?
 Existe a mesma probabilidade de acontecimento de ambas as falhas?
 
-HM direcciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles
+HM direciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles
 já trabalharam e obtiveram resultados.
 
 Já existem 12? tipos de falhas de software documentadas no papper do Duraes.
@@ -126,14 +135,14 @@ Usar o compilador gcc ou o llvm? porque? vantagens e desvantagens?
 
     gcc
         + mais maduro
-        + instalaçao facil
+        + instalação fácil
         + compilador por defeito na maioria dos SO's
         + usado anteriormente
     llvm
         + bastante recente
         + melhor feedback de erros
-        + por vezes executa mais rapido
-        + sem qualquer tipo de conhecimentos previos de utilização
+        + por vezes executa mais rápido
+        + sem qualquer tipo de conhecimentos prévios de utilização
 
 
 [Robert Natella](http://wpage.unina.it/roberto.natella) desenvolveu uma ferramenta de injeção de falhas de software.
@@ -148,7 +157,7 @@ Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)
     ☐ Escrita do estado da arte
 
 <b>Description</b>
-    Discussão relativamente aos objetivos e às tarefas que vão ser atribuidas:
+    Discussão relativamente aos objetivos e às tarefas que vão ser atribuídas:
 
     * Fred já tem grande parte do injetor de falhas de hardware feita
     * João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
@@ -184,7 +193,7 @@ Este estágio aborda o desafio de avaliar a robustez de plataformas cloud. O for
 
 ### Objetivo
 
-Este estágio tem dois objectivos fundamentais:
+Este estágio tem dois objetivos fundamentais:
 
 - Integração de ferramentas de avaliação da robustez, por forma a realizar testes em máquinas virtuais.
 
@@ -198,11 +207,11 @@ O ambiente será então composto por um conjunto de máquinas virtuais, fazendo 
 
 <b>- Estudo do estado da arte e levantamento de requisitos (mês 1).
 
-A primeira fase consistirá em tomar contacto com tecnologias de virtualização e aplicações para a cloud, bem como a familiarização com os desafios de segurança e confiabilidade acima referidos. Isto resultará numa clara formulação dos objectivos a alcançar por parte do estagiário.
+A primeira fase consistirá em tomar contacto com tecnologias de virtualização e aplicações para a cloud, bem como a familiarização com os desafios de segurança e confiabilidade acima referidos. Isto resultará numa clara formulação dos objetivos a alcançar por parte do estagiário.
 </b>
 - Construção do ambiente cloud (meses 2 a 4).
 
-Esta tarefa consiste na selecção e instalação de uma plataforma de virtualização que permitirá realizar os testes para avaliar a sua robustez.
+Esta tarefa consiste na seleção e instalação de uma plataforma de virtualização que permitirá realizar os testes para avaliar a sua robustez.
 
 - Primeira fase de integração de ferramentas de avaliação (meses 2 a 4).
 
@@ -210,7 +219,7 @@ Durante o primeiro semestre, pretende-se que a ferramenta de avaliação de robu
 
 - Escrita do relatório intermédio (mês 5).
 
-O estagiário deve apresentar as tarefas efectuadas durante o primeiro semestre e descrever o trabalho a realizar no segundo semestre, escrevendo para esse efeito um relatório intermédio e preparando uma apresentação pública para discussão.
+O estagiário deve apresentar as tarefas efetuadas durante o primeiro semestre e descrever o trabalho a realizar no segundo semestre, escrevendo para esse efeito um relatório intermédio e preparando uma apresentação pública para discussão.
 
 ### Plano de Trabalhos - Semestre 2
 
@@ -232,7 +241,7 @@ O trabalho irá ser realizado no Departamento de Engenharia Informática da Univ
 
 ### Observacoes
 
-Dar-se-á preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).
+Dar-se-à preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).
 
 #### Reuniao X/01/2015
 
