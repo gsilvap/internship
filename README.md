@@ -14,6 +14,8 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 26/03/2015](#reuniao-26032015)
+* [Reunião do dia 17/03/2015](#reuniao-17032015)
 * [Reunião do dia 03/03/2015](#reuniao-03032015)
 * [Reunião do dia 26/02/2015](#reuniao-26022015)
 * [Reunião do dia 13/02/2015](#reuniao-13022015)
@@ -26,19 +28,28 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * Co-Orientador: Henrique Madeira(henrique@dei.uc.pt) - HM
 
 ### Juri
-* Juri Arguente: Filipe Araujo (filipius@dei.uc.pt)
-* Juri Vogal: Antonio Jorge Silva Cardoso (jcardoso@dei.uc.pt)
+* Juri Arguente: Filipe Araújo (filipius@dei.uc.pt)
+* Juri Vogal: António Jorge Silva Cardoso (jcardoso@dei.uc.pt)
+
+#### Reuniao 26/03/2015
+
+
+#### Reuniao 17/03/2015
+
+Verificar se é possível implementar todos os operadores com a solução usada até agora, em que se implementa apenas o mifs.
+
+Continuar com a solução encontrada, mas tentar perceber um pouco melhor a framework e a forma de a hackar para conseguir reescrever a árvore.
 
 #### Reuniao 03/03/2015
 Decisão entre:
- - Bison - 
- - Yacc - 
+ - Bison -
+ - Yacc -
  - GCC Parser - Curva de aprendizagem bastante grande e dificilmente mantivel
  - API Eclipse CDT - API em Java, facilmente mantivel
  - MCPP - Anteriormente utilizado pelo Natella
 
 2 Fluxos:
- - CDT - estudar o fluxo e fazer a aplicação de um operador na arvore
+ - CDT - estudar o fluxo e fazer a aplicação de um operador na árvore
  - SAFE - Conhecer melhor o fluxo, e a forma que o Natella usa para injetar as falhas
 
 #### Reuniao 26/02/2015
@@ -62,7 +73,7 @@ CDT Parser
 MCPP - Portable C PreProcessor - Robert Natella - SAFE
 
 #### Reuniao 05/02/2015
-<b>Description</b># ## # ## # ## ## ## # # ## 
+<b>Description</b># ## # ## # ## ## ## # # ##
 Decisão: Injeção de falhas de software em ficheiros antes de compilar
 
 Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc
@@ -73,7 +84,7 @@ Citrix ✔  (CentOS ✔-)
 
 
 Foco em:
-    
+
     Parser GCC
     .C (devido à seleção do tipo de falhas feita anteriormente pelo João Durães.)
 .Java
@@ -95,18 +106,18 @@ C semelhante/igual ao parser?
 #### Reuniao 20/01/2015
 
 <b>Description</b>
-    
+
 Injeção de Falhas de software com 3 possibilidades:
     1 - <u> Ficheiro antes de compilar </u>
     2 - Ficheiros em código objeto
-    3 - <u> Programa a executar </u> 
+    3 - <u> Programa a executar </u>
 
-Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar 
-ou então injetar falhas em programas a executar. 
-Porquê? 
+Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar
+ou então injetar falhas em programas a executar.
+Porquê?
 Existe a mesma probabilidade de acontecimento de ambas as falhas?
 
-HM direcciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles 
+HM direcciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles
 já trabalharam e obtiveram resultados.
 
 Já existem 12? tipos de falhas de software documentadas no papper do Duraes.
@@ -134,21 +145,21 @@ Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)
 
 <b>Tasks</b>
     ☐ Leitura de documentos
-    ☐ Escrita do estado da arte   
+    ☐ Escrita do estado da arte
 
 <b>Description</b>
     Discussão relativamente aos objetivos e às tarefas que vão ser atribuidas:
-    
+
     * Fred já tem grande parte do injetor de falhas de hardware feita
     * João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
 
-    HM: Direcionar o estágio para software uma vez que a parte de hardware está 
+    HM: Direcionar o estágio para software uma vez que a parte de hardware está
     encaminhada ou ajudar ambos a integrar a aplicação de forma a meter tudo funcional?
 
     Definição de objetivos programada para Sexta, dia 16/01/2015
 
 <b>Suggested modules</b>
-    
+
     Bus, Cache, etc (HW)
     Software faults (muito trabalho)
     VM injection vs. host injection
