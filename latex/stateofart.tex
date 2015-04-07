@@ -2,7 +2,7 @@
 \newpage
 \section{State of the Art}
 
-Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and people don't buy ``physical storage" and don't care where are the data. The cloud service provide that the data is secure.
+Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and people don't buy ``physical storage'' and don't care where are the data. The cloud service provide that the data is secure.
 But, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important characteristic.
 
 The increased use of cloud is related with a low usage of many dedicated servers, lower voltage levels, reduce noise margins and increase clock rates \cite{wolter2012resilience}.
@@ -11,25 +11,24 @@ The cloud providers offers resources ready to deliver \cite{wolter2012resilience
 
 With this work, I want to inject software faults and analyze how the system react to them.
 
-A lot of studies show that the software faults it's the main cause of computer failures.
+A lot of studies show that the software faults\cite{avizzienisbasic} it's the main cause of computer failures.
 
-In this work
-deliberate how
-
-I had access to the application of Robert Natella, called SAFE, that inject software faults, as I also have to do.
-
-\cite{duraes2006emulation}
-\cite{avizzienisbasic}
+%In this work
+%deliberate how
 
 About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}.
-
-\subsection{SAFE - Robert Natella}
 
 % \marginnote{especificar as abreviaturas...}[0cm]
 % \ac{cots}
 % \ac{g-swfit}
 % \ac{odc}
 % \ac{swifi}
+
+I had access to the application of Robert Natella, called SAFE, that inject software faults, as I also have to do.
+
+\subsection{SAFE - Robert Natella}
+Safe is an application to inject faults in code written in C. This tool uses MCPP as parser, to get the tree of code. After that, write some .c files, variations of original files with operators applied. Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.
+
 
 
 \newpage
@@ -86,7 +85,7 @@ The contraints defined below was specified by João Durães in ... .
 \begin{table}[h]
 \begin{tabular}{|c|l|}
 \hline
-\textbf{Constraint} & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
+\textbf{Constraint}             & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
 \textbf{C01}       \label{C01}  & Return value of the function must not being used                              \\ \hline
 \textbf{C02}       \label{C02}  & Call must not be the only statement in the block                              \\ \hline
 \textbf{C03}       \label{C03}  & Variable must be inside stack frame                                           \\ \hline
@@ -105,7 +104,9 @@ The contraints defined below was specified by João Durães in ... .
 \begin{itemize}
 	\item \textbf{MIFS} - if construct plus statements
 
-	This operator is based in the remotion of one conditional if. To do that, i need to verify the constraints \ref{C01}
+	This operator is based in the remotion of one conditional if. To do that, I need to verify the constraints c02, c08 and c09.
+
+
 	\item \textbf{MLAC} - AND sub-expr in expression used as branch condition
 	\item \textbf{MFC}  - function call
 	\item \textbf{MIA}  - if construct around statements
