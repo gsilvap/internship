@@ -1029,6 +1029,13 @@ body .markdown-body
 </ul>
 <h3 id="reunioes"><a name="user-content-reunioes" href="#reunioes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniões</h3>
 <ul>
+<li><a href="#reuniao-08042015">Reunião do dia 08/04/2015</a></li>
+<li><a href="#reuniao-26032015">Reunião do dia 26/03/2015</a></li>
+<li><a href="#reuniao-17032015">Reunião do dia 17/03/2015</a></li>
+<li><a href="#reuniao-03032015">Reunião do dia 03/03/2015</a></li>
+<li><a href="#reuniao-26022015">Reunião do dia 26/02/2015</a></li>
+<li><a href="#reuniao-13022015">Reunião do dia 13/02/2015</a></li>
+<li><a href="#reuniao-05022015">Reunião do dia 05/02/2015</a></li>
 <li><a href="#reuniao-20012015">Reunião do dia 20/01/2015</a></li>
 <li><a href="#reuniao-12012015">Reunião do dia 12/01/2015</a></li>
 </ul>
@@ -1039,46 +1046,131 @@ body .markdown-body
 </ul>
 <h3 id="juri"><a name="user-content-juri" href="#juri" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Juri</h3>
 <ul>
-<li>Juri Arguente: Filipe Araujo (<a href="mailto:filipius@dei.uc.pt">filipius@dei.uc.pt</a>)</li>
-<li>Juri Vogal: Antonio Jorge Silva Cardoso (<a href="mailto:jcardoso@dei.uc.pt">jcardoso@dei.uc.pt</a>)</li>
+<li>Juri Arguente: Filipe Araújo (<a href="mailto:filipius@dei.uc.pt">filipius@dei.uc.pt</a>)</li>
+<li>Juri Vogal: António Jorge Silva Cardoso (<a href="mailto:jcardoso@dei.uc.pt">jcardoso@dei.uc.pt</a>)</li>
 </ul>
+<h4 id="reuniao-08042015"><a name="user-content-reuniao-08042015" href="#reuniao-08042015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 08/04/2015</h4>
+<p>Qual a representatividade das falhas? (em open source)<br />
+Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de error.s</p>
+<p>Se fosse usado num sistema de aviação, como seria?</p>
+<p>Formas de teste/verificação de bugs<br />
+ - O software que vou criar<br />
+ - Defect Seeding</p>
+<p>2 Caminhos:<br />
+ - Aplicar os operadores que estão bem especificados (perceber melhor as razões de escolha da amostra de operadores a especificar)<br />
+ - Fazer o estudo através do SourceForge (falar com o durães sobre a sua identificação dos diveros operadores)</p>
+<h4 id="reuniao-26032015"><a name="user-content-reuniao-26032015" href="#reuniao-26032015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 26/03/2015</h4>
+<p>1 - Implementar os 18 OPERADORES da tabela dos mais representativos (Table 11).<br />
+2 - Continuar o estudo da API e quiçá, fazer um patch para conseguir reescrever a árvore<br />
+3 - Estudar melhor o resto dos operadores, principalmente os que o João Durães não especificou:<br />
+    - MFCT<br />
+    - WLEC<br />
+    - WALL<br />
+    - WSUT<br />
+    - EVAV</p>
+<h4 id="reuniao-17032015"><a name="user-content-reuniao-17032015" href="#reuniao-17032015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 17/03/2015</h4>
+<p>Verificar se é possível implementar todos os operadores com a solução usada até agora, em que se implementa apenas o mifs.</p>
+<p>Continuar com a solução encontrada, mas tentar perceber um pouco melhor a framework e a forma de a hackar para conseguir reescrever a árvore.</p>
+<h4 id="reuniao-03032015"><a name="user-content-reuniao-03032015" href="#reuniao-03032015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 03/03/2015</h4>
+<p>Decisão entre:<br />
+ - Bison -<br />
+ - Yacc -<br />
+ - GCC Parser - Curva de aprendizagem bastante grande e dificilmente mantivel<br />
+ - API Eclipse CDT - API em Java, facilmente mantivel<br />
+ - MCPP - Anteriormente utilizado pelo Natella</p>
+<p>2 Fluxos:<br />
+ - CDT - estudar o fluxo e fazer a aplicação de um operador na árvore<br />
+ - SAFE - Conhecer melhor o fluxo, e a forma que o Natella usa para injetar as falhas</p>
+<h4 id="reuniao-26022015"><a name="user-content-reuniao-26022015" href="#reuniao-26022015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 26/02/2015</h4>
+<p>Continuar o estudo das diferentes ferramentas de parsing.<br />
+Examinar com maior detalhe a ferramenta do Natella.</p>
+<h4 id="reuniao-13022015"><a name="user-content-reuniao-13022015" href="#reuniao-13022015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 13/02/2015</h4>
+<p>Vantagens e desvantagens GCC parser vs Bison/Yacc vs CDT Parser</p>
+<p>GCC Parser<br />
+- mais limpo e sustentável que o Bison<br />
+- maior performance, melhor feedback de erros, capacidade de recuperar de problemas<br />
+- Recursive-descent parser<br />
+- Performance: something that you&rsquo;ve hand-optimized for your particular task will almost always perform better than a general solution. Abstraction usually has a performance hit<br />
+- Timing: at least in the case of GCC, GCC predates a lot of free developer tools (came out in 1987). There was no free version of yacc, etc. at the time, which I&rsquo;d imagine would&rsquo;ve been a priority to the people at the FSF.</p>
+<p>Bison<br />
+CDT Parser<br />
+MCPP - Portable C PreProcessor - Robert Natella - SAFE</p>
+<h4 id="reuniao-05022015"><a name="user-content-reuniao-05022015" href="#reuniao-05022015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 05/02/2015</h4>
+<p><b>Description</b># ## # ## # ## ## ## # # ##<br />
+Decisão: Injeção de falhas de software em ficheiros antes de compilar</p>
+<p>Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc</p>
+<p>Xen         vs      KVM<br />
+  +<br />
+Citrix ✔  (CentOS ✔-)</p>
+<p>Foco em:</p>
+<pre><code>Parser GCC
+.C (devido à seleção do tipo de falhas feita anteriormente pelo João Durães.)
+</code></pre>
+<p>.Java</p>
+<p>Ratings das linguagens mais usadas:<br />
+<a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">Comparação jan 2014 vs jan 2015</a><br />
+<a href="http://langpop.com/">Ultimo update 25 Outubro 2013</a></p>
+<p>Validar/Verificar:<br />
+C semelhante/igual ao parser?</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th>SW</th>
+<th>HW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HW</td>
+<td>?</td>
+<td>HWFI</td>
+</tr>
+<tr>
+<td align="center">SW</td>
+<td>SWIFI</td>
+<td>SWIFI</td>
+</tr>
+</tbody>
+</table>
 <h4 id="reuniao-20012015"><a name="user-content-reuniao-20012015" href="#reuniao-20012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 20/01/2015</h4>
 <p><b>Description</b></p>
 <p>Injeção de Falhas de software com 3 possibilidades:<br />
     1 - <u> Ficheiro antes de compilar </u><br />
     2 - Ficheiros em código objeto<br />
-    3 - <u> Programa a executar </u> </p>
-<p>Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar <br />
-ou então injetar falhas em programas a executar. <br />
-Porquê? <br />
+    3 - <u> Programa a executar </u></p>
+<p>Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar<br />
+ou então injetar falhas em programas a executar.<br />
+Porquê?<br />
 Existe a mesma probabilidade de acontecimento de ambas as falhas?</p>
-<p>HM direcciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles <br />
+<p>HM direciona para a linguagem C ou C++, uma vez que são as linguagens nas quais eles<br />
 já trabalharam e obtiveram resultados.</p>
 <p>Já existem 12? tipos de falhas de software documentadas no papper do Duraes.</p>
 <p>Usar o compilador gcc ou o llvm? porque? vantagens e desvantagens?</p>
 <pre><code>gcc
     + mais maduro
-    + instalaçao facil
-    + compilador por defeito na maioria dos SO&rsquo;s
+    + instalação fácil
+    + compilador por defeito na maioria dos SO's
     + usado anteriormente
 llvm
     + bastante recente
     + melhor feedback de erros
-    + por vezes executa mais rapido
-    + sem qualquer tipo de conhecimentos previos de utilização</code></pre>
+    + por vezes executa mais rápido
+    + sem qualquer tipo de conhecimentos prévios de utilização
+</code></pre>
 <p><a href="http://wpage.unina.it/roberto.natella">Robert Natella</a> desenvolveu uma ferramenta de injeção de falhas de software.<br />
 (enviado email no dia 27/01/2015)</p>
 <p>Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)</p>
 <h4 id="reuniao-12012015"><a name="user-content-reuniao-12012015" href="#reuniao-12012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 12/01/2015</h4>
 <p><b>Tasks</b><br />
     ☐ Leitura de documentos<br />
-    ☐ Escrita do estado da arte   </p>
+    ☐ Escrita do estado da arte</p>
 <p><b>Description</b><br />
-    Discussão relativamente aos objetivos e às tarefas que vão ser atribuidas:</p>
+    Discussão relativamente aos objetivos e às tarefas que vão ser atribuídas:</p>
 <pre><code>* Fred já tem grande parte do injetor de falhas de hardware feita
 * João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
 
-HM: Direcionar o estágio para software uma vez que a parte de hardware está 
+HM: Direcionar o estágio para software uma vez que a parte de hardware está
 encaminhada ou ajudar ambos a integrar a aplicação de forma a meter tudo funcional?
 
 Definição de objetivos programada para Sexta, dia 16/01/2015
@@ -1098,7 +1190,7 @@ Web framework
 <p>Neste contexto, surge naturalmente o problema da confiança depositada na entidade que gere a plataforma onde as aplicações executam. Qualquer organização que coloque uma aplicação na cloud (por exemplo, no EC2 da Amazon ou Azure da Microsoft) terá de aceitar as garantias dadas pelo fornecedor do serviço.</p>
 <p>Este estágio aborda o desafio de avaliar a robustez de plataformas cloud. O fornecedor do serviço computacional usa virtualização para gerir e repartir o poder computacional em função das necessidades reais da aplicação. Apesar de existirem plataformas sólidas de virtualização, a tolerância a falhas é ainda um problema de investigação</p>
 <h3 id="objetivo"><a name="user-content-objetivo" href="#objetivo" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Objetivo</h3>
-<p>Este estágio tem dois objectivos fundamentais:</p>
+<p>Este estágio tem dois objetivos fundamentais:</p>
 <ul>
 <li>
 <p>Integração de ferramentas de avaliação da robustez, por forma a realizar testes em máquinas virtuais.</p>
@@ -1111,10 +1203,10 @@ Web framework
 <p>O ambiente será então composto por um conjunto de máquinas virtuais, fazendo uso de Linux (por exemplo, Citrix ou CentOS) e uma plataforma de virtualização (por exemplo, Xen ou VMWare). Por forma a testar o sistema, pretende-se integrar um conjunto de ferramentas capazes de introduzir falhas e avaliar a resposta do sistema a essas mesmas falhas.</p>
 <h3 id="plano-de-trabalhos-semestre-1"><a name="user-content-plano-de-trabalhos-semestre-1" href="#plano-de-trabalhos-semestre-1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plano de Trabalhos - Semestre 1</h3>
 <p><b>- Estudo do estado da arte e levantamento de requisitos (mês 1).</p>
-<p>A primeira fase consistirá em tomar contacto com tecnologias de virtualização e aplicações para a cloud, bem como a familiarização com os desafios de segurança e confiabilidade acima referidos. Isto resultará numa clara formulação dos objectivos a alcançar por parte do estagiário.<br />
+<p>A primeira fase consistirá em tomar contacto com tecnologias de virtualização e aplicações para a cloud, bem como a familiarização com os desafios de segurança e confiabilidade acima referidos. Isto resultará numa clara formulação dos objetivos a alcançar por parte do estagiário.<br />
 </b><br />
 - Construção do ambiente cloud (meses 2 a 4).</p>
-<p>Esta tarefa consiste na selecção e instalação de uma plataforma de virtualização que permitirá realizar os testes para avaliar a sua robustez.</p>
+<p>Esta tarefa consiste na seleção e instalação de uma plataforma de virtualização que permitirá realizar os testes para avaliar a sua robustez.</p>
 <ul>
 <li>Primeira fase de integração de ferramentas de avaliação (meses 2 a 4).</li>
 </ul>
@@ -1122,7 +1214,7 @@ Web framework
 <ul>
 <li>Escrita do relatório intermédio (mês 5).</li>
 </ul>
-<p>O estagiário deve apresentar as tarefas efectuadas durante o primeiro semestre e descrever o trabalho a realizar no segundo semestre, escrevendo para esse efeito um relatório intermédio e preparando uma apresentação pública para discussão.</p>
+<p>O estagiário deve apresentar as tarefas efetuadas durante o primeiro semestre e descrever o trabalho a realizar no segundo semestre, escrevendo para esse efeito um relatório intermédio e preparando uma apresentação pública para discussão.</p>
 <h3 id="plano-de-trabalhos-semestre-2"><a name="user-content-plano-de-trabalhos-semestre-2" href="#plano-de-trabalhos-semestre-2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plano de Trabalhos - Semestre 2</h3>
 <ul>
 <li>Desenho e implementação de meios de avaliação avançados (meses 6 e 7).</li>
@@ -1139,7 +1231,7 @@ Web framework
 <h3 id="condicoes"><a name="user-content-condicoes" href="#condicoes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Condicoes</h3>
 <p>O trabalho irá ser realizado no Departamento de Engenharia Informática da Universidade de Coimbra e haverá possibilidade de candidatura a uma bolsa para estagiário com Licenciatura para apoiar os trabalhos do segundo semestre (745€ mensais).</p>
 <h3 id="observacoes"><a name="user-content-observacoes" href="#observacoes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Observacoes</h3>
-<p>Dar-se-á preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).</p>
+<p>Dar-se-à preferência a alunos que tenham tido um bom desempenho às disciplinas no âmbito do trabalho proposto (nomeadamente Sistemas Distribuídos, Sistemas Operativos, e Integração de Sistemas).</p>
 <h4 id="reuniao-x012015"><a name="user-content-reuniao-x012015" href="#reuniao-x012015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao X/01/2015</h4>
 <p><b>Tasks</b><br />
     ☐ task1</p>

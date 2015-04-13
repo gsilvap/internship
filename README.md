@@ -14,6 +14,7 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 08/04/2015](#reuniao-08042015)
 * [Reunião do dia 26/03/2015](#reuniao-26032015)
 * [Reunião do dia 17/03/2015](#reuniao-17032015)
 * [Reunião do dia 03/03/2015](#reuniao-03032015)
@@ -30,6 +31,21 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 ### Juri
 * Juri Arguente: Filipe Araújo (filipius@dei.uc.pt)
 * Juri Vogal: António Jorge Silva Cardoso (jcardoso@dei.uc.pt)
+
+#### Reuniao 08/04/2015
+Qual a representatividade das falhas? (em open source)
+Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de error.s
+
+Se fosse usado num sistema de aviação, como seria?
+
+Formas de teste/verificação de bugs
+ - O software que vou criar
+ - Defect Seeding
+
+2 Caminhos:
+ - Aplicar os operadores que estão bem especificados (perceber melhor as razões de escolha da amostra de operadores a especificar)
+ - Fazer o estudo através do SourceForge (falar com o durães sobre a sua identificação dos diveros operadores)
+
 
 #### Reuniao 26/03/2015
 
