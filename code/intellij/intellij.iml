@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.cdt.core_5.3.1.201109151620.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.cdt.core_5.6.0.201402142303.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.core.filesystem-1.3.100.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.core.resources-3.8.100.v20130521-2026.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.core.runtime-3.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.equinox.common_3.6.200.v20130402-1505.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.jface-3.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.jface.text_3.5.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.swt-3.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.text_3.5.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.ui.ide_3.7.0.v20110809-1737.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.ui.workbench-3.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.ltk.core.refactoring.source_3.5.200.v20110505-0800.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.eclipse.ltk.core.refactoring.source_3.5.201.r371_v20110824-0800.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/lib" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+  </component>
+</module>

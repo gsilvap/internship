@@ -28,7 +28,7 @@ TopDownSplitMerge(A[], iBegin, iEnd, B[])
 TopDownMerge(A[], iBegin, iMiddle, iEnd, B[])
 {
     i0 = iBegin, i1 = iMiddle;
-    
+
     // While there are elements in the left or right runs
     for (j = iBegin; j < iEnd; j++) {
         // If left run head exists and is <= existing right run head.
@@ -37,8 +37,8 @@ TopDownMerge(A[], iBegin, iMiddle, iEnd, B[])
             i0 = i0 + 1;
         else
             B[j] = A[i1];
-            i1 = i1 + 1;    
-    } 
+            i1 = i1 + 1;
+    }
 }
 
 CopyArray(B[], iBegin, iEnd, A[])

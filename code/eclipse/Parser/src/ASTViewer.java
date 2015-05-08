@@ -30,6 +30,7 @@ public class ASTViewer{
         JFrame frame = new JFrame("ASTViewer");
 
         FileContent fileContent = FileContent.createForExternalFileLocation("./docs/helloworld.c");
+//        FileContent fileContent = FileContent.createForExternalFileLocation("./docs/mergesortWiki.c");
 
         Map definedSymbols = new HashMap();
         String[] includePaths = new String[0];

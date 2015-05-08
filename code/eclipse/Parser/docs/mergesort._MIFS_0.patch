@@ -1,0 +1,17 @@
+--- ./docs/mergesort.c	2015-03-17 14:01:48.000000000 +0000
++++ ./docs/mergesort._MIFS_0.c	2015-04-17 15:26:37.370699000 +0100
+@@ -59,13 +59,7 @@
+ void mergeSort(int arr[], int l, int r)
+ {
+ 	r = r;
+-    if (l < r)
+-    {
+-        int m = l+(r-l)/2; //Same as (l+r)/2, but avoids overflow for large l and h
+-        mergeSort(arr, l, m);
+-        mergeSort(arr, m+1, r);
+-        merge(arr, l, m, r);
+-    }
++    
+ }
+ 
+ 
