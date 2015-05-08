@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"repre",
+				"representativos"
+			],
+			[
+				"ass",
+				"assignment"
+			],
+			[
+				"Funct",
+				"Functional"
+			],
+			[
 				"especifica",
 				"especificação"
 			],
@@ -52,18 +64,35 @@
 	"buffers":
 	[
 		{
-			"contents": "#include <stdio.h>\n\nint main()\n{\n	int  i = 0;\n	int var = 0;\n	if (i == 0)\n	{\n		for (var = 0; var < max; ++var) {\n			printf(\"a\");\n		}\n		printf(\"1if!\\n\");\n\n		while ( i < var)\n		{\n			i++;\n			printf(\"%d\\n\", i);\n		}\n\n		do\n		{\n			i--;\n			printf(\"%d\\n\", i);\n		}\n		while ( var < i);\n	}\n	else {\n		return 1;\n	}\n	return 0;\n}\n",
-			"settings":
-			{
-				"buffer_size": 313,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "internship.todo",
 			"settings":
 			{
 				"buffer_size": 6766,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "		MIFS	(\"_MIFS_\",\"Missing IF construct and surrounded Statements\"),\n		MLAC	(\"_MLAC_\",\"Missing “and sub-expression” in logical expression used in branch condition\"),\n		MFC		(\"_MFC_\" ,\"Missing function call\"),\n		MIA		(\"_MIA_\" ,\"Missing IF Around statements\"),\n		MLOC	(\"_MLOC_\",\"Missing “or sub-expression” in logical expression used in branch condition\"),\n		MLPA	(\"_MLPA_\",\"Missing Localized Part of the Algorithm\"),\n		MVAE	(\"_MVAE_\",\"Missing Variable Assignment with an Expression\"),\n		MVAV	(\"_MVAV_\",\"Missing Variable Assignment with a Value\"),\n		MIEB	(\"_MIEB_\",\"Missing IF construct plus statements plus else before statements\"),\n		MVIV	(\"_MVIV_\",\"Missing Variable initialization with a value\"),\n		WVAV	(\"_WVAV_\",\"Wrong Value Assigned to a Variable\"),\n		WAEP	(\"_WAEP_\",\"Wrong Arithmetic Expression in a function Parameter\"),\n		WPFV	(\"_WPFV_\",\"Wrong Variable in parameter of function Call\");",
+			"settings":
+			{
+				"buffer_size": 891,
+				"line_ending": "Windows",
+				"name": "MIFS	(\"_MIFS_\",\"Missing IF construct and surroun"
+			}
+		},
+		{
+			"file": "/C/Users/GonçaloSilva/Desktop/mergesort.c",
+			"settings":
+			{
+				"buffer_size": 2234,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 13330,
 				"line_ending": "Windows"
 			}
 		},
@@ -73,14 +102,6 @@
 			{
 				"buffer_size": 1568,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 11277,
-				"line_ending": "Windows"
 			}
 		},
 		{
@@ -100,6 +121,30 @@
 			}
 		},
 		{
+			"file": "latex/management.tex",
+			"settings":
+			{
+				"buffer_size": 2698,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/intro.tex",
+			"settings":
+			{
+				"buffer_size": 2080,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "latex/acknowledgements.tex",
+			"settings":
+			{
+				"buffer_size": 1961,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "latex/abstract.tex",
 			"settings":
 			{
@@ -111,38 +156,8 @@
 			"file": "latex/stateofart.tex",
 			"settings":
 			{
-				"buffer_size": 6127,
+				"buffer_size": 6575,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "\n;; Function main (null)\n;; enabled by -tree-original\n\n@1      bind_expr        type: @2       vars: @3       body: @4\n@2      void_type        name: @5       algn: 8\n@3      var_decl         name: @6       type: @7       scpe: @8\n                         srcp: helloworld.c:5          init: @9\n                         size: @10      algn: 32       used: 1\n@4      statement_list   0   : @11      1   : @12      2   : @13\n@5      type_decl        name: @14      type: @2\n@6      identifier_node  strg: i        lngt: 1\n@7      integer_type     name: @15      size: @10      algn: 32\n                         prec: 32       sign: signed   min : @16\n                         max : @17\n@8      function_decl    name: @18      type: @19      srcp: helloworld.c:3\n                         link: extern\n@9      integer_cst      type: @7       low : 0\n@10     integer_cst      type: @20      low : 32\n@11     decl_expr        type: @2\n@12     cond_expr        type: @2       op 0: @21      op 1: @22\n@13     return_expr      type: @2       expr: @23\n@14     identifier_node  strg: void     lngt: 4\n@15     type_decl        name: @24      type: @7\n@16     integer_cst      type: @7       high: -1       low : -2147483648\n@17     integer_cst      type: @7       low : 2147483647\n@18     identifier_node  strg: main     lngt: 4\n@19     function_type    unql: @25      size: @26      algn: 8\n                         retn: @7\n@20     integer_type     name: @27      size: @28      algn: 128\n                         prec: 128      sign: unsigned min : @29\n                         max : @30\n@21     eq_expr          type: @7       op 0: @3       op 1: @9\n@22     call_expr        type: @7       fn  : @31      0   : @32\n@23     modify_expr      type: @7       op 0: @33      op 1: @9\n@24     identifier_node  strg: int      lngt: 3\n@25     function_type    size: @26      algn: 8        retn: @7\n@26     integer_cst      type: @20      low : 8\n@27     identifier_node  strg: bitsizetype             lngt: 11\n@28     integer_cst      type: @20      low : 128\n@29     integer_cst      type: @20      low : 0\n@30     integer_cst      type: @20      high: -1       low : -1\n@31     addr_expr        type: @34      op 0: @35\n@32     nop_expr         type: @36      op 0: @37\n@33     result_decl      type: @7       scpe: @8       srcp: helloworld.c:3\n                         note: artificial              size: @10\n                         algn: 32\n@34     pointer_type     size: @38      algn: 64       ptd : @39\n@35     function_decl    name: @40      type: @39      srcp: stdio.h:362\n                         body: undefined               link: extern\n@36     pointer_type     qual:   r      unql: @41      size: @38\n                         algn: 64       ptd : @42\n@37     addr_expr        type: @43      op 0: @44\n@38     integer_cst      type: @20      low : 64\n@39     function_type    size: @26      algn: 8        retn: @7\n                         prms: @45\n@40     identifier_node  strg: printf   lngt: 6\n@41     pointer_type     size: @38      algn: 64       ptd : @42\n@42     integer_type     qual: c        name: @46      unql: @47\n                         size: @26      algn: 8        prec: 8\n                         sign: signed   min : @48      max : @49\n@43     pointer_type     size: @38      algn: 64       ptd : @50\n@44     string_cst       type: @50     strg: Hello World!\n  lngt: 14\n@45     tree_list        valu: @36\n@46     type_decl        name: @51      type: @47\n@47     integer_type     name: @46      size: @26      algn: 8\n                         prec: 8        sign: signed   min : @48\n                         max : @49\n@48     integer_cst      type: @47      high: -1       low : -128\n@49     integer_cst      type: @47      low : 127\n@50     array_type       size: @52      algn: 8        elts: @47\n                         domn: @53\n@51     identifier_node  strg: char     lngt: 4\n@52     integer_cst      type: @20      low : 112\n@53     integer_type     size: @38      algn: 64       prec: 64\n                         sign: signed   min : @54      max : @55\n@54     integer_cst      type: @56      low : 0\n@55     integer_cst      type: @56      low : 13\n@56     integer_type     name: @57      size: @38      algn: 64\n                         prec: 64       sign: unsigned min : @54\n                         max : @58\n@57     identifier_node  strg: sizetype lngt: 8\n@58     integer_cst      type: @56      low : -1\n\n",
-			"file": "/run/media/master/data/onedrive/backups/linux/helloworld/helloworld.c.003t.original",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 4444,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "# 1 \"helloworld.c\"\n# 1 \"<built-in>\"\n# 1 \"<command-line>\"\n# 1 \"/usr/include/stdc-predef.h\" 1 3 4\n# 1 \"<command-line>\" 2\n# 1 \"helloworld.c\"\n# 1 \"/usr/include/stdio.h\" 1 3 4\n# 27 \"/usr/include/stdio.h\" 3 4\n# 1 \"/usr/include/features.h\" 1 3 4\n# 365 \"/usr/include/features.h\" 3 4\n# 1 \"/usr/include/sys/cdefs.h\" 1 3 4\n# 402 \"/usr/include/sys/cdefs.h\" 3 4\n# 1 \"/usr/include/bits/wordsize.h\" 1 3 4\n# 403 \"/usr/include/sys/cdefs.h\" 2 3 4\n# 366 \"/usr/include/features.h\" 2 3 4\n# 389 \"/usr/include/features.h\" 3 4\n# 1 \"/usr/include/gnu/stubs.h\" 1 3 4\n# 10 \"/usr/include/gnu/stubs.h\" 3 4\n# 1 \"/usr/include/gnu/stubs-64.h\" 1 3 4\n# 11 \"/usr/include/gnu/stubs.h\" 2 3 4\n# 390 \"/usr/include/features.h\" 2 3 4\n# 28 \"/usr/include/stdio.h\" 2 3 4\n\n\n\n\n\n# 1 \"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stddef.h\" 1 3 4\n# 212 \"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stddef.h\" 3 4\ntypedef long unsigned int size_t;\n# 34 \"/usr/include/stdio.h\" 2 3 4\n\n# 1 \"/usr/include/bits/types.h\" 1 3 4\n# 27 \"/usr/include/bits/types.h\" 3 4\n# 1 \"/usr/include/bits/wordsize.h\" 1 3 4\n# 28 \"/usr/include/bits/types.h\" 2 3 4\n\n\ntypedef unsigned char __u_char;\ntypedef unsigned short int __u_short;\ntypedef unsigned int __u_int;\ntypedef unsigned long int __u_long;\n\n\ntypedef signed char __int8_t;\ntypedef unsigned char __uint8_t;\ntypedef signed short int __int16_t;\ntypedef unsigned short int __uint16_t;\ntypedef signed int __int32_t;\ntypedef unsigned int __uint32_t;\n\ntypedef signed long int __int64_t;\ntypedef unsigned long int __uint64_t;\n\n\n\n\n\n\n\ntypedef long int __quad_t;\ntypedef unsigned long int __u_quad_t;\n# 121 \"/usr/include/bits/types.h\" 3 4\n# 1 \"/usr/include/bits/typesizes.h\" 1 3 4\n# 122 \"/usr/include/bits/types.h\" 2 3 4\n\n\ntypedef unsigned long int __dev_t;\ntypedef unsigned int __uid_t;\ntypedef unsigned int __gid_t;\ntypedef unsigned long int __ino_t;\ntypedef unsigned long int __ino64_t;\ntypedef unsigned int __mode_t;\ntypedef unsigned long int __nlink_t;\ntypedef long int __off_t;\ntypedef long int __off64_t;\ntypedef int __pid_t;\ntypedef struct { int __val[2]; } __fsid_t;\ntypedef long int __clock_t;\ntypedef unsigned long int __rlim_t;\ntypedef unsigned long int __rlim64_t;\ntypedef unsigned int __id_t;\ntypedef long int __time_t;\ntypedef unsigned int __useconds_t;\ntypedef long int __suseconds_t;\n\ntypedef int __daddr_t;\ntypedef int __key_t;\n\n\ntypedef int __clockid_t;\n\n\ntypedef void * __timer_t;\n\n\ntypedef long int __blksize_t;\n\n\n\n\ntypedef long int __blkcnt_t;\ntypedef long int __blkcnt64_t;\n\n\ntypedef unsigned long int __fsblkcnt_t;\ntypedef unsigned long int __fsblkcnt64_t;\n\n\ntypedef unsigned long int __fsfilcnt_t;\ntypedef unsigned long int __fsfilcnt64_t;\n\n\ntypedef long int __fsword_t;\n\ntypedef long int __ssize_t;\n\n\ntypedef long int __syscall_slong_t;\n\ntypedef unsigned long int __syscall_ulong_t;\n\n\n\ntypedef __off64_t __loff_t;\ntypedef __quad_t *__qaddr_t;\ntypedef char *__caddr_t;\n\n\ntypedef long int __intptr_t;\n\n\ntypedef unsigned int __socklen_t;\n# 36 \"/usr/include/stdio.h\" 2 3 4\n# 44 \"/usr/include/stdio.h\" 3 4\nstruct _IO_FILE;\n\n\n\ntypedef struct _IO_FILE FILE;\n\n\n\n\n\n# 64 \"/usr/include/stdio.h\" 3 4\ntypedef struct _IO_FILE __FILE;\n# 74 \"/usr/include/stdio.h\" 3 4\n# 1 \"/usr/include/libio.h\" 1 3 4\n# 31 \"/usr/include/libio.h\" 3 4\n# 1 \"/usr/include/_G_config.h\" 1 3 4\n# 15 \"/usr/include/_G_config.h\" 3 4\n# 1 \"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stddef.h\" 1 3 4\n# 16 \"/usr/include/_G_config.h\" 2 3 4\n\n\n\n\n# 1 \"/usr/include/wchar.h\" 1 3 4\n# 82 \"/usr/include/wchar.h\" 3 4\ntypedef struct\n{\n  int __count;\n  union\n  {\n\n    unsigned int __wch;\n\n\n\n    char __wchb[4];\n  } __value;\n} __mbstate_t;\n# 21 \"/usr/include/_G_config.h\" 2 3 4\ntypedef struct\n{\n  __off_t __pos;\n  __mbstate_t __state;\n} _G_fpos_t;\ntypedef struct\n{\n  __off64_t __pos;\n  __mbstate_t __state;\n} _G_fpos64_t;\n# 32 \"/usr/include/libio.h\" 2 3 4\n# 49 \"/usr/include/libio.h\" 3 4\n# 1 \"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stdarg.h\" 1 3 4\n# 40 \"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include/stdarg.h\" 3 4\ntypedef __builtin_va_list __gnuc_va_list;\n# 50 \"/usr/include/libio.h\" 2 3 4\n# 144 \"/usr/include/libio.h\" 3 4\nstruct _IO_jump_t; struct _IO_FILE;\n# 154 \"/usr/include/libio.h\" 3 4\ntypedef void _IO_lock_t;\n\n\n\n\n\nstruct _IO_marker {\n  struct _IO_marker *_next;\n  struct _IO_FILE *_sbuf;\n\n\n\n  int _pos;\n# 177 \"/usr/include/libio.h\" 3 4\n};\n\n\nenum __codecvt_result\n{\n  __codecvt_ok,\n  __codecvt_partial,\n  __codecvt_error,\n  __codecvt_noconv\n};\n# 245 \"/usr/include/libio.h\" 3 4\nstruct _IO_FILE {\n  int _flags;\n\n\n\n\n  char* _IO_read_ptr;\n  char* _IO_read_end;\n  char* _IO_read_base;\n  char* _IO_write_base;\n  char* _IO_write_ptr;\n  char* _IO_write_end;\n  char* _IO_buf_base;\n  char* _IO_buf_end;\n\n  char *_IO_save_base;\n  char *_IO_backup_base;\n  char *_IO_save_end;\n\n  struct _IO_marker *_markers;\n\n  struct _IO_FILE *_chain;\n\n  int _fileno;\n\n\n\n  int _flags2;\n\n  __off_t _old_offset;\n\n\n\n  unsigned short _cur_column;\n  signed char _vtable_offset;\n  char _shortbuf[1];\n\n\n\n  _IO_lock_t *_lock;\n# 293 \"/usr/include/libio.h\" 3 4\n  __off64_t _offset;\n# 302 \"/usr/include/libio.h\" 3 4\n  void *__pad1;\n  void *__pad2;\n  void *__pad3;\n  void *__pad4;\n  size_t __pad5;\n\n  int _mode;\n\n  char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];\n\n};\n\n\ntypedef struct _IO_FILE _IO_FILE;\n\n\nstruct _IO_FILE_plus;\n\nextern struct _IO_FILE_plus _IO_2_1_stdin_;\nextern struct _IO_FILE_plus _IO_2_1_stdout_;\nextern struct _IO_FILE_plus _IO_2_1_stderr_;\n# 338 \"/usr/include/libio.h\" 3 4\ntypedef __ssize_t __io_read_fn (void *__cookie, char *__buf, size_t __nbytes);\n\n\n\n\n\n\n\ntypedef __ssize_t __io_write_fn (void *__cookie, const char *__buf,\n     size_t __n);\n\n\n\n\n\n\n\ntypedef int __io_seek_fn (void *__cookie, __off64_t *__pos, int __w);\n\n\ntypedef int __io_close_fn (void *__cookie);\n# 390 \"/usr/include/libio.h\" 3 4\nextern int __underflow (_IO_FILE *);\nextern int __uflow (_IO_FILE *);\nextern int __overflow (_IO_FILE *, int);\n# 434 \"/usr/include/libio.h\" 3 4\nextern int _IO_getc (_IO_FILE *__fp);\nextern int _IO_putc (int __c, _IO_FILE *__fp);\nextern int _IO_feof (_IO_FILE *__fp) __attribute__ ((__nothrow__ , __leaf__));\nextern int _IO_ferror (_IO_FILE *__fp) __attribute__ ((__nothrow__ , __leaf__));\n\nextern int _IO_peekc_locked (_IO_FILE *__fp);\n\n\n\n\n\nextern void _IO_flockfile (_IO_FILE *) __attribute__ ((__nothrow__ , __leaf__));\nextern void _IO_funlockfile (_IO_FILE *) __attribute__ ((__nothrow__ , __leaf__));\nextern int _IO_ftrylockfile (_IO_FILE *) __attribute__ ((__nothrow__ , __leaf__));\n# 464 \"/usr/include/libio.h\" 3 4\nextern int _IO_vfscanf (_IO_FILE * __restrict, const char * __restrict,\n   __gnuc_va_list, int *__restrict);\nextern int _IO_vfprintf (_IO_FILE *__restrict, const char *__restrict,\n    __gnuc_va_list);\nextern __ssize_t _IO_padn (_IO_FILE *, int, __ssize_t);\nextern size_t _IO_sgetn (_IO_FILE *, void *, size_t);\n\nextern __off64_t _IO_seekoff (_IO_FILE *, __off64_t, int, int);\nextern __off64_t _IO_seekpos (_IO_FILE *, __off64_t, int);\n\nextern void _IO_free_backup_area (_IO_FILE *) __attribute__ ((__nothrow__ , __leaf__));\n# 75 \"/usr/include/stdio.h\" 2 3 4\n\n\n\n\ntypedef __gnuc_va_list va_list;\n# 90 \"/usr/include/stdio.h\" 3 4\ntypedef __off_t off_t;\n# 102 \"/usr/include/stdio.h\" 3 4\ntypedef __ssize_t ssize_t;\n\n\n\n\n\n\n\ntypedef _G_fpos_t fpos_t;\n\n\n\n\n# 164 \"/usr/include/stdio.h\" 3 4\n# 1 \"/usr/include/bits/stdio_lim.h\" 1 3 4\n# 165 \"/usr/include/stdio.h\" 2 3 4\n\n\n\nextern struct _IO_FILE *stdin;\nextern struct _IO_FILE *stdout;\nextern struct _IO_FILE *stderr;\n\n\n\n\n\n\n\nextern int remove (const char *__filename) __attribute__ ((__nothrow__ , __leaf__));\n\nextern int rename (const char *__old, const char *__new) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\n\nextern int renameat (int __oldfd, const char *__old, int __newfd,\n       const char *__new) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\n\n\n\n\n\nextern FILE *tmpfile (void) ;\n# 209 \"/usr/include/stdio.h\" 3 4\nextern char *tmpnam (char *__s) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\n\nextern char *tmpnam_r (char *__s) __attribute__ ((__nothrow__ , __leaf__)) ;\n# 227 \"/usr/include/stdio.h\" 3 4\nextern char *tempnam (const char *__dir, const char *__pfx)\n     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) ;\n\n\n\n\n\n\n\n\nextern int fclose (FILE *__stream);\n\n\n\n\nextern int fflush (FILE *__stream);\n\n# 252 \"/usr/include/stdio.h\" 3 4\nextern int fflush_unlocked (FILE *__stream);\n# 266 \"/usr/include/stdio.h\" 3 4\n\n\n\n\n\n\nextern FILE *fopen (const char *__restrict __filename,\n      const char *__restrict __modes) ;\n\n\n\n\nextern FILE *freopen (const char *__restrict __filename,\n        const char *__restrict __modes,\n        FILE *__restrict __stream) ;\n# 295 \"/usr/include/stdio.h\" 3 4\n\n# 306 \"/usr/include/stdio.h\" 3 4\nextern FILE *fdopen (int __fd, const char *__modes) __attribute__ ((__nothrow__ , __leaf__)) ;\n# 319 \"/usr/include/stdio.h\" 3 4\nextern FILE *fmemopen (void *__s, size_t __len, const char *__modes)\n  __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\nextern FILE *open_memstream (char **__bufloc, size_t *__sizeloc) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\n\n\nextern void setbuf (FILE *__restrict __stream, char *__restrict __buf) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\nextern int setvbuf (FILE *__restrict __stream, char *__restrict __buf,\n      int __modes, size_t __n) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\n\n\nextern void setbuffer (FILE *__restrict __stream, char *__restrict __buf,\n         size_t __size) __attribute__ ((__nothrow__ , __leaf__));\n\n\nextern void setlinebuf (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\n\n\n\n\n\nextern int fprintf (FILE *__restrict __stream,\n      const char *__restrict __format, ...);\n\n\n\n\nextern int printf (const char *__restrict __format, ...);\n\nextern int sprintf (char *__restrict __s,\n      const char *__restrict __format, ...) __attribute__ ((__nothrow__));\n\n\n\n\n\nextern int vfprintf (FILE *__restrict __s, const char *__restrict __format,\n       __gnuc_va_list __arg);\n\n\n\n\nextern int vprintf (const char *__restrict __format, __gnuc_va_list __arg);\n\nextern int vsprintf (char *__restrict __s, const char *__restrict __format,\n       __gnuc_va_list __arg) __attribute__ ((__nothrow__));\n\n\n\n\n\nextern int snprintf (char *__restrict __s, size_t __maxlen,\n       const char *__restrict __format, ...)\n     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 4)));\n\nextern int vsnprintf (char *__restrict __s, size_t __maxlen,\n        const char *__restrict __format, __gnuc_va_list __arg)\n     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 0)));\n\n# 412 \"/usr/include/stdio.h\" 3 4\nextern int vdprintf (int __fd, const char *__restrict __fmt,\n       __gnuc_va_list __arg)\n     __attribute__ ((__format__ (__printf__, 2, 0)));\nextern int dprintf (int __fd, const char *__restrict __fmt, ...)\n     __attribute__ ((__format__ (__printf__, 2, 3)));\n\n\n\n\n\n\n\n\nextern int fscanf (FILE *__restrict __stream,\n     const char *__restrict __format, ...) ;\n\n\n\n\nextern int scanf (const char *__restrict __format, ...) ;\n\nextern int sscanf (const char *__restrict __s,\n     const char *__restrict __format, ...) __attribute__ ((__nothrow__ , __leaf__));\n# 443 \"/usr/include/stdio.h\" 3 4\nextern int fscanf (FILE *__restrict __stream, const char *__restrict __format, ...) __asm__ (\"\" \"__isoc99_fscanf\")\n\n                               ;\nextern int scanf (const char *__restrict __format, ...) __asm__ (\"\" \"__isoc99_scanf\")\n                              ;\nextern int sscanf (const char *__restrict __s, const char *__restrict __format, ...) __asm__ (\"\" \"__isoc99_sscanf\") __attribute__ ((__nothrow__ , __leaf__))\n\n                      ;\n# 463 \"/usr/include/stdio.h\" 3 4\n\n\n\n\n\n\n\n\nextern int vfscanf (FILE *__restrict __s, const char *__restrict __format,\n      __gnuc_va_list __arg)\n     __attribute__ ((__format__ (__scanf__, 2, 0))) ;\n\n\n\n\n\nextern int vscanf (const char *__restrict __format, __gnuc_va_list __arg)\n     __attribute__ ((__format__ (__scanf__, 1, 0))) ;\n\n\nextern int vsscanf (const char *__restrict __s,\n      const char *__restrict __format, __gnuc_va_list __arg)\n     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__format__ (__scanf__, 2, 0)));\n# 494 \"/usr/include/stdio.h\" 3 4\nextern int vfscanf (FILE *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ (\"\" \"__isoc99_vfscanf\")\n\n\n\n     __attribute__ ((__format__ (__scanf__, 2, 0))) ;\nextern int vscanf (const char *__restrict __format, __gnuc_va_list __arg) __asm__ (\"\" \"__isoc99_vscanf\")\n\n     __attribute__ ((__format__ (__scanf__, 1, 0))) ;\nextern int vsscanf (const char *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ (\"\" \"__isoc99_vsscanf\") __attribute__ ((__nothrow__ , __leaf__))\n\n\n\n     __attribute__ ((__format__ (__scanf__, 2, 0)));\n# 522 \"/usr/include/stdio.h\" 3 4\n\n\n\n\n\n\n\n\n\nextern int fgetc (FILE *__stream);\nextern int getc (FILE *__stream);\n\n\n\n\n\nextern int getchar (void);\n\n# 550 \"/usr/include/stdio.h\" 3 4\nextern int getc_unlocked (FILE *__stream);\nextern int getchar_unlocked (void);\n# 561 \"/usr/include/stdio.h\" 3 4\nextern int fgetc_unlocked (FILE *__stream);\n\n\n\n\n\n\n\n\n\n\n\nextern int fputc (int __c, FILE *__stream);\nextern int putc (int __c, FILE *__stream);\n\n\n\n\n\nextern int putchar (int __c);\n\n# 594 \"/usr/include/stdio.h\" 3 4\nextern int fputc_unlocked (int __c, FILE *__stream);\n\n\n\n\n\n\n\nextern int putc_unlocked (int __c, FILE *__stream);\nextern int putchar_unlocked (int __c);\n\n\n\n\n\n\nextern int getw (FILE *__stream);\n\n\nextern int putw (int __w, FILE *__stream);\n\n\n\n\n\n\n\n\nextern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)\n     ;\n# 638 \"/usr/include/stdio.h\" 3 4\nextern char *gets (char *__s) __attribute__ ((__deprecated__));\n\n\n# 665 \"/usr/include/stdio.h\" 3 4\nextern __ssize_t __getdelim (char **__restrict __lineptr,\n          size_t *__restrict __n, int __delimiter,\n          FILE *__restrict __stream) ;\nextern __ssize_t getdelim (char **__restrict __lineptr,\n        size_t *__restrict __n, int __delimiter,\n        FILE *__restrict __stream) ;\n\n\n\n\n\n\n\nextern __ssize_t getline (char **__restrict __lineptr,\n       size_t *__restrict __n,\n       FILE *__restrict __stream) ;\n\n\n\n\n\n\n\n\nextern int fputs (const char *__restrict __s, FILE *__restrict __stream);\n\n\n\n\n\nextern int puts (const char *__s);\n\n\n\n\n\n\nextern int ungetc (int __c, FILE *__stream);\n\n\n\n\n\n\nextern size_t fread (void *__restrict __ptr, size_t __size,\n       size_t __n, FILE *__restrict __stream) ;\n\n\n\n\nextern size_t fwrite (const void *__restrict __ptr, size_t __size,\n        size_t __n, FILE *__restrict __s);\n\n# 737 \"/usr/include/stdio.h\" 3 4\nextern size_t fread_unlocked (void *__restrict __ptr, size_t __size,\n         size_t __n, FILE *__restrict __stream) ;\nextern size_t fwrite_unlocked (const void *__restrict __ptr, size_t __size,\n          size_t __n, FILE *__restrict __stream);\n\n\n\n\n\n\n\n\nextern int fseek (FILE *__stream, long int __off, int __whence);\n\n\n\n\nextern long int ftell (FILE *__stream) ;\n\n\n\n\nextern void rewind (FILE *__stream);\n\n# 773 \"/usr/include/stdio.h\" 3 4\nextern int fseeko (FILE *__stream, __off_t __off, int __whence);\n\n\n\n\nextern __off_t ftello (FILE *__stream) ;\n# 792 \"/usr/include/stdio.h\" 3 4\n\n\n\n\n\n\nextern int fgetpos (FILE *__restrict __stream, fpos_t *__restrict __pos);\n\n\n\n\nextern int fsetpos (FILE *__stream, const fpos_t *__pos);\n# 815 \"/usr/include/stdio.h\" 3 4\n\n# 824 \"/usr/include/stdio.h\" 3 4\n\n\nextern void clearerr (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__));\n\nextern int feof (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n\nextern int ferror (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\nextern void clearerr_unlocked (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__));\nextern int feof_unlocked (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\nextern int ferror_unlocked (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\n\n\n\n\nextern void perror (const char *__s);\n\n\n\n\n\n\n# 1 \"/usr/include/bits/sys_errlist.h\" 1 3 4\n# 26 \"/usr/include/bits/sys_errlist.h\" 3 4\nextern int sys_nerr;\nextern const char *const sys_errlist[];\n# 854 \"/usr/include/stdio.h\" 2 3 4\n\n\n\n\nextern int fileno (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\n\n\nextern int fileno_unlocked (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n# 872 \"/usr/include/stdio.h\" 3 4\nextern FILE *popen (const char *__command, const char *__modes) ;\n\n\n\n\n\nextern int pclose (FILE *__stream);\n\n\n\n\n\nextern char *ctermid (char *__s) __attribute__ ((__nothrow__ , __leaf__));\n# 912 \"/usr/include/stdio.h\" 3 4\nextern void flockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__));\n\n\n\nextern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)) ;\n\n\nextern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__));\n# 942 \"/usr/include/stdio.h\" 3 4\n\n# 2 \"helloworld.c\" 2\n\nint main()\n{\n int i = 0;\n if (i == 0)\n {\n  printf(\"Hello World!\\n\");\n }\n return 0;\n}\n",
-			"file": "/run/media/master/data/OneDrive/backups/linux/helloworld/helloworld.i",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 16946,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/cover.tex",
-			"settings":
-			{
-				"buffer_size": 1206,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -154,9 +169,13 @@
 	"command_palette":
 	{
 		"height": 400.0,
-		"last_filter": "markdown",
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
 			[
 				"markdown",
 				"Set Syntax: Markdown"
@@ -168,10 +187,6 @@
 			[
 				"commi",
 				"Git: Commit"
-			],
-			[
-				"wrap",
-				"Word Wrap: Toggle"
 			],
 			[
 				"dic",
@@ -431,10 +446,56 @@
 	},
 	"expanded_folders":
 	[
-		"/D/OneDrive/mei/internship"
+		"/D/onedrive/mei/internship",
+		"/D/onedrive/mei/internship/refs",
+		"/D/onedrive/mei/internship/refs/papers"
 	],
 	"file_history":
 	[
+		"/D/downs/Imgur-Reddit-Pic-Downloader-master/Imgur-Reddit-Pic-Downloader-master/main.py",
+		"/D/downs/Imgur-Reddit-Pic-Downloader-master/Imgur-Reddit-Pic-Downloader-master/imgur-reddit-pic-downloader/2015-05-05/Aching to be fucked/info.txt",
+		"/C/Users/GonçaloSilva/Desktop/How To Install --- .txt",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIA_0.cpp.patch",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIFS_1.cpp.patch",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIEB_1.cpp.patch",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIFS_0.cpp.patch",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIA_1.cpp.patch",
+		"/C/Users/GonçaloSilva/workspace/Parser/codigo._MIEB_0.cpp.patch",
+		"/D/onedrive/ubuntu/codigo_install.cpp",
+		"/C/Users/GonçaloSilva/Desktop/main._MIFS_1.cpp.patch",
+		"/C/Users/GonçaloSilva/Desktop/main._MIFS_0.cpp.patch",
+		"/C/Users/GonçaloSilva/Desktop/main.cpp",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.759/TCPClient.java",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.252/CMD.java",
+		"/C/Users/GonçaloSilva/workspace/Parser/mergesort.FORMATTED.c",
+		"/D/onedrive/mei/internship/tools/helloworld/demo mergesort/mergesort.i_OMIEB_0.patch",
+		"/D/onedrive/mei/internship/tools/helloworld/demo mergesort/mergesort.i_OMIA_0.patch",
+		"/C/Users/GonçaloSilva/Desktop/test/Parser/docs/code/src/code.c",
+		"/D/onedrive/mei/internship/tools/xen-4.5.0/tools/blktap/drivers/aes.c",
+		"/D/onedrive/mei/internship/tools/xen-4.5.0/xen/include/xen/list.h",
+		"/D/onedrive/mei/internship/tools/xen-4.5.0/xen/xsm/dummy.c",
+		"/D/onedrive/mei/internship/tools/xen-4.5.0/stubdom/grub/mini-os.c",
+		"/C/Users/GonçaloSilva/workspace/Parser/docs/code.c",
+		"/D/onedrive/mei/internship/latex/cover.tex",
+		"/run/media/master/data/onedrive/backups/linux/helloworld/helloworld.c.003t.original",
+		"/run/media/master/data/OneDrive/backups/linux/helloworld/helloworld.i",
+		"/D/onedrive/arch/arch.sh",
+		"/D/onedrive/windows/myKeys/aeroglass/donation.key",
+		"/C/AeroGlass/donation.key",
+		"/D/downs/top.bib",
+		"/D/downs/top",
+		"/D/onedrive/mei/internship/internship.todo",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/PlainTasks/PlainTasks (Windows).sublime-settings",
+		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/PlainTasks.sublime-settings",
+		"/C/Users/GonçaloSilva/Desktop/main.tex",
+		"/C/Users/GonçaloSilva/Desktop/New folder/bare_jrnl_transmag.tex",
+		"/C/Users/GonçaloSilva/Desktop/New folder/bare_jrnl.tex",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.713/README",
+		"/C/Users/GonçaloSilva/Desktop/New folder/bare_adv.tex",
+		"/C/Users/GonçaloSilva/Desktop/New folder/bare_conf.tex",
+		"/C/Users/GonçaloSilva/Desktop/New folder/bare_conf_compsoc.tex",
+		"/H/root JB/pa_gapps_log.txt",
+		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.412/gapps-remove.txt",
 		"/D/onedrive/mei/internship/refs/README.md",
 		"/D/OneDrive/mei/internship/README.md",
 		"/home/master/Área de Trabalho/RedditImgurBrowser/Instructions.txt",
@@ -451,7 +512,6 @@
 		"/D/onedrive/mei/as/git/AS2105/Projeto2/README.md",
 		"/C/Users/GonçaloSilva/Desktop/youtube-dl.txt",
 		"/D/downs/main.tex",
-		"/C/Users/GonçaloSilva/Desktop/main.tex",
 		"/C/Users/GonçaloSilva/Desktop/table.tex",
 		"/D/OneDrive/mei/internship/internship.todo",
 		"/D/onedrive/mei/internship/latex/stateofart.tex",
@@ -519,50 +579,7 @@
 		"/run/media/master/data/OneDrive/mei/internship/tools/xen-4.5.0/tools/qemu-xen/slirp/tcp_output.c",
 		"/run/media/master/data/OneDrive/mei/internship/code/hacking/timer.c",
 		"/run/media/master/data/OneDrive/backups/linux/helloworld/mergesort.c",
-		"/run/media/master/data/Downloads D/xen-4.5.0/tools/qemu-xen/block.c",
-		"/run/media/master/data/OneDrive/arch/arch.sh",
-		"/run/media/master/data/OneDrive/backups/linux/onetab linux",
-		"/home/master/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
-		"/run/media/master/data/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
-		"/run/media/master/data/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/run/media/master/data/Sublime Text 3/Packages/User/Side Bar Folders.sublime-settings",
-		"/run/media/master/data/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/run/media/master/data/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/run/media/master/data/Roaming Sublime Text 3/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/home/master/Área de Trabalho/arch.sh",
-		"/home/master/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
-		"/run/media/master/so/Users/GonçaloSilva/Application Data/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/run/media/master/so/Users/GonçaloSilva/Application Data/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/run/media/master/so/Users/GonçaloSilva/Application Data/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/run/media/master/data/OneDrive/mei/internship/latex/main.tex",
-		"/run/media/master/data/Roaming Sublime Text 3/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/home/master/.config/sublime-text-3/Packages/PlainTasks/PlainTasks (Linux).sublime-settings",
-		"/home/master/.config/sublime-text-3/Packages/User/PlainTasks.sublime-settings",
-		"/run/media/master/data/OneDrive/mei/internship/README.md",
-		"/run/media/master/data/OneDrive/mei/internship/stage.todo",
-		"/D/OneDrive/mei/internship/latex/management.tex",
-		"/D/OneDrive/mei/internship/latex/acknowledgements.tex",
-		"/D/OneDrive/mei/internship/latex/index.tex",
-		"/D/OneDrive/mei/internship/latex/cover.tex",
-		"/D/OneDrive/mei/internship/latex/main.tex",
-		"/D/OneDrive/mei/internship/latex/README.md",
-		"/D/OneDrive/mei/internship/other docs/README.md",
-		"/D/OneDrive/mei/internship/refs/README.md",
-		"/D/OneDrive/mei/internship/code/hacking/README.md",
-		"/D/OneDrive/mei/internship/guidelines/estrutura_relatorio.docx",
-		"/D/OneDrive/mei/internship/code/eclipse/.metadata/.plugins/org.jboss.tools.common.projecttemplates/templates/jsf-1.2-facelets/FaceletsKickStartWithoutLibs/JavaSource/resources.properties",
-		"/D/Downloads D/utility.h",
-		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.805/README.md",
-		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.488/README.txt",
-		"/run/media/master/data/OneDrive/mei/internship/latex/shadequote.tex",
-		"/run/media/master/data/OneDrive/mei/internship/latex/stateofart.tex",
-		"/D/OneDrive/mei/internship/tasks.todo",
-		"/D/Dropbox/Materiais/Estagio/internship/README.md",
-		"/D/desktop/gcc/pph/gcc/cp/parser.c",
-		"/D/Dropbox/Materiais/Estagio/internship/latex/main.tex",
-		"/D/Dropbox/Materiais/Estagio/internship/latex/intro.tex",
-		"/D/Dropbox/Materiais/Estagio/internship/latex/cover.tex",
-		"/D/Dropbox/Materiais/Estagio/internship/latex/appendix.tex"
+		"/run/media/master/data/Downloads D/xen-4.5.0/tools/qemu-xen/block.c"
 	],
 	"find":
 	{
@@ -580,6 +597,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"        ",
+			"enum",
+			"enum ",
+			"enum",
+			"September",
 			"\\textit{",
 			"okular",
 			"evince",
@@ -711,98 +733,11 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 313,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								175,
-								175
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "internship.todo",
 					"semi_transient": false,
 					"settings":
@@ -814,8 +749,8 @@
 						"selection":
 						[
 							[
-								3061,
-								3061
+								692,
+								692
 							]
 						],
 						"settings":
@@ -823,6 +758,11 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -833,51 +773,46 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
-								"bh_tag_content"
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
@@ -885,64 +820,64 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 540.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "operators.todo",
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1568,
+						"buffer_size": 891,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1503,
-								1503
+								891,
+								891
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
+							"auto_name": "MIFS	(\"_MIFS_\",\"Missing IF construct and surroun",
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -953,87 +888,85 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content"
 							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"default_dir": "D:\\onedrive\\mei\\internship",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 324.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "README.md",
+					"buffer": 2,
+					"file": "/C/Users/GonçaloSilva/Desktop/mergesort.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11277,
+						"buffer_size": 2234,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1180,
-								1180
+								1940,
+								1940
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
-							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1044,16 +977,16 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -1061,7 +994,7 @@
 								"bh_single_quote_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"syntax": "Packages/C++/C++.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -1073,7 +1006,191 @@
 					"type": "text"
 				},
 				{
+					"buffer": 3,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								812,
+								812
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
 					"buffer": 4,
+					"file": "operators.todo",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								688,
+								688
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
+							],
+							"color_scheme": "Packages/PlainTasks/tasks.hidden-tmTheme",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 37.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "latex/utilities.tex",
 					"semi_transient": false,
 					"settings":
@@ -1099,56 +1216,56 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
-								"bh_tag_content"
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
@@ -1157,11 +1274,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "latex/main.tex",
 					"semi_transient": false,
 					"settings":
@@ -1173,8 +1290,8 @@
 						"selection":
 						[
 							[
-								4180,
-								4180
+								1435,
+								1435
 							]
 						],
 						"settings":
@@ -1182,31 +1299,270 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "latex/management.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								152,
+								152
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "latex/intro.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								608,
+								608
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "latex/acknowledgements.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1961,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								367,
+								367
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -1217,39 +1573,64 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1713.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 10,
 					"file": "latex/abstract.tex",
 					"semi_transient": false,
 					"settings":
@@ -1333,24 +1714,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 11,
 					"file": "latex/stateofart.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6127,
+						"buffer_size": 6575,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2313,
-								2313
+								1153,
+								1153
 							]
 						],
 						"settings":
@@ -1358,339 +1739,71 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
-								"bh_single_quote_content"
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 428.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/run/media/master/data/onedrive/backups/linux/helloworld/helloworld.c.003t.original",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4444,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1933,
-								1933
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 5,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/run/media/master/data/OneDrive/backups/linux/helloworld/helloworld.i",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16946,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16839,
-								16839
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 11026.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "latex/cover.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1206,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								603,
-								603
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1729,7 +1842,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 240.0
+		"height": 155.0
 	},
 	"output.find_results":
 	{
@@ -1760,6 +1873,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"inter",
+				"internship.todo"
+			],
+			[
+				"i",
+				"internship.todo"
+			],
 			[
 				"read",
 				"README.md"
@@ -1881,7 +2002,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 269.0,
+	"side_bar_width": 387.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

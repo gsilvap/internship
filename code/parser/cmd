@@ -1,3 +1,0 @@
-flex parser.l
-bison -dy parser.y
-gcc lex.yy.c -o y.tab.c -o test

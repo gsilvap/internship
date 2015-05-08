@@ -85,7 +85,7 @@ The contraints defined below was specified by João Durães in ... .
 \begin{table}[h]
 \begin{tabular}{|c|l|}
 \hline
-\textbf{Constraint}             & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
+\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
 \textbf{C01}       \label{C01}  & Return value of the function must not being used                              \\ \hline
 \textbf{C02}       \label{C02}  & Call must not be the only statement in the block                              \\ \hline
 \textbf{C03}       \label{C03}  & Variable must be inside stack frame                                           \\ \hline
@@ -106,6 +106,14 @@ The contraints defined below was specified by João Durães in ... .
 
 	This operator is based in the remotion of one conditional if. To do that, I need to verify the constraints c02, c08 and c09.
 
+% \begin{table}[h]
+% \begin{tabular}{ll}
+% Constraints & Description                                                                 \\
+% C02         & The if construct must not be the only statement in block                    \\
+% C08         & The if construct must not be associated to an else construct                \\
+% C09         & Statements must not include more than five statements and not include loops
+% \end{tabular}
+% \end{table}
 
 	\item \textbf{MLAC} - AND sub-expr in expression used as branch condition
 	\item \textbf{MFC}  - function call

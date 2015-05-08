@@ -1029,6 +1029,7 @@ body .markdown-body
 </ul>
 <h3 id="reunioes"><a name="user-content-reunioes" href="#reunioes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniões</h3>
 <ul>
+<li><a href="#reuniao-13042015">Reunião do dia 13/04/2015 - João Durães</a></li>
 <li><a href="#reuniao-08042015">Reunião do dia 08/04/2015</a></li>
 <li><a href="#reuniao-26032015">Reunião do dia 26/03/2015</a></li>
 <li><a href="#reuniao-17032015">Reunião do dia 17/03/2015</a></li>
@@ -1049,9 +1050,25 @@ body .markdown-body
 <li>Juri Arguente: Filipe Araújo (<a href="mailto:filipius@dei.uc.pt">filipius@dei.uc.pt</a>)</li>
 <li>Juri Vogal: António Jorge Silva Cardoso (<a href="mailto:jcardoso@dei.uc.pt">jcardoso@dei.uc.pt</a>)</li>
 </ul>
+<h4 id="reuniao-13042015"><a name="user-content-reuniao-13042015" href="#reuniao-13042015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 13/04/2015</h4>
+<p>O paper das transactions é o mais atualizado.<br />
+O injector/aplicação feito pelo João Durães não tem nome.</p>
+<pre><code>WLEC - Wrong logical Expression used as branch Condition - trocar algumas das condições dos IF's
+*WIDS - Wrong String in initial data
+EVAV - Extraneous variable assignment using another variable - inserir uma modificação a uma variavel a cada linha de codigo? vai produzir muitas variações
+
+WSUT - Wrong datatypes or conversion used - Pode produzir warnings ou mesmo problemas ao compilar, implementação pouco viável
+WALL - Wrong algorithm - large modifications - (Definir um padrão a partir de mais informação do Durães) modificar parte de um ciclo/bloco ?
+*MLPC - Missing Small and localized part of algorithm - retirar um assignment, por exemplo.
+MFCT - Missing Functionality - (Definir um padrão a partir de mais informação do Durães) frequência alta
+</code></pre>
+<p>*na tabela dos mais representativos da tese - 2005.</p>
+<p>O estudo do João Durães essencialmente baseou-se na verificação das diferenças entre &ldquo;commits&rdquo;, sempre que era feito algum tipo de correção, a mesma era avaliada e caracterizada.<br />
+Depois disso era verificado se existia algum tipo de padrão em cada categoria. Como não existia nenhum injetor, o João Durães optou por implementar apenas 13 operadores dos operadores mais representativos.</p>
+<p>Em que é que o meu injetor vai ser diferente do injetor do Robert Natella? (mais operadores? )</p>
 <h4 id="reuniao-08042015"><a name="user-content-reuniao-08042015" href="#reuniao-08042015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 08/04/2015</h4>
 <p>Qual a representatividade das falhas? (em open source)<br />
-Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de error.s</p>
+Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de erros.</p>
 <p>Se fosse usado num sistema de aviação, como seria?</p>
 <p>Formas de teste/verificação de bugs<br />
  - O software que vou criar<br />
@@ -1096,7 +1113,7 @@ Examinar com maior detalhe a ferramenta do Natella.</p>
 CDT Parser<br />
 MCPP - Portable C PreProcessor - Robert Natella - SAFE</p>
 <h4 id="reuniao-05022015"><a name="user-content-reuniao-05022015" href="#reuniao-05022015" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Reuniao 05/02/2015</h4>
-<p><b>Description</b># ## # ## # ## ## ## # # ##<br />
+<p><b>Description</b><br />
 Decisão: Injeção de falhas de software em ficheiros antes de compilar</p>
 <p>Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc</p>
 <p>Xen         vs      KVM<br />

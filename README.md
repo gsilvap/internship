@@ -14,6 +14,10 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 05/05/2015](#reuniao-05052015)
+* [Reunião do dia 28/04/2015](#reuniao-28042015)
+* [Reunião do dia 21/04/2015](#reuniao-21042015)
+* [Reunião do dia 13/04/2015 - João Durães](#reuniao-13042015)
 * [Reunião do dia 08/04/2015](#reuniao-08042015)
 * [Reunião do dia 26/03/2015](#reuniao-26032015)
 * [Reunião do dia 17/03/2015](#reuniao-17032015)
@@ -32,9 +36,74 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * Juri Arguente: Filipe Araújo (filipius@dei.uc.pt)
 * Juri Vogal: António Jorge Silva Cardoso (jcardoso@dei.uc.pt)
 
+#### Reuniao 05/05/2015
+
+Fazer a analise de performance do programa
+ - usando a analise recursiva da arvore
+ - usando o visitor pattern
+
+Para além do número da falha meter o número da linha em que é feita a primeira modificação
+Selecionar os programas a efectuar injecção de falhas
+Testar programas em C e C++
+
+#### Reuniao 28/04/2015
+Justificar a utilização de Patchs
+System testing
+Testes unitários
+
+.c
+.mifs1.c
+.mifs1.c.patch
+
+taxonomia - faults erros and failures
+Saber o resultado de injetar aquela falha
+
+CRASH SCALE
+ - Catastrophic
+ - Restart
+ - Abort
+ - Silent
+ - Hindering
+
+.c -> AST -> |(AST) -> .c
+diff
+patch
+
+Regression Testing -> testar o programa versao a versao, verificando se o mesmo não regrediu
+
+#### Reuniao 21/04/2015
+Esquecer os operadores que não estão minimamente especificados.
+
+Resolver os problemas com a edição de codigo dos nos da arvore e com a obtenção do codigo final.
+    - Arranjar um testcase caso seja problema do CDT e submeter o mesmo para a mailing list.
+    - Criar um projeto C ?
+    - Reescrever as classes ChangeGenerator e ASTWriting para não formatar ou usar as opções por defeito
+    - Try to create my own translation unit and cproject classes
+
+#### Reuniao 13/04/2015
+
+O paper das transactions é o mais atualizado.
+O injector/aplicação feito pelo João Durães não tem nome.
+
+    WLEC - Wrong logical Expression used as branch Condition - trocar algumas das condições dos IF's
+    *WIDS - Wrong String in initial data
+    EVAV - Extraneous variable assignment using another variable - inserir uma modificação a uma variavel a cada linha de codigo? vai produzir muitas variações
+
+    WSUT - Wrong datatypes or conversion used - Pode produzir warnings ou mesmo problemas ao compilar, implementação pouco viável
+    WALL - Wrong algorithm - large modifications - (Definir um padrão a partir de mais informação do Durães) modificar parte de um ciclo/bloco ?
+    *MLPC - Missing Small and localized part of algorithm - retirar um assignment, por exemplo.
+    MFCT - Missing Functionality - (Definir um padrão a partir de mais informação do Durães) frequência alta
+
+*na tabela dos mais representativos da tese - 2005.
+
+O estudo do João Durães essencialmente baseou-se na verificação das diferenças entre "commits", sempre que era feito algum tipo de correção, a mesma era avaliada e caracterizada.
+Depois disso era verificado se existia algum tipo de padrão em cada categoria. Como não existia nenhum injetor, o João Durães optou por implementar apenas 13 operadores dos operadores mais representativos.
+
+Em que é que o meu injetor vai ser diferente do injetor do Robert Natella? ( mais operadores? linguagem Java? mantivel mais facilmente? )
+
 #### Reuniao 08/04/2015
 Qual a representatividade das falhas? (em open source)
-Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de error.s
+Empresas grandes têm bases de dados com a especificação e estatisticas da ocorrencia dos diversos tipos de erros.
 
 Se fosse usado num sistema de aviação, como seria?
 
@@ -98,7 +167,7 @@ CDT Parser
 MCPP - Portable C PreProcessor - Robert Natella - SAFE
 
 #### Reuniao 05/02/2015
-<b>Description</b># ## # ## # ## ## ## # # ##
+<b>Description</b>
 Decisão: Injeção de falhas de software em ficheiros antes de compilar
 
 Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc

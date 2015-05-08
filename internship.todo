@@ -38,15 +38,13 @@ Tarefas até à próxima reunião:
           ✔ MIFS - if construct plus statements @done (15-03-17 14:00) @critical
             Missing "If (cond) { statement(s) }"
             Eliminar uma instrução if e as intruções desse bloco
+          ✔ MIA  - if contruct around statements @critical @done (15-05-08 16:34)
+          ✔ MIEB - if contruct plus statements plus else before statements @critical @done (15-05-08 16:34)
 
-            Restrição: eliminar os else's associados ? vs MIEB
           ☐ MLAC - AND sub-expr in expression used as branch condition @critical
-
             Eliminar o AND e a condição associada
           ☐ MFC  - Function call @critical
             Eliminar a chamada de função
-
-          ☐ MIA  - if contruct around statements @critical
 
           ☐ MLOC - OR sub-expr in expression used as branch condition @critical
             Eliminar o OR e a condição associada
@@ -55,26 +53,15 @@ Tarefas até à próxima reunião:
 
           ☐ MVAE - variable assignment using an expression @critical
 
-          ☐ MFCT - functionality
-
           ☐ MVAV - variable assignment using an value @critical
-
-          ☐ MIEB - if contruct plus statements plus else before statements @critical
-
 
           ☐ MVIV - variable initialization @critical
 
       Fault Types - Wrong:
-
-          ☐ WLEC - logical expression used as branch condition
-          ☐ WALL - algorithm - large modifications
           ☐ WVAV - value assigned to variable @critical
           ☐ WAEP - arithmetic expression in parameter of function call @critical
-          ☐ WSUT - data types or conversion used
           ☐ WPFV - variable used in parameter of function call @critical
       Fault Types - Extraneous:
-
-          ☐ EVAV - variable assignment using another variable
 
 
 Literatura:
