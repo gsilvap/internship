@@ -7,15 +7,16 @@
 
 % include other pages
 \input{acknowledgements}
-\newpage
+\clearpage
 \pagestyle{fancy}
+% \pagestyle{empty}
 
 \pagenumbering{roman}
 
-\begin{spacing}{0.6}
+\renewcommand{\baselinestretch}{0.5}\normalsize
 \tableofcontents \label{toc}
 \addcontentsline{toc}{section}{Contents}
-\end{spacing}
+\renewcommand{\baselinestretch}{1.0}\normalsize
 \newpage
 
 \listoffigures

@@ -36,12 +36,12 @@ Robert Natella implemented thirteen operators in SAFE, same as João Durães\cit
 \ac{odc} Model is a framework developed by IBM, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
 ODC can be used to classifying and analyzing defects during software development.
 
-\red{ essentially a classification of the defects. This model have five categories:}
+\red{ essentially a classification of the defects. This model have eight categories:}
 \cite{bridge1998orthogonal}
 \cite{chillarege2004orthogonal}
 
 \begin{itemize}
-	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api} application programming interface (API), interface with hardware architecture, or global structure(s). It would require a formal design change.
+	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
 	\item \textbf{Checking} -
 	\item \textbf{Assignment} -
 	\item \textbf{Algorithm} -
@@ -55,16 +55,19 @@ ODC can be used to classifying and analyzing defects during software development
 \newpage
 \section{Research objectives and approach method}
 
-
+In this section are discussed the main aspects in study.
 
 \subsection{Cloud Computing}
 
-Three levels of Cloud Computing:
+Three levels of Cloud Computing Service Models:
 
 \begin{itemize}
-	\item \ac{iaas};
-	\item \ac{paas};
-	\item \ac{saas}.
+	\item \textbf{\ac{iaas}} - as the name suggests, provides an computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
+
+	\item \textbf{\ac{paas}} - provides an computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
+
+	\item \textbf{\ac{saas}} - provides access to application softwares ofter referred as \textit{on-demand self-service} sofwares. Use it without install, setup and run the application. Service provider do all things for you. Google Apps, Microsoft Office 365.
+
 \end{itemize}
 
 The cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
@@ -90,7 +93,18 @@ For parsing the code, analyze and modify it,
 
 Finally I decided to use Eclipse CDT Plugin as standalone (only import libraries to project), because of my facilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.
 
+
+\red{Problems with the rewriting of tree}
+
+\red{Reflection}
+
+\red{But I was forced to take decisions after that, for example, after create the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}
+
+\red{Performance analyses}
+
 \subsection{Applications to inject faults}
+
+\red{The same applications that João Durães have collect information?}
 
 \newpage
 % \section{Current work and preliminary results}
@@ -117,7 +131,6 @@ WAEP       & Wrong arithmetic expression in function call parameter \\
 \end{tabular}
 \caption{\small \sl Faults.\label{tab:faults}}
 \end{table}
-
 
 \begin{table}[ht]
 \begin{tabular}{c}
@@ -204,8 +217,14 @@ The fault injected results is equal to the real software faults?
 
 \subsection{Compile programs}
 
-Select five to ten programs to test.
+\red{Select five to ten programs to test.}
 
-\subsection{Results}
+After the compilation and execution of the programs, the results need to be evaluate. For that, I will use the \textit{CRASH Scale}\cite{koopman1997comparing}:
 
-CRASH Scale
+\begin{itemize}
+	\item \textbf{C}atastrophic
+	\item \textbf{R}estart
+	\item \textbf{A}bort
+	\item \textbf{S}ilent
+	\item \textbf{H}indering
+\end{itemize}
