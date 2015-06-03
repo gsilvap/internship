@@ -24,17 +24,37 @@ About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}
 % \ac{odc}
 % \ac{swifi}
 
-I had access to the application of Robert Natella, called SAFE, that inject software faults, as I also have to do.
+I had access to the application (executable only, not the source) of Robert Natella, called SAFE, that inject software faults, as I also have to do and I will describe it in next section.
 
-\subsection{SAFE - Robert Natella}
-Safe is an application to inject faults in code written in C. This tool uses MCPP as parser, to get the tree of code. After that, write some .c files, variations of original files with operators applied. Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.
+\subsection{SAFE by Robert Natella}
+Safe is an application to inject realistic software faults in programs written in C and C++.
+This tool uses MCPP as parser, to get the tree of code. The decision of use MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
+After that, write some files, variations of original files (code with simple mutations) with operators applied.
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.
 
+\subsection{ODC Model}
+\ac{odc} Model is a framework developed by IBM, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
+ODC can be used to classifying and analyzing defects during software development.
+
+\red{ essentially a classification of the defects. This model have five categories:}
+\cite{bridge1998orthogonal}
+\cite{chillarege2004orthogonal}
+
+\begin{itemize}
+	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api} application programming interface (API), interface with hardware architecture, or global structure(s). It would require a formal design change.
+	\item \textbf{Checking} -
+	\item \textbf{Assignment} -
+	\item \textbf{Algorithm} -
+	\item \textbf{Interface} -
+	\item \textbf{Timing/serialization} -
+	\item \textbf{Build/package/merge} -
+	\item \textbf{Documentation} -
+\end{itemize}
 
 
 \newpage
 \section{Research objectives and approach method}
 
-\subsection{GCC Parser vs CDT Parser vs Bison}
 
 
 \subsection{Cloud Computing}
@@ -47,7 +67,7 @@ Three levels of Cloud Computing:
 	\item \ac{saas}.
 \end{itemize}
 
-The cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most importants are:
+The cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
  	\item Security attacks;
  	\item Accidents;
@@ -58,67 +78,69 @@ The cloud computing isn't free of external disturbances\cite{wolter2012resilienc
  	\item \ac{ddos} attacks.
  \end{itemize}
 
+
+\subsection{GCC Parser vs Bison vs Eclipse CDT}
+
+In the beginning of planning the basic software without any user interface, I needed to research the best applications, as the best way for using them to obtain panned results (fault injector).
+For that, I thought that I can use the same tools that I have used in Compilers course, Lex and Yacc
+
+For parsing the code, analyze and modify it,
+
+
+
+Finally I decided to use Eclipse CDT Plugin as standalone (only import libraries to project), because of my facilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.
+
 \subsection{Applications to inject faults}
 
 \newpage
-\section{Current work and preliminary results}
+% \section{Current work and preliminary results}
+\section{Fault Injector Development}
 
-\newpage
-\section{Work plan and implications}
+\begin{table}[h]
+\begin{tabular}{l|l}
+\hline
+Fault Type & Description                                            \\ \hline
+MFC        & Missing function call                                  \\
+MVIV       & Missing variable initialization using a value          \\
+MVAV       & Missing variable assignment using a value              \\
+MVAE       & Missing variable assignment with an expression         \\
+MIA        & Missing IF construct around statements                 \\
+MIFS       & Missing IF construct + statements                      \\
+MIEB       & Missing IF construct + statements + ELSE construct     \\
+MLAC       & Missing AND in expression used as branch condition     \\
+MLOC       & Missing OR in expression used as branch condition      \\
+MLPA       & Missing small and localized part of the algorithm      \\
+WVAV       & Wrong value assigned to variable                       \\
+WPFV       & Wrong variable used in parameter of function call      \\
+WAEP       & Wrong arithmetic expression in function call parameter \\
+		   & \red{add another faults}								\\ \hline
+\end{tabular}
+\caption{\small \sl Faults.\label{tab:faults}}
+\end{table}
 
-Built three separated modules:
 
-\begin{itemize}
-	\item Generate the derivations of main code of selected programs;
-	\item Verify and analyze the effect of produced faults;
-	\item Compile the programs with injected faults, by using make file.
-\end{itemize}
+\begin{table}[ht]
+\begin{tabular}{c}
+\includegraphics[width=1\textwidth]{img/representative_faults.jpg}
+\end{tabular}
+\caption{\small \sl Representativeness faults.\label{tab:representative_faults}}
+\end{table}
 
 \subsection{Generate derivations}
 
 I chose to use the most representative faults \cite{duraes2006emulation}, divided into missing, wrong and extraneous, specified individually further down:
 
-\subsection{Contraints}
-
-The contraints defined below was specified by João Durães in ... .
-
-\begin{table}[h]
-\begin{tabular}{|c|l|}
-\hline
-\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline
-\textbf{C01}       \label{C01}  & Return value of the function must not being used                              \\ \hline
-\textbf{C02}       \label{C02}  & Call must not be the only statement in the block                              \\ \hline
-\textbf{C03}       \label{C03}  & Variable must be inside stack frame                                           \\ \hline
-\textbf{C04}       \label{C04}  & Must be the first assignment for that variable in the module                  \\ \hline
-\textbf{C05}       \label{C05}  & Assignment must not be inside a loop                                          \\ \hline
-\textbf{C06}       \label{C06}  & Assignment must not be part of a for construct                                \\ \hline
-\textbf{C07}       \label{C07}  & Must not be the first assignment for that variable in the module              \\ \hline
-\textbf{C08}       \label{C08}  & The if construct must not be associated to an else construct                  \\ \hline
-\textbf{C09}       \label{C09}  & Statements must not include more than five statemens and not include loops    \\ \hline
-\textbf{C10}       \label{C010} & Statements are in the same block, do not include more than 5 stats. not loops \\ \hline
-\textbf{C11}       \label{C011} & There must be at leat two variables in this module                            \\ \hline
-\end{tabular}
-\end{table}
+\red{Table of more representative faults of Durães}
 
 \subsubsection{Fault Types - Missing:}
 \begin{itemize}
 	\item \textbf{MIFS} - if construct plus statements
 
 	This operator is based in the remotion of one conditional if. To do that, I need to verify the constraints c02, c08 and c09.
-
-% \begin{table}[h]
-% \begin{tabular}{ll}
-% Constraints & Description                                                                 \\
-% C02         & The if construct must not be the only statement in block                    \\
-% C08         & The if construct must not be associated to an else construct                \\
-% C09         & Statements must not include more than five statements and not include loops
-% \end{tabular}
-% \end{table}
-
-	\item \textbf{MLAC} - AND sub-expr in expression used as branch condition
+	\item \textbf{MLAC} - AND sub-expression in expression used as branch condition
 	\item \textbf{MFC}  - function call
 	\item \textbf{MIA}  - if construct around statements
-	\item \textbf{MLOC} - OR sub-expr in expression used as branch condition
+	\item \textbf{MLOC} - OR sub-expression in expression used as branch condition
 	\item \textbf{MLPA} - small and localized part of the algorithm
 	\item \textbf{MVAE} - variable assignment using an expression
 	\item \textbf{MFCT} - functionality
@@ -142,6 +164,39 @@ The contraints defined below was specified by João Durães in ... .
 	\item \textbf{EVAV} - variable assignment using another variable
 \end{itemize}
 
+\subsection{Constraints}
+
+The constraints defined below was specified by João Durães in ... .
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
+\textbf{C01}       \label{C01}  & Return value of the function \textbf{must not} being used                              \\ \hline
+\textbf{C02}       \label{C02}  & Call \textbf{must not be} the only statement in the block                              \\ \hline
+\textbf{C03}       \label{C03}  & Variable \textbf{must be} inside stack frame                                           \\ \hline
+\textbf{C04}       \label{C04}  & \textbf{Must be} the first assignment for that variable in the module                  \\ \hline
+\textbf{C05}       \label{C05}  & Assignment \textbf{must not be} inside a loop                                          \\ \hline
+\textbf{C06}       \label{C06}  & Assignment \textbf{must not be} part of a for construct                                \\ \hline
+\textbf{C07}       \label{C07}  & \textbf{Must not be} the first assignment for that variable in the module              \\ \hline
+\textbf{C08}       \label{C08}  & The if construct \textbf{must not be} associated to an else construct                  \\ \hline
+\textbf{C09}       \label{C09}  & Statements \textbf{must not include more than} five statements and not include loops   \\ \hline
+\textbf{C10}       \label{C010} & Statements are in the same block, \textbf{do not include more than} 5 stats. not loops \\ \hline
+\textbf{C11}       \label{C011} & There \textbf{must be} at least two variables in this module                           \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\section{Work plan and implications}
+
+Built three separated modules:
+
+\begin{itemize}
+	\item Generate the derivations of main code of selected programs;
+	\item Verify and analyze the effect of produced faults;
+	\item Compile the programs with injected faults, by using make file.
+\end{itemize}
 
 \subsection{Analyze the effects}
 
@@ -151,3 +206,6 @@ The fault injected results is equal to the real software faults?
 
 Select five to ten programs to test.
 
+\subsection{Results}
+
+CRASH Scale

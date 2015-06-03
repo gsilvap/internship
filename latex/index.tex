@@ -6,22 +6,25 @@
 % \maketitle
 
 % include other pages
-\pagenumbering{roman}
 \input{acknowledgements}
 \newpage
 \pagestyle{fancy}
 
+\pagenumbering{roman}
+
+\begin{spacing}{0.6}
 \tableofcontents \label{toc}
 \addcontentsline{toc}{section}{Contents}
+\end{spacing}
 \newpage
 
 \listoffigures
 \addcontentsline{toc}{section}{List of Figures}
-\newpage
+% \newpage
 
 \listoftables
 \addcontentsline{toc}{section}{List of Tables}
 \newpage
 
-\printacronyms[include-classes=abbrev,name=Abbreviations]		
+\printacronyms[include-classes=abbrev,name=Abbreviations]
 \addcontentsline{toc}{section}{Abbreviations}
