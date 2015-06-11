@@ -133,28 +133,11 @@ Using it I can code Fault Injector in Java, making the software more maintainabl
 
 \red{Performance analyses}
 
-\subsection{Applications to inject faults}
-
-\red{The same applications that João Durães have collect information?}
-
-\begin{itemize}
-	\item MinGW, Last Update: 2015-06-08
-	\item ScummVM, Last Update: 2015-05-17
-	\item CDEX, Last Update: 2015-04-24
-	\item FireBird, Last Update: 2015-04-15
-	\item Joe, Last Update: 2015-03-22
-	\item FreeCiv, Last Update: 2015-03-14
-	\item GAIM or Pidgin, Last Update: 2015-01-07
-	\item BASH, Last Update: 2013-12-10
-	\item ZSNES, Last Update: 2013-05-07
-	\item VIM, Last Update: 2013-04-25
-	\item pdftohtml, Last Update: 2013-04-24
-	%\item LKERNEL
-\end{itemize}
-
 \newpage
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
+
+The Fault Injector currently in development is coded in Java and
 
 \begin{figure}[!ht]
 \begin{center}
@@ -253,12 +236,28 @@ The constraints defined below was specified by João Durães in ... .
 \end{tabular}
 \end{table}
 
+\clearpage
+\subsection{Applications to inject faults}
+
+\red{The same applications that João Durães have collect information?}
+
+\begin{itemize}
+	\item MinGW, Last Update: 2015-06-08
+	\item ScummVM, Last Update: 2015-05-17
+	\item CDEX, Last Update: 2015-04-24
+	\item FireBird, Last Update: 2015-04-15
+	\item Joe, Last Update: 2015-03-22
+	\item FreeCiv, Last Update: 2015-03-14
+	\item GAIM or Pidgin, Last Update: 2015-01-07
+	\item BASH, Last Update: 2013-12-10
+	\item ZSNES, Last Update: 2013-05-07
+	\item VIM, Last Update: 2013-04-25
+	\item pdftohtml, Last Update: 2013-04-24
+	%\item LKERNEL
+\end{itemize}
+
 \newpage
 \section{Work plan and implications}
-
-
-\red{From version to version I use a regression testing to test the fault injector to guarant that application don't regreded.}
-
 
 Built three separated modules:
 
@@ -272,18 +271,24 @@ Built three separated modules:
 
 The fault injected results is equal to the real software faults?
 
+
+
+
 \subsection{Compile programs}
 
 \red{Select five to ten programs to be tested.}
 
 \red{Justificar a utilização de patchs}
 
-After the compilation and execution of the programs, the results need to be evaluate. For that, I will use the \textit{CRASH Scale}\cite{koopman1997comparing}:
+After the compilation and execution of the programs, the results need to be evaluate. For measure that, I will use the \textit{CRASH Scale}\cite{koopman1997comparing}:
 
 \begin{itemize}
-	\item \textbf{C}atastrophic
-	\item \textbf{R}estart
-	\item \textbf{A}bort
-	\item \textbf{S}ilent
-	\item \textbf{H}indering
+	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
+	\item \textbf{R}estart - Task or process hangs, requiring restart;
+	\item \textbf{A}bort - Task or process aborts abnormally (i.e. ``code dump'' or ``segmentation violation'');
+	\item \textbf{S}ilent - Test Process exits without error code returned when one should be;
+	\item \textbf{H}indering - Test Process exits with an error code not relevant to the situation or incorrect error code returned;
+	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error core.
 \end{itemize}
+
+This \textit{CRASH Scale} is one way to show results of the effect of faults on an end-use system.
