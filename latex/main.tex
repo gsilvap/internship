@@ -11,6 +11,7 @@
 % \usepackage[pdftex]{graphicx}
 % \usepackage[demo]{graphicx}
 \usepackage{graphicx}
+\graphicspath{ {img/} }
 % para a cor do texto
 \usepackage[usenames, dvipsnames]{color}
 
@@ -18,8 +19,9 @@
 %for proper url entries
 
 % to use superscipt numbers in bib
-\usepackage[superscript,biblabel]{cite}
-%\usepackage[super]{natbib}
+% \usepackage[superscript,biblabel]{cite}
+\usepackage[super]{natbib}
+\setcitestyle{square}
 
 \usepackage{url}
 %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
@@ -48,6 +50,8 @@
 % package to use acronyms
 \usepackage{acro}
 \input{abbreviations.tex}
+
+\usepackage[justification=centering]{caption}
 
 % add notes to margins
 \usepackage{marginnote}
@@ -86,7 +90,6 @@
 % block quote with big quotation marks
 \usepackage[T1]{fontenc}
 \usepackage{libertine}
-\usepackage{graphicx}
 \usepackage{framed}
 
 % tables
@@ -95,6 +98,7 @@
 
 % glossary
 % \usepackage{glossaries}
+% \usepackage[toc]{glossaries}
 % \makeglossaries
 % \input{glossary}
 
@@ -120,6 +124,7 @@
 
 \begin{document}
 
+
 \input{cover}
 \input{index}
 \input{abstract}
@@ -128,13 +133,6 @@
 \input{stateofart}
 \input{conclusions}
 \input{appendix}
-
-
-% glossary
-% \clearpage
-% \printglossaries
-% \printglossary
-% \clearpage
 
 % \cleardoublepage
 % \phantomsection

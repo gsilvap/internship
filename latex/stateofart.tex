@@ -1,22 +1,20 @@
 %!TEX root = main.tex
-\newpage
+% \newpage
 \section{State of the Art}
 
-Nowadays, people use lot's of services based in cloud and lot's of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and people don't buy ``physical storage'' and don't care where are the data. The cloud service provide that the data is secure.
-But, like any system, the cloud have problems such as another computer systems, software and hardware faults. And the resilience of the cloud is an important characteristic.
+Nowadays, people use a lot of services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and don't need to buy ``physical storage'' and don't care where are the data. The cloud service provides that the data is secure.
+But, like as any system, the cloud have problems \red{such as} another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
 
-The increased use of cloud is related with a low usage of many dedicated servers, lower voltage levels, reduce noise margins and increase clock rates \cite{wolter2012resilience}.
+The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates \cite{wolter2012resilience}. The cloud providers offers resources ready to deliver \cite{wolter2012resilience}.
 
-The cloud providers offers resources ready to deliver \cite{wolter2012resilience}.
+With this work, I pretend to inject software faults and analyze how the system react to them.
 
-With this work, I want to inject software faults and analyze how the system react to them.
-
-A lot of studies show that the software faults\cite{avizzienisbasic} it's the main cause of computer failures.
+There are many studies showing that the software faults\cite{avizzienisbasic} it's the main cause of computer failures.
+About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}.
 
 %In this work
 %deliberate how
 
-About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}.
 
 % \marginnote{especificar as abreviaturas...}[0cm]
 % \ac{cots}
@@ -24,31 +22,48 @@ About 44\% of the software faults cannot be emulated \cite{madeira2000emulation}
 % \ac{odc}
 % \ac{swifi}
 
-I had access to the application (executable only, not the source) of Robert Natella, called SAFE, that inject software faults, as I also have to do and I will describe it in next section.
+I have the opportunity to access to the application (executable only, not the source) of Robert Natella, called by SAFE, that inject software faults, as I also want to do (I will describe it in next section).
 
-\subsection{SAFE by Robert Natella}
-Safe is an application to inject realistic software faults in programs written in C and C++.
+\subsection{Software Implemented Fault Injection of Software Faults}
+In the next subsections I will describe some fault injectors that have been previously done.\\
+
+\textbf{SAFE by Robert Natella}\\
+% \subsubsection{SAFE by Robert Natella}
+
+Safe is an application to inject realistic software faults in programs codded in C and C++.
 This tool uses MCPP as parser, to get the tree of code. The decision of use MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
-After that, write some files, variations of original files (code with simple mutations) with operators applied.
-Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.
+
+\red{After that, write some files, variations of original files (code with simple mutations) with operators applied.}
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert \red{sinonimo: implemented} at source code level, and João at binary level.\\
+
+
+\textbf{JACA Tool}\\
+% \subsubsection{JACA Tool}
+
+JACA\cite{regina2003jaca} is a tool taht have been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
+\cite{martins2002jaca} \\
+
+\textbf{J-SWFIT} \\
+
+Java Software Fault Injection Tool\cite{sanches2011j} is a tool that don't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
+
 
 \subsection{ODC Model}
-\ac{odc} Model is a framework developed by IBM, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
+\ac{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
 ODC can be used to classifying and analyzing defects during software development.
 
-\red{ essentially a classification of the defects. This model have eight categories:}
-\cite{bridge1998orthogonal}
-\cite{chillarege2004orthogonal}
+%\cite{lyu1996handbook}
+For that, this model have eight categories:
 
 \begin{itemize}
 	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
-	\item \textbf{Checking} -
-	\item \textbf{Assignment} -
-	\item \textbf{Algorithm} -
-	\item \textbf{Interface} -
-	\item \textbf{Timing/serialization} -
-	\item \textbf{Build/package/merge} -
-	\item \textbf{Documentation} -
+	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or an data structure.
+	\item \textbf{Interface} - Problems in the interaction with other components, modules, device drivers, call statements, control blocks, or parameter lists.
+	\item \textbf{Checking} - Based in the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
+	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
+	\item \textbf{Build/package/merge} - Errors that occur in the integration of library systems, management of changes, or in version control.
+	\item \textbf{Documentation} - Errors in the documentation, that con be propagated to publications and maintenance notes.
+	\item \textbf{Algorithm} - Problems that can be fixed by reimplementing an algorithm or local data structure, include efficiency or correctness that affect the task.
 \end{itemize}
 
 
@@ -77,22 +92,38 @@ The cloud computing isn't free of external disturbances\cite{wolter2012resilienc
  	\item Power surges;
  	\item Workload faults;
  	\item Malfunction;
- 	\item Worms
+ 	\item Worms;
  	\item \ac{ddos} attacks.
  \end{itemize}
 
 
-\subsection{GCC Parser vs Bison vs Eclipse CDT}
+\subsection{Tools - GCC Parser, Bison and Eclipse CDT}
 
-In the beginning of planning the basic software without any user interface, I needed to research the best applications, as the best way for using them to obtain panned results (fault injector).
-For that, I thought that I can use the same tools that I have used in Compilers course, Lex and Yacc
+In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
+For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.
 
-For parsing the code, analyze and modify it,
+\red{For parsing the code, analyze and modify it,}
 
+% Finally, I decided to use
+In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my habilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
 
+\textbf{GCC Parser}\\
 
-Finally I decided to use Eclipse CDT Plugin as standalone (only import libraries to project), because of my facilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.
+Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving human meaningful messages on syntax errors.\\
 
+\textbf{Eclipse CDT}\\
+
+Eclipse CDT, as the name suggests, is an plugin for Eclipse that provides a fully functional C and C++ Integrated Development Environment.
+Some of the features included in this plugin that are interesting for this project are:
+\begin{itemize}
+	\item Source navigation;
+	\item Code editor with syntax highlighting;
+	\item Source code refactoring and code generation.
+\end{itemize}
+
+Is possible to use this plugin in standalone mode, importing .jar files to the project.
+Using it I can code Fault Injector in Java, making the software more maintainable and easy to use, write, compile and debug.
+\\
 
 \red{Problems with the rewriting of tree}
 
@@ -106,11 +137,33 @@ Finally I decided to use Eclipse CDT Plugin as standalone (only import libraries
 
 \red{The same applications that João Durães have collect information?}
 
+\begin{itemize}
+	\item MinGW, Last Update: 2015-06-08
+	\item ScummVM, Last Update: 2015-05-17
+	\item CDEX, Last Update: 2015-04-24
+	\item FireBird, Last Update: 2015-04-15
+	\item Joe, Last Update: 2015-03-22
+	\item FreeCiv, Last Update: 2015-03-14
+	\item GAIM or Pidgin, Last Update: 2015-01-07
+	\item BASH, Last Update: 2013-12-10
+	\item ZSNES, Last Update: 2013-05-07
+	\item VIM, Last Update: 2013-04-25
+	\item pdftohtml, Last Update: 2013-04-24
+	%\item LKERNEL
+\end{itemize}
+
 \newpage
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
 
-\begin{table}[h]
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1\textwidth]{mockup.png}
+\caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
+\end{center}
+\end{figure}
+
+\begin{table}[!ht]
 \begin{tabular}{l|l}
 \hline
 Fault Type & Description                                            \\ \hline
@@ -132,7 +185,7 @@ WAEP       & Wrong arithmetic expression in function call parameter \\
 \caption{\small \sl Faults.\label{tab:faults}}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[!ht]
 \begin{tabular}{c}
 \includegraphics[width=1\textwidth]{img/representative_faults.jpg}
 \end{tabular}
@@ -145,7 +198,7 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 
 \red{Table of more representative faults of Durães}
 
-\subsubsection{Fault Types - Missing:}
+\subsubsection{Fault Types - Missing}
 \begin{itemize}
 	\item \textbf{MIFS} - if construct plus statements
 
@@ -162,7 +215,7 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 	\item \textbf{MVIV} - variable initialization
 \end{itemize}
 
-\subsubsection{Fault Types - Wrong:}
+\subsubsection{Fault Types - Wrong}
 \begin{itemize}
 	\item \textbf{WLEC} - logical expression used as branch condition
 	\item \textbf{WALL} - algorithm - large modifications
@@ -172,7 +225,7 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 	\item \textbf{WPFV} - variable used in parameter of function call
 \end{itemize}
 
-\subsubsection{Fault Types - Extraneous:}
+\subsubsection{Fault Types - Extraneous}
 \begin{itemize}
 	\item \textbf{EVAV} - variable assignment using another variable
 \end{itemize}
@@ -181,9 +234,9 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 
 The constraints defined below was specified by João Durães in ... .
 
-\begin{table}[ht]
+\begin{table}[!ht]
 \centering
-\begin{tabular}{|c|l|}
+\begin{tabular}{|c|p{12cm}|}
 \hline
 \textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
 \textbf{C01}       \label{C01}  & Return value of the function \textbf{must not} being used                              \\ \hline
@@ -203,6 +256,10 @@ The constraints defined below was specified by João Durães in ... .
 \newpage
 \section{Work plan and implications}
 
+
+\red{From version to version I use a regression testing to test the fault injector to guarant that application don't regreded.}
+
+
 Built three separated modules:
 
 \begin{itemize}
@@ -217,7 +274,9 @@ The fault injected results is equal to the real software faults?
 
 \subsection{Compile programs}
 
-\red{Select five to ten programs to test.}
+\red{Select five to ten programs to be tested.}
+
+\red{Justificar a utilização de patchs}
 
 After the compilation and execution of the programs, the results need to be evaluate. For that, I will use the \textit{CRASH Scale}\cite{koopman1997comparing}:
 

@@ -39,8 +39,8 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 #### Reuniao 05/05/2015
 
 Fazer a analise de performance do programa
- - usando a analise recursiva da arvore
- - usando o visitor pattern
+- usando a analise recursiva da arvore
+- usando o visitor pattern
 
 Para além do número da falha meter o número da linha em que é feita a primeira modificação
 Selecionar os programas a efectuar injecção de falhas
@@ -59,11 +59,11 @@ taxonomia - faults erros and failures
 Saber o resultado de injetar aquela falha
 
 CRASH SCALE
- - Catastrophic
- - Restart
- - Abort
- - Silent
- - Hindering
+- Catastrophic
+- Restart
+- Abort
+- Silent
+- Hindering
 
 .c -> AST -> |(AST) -> .c
 diff
@@ -75,24 +75,24 @@ Regression Testing -> testar o programa versao a versao, verificando se o mesmo 
 Esquecer os operadores que não estão minimamente especificados.
 
 Resolver os problemas com a edição de codigo dos nos da arvore e com a obtenção do codigo final.
-    - Arranjar um testcase caso seja problema do CDT e submeter o mesmo para a mailing list.
-    - Criar um projeto C ?
-    - Reescrever as classes ChangeGenerator e ASTWriting para não formatar ou usar as opções por defeito
-    - Try to create my own translation unit and cproject classes
+- Arranjar um testcase caso seja problema do CDT e submeter o mesmo para a mailing list.
+- Criar um projeto C ?
+- Reescrever as classes ChangeGenerator e ASTWriting para não formatar ou usar as opções por defeito
+- Try to create my own translation unit and cproject classes
 
 #### Reuniao 13/04/2015
 
 O paper das transactions é o mais atualizado.
 O injector/aplicação feito pelo João Durães não tem nome.
 
-    WLEC - Wrong logical Expression used as branch Condition - trocar algumas das condições dos IF's
-    *WIDS - Wrong String in initial data
-    EVAV - Extraneous variable assignment using another variable - inserir uma modificação a uma variavel a cada linha de codigo? vai produzir muitas variações
+WLEC - Wrong logical Expression used as branch Condition - trocar algumas das condições dos IF's
+*WIDS - Wrong String in initial data
+EVAV - Extraneous variable assignment using another variable - inserir uma modificação a uma variavel a cada linha de codigo? vai produzir muitas variações
 
-    WSUT - Wrong datatypes or conversion used - Pode produzir warnings ou mesmo problemas ao compilar, implementação pouco viável
-    WALL - Wrong algorithm - large modifications - (Definir um padrão a partir de mais informação do Durães) modificar parte de um ciclo/bloco ?
-    *MLPC - Missing Small and localized part of algorithm - retirar um assignment, por exemplo.
-    MFCT - Missing Functionality - (Definir um padrão a partir de mais informação do Durães) frequência alta
+WSUT - Wrong datatypes or conversion used - Pode produzir warnings ou mesmo problemas ao compilar, implementação pouco viável
+WALL - Wrong algorithm - large modifications - (Definir um padrão a partir de mais informação do Durães) modificar parte de um ciclo/bloco ?
+*MLPC - Missing Small and localized part of algorithm - retirar um assignment, por exemplo.
+MFCT - Missing Functionality - (Definir um padrão a partir de mais informação do Durães) frequência alta
 
 *na tabela dos mais representativos da tese - 2005.
 
@@ -108,12 +108,12 @@ Empresas grandes têm bases de dados com a especificação e estatisticas da oco
 Se fosse usado num sistema de aviação, como seria?
 
 Formas de teste/verificação de bugs
- - O software que vou criar
- - Defect Seeding
+- O software que vou criar
+- Defect Seeding
 
 2 Caminhos:
- - Aplicar os operadores que estão bem especificados (perceber melhor as razões de escolha da amostra de operadores a especificar)
- - Fazer o estudo através do SourceForge (falar com o durães sobre a sua identificação dos diveros operadores)
+- Aplicar os operadores que estão bem especificados (perceber melhor as razões de escolha da amostra de operadores a especificar)
+- Fazer o estudo através do SourceForge (falar com o durães sobre a sua identificação dos diveros operadores)
 
 
 #### Reuniao 26/03/2015
@@ -121,11 +121,11 @@ Formas de teste/verificação de bugs
 1 - Implementar os 18 OPERADORES da tabela dos mais representativos (Table 11).
 2 - Continuar o estudo da API e quiçá, fazer um patch para conseguir reescrever a árvore
 3 - Estudar melhor o resto dos operadores, principalmente os que o João Durães não especificou:
-    - MFCT
-    - WLEC
-    - WALL
-    - WSUT
-    - EVAV
+- MFCT
+- WLEC
+- WALL
+- WSUT
+- EVAV
 
 
 #### Reuniao 17/03/2015
@@ -136,15 +136,15 @@ Continuar com a solução encontrada, mas tentar perceber um pouco melhor a fram
 
 #### Reuniao 03/03/2015
 Decisão entre:
- - Bison -
- - Yacc -
- - GCC Parser - Curva de aprendizagem bastante grande e dificilmente mantivel
- - API Eclipse CDT - API em Java, facilmente mantivel
- - MCPP - Anteriormente utilizado pelo Natella
+- Bison -
+- Yacc -
+- GCC Parser - Curva de aprendizagem bastante grande e dificilmente mantivel
+- API Eclipse CDT - API em Java, facilmente mantivel
+- MCPP - Anteriormente utilizado pelo Natella
 
 2 Fluxos:
- - CDT - estudar o fluxo e fazer a aplicação de um operador na árvore
- - SAFE - Conhecer melhor o fluxo, e a forma que o Natella usa para injetar as falhas
+- CDT - estudar o fluxo e fazer a aplicação de um operador na árvore
+- SAFE - Conhecer melhor o fluxo, e a forma que o Natella usa para injetar as falhas
 
 #### Reuniao 26/02/2015
 
@@ -173,14 +173,14 @@ Decisão: Injeção de falhas de software em ficheiros antes de compilar
 Analisar os 13 tipos de falhas selecionadas pelo João Durães, relativamente à sua implementação em código antes de compilar, constraints, etc
 
 Xen         vs      KVM
-  +
++
 Citrix ✔  (CentOS ✔-)
 
 
 Foco em:
 
-    Parser GCC
-    .C (devido à seleção do tipo de falhas feita anteriormente pelo João Durães.)
+Parser GCC
+.C (devido à seleção do tipo de falhas feita anteriormente pelo João Durães.)
 .Java
 
 Ratings das linguagens mais usadas:
@@ -202,9 +202,9 @@ C semelhante/igual ao parser?
 <b>Description</b>
 
 Injeção de Falhas de software com 3 possibilidades:
-    1 - <u> Ficheiro antes de compilar </u>
-    2 - Ficheiros em código objeto
-    3 - <u> Programa a executar </u>
+1 - <u> Ficheiro antes de compilar </u>
+2 - Ficheiros em código objeto
+3 - <u> Programa a executar </u>
 
 Decidir entre a 1 e a 3. Ou injetar falhas de software em ficheiros antes de compilar
 ou então injetar falhas em programas a executar.
@@ -218,16 +218,16 @@ Já existem 12? tipos de falhas de software documentadas no papper do Duraes.
 
 Usar o compilador gcc ou o llvm? porque? vantagens e desvantagens?
 
-    gcc
-        + mais maduro
-        + instalação fácil
-        + compilador por defeito na maioria dos SO's
-        + usado anteriormente
-    llvm
-        + bastante recente
-        + melhor feedback de erros
-        + por vezes executa mais rápido
-        + sem qualquer tipo de conhecimentos prévios de utilização
+gcc
++ mais maduro
++ instalação fácil
++ compilador por defeito na maioria dos SO's
++ usado anteriormente
+llvm
++ bastante recente
++ melhor feedback de erros
++ por vezes executa mais rápido
++ sem qualquer tipo de conhecimentos prévios de utilização
 
 
 [Robert Natella](http://wpage.unina.it/roberto.natella) desenvolveu uma ferramenta de injeção de falhas de software.
@@ -238,26 +238,26 @@ Clarificar objetivos e decidir o caminho (2 a 3 semanas para estar traçado!!!)
 #### Reuniao 12/01/2015
 
 <b>Tasks</b>
-    ☐ Leitura de documentos
-    ☐ Escrita do estado da arte
+☐ Leitura de documentos
+☐ Escrita do estado da arte
 
 <b>Description</b>
-    Discussão relativamente aos objetivos e às tarefas que vão ser atribuídas:
+Discussão relativamente aos objetivos e às tarefas que vão ser atribuídas:
 
-    * Fred já tem grande parte do injetor de falhas de hardware feita
-    * João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
+* Fred já tem grande parte do injetor de falhas de hardware feita
+* João também tem um injetor funcional (apesar de complexo) e está a fazer a interface web usando struts2
 
-    HM: Direcionar o estágio para software uma vez que a parte de hardware está
-    encaminhada ou ajudar ambos a integrar a aplicação de forma a meter tudo funcional?
+HM: Direcionar o estágio para software uma vez que a parte de hardware está
+encaminhada ou ajudar ambos a integrar a aplicação de forma a meter tudo funcional?
 
-    Definição de objetivos programada para Sexta, dia 16/01/2015
+Definição de objetivos programada para Sexta, dia 16/01/2015
 
 <b>Suggested modules</b>
 
-    Bus, Cache, etc (HW)
-    Software faults (muito trabalho)
-    VM injection vs. host injection
-    Web framework
+Bus, Cache, etc (HW)
+Software faults (muito trabalho)
+VM injection vs. host injection
+Web framework
 
 
 ### Opção Tematica
@@ -331,7 +331,7 @@ Dar-se-à preferência a alunos que tenham tido um bom desempenho às disciplina
 #### Reuniao X/01/2015
 
 <b>Tasks</b>
-    ☐ task1
+☐ task1
 
 <b>Description</b>
 
