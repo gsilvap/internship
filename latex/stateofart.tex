@@ -94,23 +94,30 @@ To understand a little more what the Cloud Computing means:\\
 
 Cloud Computing is a new way to delivery TI services on-demand (utility-oriented and Internet-centric). This services included all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{cloudcomputing.jpg}
+\caption{\small \sl Cloud Computing overview.\label{fig:cloudcomputing}}
+\end{center}
+\end{figure}
+
 Above, I will describe it in relation to characteristics, deployment models and service models \cite{schouten2013ibm}.
 
 The characteristics of Cloud Computing are:
 \begin{itemize}
-	\item \textbf{On demand self-service} 	- The users can request and manage their cloud computing resources without requiring human interaction,
-	\item \textbf{Broad network access 	}	-
-	\item \textbf{Resource pooling 		}	-
-	\item \textbf{Rapid elasticity 		}	-
-	\item \textbf{Measured service 		}	-
+	\item \textbf{On demand self-service} 	- The users can request and manage their cloud computing resources without requiring human interaction, through a web-based self-service portal.
+	\item \textbf{Broad network access 	}	- Provide access over the network and using standard way through by several clients (e.g., mobile phones, tablets, laptops and workstations).
+	\item \textbf{Resource pooling 		}	- The computer resources are pooled to serve multiple customers through the safe separation of the resources at logical level.
+	\item \textbf{Rapid elasticity 		}	- Capability of resources to be elastically provisioned and released. Making sure of the application will have exactly the capacity that it needs at any point of time.
+	\item \textbf{Measured service 		}	- The service is monitored, measured and reported transparently based on the usage. The clients pay in accordance with the service spent.
 \end{itemize}
 
-Three models of deployment:
+Four models of deployment:
 \begin{itemize}
 	\item \textbf{Private Cloud}   -
-	\item \textbf{Community Cloud} -
-	\item \textbf{Public Cloud}    -
-	\item \textbf{Hybrid Cloud}    -
+	\item \textbf{Community Cloud} - Shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
+	\item \textbf{Public Cloud}    - Available to the general public or to a group of a big company. Property of one organization which selling Cloud services.
+	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that permits portability. Take advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
 
 Three levels of Cloud Computing Service Models:
@@ -122,9 +129,18 @@ Three levels of Cloud Computing Service Models:
 
 	\item \textbf{\ac{saas}} - provides access to application softwares ofter referred as \textit{on-demand self-service} softwares. Use it without install, setup and run the application. Service provider do all things for you. Examples: Google Apps, Microsoft Office 365.
 
+	\item \textbf{\ac{bpaas}} - this model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
+
 \end{itemize}
 
-The cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{cloud-computing-service-models.png}
+\caption{\small \sl Cloud Computing Service Models.\label{fig:cloudcomputingservicemodels}}
+\end{center}
+\end{figure}
+
+But, such as any computer system, the cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
  	\item Security attacks;
  	\item Accidents;
