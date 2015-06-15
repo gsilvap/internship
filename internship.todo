@@ -24,6 +24,16 @@ Módulos:
     Aplica cada um dos patch aos ficheiros originais e instala o programa / make
 
 
+Report:
+  ☐ Abstract - Desenvolver
+  ☐ 1.1 - Desenvolver
+  ☐ 1.5.2 - Desenvolver e relacionar os riscos com a forma de os mitigar
+  ☐ 1.5.3 - Desenvolver e especificar uma metodologia. Agile Life Cycle baseado num modelo incremental, enquandra-se com o desenvolvimento do projeto?
+  ☐ 2 - Contextualizar
+  ☐ 3.2 - Descrever o Bison/Yacc e o mcpp
+  ☐ 4 - Especificar cada um dos operadores e constraints
+  ☐ 4.3 - Em que aplicações vou injectar falhas?
+
 Tarefas até à próxima reunião:
  ☐ Verificar se as alterações feitas ao nivel do GCC parser são iguais às produzidas por essa mesma falha de software real introduzida no Xen ou no KVM
   2 Threads principais:

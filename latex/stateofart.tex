@@ -3,13 +3,13 @@
 \section{State of the Art}
 
 Nowadays, people use a lot of services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and neither need to buy ``physical storage'', neither care where are the data. The cloud service provides that the data is secure.
-But, like as any system, the cloud have problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
+But, like as any system, the cloud has problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
 
-The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud providers offers resources ready to deliver \cite{wolter2012resilience}.
+The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offers resources ready to deliver \cite{wolter2012resilience}.
 
 There are many studies showing that the software faults\cite{avizzienisbasic} it's the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
 
-With this work, I pretend to inject software faults and analyze how the system react to them.
+With this work, I pretend to inject software faults and analyze how the system reacts to them.
 
 In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.
 
@@ -45,19 +45,19 @@ In the next subsections I will describe some fault injectors that have been prev
 Safe is an application to inject realistic software faults in programs coded in C and C++.
 This tool uses MCPP as parser, to get the tree of code. The decision of use MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
 
-\red{After that, write some files, variations of original files (code with simple mutations) with operators applied.}
-Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert \red{sinonimo: implemented} at source code level, and João at binary level.\\
+After that, write some files, variations of original files (code with simple mutations) with operators applied.
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
 
 
 \textbf{JACA Tool}\\
 % \subsubsection{JACA Tool}
 
-JACA\cite{regina2003jaca} is a tool taht have been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
+JACA\cite{regina2003jaca} is a tool that have been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
 \cite{martins2002jaca}. \\
 
 \textbf{J-SWFIT} \\
 
-Java Software Fault Injection Tool\cite{sanches2011j} is a tool that don't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
+Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
 
 \clearpage
 \subsection{ODC Model}
@@ -65,11 +65,11 @@ Java Software Fault Injection Tool\cite{sanches2011j} is a tool that don't need 
 ODC can be used to classifying and analyzing defects during software development.
 
 %\cite{lyu1996handbook}
-For that, this model have eight categories:
+For that, this model has eight categories:
 
 \begin{itemize}
 	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
-	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or an data structure.
+	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or a data structure.
 	\item \textbf{Interface} - Problems in the interaction with other components, modules, device drivers, call statements, control blocks, or parameter lists.
 	\item \textbf{Checking} - Based in the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
 	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
@@ -92,12 +92,12 @@ To understand a little more what the Cloud Computing means:\\
 
 \textit{``Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.''}\cite{mell2011nist}.\\
 
-Cloud Computing is a new way to delivery TI services on-demand (utility-oriented and Internet-centric). This services included all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
+Cloud Computing is a new way to delivery TI services on-demand (utility-oriented and Internet-centric). These services included all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{cloudcomputing.jpg}
-\caption{\small \sl Cloud Computing overview.\label{fig:cloudcomputing}}
+\caption{\small \sl Cloud computing overview.\label{fig:cloudcomputing}}
 \end{center}
 \end{figure}
 
@@ -114,22 +114,24 @@ The characteristics of Cloud Computing are:
 
 Four models of deployment:
 \begin{itemize}
-	\item \textbf{Private Cloud}   -
-	\item \textbf{Community Cloud} - Shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
-	\item \textbf{Public Cloud}    - Available to the general public or to a group of a big company. Property of one organization which selling Cloud services.
+	%and treat effectively a lot of requests.}
+	\item \textbf{Private Cloud}   - It's a single-tenant cloud solution utilizing client hardware and software, is located inside the client firewall or even data center. The sensitive information is maintained inside of organization. It has the disadvantage of not having ability to scale on demand.
+	\item \textbf{Community Cloud} - It’s shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
+	\item \textbf{Public Cloud}    - It's available to the general public or to a group of a big company. It's a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers. It's owned by the company that sells cloud services.
+
 	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that permits portability. Take advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
 
-Three levels of Cloud Computing Service Models:
+Four levels of Cloud Computing Service Models:
 
 \begin{itemize}
-	\item \textbf{\ac{iaas}} - as the name suggests, provides an computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
+	\item \textbf{\ac{iaas}} - As the name suggests, provides a computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
 
-	\item \textbf{\ac{paas}} - provides an computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
+	\item \textbf{\ac{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
 
-	\item \textbf{\ac{saas}} - provides access to application softwares ofter referred as \textit{on-demand self-service} softwares. Use it without install, setup and run the application. Service provider do all things for you. Examples: Google Apps, Microsoft Office 365.
+	\item \textbf{\ac{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
 
-	\item \textbf{\ac{bpaas}} - this model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
+	\item \textbf{\ac{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
 
 \end{itemize}
 
@@ -157,10 +159,14 @@ But, such as any computer system, the cloud computing isn't free of external dis
 In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
 For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.
 
-\red{For parsing the code, analyze and modify it,}
+%\red{For parsing the code, analyze and modify it,}
 
 % Finally, I decided to use
-In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my habilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
+In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my abilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
+
+\textbf{Bison/Yacc}\\
+
+\textbf{MCPP}\\
 
 \textbf{GCC Parser}\\
 
@@ -168,7 +174,7 @@ Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, 
 
 \textbf{Eclipse CDT}\\
 
-Eclipse CDT, as the name suggests, is an plugin for Eclipse that provides a fully functional C and C++ Integrated Development Environment.
+Eclipse CDT, as the name suggests, is a plugin for Eclipse that provides a fully functional C and C++ Integrated Development Environment.
 Some of the features included in this plugin that are interesting for this project are:
 \begin{itemize}
 	\item Source navigation;
@@ -177,16 +183,16 @@ Some of the features included in this plugin that are interesting for this proje
 \end{itemize}
 
 Is possible to use this plugin in standalone mode, importing .jar files to the project.
-Using it I can code Fault Injector in Java, making the software more maintainable and easy to use, write, compile and debug.
+Using it, I can code Fault Injector in Java, making the software more maintainable and easy to use, write, compile and debug.
 \\
 
-\red{Problems with the rewriting of tree}
+%\red{Problems with the rewriting of tree}
 
-\red{Reflection}
+%\red{Reflection}
 
-\red{But I was forced to take decisions after that, for example, after create the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}
+%\red{But I was forced to take decisions after that, for example, after create the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}
 
-\red{Performance analyses}
+%\red{Performance analyses}
 
 \newpage
 % \section{Current work and preliminary results}
@@ -230,7 +236,7 @@ The operators above will applied to source code of applications and will generat
 
 I chose to use the most representative faults \cite{duraes2006emulation}, divided into missing, wrong and extraneous, specified individually further down:
 
-\red{Table of more representative faults of Durães}
+%\red{Table of more representative faults of Durães}
 
 \subsubsection{Fault Types - Missing}
 \begin{itemize}
@@ -244,7 +250,7 @@ I chose to use the most representative faults \cite{duraes2006emulation}, divide
 	\item \textbf{MLPA} - small and localized part of the algorithm
 	\item \textbf{MVAE} - variable assignment using an expression
 %	\item \textbf{MFCT} - functionality
-	\item \textbf{MVAV} - variable assignment using an value
+	\item \textbf{MVAV} - variable assignment using a value
 	\item \textbf{MIEB} - if construct plus statements plus else before statements
 	\item \textbf{MVIV} - variable initialization
 \end{itemize}
@@ -282,7 +288,7 @@ The constraints defined below was specified by João Durães in ... .
 \textbf{C07}       \label{C07}  & \textbf{Must not be} the first assignment for that variable in the module              \\ \hline
 \textbf{C08}       \label{C08}  & The if construct \textbf{must not be} associated to an else construct                  \\ \hline
 \textbf{C09}       \label{C09}  & Statements \textbf{must not include more than} five statements and not include loops   \\ \hline
-\textbf{C10}       \label{C010} & Statements are in the same block, \textbf{do not include more than} 5 stats. not loops \\ \hline
+\textbf{C10}       \label{C010} & Statements are in the same block, \textbf{do not include more than} 5 stats. or loops \\ \hline
 \textbf{C11}       \label{C011} & There \textbf{must be} at least two variables in this module                           \\ \hline
 \end{tabular}
 \end{table}
@@ -318,9 +324,7 @@ Built three separated modules:
 	\item Compile the programs with injected faults, by using make file.
 \end{itemize}
 
-\subsection{Analyze the effects}
 
-\red{The fault injected results is equal to the real software faults?}
 
 
 
@@ -331,7 +335,11 @@ Built three separated modules:
 
 \red{Justificar a utilização de patchs}
 
-After the compilation and execution of the programs, the results need to be evaluate. For measure that, I will use the \textit{CRASH Scale}\cite{koopman1997comparing}:
+\subsection{Analyze the effects}
+
+\red{The fault injected results is equal to the real software faults?}
+
+After the compilation and execution of the programs, the results need to be evaluated. For measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
 
 \begin{itemize}
 	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
@@ -342,4 +350,4 @@ After the compilation and execution of the programs, the results need to be eval
 	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error core.
 \end{itemize}
 
-This \textit{CRASH Scale} is one way to show results of the effect of faults on an end-use system.
+This \textit{CRASH Scale} is one way to show results of the effect of faults on an end-use system, mainly from the operating system perspective.
