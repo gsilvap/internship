@@ -26,10 +26,10 @@ In Table \ref{tab:representative_faults}, are specified the most representative 
 
 
 % \marginnote{especificar as abreviaturas...}[0cm]
-% \ac{cots}
-% \ac{g-swfit}
-% \ac{odc}
-% \ac{swifi}
+% \\textbf{acs{cots}} A \acl{cots}
+% \acl{g-swfit}
+% \acl{odc}
+% \acl{swifi}
 
 I have the opportunity to access to the application (executable only)
 %not the source)
@@ -61,14 +61,14 @@ Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't nee
 
 \clearpage
 \subsection{ODC Model}
-\ac{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
+\acl{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
 ODC can be used to classifying and analyzing defects during software development.
 
 %\cite{lyu1996handbook}
 For that, this model has eight categories:
 
 \begin{itemize}
-	\item \textbf{Function} - This defect affects significant capability, end-user features, product \ac{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
+	\item \textbf{Function} - This defect affects significant capability, end-user features, product \acl{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
 	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or a data structure.
 	\item \textbf{Interface} - Problems in the interaction with other components, modules, device drivers, call statements, control blocks, or parameter lists.
 	\item \textbf{Checking} - Based in the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
@@ -125,13 +125,13 @@ Four models of deployment:
 Four levels of Cloud Computing Service Models:
 
 \begin{itemize}
-	\item \textbf{\ac{iaas}} - As the name suggests, provides a computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
+	\item \textbf{\acl{iaas}} - As the name suggests, provides a computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
 
-	\item \textbf{\ac{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
+	\item \textbf{\acl{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
 
-	\item \textbf{\ac{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
+	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
 
-	\item \textbf{\ac{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
+	\item \textbf{\acl{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
 
 \end{itemize}
 
@@ -150,7 +150,7 @@ But, such as any computer system, the cloud computing isn't free of external dis
  	\item Workload faults;
  	\item Malfunction;
  	\item Worms;
- 	\item \ac{ddos} attacks.
+ 	\item \acl{ddos} attacks.
  \end{itemize}
 
 \clearpage
@@ -203,25 +203,165 @@ The Fault Injector currently in development is coded in Java using Eclipse CDT, 
 \cite{duraes2005thesis}.
 
 \begin{table}[!ht]
-\begin{tabular}{l|l}
+\begin{tabular}{|l|p{12cm}|}
 \hline
-Fault Type & Description                                            \\ \hline
-MFC        & Missing function call                                  \\
-MVIV       & Missing variable initialization using a value          \\
-MVAV       & Missing variable assignment using a value              \\
-MVAE       & Missing variable assignment with an expression         \\
-MIA        & Missing IF construct around statements                 \\
-MIFS       & Missing IF construct + statements                      \\
-MIEB       & Missing IF construct + statements + ELSE construct     \\
-MLAC       & Missing AND in expression used as branch condition     \\
-MLOC       & Missing OR in expression used as branch condition      \\
-MLPA       & Missing small and localized part of the algorithm      \\
-WVAV       & Wrong value assigned to variable                       \\
-WPFV       & Wrong variable used in parameter of function call      \\
-WAEP       & Wrong arithmetic expression in function call parameter \\ \hline
+\textbf{Fault Type}		& \multicolumn{1}{c|}{\textbf{Description}}		\\ \hline \hline
+MFC        				& \Acl{mfc}  									\\ \hline
+MVIV       				& \Acl{mviv} 									\\ \hline
+MVAV       				& \Acl{mvav} 									\\ \hline
+MVAE       				& \Acl{mvae} 									\\ \hline
+MIA        				& \Acl{mia}  									\\ \hline
+MIFS       				& \Acl{mifs} 									\\ \hline
+MIEB       				& \Acl{mieb} 									\\ \hline
+MLAC       				& \Acl{mlac} 									\\ \hline
+MLOC       				& \Acl{mloc} 									\\ \hline
+MLPA       				& \Acl{mlpa} 									\\ \hline
+WVAV       				& \Acl{wvav} 									\\ \hline
+WPFV       				& \Acl{wpfv} 									\\ \hline
+WAEP       				& \Acl{waep} 									\\ \hline
 \end{tabular}
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
+
+\subsection{Generate derivations}
+
+I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation}, specified individually further down:
+
+%\red{Table of more representative faults of Durães}
+	\hypertarget{mifs}{}
+	\subsubsection{\textbf{\acs{mifs}}} - \Acl{mifs} - \green{\textbf{Implemented}}
+ 	\bookmark[level=\thesubsubsection,dest=mifs]{\thesubsubsection \ \acs{mifs}}
+
+	The application of this operator changes the source code with the remotion of one \textit{if} construct and the statements surrounded by it.
+	But, to do that, I need to verify the constraints above:
+	\begin{itemize}
+		\item \textbf{\acs{c02}} - \Acl{c02};
+		\item \textbf{\acs{c08}} - \Acl{c08};
+		\item \textbf{\acs{c09}} - \Acl{c09}.
+	\end{itemize}
+
+	\hypertarget{mlac}{}
+	\subsubsection{\textbf{\acs{mlac}}} - \Acl{mlac} - \green{\textbf{Implemented}}
+	\bookmark[level=\thesubsubsection,dest=mlac]{\thesubsubsection \ \acs{mlac}}
+
+	This operator emules the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator AND. With an AND operator, if one of the sub-expressions is \textit{false} all the expression will be \textit{false} and the condition will fail.
+	\begin{itemize}
+		\item \textbf{\acs{c12}} - \Acl{c12}.
+	\end{itemize}
+
+	\hypertarget{mfc}{}
+	\subsubsection{\textbf{\acs{mfc}}} - \Acl{mfc}
+	\bookmark[level=\thesubsubsection,dest=mfc]{\thesubsubsection \ \acs{mfc}}
+
+	The emulation of this operator is based in the remotion of a function call in a context where the returned value is not used.
+	\begin{itemize}
+		\item \textbf{\acs{c01}} - \Acl{c01};
+		\item \textbf{\acs{c02}} - \Acl{c02}.
+	\end{itemize}
+
+	\hypertarget{mia}{}
+	\subsubsection{\textbf{\acs{mia}}} - \Acl{mia} - \green{\textbf{Implemented}}
+	\bookmark[level=\thesubsubsection,dest=mia]{\thesubsubsection \ \acs{mia}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c08}} - \Acl{c08};
+		\item \textbf{\acs{c09}} - \Acl{c09}.
+	\end{itemize}
+
+	\hypertarget{mloc}{}
+	\subsubsection{\textbf{\acs{mloc}}} - \Acl{mloc} - \green{\textbf{Implemented}}
+	\bookmark[level=\thesubsubsection,dest=mloc]{\thesubsubsection \ \acs{mloc}}
+
+	This operator emules the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. \red{acabar}
+	\begin{itemize}
+		\item \textbf{\acs{c12}} - \Acl{c12}.
+	\end{itemize}
+
+	\hypertarget{mlpa}{}
+	\subsubsection{\textbf{\acs{mlpa}}} - \Acl{mlpa}
+	\bookmark[level=\thesubsubsection,dest=mlpa]{\thesubsubsection \ \acs{mlpa}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c02}} - \Acl{c02};
+		\item \textbf{\acs{c10}} - \Acl{c10}.
+	\end{itemize}
+
+	\hypertarget{mvae}{}
+	\subsubsection{\textbf{\acs{mvae}}} - \Acl{mvae}
+	\bookmark[level=\thesubsubsection,dest=mvae]{\thesubsubsection \ \acs{mvae}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c02}} - \Acl{c02};
+		\item \textbf{\acs{c03}} - \Acl{c03};
+		\item \textbf{\acs{c06}} - \Acl{c06};
+		\item \textbf{\acs{c07}} - \Acl{c07}.
+	\end{itemize}
+
+	\hypertarget{mvav}{}
+	\subsubsection{\textbf{\acs{mvav}}} - \Acl{mvav}
+	\bookmark[level=\thesubsubsection,dest=mvav]{\thesubsubsection \ \acs{mvav}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c02}} - \Acl{c02};
+		\item \textbf{\acs{c03}} - \Acl{c03};
+		\item \textbf{\acs{c06}} - \Acl{c06};
+		\item \textbf{\acs{c07}} - \Acl{c07}.
+	\end{itemize}
+
+	\hypertarget{mieb}{}
+	\subsubsection{\textbf{\acs{mieb}}} - \Acl{mieb} - \green{\textbf{Implemented}}
+	\bookmark[level=\thesubsubsection,dest=mieb]{\thesubsubsection \ \acs{mieb}}
+
+	This operator generates derivations of the source code of applications by removing the if construct plus statements plus else before statements. To apply this operator I need to verify the constraint above:
+	\begin{itemize}
+		\item \textbf{\acs{c08n}} - \Acl{c08n}.
+	\end{itemize}
+	This constraint doesn't exists in João Durães specification, but as this operator cannot be applyed in all situations, I implemented and specify it.
+
+	\hypertarget{mviv}{}
+	\subsubsection{\textbf{\acs{mviv}}} - \Acl{mviv}
+	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c02}} - \Acl{c02};
+		\item \textbf{\acs{c03}} - \Acl{c03};
+		\item \textbf{\acs{c04}} - \Acl{c04};
+		\item \textbf{\acs{c05}} - \Acl{c05};
+		\item \textbf{\acs{c06}} - \Acl{c06}.
+	\end{itemize}
+
+
+%	\hypertarget{wlec}{}
+%	\subsubsection{\textbf{\acs{wlec}}} - \Acl{wlec}
+%	\hypertarget{wall}{}
+%	\subsubsection{\textbf{\acs{wall}}} - \Acl{wall}
+	\hypertarget{wvav}{}
+	\subsubsection{\textbf{\acs{wvav}}} - \Acl{wvav}
+	\bookmark[level=\thesubsubsection,dest=wvav]{\thesubsubsection \ \acs{wvav}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c03}} - \Acl{c03};
+		\item \textbf{\acs{c04}} - \Acl{c04};
+		\item \textbf{\acs{c06}} - \Acl{c06}.
+	\end{itemize}
+
+	\hypertarget{waep}{}
+	\subsubsection{\textbf{\acs{waep}}} - \Acl{waep}
+	\bookmark[level=\thesubsubsection,dest=waep]{\thesubsubsection \ \acs{waep}}
+
+
+
+%	\hypertarget{wsut}{}
+%	\subsubsection{\textbf{\acs{wsut}}} - \Acl{wsut}
+
+	\hypertarget{wpfv}{}
+	\subsubsection{\textbf{\acs{wpfv}}} - \Acl{wpfv}
+	\bookmark[level=\thesubsubsection,dest=wpfv]{\thesubsubsection \ \acs{wpfv}}
+
+	\begin{itemize}
+		\item \textbf{\acs{c03}} - \Acl{c03};
+		\item \textbf{\acs{c11}} - \Acl{c11}.
+	\end{itemize}
 
 The operators above will applied to source code of applications and will generate modified files.
 
@@ -231,39 +371,6 @@ The operators above will applied to source code of applications and will generat
 \caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
 \end{center}
 \end{figure}
-
-\subsection{Generate derivations}
-
-I chose to use the most representative faults \cite{duraes2006emulation}, divided into missing, wrong and extraneous, specified individually further down:
-
-%\red{Table of more representative faults of Durães}
-
-\subsubsection{Fault Types - Missing}
-\begin{itemize}
-	\item \textbf{MIFS} - if construct plus statements
-
-	This operator is based in the remotion of one conditional if. To do that, I need to verify the constraints c02, c08 and c09.
-	\item \textbf{MLAC} - AND sub-expression in expression used as branch condition
-	\item \textbf{MFC}  - function call
-	\item \textbf{MIA}  - if construct around statements
-	\item \textbf{MLOC} - OR sub-expression in expression used as branch condition
-	\item \textbf{MLPA} - small and localized part of the algorithm
-	\item \textbf{MVAE} - variable assignment using an expression
-%	\item \textbf{MFCT} - functionality
-	\item \textbf{MVAV} - variable assignment using a value
-	\item \textbf{MIEB} - if construct plus statements plus else before statements
-	\item \textbf{MVIV} - variable initialization
-\end{itemize}
-
-\subsubsection{Fault Types - Wrong}
-\begin{itemize}
-%	\item \textbf{WLEC} - logical expression used as branch condition
-%	\item \textbf{WALL} - algorithm - large modifications
-	\item \textbf{WVAV} - value assigned to variable
-	\item \textbf{WAEP} - arithmetic expression in parameter of function call
-%	\item \textbf{WSUT} - data types or conversion used
-	\item \textbf{WPFV} - variable used in parameter of function call
-\end{itemize}
 
 %\subsubsection{Fault Types - Extraneous}
 %\begin{itemize}
@@ -279,18 +386,30 @@ The constraints defined below was specified by João Durães in ... .
 \begin{tabular}{|c|p{12cm}|}
 \hline
 \textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
-\textbf{C01}       \label{C01}  & Return value of the function \textbf{must not} being used                              \\ \hline
-\textbf{C02}       \label{C02}  & Call \textbf{must not be} the only statement in the block                              \\ \hline
-\textbf{C03}       \label{C03}  & Variable \textbf{must be} inside stack frame                                           \\ \hline
-\textbf{C04}       \label{C04}  & \textbf{Must be} the first assignment for that variable in the module                  \\ \hline
-\textbf{C05}       \label{C05}  & Assignment \textbf{must not be} inside a loop                                          \\ \hline
-\textbf{C06}       \label{C06}  & Assignment \textbf{must not be} part of a for construct                                \\ \hline
-\textbf{C07}       \label{C07}  & \textbf{Must not be} the first assignment for that variable in the module              \\ \hline
-\textbf{C08}       \label{C08}  & The if construct \textbf{must not be} associated to an else construct                  \\ \hline
-\textbf{C09}       \label{C09}  & Statements \textbf{must not include more than} five statements and not include loops   \\ \hline
-\textbf{C10}       \label{C010} & Statements are in the same block, \textbf{do not include more than} 5 stats. or loops \\ \hline
-\textbf{C11}       \label{C011} & There \textbf{must be} at least two variables in this module                           \\ \hline
+\textbf{C01}         & \Acl{c01} \\ \hline
+\textbf{C02}         & \Acl{c02} \\ \hline
+\textbf{C03}         & \Acl{c03} \\ \hline
+\textbf{C04}         & \Acl{c04} \\ \hline
+\textbf{C05}         & \Acl{c05} \\ \hline
+\textbf{C06}         & \Acl{c06} \\ \hline
+\textbf{C07}         & \Acl{c07} \\ \hline
+\textbf{C08}         & \Acl{c08} \\ \hline
+\textbf{C09}         & \Acl{c09} \\ \hline
+\textbf{C10}         & \Acl{c10} \\ \hline
+\textbf{C11}         & \Acl{c11} \\ \hline
 \end{tabular}
+\caption{\small \sl Fault emulation contraints defined by João Durães.\label{tab:faultEmulationConstraintsDuraes}}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
+\textbf{C08n}         & \Acl{c08n} \\ \hline
+\textbf{C12}         & \Acl{c12} \\ \hline
+\end{tabular}
+\caption{\small \sl Other constraints.\label{tab:otherConstraints}}
 \end{table}
 
 \clearpage
@@ -345,7 +464,7 @@ After the compilation and execution of the programs, the results need to be eval
 	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
 	\item \textbf{R}estart - Task or process hangs, requiring restart;
 	\item \textbf{A}bort - Task or process aborts abnormally (i.e. ``code dump'' or ``segmentation violation'');
-	\item \textbf{S}ilent - Test Process exits without error code returned when one should be;
+	\item \textbf{S}ilent - Test Process exits without an error code returned when one should be;
 	\item \textbf{H}indering - Test Process exits with an error code not relevant to the situation or incorrect error code returned;
 	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error core.
 \end{itemize}

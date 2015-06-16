@@ -1,0 +1,376 @@
+%!TEX root = main.tex
+
+\DeclareAcronym{mbc}{
+	short = MBC,
+	long  = missing break in case,
+	class = operator
+}
+\DeclareAcronym{mca}{
+	short = MCA,
+	long  = missing iteration construct arround statements,
+	class = operator
+}
+\DeclareAcronym{mcs}{
+	short = MCS,
+	long  = missing case: statement(s) inside a switch construct,
+	class = operator
+}
+\DeclareAcronym{mfc}{
+	short = MFC,
+	long  = missing function call,
+	class = operator
+}
+\DeclareAcronym{mfct}{
+	short = MFCT,
+	long  = missing functionality,
+	class = operator
+}
+\DeclareAcronym{mia}{
+	short = MIA,
+	long  = missing if construct arount statements,
+	class = operator
+}
+\DeclareAcronym{miea}{
+	short = MIEA,
+	long  = missing if construct plus else plus statements around statements,
+	class = operator
+}
+\DeclareAcronym{mieb}{
+	short = MIEB,
+	long  = missing if construct plus statements plus else before statements,
+	class = operator
+}
+\DeclareAcronym{mies}{
+	short = MIES,
+	long  = missing if-else construct plus statement,
+	class = operator
+}
+\DeclareAcronym{mifs}{
+	short = MIFS,
+	long  = missing if construct and surrounded statements,
+	class = operator
+}
+\DeclareAcronym{mlaa}{
+	short = MLAA,
+	long  = missing and sub-expr. in larger expression in assignment,
+	class = operator
+}
+\DeclareAcronym{mlac}{
+	short = MLAC,
+	long  = missing and sub-expr. in logical expression used in branch condition,
+	class = operator
+}
+\DeclareAcronym{mlap}{
+	short = MLAP,
+	long  = missing and sub-expr. in param. of function call,
+	class = operator
+}
+\DeclareAcronym{mloa}{
+	short = MLOA,
+	long  = missing or sub-expr. in larger expression in assignment,
+	class = operator
+}
+\DeclareAcronym{mloc}{
+	short = MLOC,
+	long  = missing or sub-expr. in logical expression used in branch condition,
+	class = operator
+}
+\DeclareAcronym{mlop}{
+	short = MLOP,
+	long  = missing or sub-expr. in param. of function call,
+	class = operator
+}
+\DeclareAcronym{mlpa}{
+	short = MLPA,
+	long  = missing localized part of the algorithm,
+	class = operator
+}
+\DeclareAcronym{mlpl}{
+	short = MLPL,
+	long  = missing large part of the algorithm,
+	class = operator
+}
+\DeclareAcronym{mlps}{
+	short = MLPS,
+	long  = missing sparsely spaced parts of the algorithm,
+	class = operator
+}
+\DeclareAcronym{mpfc}{
+	short = MPFC,
+	long  = missing parameter in function call,
+	class = operator
+}
+\DeclareAcronym{mrs}{
+	short = MRS,
+	long  = missing return statement,
+	class = operator
+}
+\DeclareAcronym{mvad}{
+	short = MVAD,
+	long  = missing variable auto-decrement,
+	class = operator
+}
+\DeclareAcronym{mvae}{
+	short = MVAE,
+	long  = missing variable assignment with an expression,
+	class = operator
+}
+\DeclareAcronym{mvai}{
+	short = MVAI,
+	long  = missing variable auto-increment,
+	class = operator
+}
+\DeclareAcronym{mvav}{
+	short = MVAV,
+	long  = missing variable assignment with a value,
+	class = operator
+}
+\DeclareAcronym{mvie}{
+	short = MVIE,
+	long  = missing variable initialization using a value,
+	class = operator
+}
+\DeclareAcronym{mviv}{
+	short = MVIV,
+	long  = missing variable initialization with a value,
+}
+
+\DeclareAcronym{waec}{
+	short = WAEC,
+	long  = wrong arithmetic expression in branch condition,
+	class = operator
+}
+\DeclareAcronym{waep}{
+	short = WAEP,
+	long  = wrong arithmetic expression in param. of function call,
+	class = operator
+}
+\DeclareAcronym{wald}{
+	short = WALD,
+	long  = wrong algorithm - small sparse modifications,
+	class = operator
+}
+\DeclareAcronym{wall}{
+	short = WALL,
+	long  = wrong algorithm - large modifications,
+	class = operator
+}
+\DeclareAcronym{walr}{
+	short = WALR,
+	long  = wrong algorithm - code was misplaced,
+	class = operator
+}
+\DeclareAcronym{wbc1}{
+	short = WBC1,
+	long  = wrong branch construct - goto instead break,
+	class = operator
+}
+\DeclareAcronym{wfcd}{
+	short = WFCD,
+	long  = wrong function called with different parameters,
+	class = operator
+}
+\DeclareAcronym{wfcs}{
+	short = WFCS,
+	long  = wrong function called with same parameters,
+	class = operator
+}
+\DeclareAcronym{widi}{
+	short = WIDI,
+	long  = wrong constant in initial data,
+	class = operator
+}
+\DeclareAcronym{widim}{
+	short = WIDIM,
+	long  = wrong miss by one constant in initial data,
+	class = operator
+}
+\DeclareAcronym{widm}{
+	short = WIDM,
+	long  = wrong initial data - array has values in wrong order,
+	class = operator
+}
+\DeclareAcronym{wids}{
+	short = WIDS,
+	long  = wrong string in initial data,
+	class = operator
+}
+\DeclareAcronym{widsl}{
+	short = WIDSL,
+	long  = wrong string in initial data - missing one char,
+	class = operator
+}
+\DeclareAcronym{wlec}{
+	short = WLEC,
+	long  = wrong logical expression used as branch condition,
+	class = operator
+}
+\DeclareAcronym{wlep}{
+	short = WLEP,
+	long  = wrong logical expression in param of function call,
+	class = operator
+}
+\DeclareAcronym{wpfl}{
+	short = WPFL,
+	long  = wrong value used in parameter of function call,
+	class = operator
+}
+\DeclareAcronym{wpfml}{
+	short = WPFML,
+	long  = wrong miss by one value in parameter of function call,
+	class = operator
+}
+\DeclareAcronym{wpfo}{
+	short = WPFO,
+	long  = wrong parameter order in function call,
+	class = operator
+}
+\DeclareAcronym{wpfv}{
+	short = WPFV,
+	long  = wrong variable used in parameter of function call,
+	class = operator
+}
+\DeclareAcronym{wpla}{
+	short = WPLA,
+	long  = wrong parenthesis in logical expr. used in assignment,
+	class = operator
+}
+\DeclareAcronym{wplc}{
+	short = WPLC,
+	long  = wrong parenthesis in logical expr. used as branch condition,
+	class = operator
+}
+\DeclareAcronym{wplp}{
+	short = WPLP,
+	long  = wrong parenthesis in logical expr. In param of function call,
+	class = operator
+}
+\DeclareAcronym{wrv}{
+	short = WRV,
+	long  = wrong return value,
+	class = operator
+}
+\DeclareAcronym{wsuc}{
+	short = WSUC,
+	long  = wrong conditional compilation definitions,
+	class = operator
+}
+\DeclareAcronym{wsut}{
+	short = WSUT,
+	long  = wrong data types or conversion used,
+	class = operator
+}
+\DeclareAcronym{wvae}{
+	short = WVAE,
+	long  = wrong arithmetic expression used in assignment,
+	class = operator
+}
+\DeclareAcronym{wval}{
+	short = WVAL,
+	long  = wrong logical expression used in assignment,
+	class = operator
+}
+\DeclareAcronym{wvam}{
+	short = WVAM,
+	long  = wrong miss by one value assigned to variable,
+	class = operator
+}
+\DeclareAcronym{wvav}{
+	short = WVAV,
+	long  = wrong value assigned to a variable,
+	class = operator
+}
+\DeclareAcronym{wvim}{
+	short = WVIM,
+	long  = wrong miss-by-one value used in variable initialization,
+	class = operator
+}
+\DeclareAcronym{wviv}{
+	short = WVIV,
+	long  = wrong value used in variable initialization,
+	class = operator
+}
+\DeclareAcronym{efc}{
+	short = EFC,
+	long  = extraneous function call,
+	class = operator
+}
+\DeclareAcronym{eloc}{
+	short = ELOC,
+	long  = extraneous or expr. in expression used as branch condition,
+	class = operator
+}
+\DeclareAcronym{eval}{
+	short = EVAL,
+	long  = extraneous variable assignment using a value,
+	class = operator
+}
+\DeclareAcronym{evav}{
+	short = EVAV,
+	long  = extraneous variable assignment using another variable,
+	class = operator
+}
+
+
+% \acused{mbc}
+% \acused{mca}
+% \acused{mcs}
+% \acused{mfc}
+% \acused{mfct}
+% \acused{mia}
+% \acused{miea}
+% \acused{mieb}
+% \acused{mies}
+% \acused{mifs}
+% \acused{mlaa}
+% \acused{mlac}
+% \acused{mlap}
+% \acused{mloa}
+% \acused{mloc}
+% \acused{mlop}
+% \acused{mlpa}
+% \acused{mlpl}
+% \acused{mlps}
+% \acused{mpfc}
+% \acused{mrs}
+% \acused{mvad}
+% \acused{mvae}
+% \acused{mvai}
+% \acused{mvav}
+% \acused{mvie}
+% \acused{mviv}
+% \acused{waec}
+% \acused{waep}
+% \acused{wald}
+% \acused{wall}
+% \acused{walr}
+% \acused{wbc1}
+% \acused{wfcd}
+% \acused{wfcs}
+% \acused{widi}
+% \acused{widim}
+% \acused{widm}
+% \acused{wids}
+% \acused{widsl}
+% \acused{wlec}
+% \acused{wlep}
+% \acused{wpfl}
+% \acused{wpfml}
+% \acused{wpfo}
+% \acused{wpfv}
+% \acused{wpla}
+% \acused{wplc}
+% \acused{wplp}
+% \acused{wrv}
+% \acused{wsuc}
+% \acused{wsut}
+% \acused{wvae}
+% \acused{wval}
+% \acused{wvam}
+% \acused{wvav}
+% \acused{wvim}
+% \acused{wviv}
+% \acused{efc}
+% \acused{eloc}
+% \acused{eval}
+% \acused{evav}

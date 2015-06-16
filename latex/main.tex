@@ -7,6 +7,8 @@
 \usepackage{babel}
 \usepackage{blindtext}
 
+\usepackage[nottoc]{tocbibind}  % no `Contents` in TOC
+
 %for embedding images
 % \usepackage[pdftex]{graphicx}
 % \usepackage[demo]{graphicx}
@@ -42,7 +44,8 @@
 \usepackage{subcaption}
 % \usepackage[all]{hypcap}
 
-\usepackage{bookmark}
+\usepackage[numbered]{bookmark}
+% \usepackage{bookmark}
 
 % indent first paragraph
 \usepackage{indentfirst}
@@ -51,6 +54,8 @@
 % package to use acronyms
 \usepackage{acro}
 \input{abbreviations.tex}
+\input{operators.tex}
+\input{constraints.tex}
 
 \usepackage[justification=centering]{caption}
 
@@ -70,6 +75,7 @@
 % \usepackage[portrait]{gmeometric}
 
 \newcommand*{\red}{\textcolor{red}}
+\newcommand*{\green}{\textcolor{green}}
 
 % edit footer and header
 \usepackage{fancyhdr}
@@ -140,7 +146,7 @@
 % \bibliographystyle{unsrt}
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
-\addcontentsline{toc}{section}{References}
+% \addcontentsline{toc}{section}{References}
 % \nocite{*}
 
 \end{document}

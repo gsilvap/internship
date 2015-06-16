@@ -13,22 +13,24 @@
 
 \pagenumbering{roman}
 
-\renewcommand{\baselinestretch}{0.5}\normalsize
+\setcounter{tocdepth}{2}
+\renewcommand{\baselinestretch}{0.9}\normalsize
+\pdfbookmark{\contentsname}{toc}
 \tableofcontents \label{toc}
-\addcontentsline{toc}{section}{Contents}
-\renewcommand{\baselinestretch}{1.0}\normalsize
+% \addcontentsline{toc}{section}{Contents}
+% \renewcommand{\baselinestretch}{1.0}\normalsize
 \newpage
 
 \listoffigures
-\addcontentsline{toc}{section}{List of Figures}
+% \addcontentsline{toc}{section}{List of Figures}
 % \newpage
 
 \listoftables
-\addcontentsline{toc}{section}{List of Tables}
+% \addcontentsline{toc}{section}{List of Tables}
 \newpage
 
-\printacronyms[include-classes=abbrev,name=Abbreviations]
-\addcontentsline{toc}{section}{Abbreviations}
+% \printacronyms[include-classes=abbrev,name=Abbreviations]
+% \addcontentsline{toc}{section}{Abbreviations}
 
 % glossary
 % \glsaddall
