@@ -2,12 +2,12 @@
 \newpage
 \section{State of the Art}
 
-Nowadays, people use a lot of services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and neither need to buy ``physical storage'', neither care where are the data. The cloud service provides that the data is secure.
-But, like as any system, the cloud has problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
+Nowadays, people use many services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and neither need to buy ``physical storage'', neither care where are the data. The cloud service provides that the data is secure.
+However, like as any system, the cloud has problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
 
 The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offers resources ready to deliver \cite{wolter2012resilience}.
 
-There are many studies showing that the software faults\cite{avizzienisbasic} it's the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
+There are many studies showing that the software faults\cite{avizzienisbasic} it is the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
 
 With this work, I pretend to inject software faults and analyze how the system reacts to them.
 
@@ -37,7 +37,7 @@ of Robert Natella, called by SAFE, that inject software faults, as I also want t
 
 \clearpage
 \subsection{Software Implemented Fault Injection of Software Faults}
-In the next subsections I will describe some fault injectors that have been previously done.\\
+In the next subsections, I will describe some fault injectors that have been previously done.\\
 
 \textbf{SAFE by Robert Natella}\\
 % \subsubsection{SAFE by Robert Natella}
@@ -52,12 +52,12 @@ Robert Natella implemented thirteen operators in SAFE, same as João Durães\cit
 \textbf{JACA Tool}\\
 % \subsubsection{JACA Tool}
 
-JACA\cite{regina2003jaca} is a tool that have been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
+JACA\cite{regina2003jaca} is a tool that has been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
 \cite{martins2002jaca}. \\
 
 \textbf{J-SWFIT} \\
 
-Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
+Java Software Fault Injection Tool\cite{sanches2011j} is a tool that does not need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
 
 \clearpage
 \subsection{ODC Model}
@@ -75,7 +75,7 @@ For that, this model has eight categories:
 	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
 	\item \textbf{Build/package/merge} - Errors that occur in the integration of library systems, management of changes, or in version control.
 	\item \textbf{Documentation} - Errors in the documentation, that con be propagated to publications and maintenance notes.
-	\item \textbf{Algorithm} - Problems that can be fixed by reimplementing an algorithm or local data structure, include efficiency or correctness that affect the task.
+	\item \textbf{Algorithm} - Problems that can be fixed by re-implementing an algorithm or local data structure, include efficiency or correctness that affect the task.
 \end{itemize}
 
 
@@ -101,7 +101,7 @@ Cloud Computing is a new way to delivery TI services on-demand (utility-oriented
 \end{center}
 \end{figure}
 
-Above, I will describe it in relation to characteristics, deployment models and service models \cite{schouten2013ibm}.
+Above, I will describe it in relation to characteristics, deployment models and service models\cite{schouten2013ibm}.
 
 The characteristics of Cloud Computing are:
 \begin{itemize}
@@ -109,15 +109,15 @@ The characteristics of Cloud Computing are:
 	\item \textbf{Broad network access 	}	- Provide access over the network and using standard way through by several clients (e.g., mobile phones, tablets, laptops and workstations).
 	\item \textbf{Resource pooling 		}	- The computer resources are pooled to serve multiple customers through the safe separation of the resources at logical level.
 	\item \textbf{Rapid elasticity 		}	- Capability of resources to be elastically provisioned and released. Making sure of the application will have exactly the capacity that it needs at any point of time.
-	\item \textbf{Measured service 		}	- The service is monitored, measured and reported transparently based on the usage. The clients pay in accordance with the service spent.
+	\item \textbf{Measured service 		}	- The service is monitored, measured, and reported transparently based on the usage. The clients pay in accordance with the service spent.
 \end{itemize}
 
 Four models of deployment:
 \begin{itemize}
 	%and treat effectively a lot of requests.}
-	\item \textbf{Private Cloud}   - It's a single-tenant cloud solution utilizing client hardware and software, is located inside the client firewall or even data center. The sensitive information is maintained inside of organization. It has the disadvantage of not having ability to scale on demand.
-	\item \textbf{Community Cloud} - It’s shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
-	\item \textbf{Public Cloud}    - It's available to the general public or to a group of a big company. It's a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers. It's owned by the company that sells cloud services.
+	\item \textbf{Private Cloud}   - It is a single-tenant cloud solution utilizing client hardware and software, is located inside the client firewall or even data center. The sensitive information is maintained inside of organization. It has the disadvantage of not having ability to scale on demand.
+	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
+	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers. The company that sells cloud services owns it.
 
 	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that permits portability. Take advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
@@ -129,7 +129,7 @@ Four levels of Cloud Computing Service Models:
 
 	\item \textbf{\acl{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
 
-	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
+	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup, and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
 
 	\item \textbf{\acl{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
 
@@ -142,7 +142,7 @@ Four levels of Cloud Computing Service Models:
 \end{center}
 \end{figure}
 
-But, such as any computer system, the cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
+Nevertheless, such as any computer system, the cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
  	\item Security attacks;
  	\item Accidents;
@@ -244,7 +244,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\subsubsection{\textbf{\acs{mlac}}} - \Acl{mlac} - \green{\textbf{Implemented}}
 	\bookmark[level=\thesubsubsection,dest=mlac]{\thesubsubsection \ \acs{mlac}}
 
-	This operator emules the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator AND. With an AND operator, if one of the sub-expressions is \textit{false} all the expression will be \textit{false} and the condition will fail.
+	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator AND. With an AND operator, if one of the sub-expressions is \textit{false} all the expression will be \textit{false} and the condition will fail.
 	\begin{itemize}
 		\item \textbf{\acs{c12}} - \Acl{c12}.
 	\end{itemize}
@@ -316,7 +316,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\begin{itemize}
 		\item \textbf{\acs{c08n}} - \Acl{c08n}.
 	\end{itemize}
-	This constraint doesn't exists in João Durães specification, but as this operator cannot be applyed in all situations, I implemented and specify it.
+	This constraint does not exists in João Durães specification, but as this operator cannot be applied in all situations, I implemented and specify it.
 
 	\hypertarget{mviv}{}
 	\subsubsection{\textbf{\acs{mviv}}} - \Acl{mviv}
@@ -363,7 +363,7 @@ I chose to use a set of the most representative faults, previously specified by 
 		\item \textbf{\acs{c11}} - \Acl{c11}.
 	\end{itemize}
 
-The operators above will applied to source code of applications and will generate modified files.
+The operators above will be applied to source code of applications and will generate modified files.
 
 \begin{figure}[!ht]
 \begin{center}
