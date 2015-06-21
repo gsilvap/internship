@@ -14,6 +14,7 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 * [Observações](#observacoes)
 
 ### Reuniões
+* [Reunião do dia 19/06/2015](#reuniao-19062015)
 * [Reunião do dia 05/05/2015](#reuniao-05052015)
 * [Reunião do dia 28/04/2015](#reuniao-28042015)
 * [Reunião do dia 21/04/2015](#reuniao-21042015)
@@ -35,6 +36,9 @@ Estágio [1915] - Avaliação da Robustez de Plataformas Cloud
 ### Juri
 * Juri Arguente: Filipe Araújo (filipius@dei.uc.pt)
 * Juri Vogal: António Jorge Silva Cardoso (jcardoso@dei.uc.pt)
+
+#### Reuniao 19/06/2015
+
 
 #### Reuniao 05/05/2015
 
