@@ -108,6 +108,14 @@
 			}
 		},
 		{
+			"file": "latex/cover.tex",
+			"settings":
+			{
+				"buffer_size": 1552,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "latex/stateofart.tex",
 			"settings":
 			{
@@ -119,7 +127,15 @@
 			"file": "latex/main.tex",
 			"settings":
 			{
-				"buffer_size": 4408,
+				"buffer_size": 4446,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "\\documentclass[12pt,a4paper, english]{article}\n\\usepackage[utf8]{inputenc}\n\n% glossary\n\\usepackage[nonumberlist]{glossaries}\n% \\usepackage[toc]{glossaries}\n\\makeglossaries\n\n\\begin{document}\n\n\n% availability\n\\newglossaryentry{availability}\n{\n    name=availability,\n    description={being available to perform a service correctly}\n}\n% reliability\n\\newglossaryentry{reliability}\n{\n    name=reliability,\n    description={the ability of the product/system to consistently perform its intended functions without unplanned interruption. Continuity of the service in correct operation}\n}\n% resilience\n\\newglossaryentry{resilience}\n{\n    name=resilience,\n    description={capacity of system to recover from faults}\n}\n\n% safety\n\\newglossaryentry{safety}\n{\n    name=safety,\n    description={absence of catastrophic consequences}\n}\n% controllability\n\\newglossaryentry{controllability}\n{\n    name=controllability,\n    description={ability of controlling the injection of faults, both in time and space}\n}\n% observability\n\\newglossaryentry{observability}\n{\n    name=observability,\n    description={ability of observing the manifestations of the injected faults}\n}\n% repeatability\n\\newglossaryentry{repeatability}\n{\n    name=repeatability,\n    description={being capable of repeating an experiment and obtaining the same result}\n}\n\n% reproducibility\n\\newglossaryentry{reproducibility}\n{\n    name=reproducibility,\n    description={being able to reproduce the results of a fault injection campaign}\n}\n\n% representativeness\n\\newglossaryentry{representativeness}\n{\n    name=representativeness,\n    description={how accurately can the emulates sytem, the Work-load and the Fautload represent the real system}\n}\n\n% confidentiality\n\\newglossaryentry{confidentiality}\n{\n    name=confidentiality,\n    description={no unintended disclosure of information}\n}\n\n% integrity\n\\newglossaryentry{integrity}\n{\n    name=integrity,\n    description={no improper system state alterations}\n}\n\n% maintainability\n\\newglossaryentry{maintainability}\n{\n    name=maintainability,\n    description={ability of undergoing repairs and maintenance operations}\n}\n\n%% Classification of Fault Injection Techniques\n% controllability\n\\newglossaryentry{controllability}\n{\n    name=controllability,\n    description={ability of controlling the injection of faults, both in time and space}\n}\n\n% observability\n\\newglossaryentry{observability}\n{\n    name=observability,\n    description={ability of observing the manifestations of the injected faults}\n}\n\n% repeatability\n\\newglossaryentry{repeatability}\n{\n    name=repeatability,\n    description={being capable of repeating an experiment and obtaining the same result}\n}\n\n% reproducibility\n\\newglossaryentry{reproducibility}\n{\n    name=reproducibility,\n    description={being able to reproduce the results of a fault injection campaign}\n}\n\n% representativeness\n\\newglossaryentry{representativeness}\n{\n    name=representativeness,\n    description={how accurately can the emulates sytem, the Work-load and the Fautload represent the real system}\n}\n\n\n\\newglossaryentry{fault prevention}\n{\n    name=fault prevention,\n    description={means to prevent the occurrence or introduction of faults}\n}\n\\newglossaryentry{fault tolerance}\n{\n    name=fault tolerance,\n    description={means to avoid service failures in the presence of faults}\n}\n\\newglossaryentry{fault removal}\n{\n    name=fault removal,\n    description={means to reduce the number and severity of faults}\n}\n\\newglossaryentry{fault forecasting}\n{\n    name=fault forecasting,\n    description={estimate the present number, the future incidence, and the likely consequences of faults}\n}\n\n\n\\newglossaryentry{correct service}\n{\n    name=correct service,\n    description={is delivered when the service implements the system function}\n}\n\n\\newglossaryentry{security}\n{\n    name=security,\n    description={is a composite of the attributes of \\textbf{confidentiality, integrity, and availability}, requiring the concurrent existence of 1) availability for authorized actions only, 2) confidentiality, and 3) integrity with ``improper'' meaning ``unauthorized''}\n}\n\\newglossaryentry{dependability}\n{\n    name=dependability,\n    description={is the ability to deliver service that can justifiably be trusted}\n}\n\n\n\\newglossaryentry{permanent fault}\n{\n    name=permanent Fault,\n    description={will remain active until the afected component is repaired}\n}\n\\newglossaryentry{internitent fault}\n{\n    name=internitent Fault,\n    description={will appear and reappear in an apparently random fashion}\n}\n\\newglossaryentry{transient fault}\n{\n    name=transient Fault,\n    description={will disappear after some time}\n}\n\n\\newglossaryentry{software verification}\n{\n    name=software verification,\n    description={to check whether the software has been done right (i.e., software is working as specified)}\n}\n\\newglossaryentry{software validation}\n{\n    name=software validation,\n    description={to check whether the right software has been developed (i.e., software is working as needed/expected by customer)}\n}\n\n\\newglossaryentry{software testing}\n{\n    name=software testing,\n    description={é um conjunto de testes, criados antes do software ser deployed, de forma a verificar a implementação dos requisitos}\n}\n\n\\newglossaryentry{regression testing}\n{\n    name=regression testing,\n    description={the purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software}\n}\n\n\\newglossaryentry{correct service}\n{\n    name=correct service,\n    description={is delivered when the service implements the expected system function}\n}\n\\newglossaryentry{service failure}\n{\n    name=service failure,\n    description={is an event that occurs when the delivered service deviates from correct service}\n}\n\n\\newglossaryentry{restoration}\n{\n    name=restoration,\n    description={is the transition from incorrect service to correct service}\n}\n\n\\newglossaryentry{defect}\n{\n    name=defect,\n    description={any occurrence in a work product that is determined to be \\textbf{incomplete, incorrect or missing}, any instance which a requirement is not satisfied (fagan, 1986)}\n}\n\n\\newglossaryentry{error}\n{\n    name=Error,\n    description={\\textbf{dependability view - } a measure of the difference between the actual and the ideal. \\textbf{software reliability view - } Human action that results in software containing a fault}\n}\n\n\\newglossaryentry{fault}\n{\n    name=Fault,\n    description={\\textbf{dependability view - }a condition that may cause a system to fail in performing its required function \\textbf{software reliability view - }a cause for an internal error}\n}\n\n\\newglossaryentry{failure}\n{\n    name=failure,\n    description={is an event that occurs when the delivered service deviates from correct service (other.: is a transition from correct service to incorrect service) \\textbf{dependability view - }the inability of a system or component to perform a required function according to its specifications \\textbf{software reliability view - } any observable divergence of software behavior in execution from user needs}\n}\n\n\\newglossaryentry{.}\n{\n    name=.,\n    description={}\n}\n\n\n%% A DEFINIR\n\n% robustness\n\\newglossaryentry{robustness}\n{\n    name=robustness,\n    description={``a software system can be said to be robust if it retains its ability to deliver service in conditions which are beyond its normal domain of operation'' (Laprie)}\n}\n% confidence\n\\newglossaryentry{confidence}\n{\n    name=confidence,\n    description={..}\n}\n\n% BENCHMARK DEFINITIONS\n\n% % relevance\n% \\newglossaryentry{relevance}\n% {\n%   name=relevance,\n%   description={the benchmark has to focus on typical and representative operations of the problem domain}\n% }\n% % portability\n% \\newglossaryentry{portability}\n% {\n%   name=portability,\n%   description={the benchmark should be capable of running in several different systems and architectures}\n% }\n% % scalability\n% \\newglossaryentry{scalability}\n% {\n%   name=scalability,\n%   description={it should be able to cover both small and large systems}\n% }\n% % simplicity\n% \\newglossaryentry{simplicity}\n% {\n%   name=simplicity,\n%   description={in order to avoid lack of credibility, the benchmark should strive to be clear and simple to understand. Subsequent % research [14] has yielded further criteria}\n% }\n% % relevant\n% \\newglossaryentry{relevant}\n% {\n%   name=relevant,\n%   description={the benchmark must simulate useful and representative operations of the problem domain}\n% }\n% % repeatable\n% \\newglossaryentry{repeatable}\n% {\n%   name=repeatable,\n%   description={the benchmark’s results can be reproduced when running the same benchmark under similar conditions}\n% }\n% % fair&Portable\n% \\newglossaryentry{fair&portable}\n% {\n%   name=fair\\&portable,\n%   description={the benchmark needs to be easily portable and do not favor or penalize one system or architecture over another, it % should provide a fair comparison between systems}\n% }\n% % verifiable\n% \\newglossaryentry{verifiable}\n% {\n%   name=verifiable,\n%   description={the results provided by the benchmark need to inspire confidence as of their validity and representativeness. This can % be done trough the review of the benchmark by external auditors}\n% }\n% % economical\n% \\newglossaryentry{economical}\n% {\n%   name=economical,\n%   description={the benchmark should be affordable to run}\n% }\n\n% glossary\n\\glsaddall\n\\printglossaries\n\n\\end{document}\n",
+			"settings":
+			{
+				"buffer_size": 9656,
 				"line_ending": "Windows"
 			}
 		},
@@ -130,14 +146,6 @@
 				"buffer_size": 177,
 				"line_ending": "Windows",
 				"name": "notes"
-			}
-		},
-		{
-			"contents": "\\documentclass[12pt,a4paper, english]{article}\n\\usepackage[utf8]{inputenc}\n\n% glossary\n\\usepackage[nonumberlist]{glossaries}\n% \\usepackage[toc]{glossaries}\n\\makeglossaries\n\n\\begin{document}\n\n\n% availability\n\\newglossaryentry{availability}\n{\n    name=availability,\n    description={being available to perform a service correctly}\n}\n% reliability\n\\newglossaryentry{reliability}\n{\n    name=reliability,\n    description={the ability of the product/system to consistently perform its intended functions without unplanned interruption. Continuity of the service in correct operation}\n}\n% resilience\n\\newglossaryentry{resilience}\n{\n    name=resilience,\n    description={capacity of system to recover from faults}\n}\n\n% safety\n\\newglossaryentry{safety}\n{\n    name=safety,\n    description={absence of catastrophic consequences}\n}\n% controllability\n\\newglossaryentry{controllability}\n{\n    name=controllability,\n    description={ability of controlling the injection of faults, both in time and space}\n}\n% observability\n\\newglossaryentry{observability}\n{\n    name=observability,\n    description={ability of observing the manifestations of the injected faults}\n}\n% repeatability\n\\newglossaryentry{repeatability}\n{\n    name=repeatability,\n    description={being capable of repeating an experiment and obtaining the same result}\n}\n\n% reproducibility\n\\newglossaryentry{reproducibility}\n{\n    name=reproducibility,\n    description={being able to reproduce the results of a fault injection campaign}\n}\n\n% representativeness\n\\newglossaryentry{representativeness}\n{\n    name=representativeness,\n    description={how accurately can the emulates sytem, the Work-load and the Fautload represent the real system}\n}\n\n% confidentiality\n\\newglossaryentry{confidentiality}\n{\n    name=confidentiality,\n    description={no unintended disclosure of information}\n}\n\n% integrity\n\\newglossaryentry{integrity}\n{\n    name=integrity,\n    description={no improper system state alterations}\n}\n\n% maintainability\n\\newglossaryentry{maintainability}\n{\n    name=maintainability,\n    description={ability of undergoing repairs and maintenance operations}\n}\n\n%% Classification of Fault Injection Techniques\n% controllability\n\\newglossaryentry{controllability}\n{\n    name=controllability,\n    description={ability of controlling the injection of faults, both in time and space}\n}\n\n% observability\n\\newglossaryentry{observability}\n{\n    name=observability,\n    description={ability of observing the manifestations of the injected faults}\n}\n\n% repeatability\n\\newglossaryentry{repeatability}\n{\n    name=repeatability,\n    description={being capable of repeating an experiment and obtaining the same result}\n}\n\n% reproducibility\n\\newglossaryentry{reproducibility}\n{\n    name=reproducibility,\n    description={being able to reproduce the results of a fault injection campaign}\n}\n\n% representativeness\n\\newglossaryentry{representativeness}\n{\n    name=representativeness,\n    description={how accurately can the emulates sytem, the Work-load and the Fautload represent the real system}\n}\n\n\n\\newglossaryentry{fault prevention}\n{\n    name=fault prevention,\n    description={means to prevent the occurrence or introduction of faults}\n}\n\\newglossaryentry{fault tolerance}\n{\n    name=fault tolerance,\n    description={means to avoid service failures in the presence of faults}\n}\n\\newglossaryentry{fault removal}\n{\n    name=fault removal,\n    description={means to reduce the number and severity of faults}\n}\n\\newglossaryentry{fault forecasting}\n{\n    name=fault forecasting,\n    description={estimate the present number, the future incidence, and the likely consequences of faults}\n}\n\n\n\\newglossaryentry{correct service}\n{\n    name=correct service,\n    description={is delivered when the service implements the system function}\n}\n\n\\newglossaryentry{security}\n{\n    name=security,\n    description={is a composite of the attributes of \\textbf{confidentiality, integrity, and availability}, requiring the concurrent existence of 1) availability for authorized actions only, 2) confidentiality, and 3) integrity with ``improper'' meaning ``unauthorized''}\n}\n\\newglossaryentry{dependability}\n{\n    name=dependability,\n    description={is the ability to deliver service that can justifiably be trusted}\n}\n\n\n\\newglossaryentry{permanent fault}\n{\n    name=permanent Fault,\n    description={will remain active until the afected component is repaired}\n}\n\\newglossaryentry{internitent fault}\n{\n    name=internitent Fault,\n    description={will appear and reappear in an apparently random fashion}\n}\n\\newglossaryentry{transient fault}\n{\n    name=transient Fault,\n    description={will disappear after some time}\n}\n\n\\newglossaryentry{software verification}\n{\n    name=software verification,\n    description={to check whether the software has been done right (i.e., software is working as specified)}\n}\n\\newglossaryentry{software validation}\n{\n    name=software validation,\n    description={to check whether the right software has been developed (i.e., software is working as needed/expected by customer)}\n}\n\n\\newglossaryentry{software testing}\n{\n    name=software testing,\n    description={é um conjunto de testes, criados antes do software ser deployed, de forma a verificar a implementação dos requisitos}\n}\n\n\\newglossaryentry{regression testing}\n{\n    name=regression testing,\n    description={the purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software}\n}\n\n\\newglossaryentry{correct service}\n{\n    name=correct service,\n    description={is delivered when the service implements the expected system function}\n}\n\\newglossaryentry{service failure}\n{\n    name=service failure,\n    description={is an event that occurs when the delivered service deviates from correct service}\n}\n\n\\newglossaryentry{restoration}\n{\n    name=restoration,\n    description={is the transition from incorrect service to correct service}\n}\n\n\\newglossaryentry{defect}\n{\n    name=defect,\n    description={any occurrence in a work product that is determined to be \\textbf{incomplete, incorrect or missing}, any instance which a requirement is not satisfied (fagan, 1986)}\n}\n\n\\newglossaryentry{error}\n{\n    name=Error,\n    description={\\textbf{dependability view - } a measure of the difference between the actual and the ideal. \\textbf{software reliability view - } Human action that results in software containing a fault}\n}\n\n\\newglossaryentry{fault}\n{\n    name=Fault,\n    description={\\textbf{dependability view - }a condition that may cause a system to fail in performing its required function \\textbf{software reliability view - }a cause for an internal error}\n}\n\n\\newglossaryentry{failure}\n{\n    name=failure,\n    description={is an event that occurs when the delivered service deviates from correct service (other.: is a transition from correct service to incorrect service) \\textbf{dependability view - }the inability of a system or component to perform a required function according to its specifications \\textbf{software reliability view - } any observable divergence of software behavior in execution from user needs}\n}\n\n\\newglossaryentry{.}\n{\n    name=.,\n    description={}\n}\n\n\n%% A DEFINIR\n\n% robustness\n\\newglossaryentry{robustness}\n{\n    name=robustness,\n    description={``a software system can be said to be robust if it retains its ability to deliver service in conditions which are beyond its normal domain of operation'' (Laprie)}\n}\n% confidence\n\\newglossaryentry{confidence}\n{\n    name=confidence,\n    description={..}\n}\n\n% BENCHMARK DEFINITIONS\n\n% % relevance\n% \\newglossaryentry{relevance}\n% {\n%   name=relevance,\n%   description={the benchmark has to focus on typical and representative operations of the problem domain}\n% }\n% % portability\n% \\newglossaryentry{portability}\n% {\n%   name=portability,\n%   description={the benchmark should be capable of running in several different systems and architectures}\n% }\n% % scalability\n% \\newglossaryentry{scalability}\n% {\n%   name=scalability,\n%   description={it should be able to cover both small and large systems}\n% }\n% % simplicity\n% \\newglossaryentry{simplicity}\n% {\n%   name=simplicity,\n%   description={in order to avoid lack of credibility, the benchmark should strive to be clear and simple to understand. Subsequent % research [14] has yielded further criteria}\n% }\n% % relevant\n% \\newglossaryentry{relevant}\n% {\n%   name=relevant,\n%   description={the benchmark must simulate useful and representative operations of the problem domain}\n% }\n% % repeatable\n% \\newglossaryentry{repeatable}\n% {\n%   name=repeatable,\n%   description={the benchmark’s results can be reproduced when running the same benchmark under similar conditions}\n% }\n% % fair&Portable\n% \\newglossaryentry{fair&portable}\n% {\n%   name=fair\\&portable,\n%   description={the benchmark needs to be easily portable and do not favor or penalize one system or architecture over another, it % should provide a fair comparison between systems}\n% }\n% % verifiable\n% \\newglossaryentry{verifiable}\n% {\n%   name=verifiable,\n%   description={the results provided by the benchmark need to inspire confidence as of their validity and representativeness. This can % be done trough the review of the benchmark by external auditors}\n% }\n% % economical\n% \\newglossaryentry{economical}\n% {\n%   name=economical,\n%   description={the benchmark should be affordable to run}\n% }\n\n% glossary\n\\glsaddall\n\\printglossaries\n\n\\end{document}\n",
-			"settings":
-			{
-				"buffer_size": 9656,
-				"line_ending": "Windows"
 			}
 		}
 	],
@@ -746,7 +754,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -836,7 +844,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -925,7 +933,7 @@
 						"translation.y": 549.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1014,7 +1022,7 @@
 						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1095,6 +1103,7 @@
 								"bh_angle_close",
 								"bh_angle_content"
 							],
+							"color_scheme": "Packages/PlainTasks/tasks.hidden-tmTheme",
 							"side_bar_folders_auto_load_folder": 1,
 							"spell_check": true,
 							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
@@ -1105,7 +1114,7 @@
 						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -1121,8 +1130,8 @@
 						"selection":
 						[
 							[
-								1415,
-								1008
+								271,
+								271
 							]
 						],
 						"settings":
@@ -1131,21 +1140,21 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1156,31 +1165,31 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -1197,14 +1206,105 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 228.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
+					"file": "latex/cover.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1552,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								763,
+								763
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"parser": "markdown",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"target": "browser"
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "latex/stateofart.tex",
 					"semi_transient": false,
 					"settings":
@@ -1291,24 +1391,24 @@
 						"translation.y": 5720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "latex/main.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4408,
+						"buffer_size": 4446,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2936,
-								2936
+								3366,
+								3366
 							]
 						],
 						"settings":
@@ -1316,21 +1416,21 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1341,31 +1441,31 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -1377,99 +1477,10 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1440.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								177,
-								177
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_name": "notes",
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"default_dir": "D:\\onedrive\\mei\\internship",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1559,7 +1570,96 @@
 						"translation.y": 3315.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "notes",
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"default_dir": "D:\\onedrive\\mei\\internship",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1630,12 +1730,16 @@
 		"selected_items":
 		[
 			[
-				"constra",
-				"latex\\constraints.tex"
-			],
-			[
 				"main",
 				"latex\\main.tex"
+			],
+			[
+				"cover",
+				"latex\\cover.tex"
+			],
+			[
+				"constra",
+				"latex\\constraints.tex"
 			],
 			[
 				"oper",
@@ -1784,10 +1888,6 @@
 			[
 				"taks",
 				"tasks.todo"
-			],
-			[
-				"cover",
-				"latex\\cover.tex"
 			],
 			[
 				"tasks",
