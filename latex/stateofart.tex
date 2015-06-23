@@ -4,21 +4,24 @@
 
 Nowadays, people use many services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and neither need to buy ``physical storage'', neither care where are the data. The cloud service provides that the data is secure.
 However, like as any system, the cloud has problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
-
+\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}
 The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offers resources ready to deliver \cite{wolter2012resilience}.
 
-There are many studies showing that the software faults\cite{avizzienisbasic} it is the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
+\red{There are many studies showing that the software faults\cite{avizzienisbasic} it is the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.}
 
 With this work, I pretend to inject software faults and analyze how the system reacts to them.
 
-In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.
+% In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.
 
-\begin{table}[!ht]
-\begin{tabular}{c}
-\includegraphics[width=1\textwidth]{representative_faults.jpg}
-\end{tabular}
-\caption{\small \sl Fault coverage of the representative fault types. \cite{duraes2005thesis} \label{tab:representative_faults}}
-\end{table}
+\orange{O estilo continua com frases soltas, e pouco articuladas.
+Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns. Por que razão é que ``less than 70\% of the software faults can be emulated !?'' Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}
+
+% \begin{table}[!ht]
+% \begin{tabular}{c}
+% \includegraphics[width=1\textwidth]{representative_faults.jpg}
+% \end{tabular}
+% \caption{\small \sl \red{Fault coverage of the representative fault types.} \cite{duraes2005thesis} \label{tab:representative_faults}}
+% \end{table}
 
 
 %In this work
@@ -37,7 +40,7 @@ of Robert Natella, called by SAFE, that inject software faults, as I also want t
 
 \clearpage
 \subsection{Software Implemented Fault Injection of Software Faults}
-In the next subsections, I will describe some fault injectors that have been previously done.\\
+\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\
 
 \textbf{SAFE by Robert Natella}\\
 % \subsubsection{SAFE by Robert Natella}
@@ -138,7 +141,7 @@ Four levels of Cloud Computing Service Models:
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{cloud-computing-service-models.png}
-\caption{\small \sl Cloud Computing Service Models.\label{fig:cloudcomputingservicemodels}}
+\caption{\small \sl Cloud computing service models.\label{fig:cloudcomputingservicemodels}}
 \end{center}
 \end{figure}
 
@@ -222,6 +225,8 @@ WAEP       				& \Acl{waep} 									\\ \hline
 \end{tabular}
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
+
+\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}
 
 \subsection{Generate derivations}
 
@@ -415,22 +420,21 @@ The constraints defined below was specified by João Durães in ... .
 \clearpage
 \subsection{Applications to inject faults}
 
-\red{The same applications that João Durães have collect information?}
-
-\begin{itemize}
-	\item MinGW, Last Update: 2015-06-08
-	\item ScummVM, Last Update: 2015-05-17
-	\item CDEX, Last Update: 2015-04-24
-	\item FireBird, Last Update: 2015-04-15
-	\item Joe, Last Update: 2015-03-22
-	\item FreeCiv, Last Update: 2015-03-14
-	\item GAIM or Pidgin, Last Update: 2015-01-07
-	\item BASH, Last Update: 2013-12-10
-	\item ZSNES, Last Update: 2013-05-07
-	\item VIM, Last Update: 2013-04-25
-	\item pdftohtml, Last Update: 2013-04-24
-	%\item LKERNEL
-\end{itemize}
+% \red{The same applications that João Durães have collect information?}
+% \begin{itemize}
+% 	\item MinGW, Last Update: 2015-06-08
+% 	\item ScummVM, Last Update: 2015-05-17
+% 	\item CDEX, Last Update: 2015-04-24
+% 	\item FireBird, Last Update: 2015-04-15
+% 	\item Joe, Last Update: 2015-03-22
+% 	\item FreeCiv, Last Update: 2015-03-14
+% 	\item GAIM or Pidgin, Last Update: 2015-01-07
+% 	\item BASH, Last Update: 2013-12-10
+% 	\item ZSNES, Last Update: 2013-05-07
+% 	\item VIM, Last Update: 2013-04-25
+% 	\item pdftohtml, Last Update: 2013-04-24
+% 	%\item LKERNEL
+% \end{itemize}
 
 \newpage
 \section{Work plan and implications}
@@ -470,3 +474,6 @@ After the compilation and execution of the programs, the results need to be eval
 \end{itemize}
 
 This \textit{CRASH Scale} is one way to show results of the effect of faults on an end-use system, mainly from the operating system perspective.
+
+\orange{Esta parte é particularmente importante: a classificação dos efeitos.
+Creio que há mais a dizer, pois fará parte do plano futuro de desenvolvimento classificar o que cada programa defeituoso faz.}
