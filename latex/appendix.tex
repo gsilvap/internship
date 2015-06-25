@@ -45,18 +45,15 @@
 
 \clearpage
 
-\subsection{Appendix C - Decision tree} \label{App:C}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1.1\textwidth]{decisions.jpg}
-\caption{\small \sl Decision tree.\label{fig:decisions}}
-\end{center}
-\end{figure}
+% \subsection{Appendix C - Decision tree} \label{App:C}
+
 
 
 
 \clearpage
 \printacronyms[include-classes=abbrev,name={\subsection{Appendix D - Abbreviations} \label{App:D}}]
-% \acuseall
+\iftoggle{long}{\acuseall}
+
+
 \printacronyms[include-classes=operator,name=Operators]
 \printacronyms[include-classes=constraint,name=Constraints]

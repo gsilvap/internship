@@ -30,10 +30,10 @@ Software & SWIFI    & SWIFI
 \Ac{swifi} are an attractive technique because won't require additional hardware (increase the cost of test). The targets of this technique are the applications and the operating systems, but, this technique don't have only advantages, can't inject faults in inaccessible areas of software and may disrupt or change the workload of the testing software. This technique can be used at:
 
 \begin{itemize}
-	\item \textbf{Compilation time at object code level} 		- Modify the structure of the program before the creation of executable file;
+	\item \textbf{Compilation time (object code level)} 		- Modify the structure of the program before the creation of executable file;
 	 % and can emulate Hardware faults, software faults;
-	\item \textbf{Execution environment at binary code level} 	- Changing the binary code activated by a timeout, an exception or a trap. At this level, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
-	\item \textbf{Before compile time at source code level} 	- Derivate the source code by removing, replacing or inserting some simple code before the compilation of program;
+	\item \textbf{Execution environment (binary code level)} 	- Changing the binary code activated by a timeout, an exception or a trap. At this level, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
+	\item \textbf{Before compile time (source code level)} 		- Derivate the source code by removing, replacing or inserting some simple code before the compilation of program;
 \end{itemize}
 
 \iftoggle{long}{\red{With this work, I pretend to inject software faults and analyze how the system reacts to them.}}
@@ -215,7 +215,8 @@ Nevertheless, such as any computer system, cloud computing isn't free of externa
  \end{itemize}
 
 \clearpage
-\subsection{Tools - GCC Parser, Bison and Eclipse CDT}
+\subsection{Tools}
+ % - GCC Parser, Bison and Eclipse CDT}
 
 In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
 For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.\\
@@ -273,6 +274,15 @@ In the end, I selected Eclipse CDT Plugin as standalone (only import libraries t
 
 \iftoggle{long}{\red{Performance analyses}}
 
+\newpage
+\section{Hard work}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{decisions.png}
+\caption{\small \sl Decision tree.\label{fig:decisions}}
+\end{center}
+\end{figure}
 
 
 \newpage
@@ -497,25 +507,6 @@ The constraints defined below were specified by João Durães in ... .
 \end{table}
 
 \clearpage
-\subsection{Applications to inject faults}
-
-% \red{The same applications that João Durães has collected information?}
-% \begin{itemize}
-% 	\item MinGW, Last Update: 2015-06-08
-% 	\item ScummVM, Last Update: 2015-05-17
-% 	\item CDEX, Last Update: 2015-04-24
-% 	\item FireBird, Last Update: 2015-04-15
-% 	\item Joe, Last Update: 2015-03-22
-% 	\item FreeCiv, Last Update: 2015-03-14
-% 	\item GAIM or Pidgin, Last Update: 2015-01-07
-% 	\item BASH, Last Update: 2013-12-10
-% 	\item ZSNES, Last Update: 2013-05-07
-% 	\item VIM, Last Update: 2013-04-25
-% 	\item pdftohtml, Last Update: 2013-04-24
-% 	%\item LKERNEL
-% \end{itemize}
-
-\newpage
 \section{Work plan and implications}
 
 Built three separated modules:
