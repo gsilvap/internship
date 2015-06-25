@@ -67,32 +67,43 @@ of Robert Natella, named SAFE, that injects software faults, as I also intended 
 
 \clearpage
 \subsection{Software Implemented Fault Injection of Software Faults}
-\iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
-
-\iftoggle{long}{\textbf{Doctor}\\}
+% \iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
 
 
+\iftoggle{long}{
+	\hypertarget{Doctor}{}
+ 	\subsubsection{Doctor}
+ 	\bookmark[level=\thesubsubsection,dest=Doctor]{\thesubsubsection \ Doctor}
+}
 
-\iftoggle{long}{\textbf{Ferrari}\\}
+\iftoggle{long}{
+	\hypertarget{Ferrari}{}
+ 	\subsubsection{Ferrari}
+ 	\bookmark[level=\thesubsubsection,dest=Ferrari]{\thesubsubsection \ Ferrari}
+}
 
+\iftoggle{long}{
+	\hypertarget{Ftape}{}
+ 	\subsubsection{Ftape}
+ 	\bookmark[level=\thesubsubsection,dest=Ftape]{\thesubsubsection \ Ftape}
+}
 
-
-\iftoggle{long}{\textbf{Ftape}\\}
-
-
-
-\textbf{JACA Tool}\\
-% \subsubsection{JACA Tool}
+\hypertarget{JACA Tool}{}
+\subsubsection{JACA Tool}
+\bookmark[level=\thesubsubsection,dest=JACA Tool]{\thesubsubsection \ JACA Tool}
 
 JACA\cite{regina2003jaca} is a tool that has been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
 \cite{martins2002jaca}. \\
 
-\textbf{J-SWFIT} \\
+\hypertarget{J-SWFIT}{}
+\subsubsection{J-SWFIT}
+\bookmark[level=\thesubsubsection,dest=J-SWFIT]{\thesubsubsection \ J-SWFIT}
 
 Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.\\
 
-\textbf{SAFE by Robert Natella}\\
-% \subsubsection{SAFE by Robert Natella}
+\hypertarget{SAFE by Robert Natella}{}
+\subsubsection{SAFE by Robert Natella}
+\bookmark[level=\thesubsubsection,dest=SAFE by Robert Natella]{\thesubsubsection \ SAFE by Robert Natella}
 
 Safe is an application to inject realistic software faults in programs coded in C and C++.
 This tool uses MCPP as parser, to get the tree of code. The decision of using MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
@@ -101,8 +112,11 @@ After that, write some files, variations of original files (code with simple mut
 Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
 
 
-\iftoggle{long}{\textbf{Xception}\\}
-
+\iftoggle{long}{
+	\hypertarget{Xception}{}
+ 	\subsubsection{Xception}
+ 	\bookmark[level=\thesubsubsection,dest=Xception]{\thesubsubsection \ Xception}
+}
 
 \clearpage
 \subsection{ODC Model}
@@ -210,17 +224,27 @@ For that, I thought that I could use the same tools that I have used in Compiler
 
 
 
-\iftoggle{long}{\textbf{Bison/Yacc}\\}
+\iftoggle{long}{
+	\hypertarget{Bison/Yacc}{}
+ 	\subsubsection{Bison/Yacc}
+ 	\bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
+}
 
+\iftoggle{long}{
+	\hypertarget{MCPP}{}
+ 	\subsubsection{MCPP}
+ 	\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
+}
 
-\iftoggle{long}{\textbf{MCPP}\\}
-
-
-\textbf{GCC Parser}\\
+\hypertarget{GCC Parser}{}
+\subsubsection{GCC Parser}
+\bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
 
 Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors.\\
 
-\textbf{Eclipse CDT}\\
+\hypertarget{Eclipse CDT}{}
+\subsubsection{Eclipse CDT}
+\bookmark[level=\thesubsubsection,dest=Eclipse CDT]{\thesubsubsection \ Eclipse CDT}
 
 Eclipse CDT, as the name suggests, is a plugin for Eclipse that provides a fully functional C and C++ Integrated Development Environment.
 Some of the features included in this plugin that are interesting for this project are:
@@ -255,8 +279,7 @@ In the end, I selected Eclipse CDT Plugin as standalone (only import libraries t
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
 
-The Fault Injector currently in development is coded in Java using Eclipse CDT, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})
-\cite{duraes2005thesis}.
+The Fault Injector currently in development is coded in Java using Eclipse CDT, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. However, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
 
 \begin{table}[!ht]
 \begin{tabular}{|l|p{12cm}|}
