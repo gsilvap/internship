@@ -3,31 +3,29 @@
 % \chapter{Introduction}
 \section{Introduction}
 
-\red{In the next subsections will be introduced the context and the scope of this project.}
-\orange{1,2 ou 3 paragrafos descritivos do problema}
+\iftoggle{long}{\red{In the next subsections will be introduced the context and the scope of this project.}
+\orange{1,2 ou 3 paragrafos descritivos do problema}}
 
 \subsection{Contextualization}
-\orange{Logo aqui deve ficar claro que os bugs existem, vão sempre existir, e que testar a capacidade de qualquer sistema crítico para lidar com bugs existentes é fundamental. Daí todo o trabalho. Não é claro por que razão (ou razões) isto é específico para a Cloud. Não é igual fazer-se para a Cloud ou para programas stand-alone clássicos?}
+\iftoggle{long}{\orange{Logo aqui deve ficar claro que os bugs existem, vão sempre existir, e que testar a capacidade de qualquer sistema crítico para lidar com bugs existentes é fundamental. Daí todo o trabalho. Não é claro por que razão (ou razões) isto é específico para a Cloud. Não é igual fazer-se para a Cloud ou para programas stand-alone clássicos?}}
 
-The present dissertation describes the work developed in scope of Master of Science in Informatics Engineering. It is focused in ``Evaluate the robustness of Cloud'' and this is one issue very important nowadays, because of the increasing usage of this.
-It's characterized by the placement of data and software on remote infrastructure. \red{Despite the numerous benefits, the reliability of these platforms hasn't kept the needs, and users trust on their applications to systems outside of personal control.}
+The present dissertation describes the work developed in the scope of Master of Science in Informatics Engineering. It is focused on ``Evaluate the robustness of Cloud'' and this is a very important issue nowadays, because of the increasing usage of this.
+It's characterized by the placement of data and software on remote infrastructure. Despite the numerous benefits, the reliability of these platforms hasn't kept the needs, and users trust on their applications to systems outside of personal control.
 
-\orange{“in this context, the problem of … arises naturally”
-Muitas vezes o Inglês troca a ordem das palavras. Em poucas palavras, deve usar-se a voz ativa, portanto será de encontrar informação sobre essa forma de construção frásica.}
+\iftoggle{long}{\orange{“in this context, the problem of … arises naturally”
+Muitas vezes o Inglês troca a ordem das palavras. Em poucas palavras, deve usar-se a voz ativa, portanto será de encontrar informação sobre essa forma de construção frásica.}}
 
-\red{In this context, naturally arises the problem of confidence in the entity that manages the platform where applications have been executed.} Any organization that put an application in the cloud (for example, Microsoft Azure or Amazon EC2) so should to accept the assurances given by the service provider.
+In this context, the problem of confidence in the entity that manages the platform where applications have been executed arises naturally. Any organization that put an application in the cloud (for example, Microsoft Azure or Amazon EC2) so should accept the assurances given by the service provider.
 
-\red{This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet actual needs of the application.}
-%\red{Although, there are solid virtualization platforms, fault tolerance is still a research problem.}
-%\red{resilience}
+\iftoggle{long}{\red{This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application.}}
 
+\iftoggle{long}{\red{Although, there are solid virtualization platforms, fault tolerance is still a research problem.}}
+\iftoggle{long}{\red{resilience}}
 
-% \citewwwbib{ref02}
-% \cite{ref02}
 
 \subsection{The project}
 
-This project is based mainly in inject software faults. It was decided since there already are other people involved in the part of hardware faults.
+This project is based mainly in inject software faults. It was decided since there are already other people involved in the part of hardware faults.
 
 \subsection{Objectives}
 
@@ -35,7 +33,8 @@ The main objective of this work is to evaluate the robustness of the cloud. To d
 
 Nevertheless, this objective is divided in some other goals:
 
-\orange{Esta parte está bem, mas o passo de “evaluate the robustness of the cloud” para estes 3 objetivos é demasiado grande. Deve explicar-se um pouco mais, partindo de um objetivo grande, e progressivamente estabelecer o que aqui se chama “goals”.}
+\iftoggle{long}{\orange{Esta parte está bem, mas o passo de “evaluate the robustness of the cloud” para estes 3 objetivos é demasiado grande. Deve explicar-se um pouco mais, partindo de um objetivo grande, e progressivamente estabelecer o que aqui se chama “goals”.}}
+
 \begin{itemize}
 	\item Generate derivations of main code of selected programs;
 	\item Verify and analyze the effect of produced faults;
@@ -47,13 +46,13 @@ Nevertheless, this objective is divided in some other goals:
 
 In this document are specified all the related subjects with the project.
 
-The second section be present the state-of-the-art in the related areas with particular emphasis to Cloud Computing and Fault Injection.
+The second section presents the state-of-the-art in the related areas with particular emphasis to Cloud Computing and Fault Injection.
 
-Third section is an important section of this report, because of the research involved in the execution of this work. It was necessary to take some important decisions based in research results, knowledge and my own experience.
+The third section is an important section of this report, because of the research involved in the execution of this work. It was necessary to take some important decisions based in research results, knowledge and my own experience.
 
-Fourth section describes the work that have been done in Fault Injector, and the work that should be done in the next semester.
+The fourth section describes the work that has been done in Fault Injector, and the work that should be done in the next semester.
 
-Fifth section explains other modules that are need to be executed in this project to can view and evaluate the results of the fault injector.
+The fifth section explains other modules that need to be executed in this project to observe and evaluate the results of the fault injector.
 
-In the last section, I will do an overview analyses to my work, in general the operators and the constraints developed. I will also talk in the work to be done in the next semester.
+In the last section, I will do an overview analyses of my work, in general the operators and the constraints developed. I will also talk about the work to be done in the next semester.
 

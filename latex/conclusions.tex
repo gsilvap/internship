@@ -4,7 +4,7 @@
 
 \subsection{Global Vision}
 
-In table \ref{tab:operators_status}, it's possible to understand the operators that were implemented in the first semester of this dissertation. As can be seen, I have implemented \red{five} of thirteen operators that João Durães was specified.
+In table \ref{tab:operators_status}, it's possible to understand the operators that were implemented in the first semester of this dissertation. As can be seen, I have implemented \red{five} of thirteen operators that João Durães specified.
 
 In table \ref{tab:constraints_status}, is also possible to check that I have implemented \red{three} of eleven constraints related to the thirteen operators.
 
@@ -28,27 +28,39 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 \clearpage
 \subsection{Future Work}
 
-\orange{Mais do que “future work” é necessário um plano para o segundo semestre, relativamente detalhado.}
-\orange{Globalmente há várias coisas que não estão suficientemente bem explicadas:
-- exatamente quais são as características novas da cloud, que devem ser avaliadas por injeção de falhas (podemos conversar sobre isto)
-- qual a razão para se desenvolver algo novo, quando a ferramenta do Natella já faz muito (lembro-me que colecionámos muitos argumentos
-que estão anotados)
-- como é que se vai dar uso ao que está implementado? far-se-ão experiências, os resultados serão classificados e analisados certamente
-- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source
-code, runtime, etc.)
-- o texto deve ser clarificado, mas essencialmente é no plano das ideias que muitas vezes está pouco claro: por que razão se está a fazer isto?
-quais são as alternativas? como é feito? exatamente o que é feito}
+\iftoggle{long}{\orange{Mais do que “future work” é necessário um plano para o segundo semestre, relativamente detalhado.}}
+
+\iftoggle{long}{\orange{Globalmente há várias coisas que não estão suficientemente bem explicadas:}}
+
+\iftoggle{long}{- exatamente quais são as características novas da cloud, que devem ser avaliadas por injeção de falhas (podemos conversar sobre isto)}
+
+\iftoggle{long}{- qual a razão para se desenvolver algo novo, quando a ferramenta do Natella já faz muito (lembro-me que colecionámos muitos argumentos}
+
+\iftoggle{long}{que estão anotados)}
+
+\iftoggle{long}{- como é que se vai dar uso ao que está implementado? far-se-ão experiências, os resultados serão classificados e analisados certamente}
+
+\iftoggle{long}{- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source}
+
+\iftoggle{long}{code, runtime, etc.)}
+
+\iftoggle{long}{- o texto deve ser clarificado, mas essencialmente é no plano das ideias que muitas vezes está pouco claro: por que razão se está a fazer isto?}
+
+\iftoggle{long}{quais são as alternativas? como é feito? exatamente o que é feito}
 
 In the future, I have planned to implement the other operators and constraints. In addition, apply this software in testing of open source software's that I will select.
 
-I will use \red{regression testing} to verify if when I coded one new operator or constraint I don't screwed the operators and constraints previous implemented.
-\red{From version to version, I use a regression testing to test the fault injector to guaranty that application doesn't regarded.}
+I will use \red{regression testing} to verify if when I coded one new operator or constraint I didn't mess with the operators and constraints previous implemented.
+\red{From version to version, I use a regression testing to test the fault injector to guarantee that application doesn't regarded.}
 
 
 \textit{``The purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software.''}
 
-\red{Regression Testing}
+\iftoggle{long}{\red{Regression Testing}}
 
-\red{System testing}
 
-\red{Unit tests}
+\iftoggle{long}{\red{System testing}}
+
+
+\iftoggle{long}{\red{Unit tests}}
+

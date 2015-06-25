@@ -7,7 +7,7 @@
 \usepackage{babel}
 \usepackage{blindtext}
 
-\usepackage[nottoc]{tocbibind}  % no `Contents` in TOC
+% \usepackage[nottoc]{tocbibind}  % no `Contents` in TOC
 
 %for embedding images
 % \usepackage[pdftex]{graphicx}
@@ -103,6 +103,11 @@
 \usepackage{libertine}
 \usepackage{framed}
 
+% comment
+\usepackage{etoolbox}
+\providetoggle{long}
+\settoggle{long}{false}
+
 % tables
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -150,7 +155,7 @@
 % \bibliographystyle{unsrt}
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
-% \addcontentsline{toc}{section}{References}
+\addcontentsline{toc}{section}{References}
 % \nocite{*}
 
 \end{document}

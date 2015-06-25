@@ -2,19 +2,47 @@
 \newpage
 \section{State of the Art}
 
-Nowadays, people use many services based in cloud and many of companies choose to use them too. Using it, companies reduce the costs of IT infrastructure and neither need to buy ``physical storage'', neither care where are the data. The cloud service provides that the data is secure.
-However, like as any system, the cloud has problems such as another computer systems, software and hardware faults. Very important is the resilience of the cloud too.
-\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}
-The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offers resources ready to deliver \cite{wolter2012resilience}.
+Nowadays, people use many services based in the cloud and many companies choose to use them too. By doing that, companies reduce the costs of IT infrastructure and not even need to buy ``physical storage'', neither care where the data is. The cloud service provides that the data is secure.
+However, like any system, the cloud has problems such any other computer system, software and hardware faults. The resilience of the cloud is very important too.
+\iftoggle{long}{\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}}
+The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
 
-\red{There are many studies showing that the software faults\cite{avizzienisbasic} it is the main cause of computer failures. But, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.}
+There are many studies showing that the software faults\cite{avizzienisbasic} are the main cause of computer failures. But, the number of faults that can be emulated is directly related to the technique used.
 
-With this work, I pretend to inject software faults and analyze how the system reacts to them.
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c}
+         & Software & Hardware \\ \hline
+Hardware &          & HWIFI    \\ \hline
+Software & SWIFI    & SWIFI
+\end{tabular}
+\caption{Fault injection techniques and emulation environment.}
+\label{swifi_hwifi}
+\end{table}
 
-% In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.
+\begin{itemize}
+	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software; Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
 
-\orange{O estilo continua com frases soltas, e pouco articuladas.
-Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns. Por que razão é que ``less than 70\% of the software faults can be emulated !?'' Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}
+	\item \textbf{\ac{hwifi}} - this technique is related to the fault injections in the final system hardware. Examples: \ac{emp}, radiation.
+
+\end{itemize}
+
+\Ac{swifi} are an attractive technique because won't require additional hardware (increase the cost of test). The targets of this technique are the applications and the operating systems, but, this technique don't have only advantages, can't inject faults in inaccessible areas of software and may disrupt or change the workload of the testing software. This technique can be used at:
+
+\begin{itemize}
+	\item \textbf{Compilation time at object code level} 		- Modify the structure of the program before the creation of executable file;
+	 % and can emulate Hardware faults, software faults;
+	\item \textbf{Execution environment at binary code level} 	- Changing the binary code activated by a timeout, an exception or a trap. At this level, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
+	\item \textbf{Before compile time at source code level} 	- Derivate the source code by removing, replacing or inserting some simple code before the compilation of program;
+\end{itemize}
+
+\iftoggle{long}{\red{With this work, I pretend to inject software faults and analyze how the system reacts to them.}}
+
+%\iftoggle{long}{In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.}
+
+
+\iftoggle{long}{\orange{O estilo continua com frases soltas, e pouco articuladas.
+Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns. Por que razão é que ``less than 70\% of the software faults can be emulated !?'' Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}}
 
 % \begin{table}[!ht]
 % \begin{tabular}{c}
@@ -32,24 +60,25 @@ Não sei se a maior parte das avarias são causadas por falhas de software. Há 
 % \\textbf{acs{cots}} A \acl{cots}
 % \acl{g-swfit}
 % \acl{odc}
-% \acl{swifi}
 
-I have the opportunity to access to the application (executable only)
+I had the opportunity to access to the application (executable only)
 %not the source)
-of Robert Natella, called by SAFE, that inject software faults, as I also want to do (I will describe it in next section).
+of Robert Natella, named SAFE, that injects software faults, as I also intended to do (I will describe it in next section).
 
 \clearpage
 \subsection{Software Implemented Fault Injection of Software Faults}
-\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\
+\iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
 
-\textbf{SAFE by Robert Natella}\\
-% \subsubsection{SAFE by Robert Natella}
+\iftoggle{long}{\textbf{Doctor}\\}
 
-Safe is an application to inject realistic software faults in programs coded in C and C++.
-This tool uses MCPP as parser, to get the tree of code. The decision of use MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
 
-After that, write some files, variations of original files (code with simple mutations) with operators applied.
-Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
+
+\iftoggle{long}{\textbf{Ferrari}\\}
+
+
+
+\iftoggle{long}{\textbf{Ftape}\\}
+
 
 
 \textbf{JACA Tool}\\
@@ -60,12 +89,25 @@ JACA\cite{regina2003jaca} is a tool that has been made to validate Java applicat
 
 \textbf{J-SWFIT} \\
 
-Java Software Fault Injection Tool\cite{sanches2011j} is a tool that does not need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.
+Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.\\
+
+\textbf{SAFE by Robert Natella}\\
+% \subsubsection{SAFE by Robert Natella}
+
+Safe is an application to inject realistic software faults in programs coded in C and C++.
+This tool uses MCPP as parser, to get the tree of code. The decision of using MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
+
+After that, write some files, variations of original files (code with simple mutations) with operators applied.
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
+
+
+\iftoggle{long}{\textbf{Xception}\\}
+
 
 \clearpage
 \subsection{ODC Model}
 \acl{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
-ODC can be used to classifying and analyzing defects during software development.
+ODC can be used to classify and analyze defects during software development.
 
 %\cite{lyu1996handbook}
 For that, this model has eight categories:
@@ -74,10 +116,10 @@ For that, this model has eight categories:
 	\item \textbf{Function} - This defect affects significant capability, end-user features, product \acl{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
 	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or a data structure.
 	\item \textbf{Interface} - Problems in the interaction with other components, modules, device drivers, call statements, control blocks, or parameter lists.
-	\item \textbf{Checking} - Based in the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
+	\item \textbf{Checking} - Based on the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
 	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
 	\item \textbf{Build/package/merge} - Errors that occur in the integration of library systems, management of changes, or in version control.
-	\item \textbf{Documentation} - Errors in the documentation, that con be propagated to publications and maintenance notes.
+	\item \textbf{Documentation} - Errors in the documentation, that can be propagated to publications and maintenance notes.
 	\item \textbf{Algorithm} - Problems that can be fixed by re-implementing an algorithm or local data structure, include efficiency or correctness that affect the task.
 \end{itemize}
 
@@ -95,7 +137,7 @@ To understand a little more what the Cloud Computing means:\\
 
 \textit{``Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.''}\cite{mell2011nist}.\\
 
-Cloud Computing is a new way to delivery TI services on-demand (utility-oriented and Internet-centric). These services included all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
+Cloud Computing is a new way to delivery IT services on-demand (utility-oriented and Internet-centric). This services include all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -104,14 +146,14 @@ Cloud Computing is a new way to delivery TI services on-demand (utility-oriented
 \end{center}
 \end{figure}
 
-Above, I will describe it in relation to characteristics, deployment models and service models\cite{schouten2013ibm}.
+Below, I will describe it in relation to characteristics, deployment models and service models\cite{schouten2013ibm}.
 
 The characteristics of Cloud Computing are:
 \begin{itemize}
 	\item \textbf{On demand self-service} 	- The users can request and manage their cloud computing resources without requiring human interaction, through a web-based self-service portal.
 	\item \textbf{Broad network access 	}	- Provide access over the network and using standard way through by several clients (e.g., mobile phones, tablets, laptops and workstations).
 	\item \textbf{Resource pooling 		}	- The computer resources are pooled to serve multiple customers through the safe separation of the resources at logical level.
-	\item \textbf{Rapid elasticity 		}	- Capability of resources to be elastically provisioned and released. Making sure of the application will have exactly the capacity that it needs at any point of time.
+	\item \textbf{Rapid elasticity 		}	- Capability of resources to be elastically provisioned and released. Making sure that the application will have exactly the capacity that it needs at any point of time.
 	\item \textbf{Measured service 		}	- The service is monitored, measured, and reported transparently based on the usage. The clients pay in accordance with the service spent.
 \end{itemize}
 
@@ -119,10 +161,12 @@ Four models of deployment:
 \begin{itemize}
 	%and treat effectively a lot of requests.}
 	\item \textbf{Private Cloud}   - It is a single-tenant cloud solution utilizing client hardware and software, is located inside the client firewall or even data center. The sensitive information is maintained inside of organization. It has the disadvantage of not having ability to scale on demand.
-	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
-	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers. The company that sells cloud services owns it.
 
-	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that permits portability. Take advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
+	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
+
+	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers.
+
+	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that allows portability. Takes advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
 
 Four levels of Cloud Computing Service Models:
@@ -132,7 +176,7 @@ Four levels of Cloud Computing Service Models:
 
 	\item \textbf{\acl{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
 
-	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup, and run the application. Service provider does all things for you. Examples: Google Apps, Microsoft Office 365.
+	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup, and run the application. Service provider does all those things for you. Examples: Google Apps, Microsoft Office 365.
 
 	\item \textbf{\acl{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
 
@@ -140,12 +184,12 @@ Four levels of Cloud Computing Service Models:
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{cloud-computing-service-models.png}
+\includegraphics[width=1\textwidth]{cloud-computing-service-models2.png}
 \caption{\small \sl Cloud computing service models.\label{fig:cloudcomputingservicemodels}}
 \end{center}
 \end{figure}
 
-Nevertheless, such as any computer system, the cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
+Nevertheless, such as any computer system, cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
  	\item Security attacks;
  	\item Accidents;
@@ -160,20 +204,21 @@ Nevertheless, such as any computer system, the cloud computing isn't free of ext
 \subsection{Tools - GCC Parser, Bison and Eclipse CDT}
 
 In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
-For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.
+For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.\\
 
 %\red{For parsing the code, analyze and modify it,}
 
-% Finally, I decided to use
-In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my abilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
 
-\textbf{Bison/Yacc}\\
 
-\textbf{MCPP}\\
+\iftoggle{long}{\textbf{Bison/Yacc}\\}
+
+
+\iftoggle{long}{\textbf{MCPP}\\}
+
 
 \textbf{GCC Parser}\\
 
-Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving human meaningful messages on syntax errors.\\
+Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors.\\
 
 \textbf{Eclipse CDT}\\
 
@@ -185,24 +230,32 @@ Some of the features included in this plugin that are interesting for this proje
 	\item Source code refactoring and code generation.
 \end{itemize}
 
-Is possible to use this plugin in standalone mode, importing .jar files to the project.
+It's possible to use this plugin in standalone mode, importing .jar files to the project.
 Using it, I can code Fault Injector in Java, making the software more maintainable and easy to use, write, compile and debug.
 \\
 
-%\red{Problems with the rewriting of tree}
+% Finally, I decided to use
+In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my abilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
 
-%\red{Reflection}
 
-%\red{But I was forced to take decisions after that, for example, after create the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}
+\iftoggle{long}{\red{Problems with the rewriting of tree}}
 
-%\red{Performance analyses}
+
+\iftoggle{long}{\red{Reflection}}
+
+
+\iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
+
+
+\iftoggle{long}{\red{Performance analyses}}
+
+
 
 \newpage
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
 
 The Fault Injector currently in development is coded in Java using Eclipse CDT, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})
-%, specified by João Durães in Appendix A of
 \cite{duraes2005thesis}.
 
 \begin{table}[!ht]
@@ -226,13 +279,15 @@ WAEP       				& \Acl{waep} 									\\ \hline
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
 
-\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}
+In the beginning of this project,
+\iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
 
 \subsection{Generate derivations}
 
 I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation}, specified individually further down:
 
-%\red{Table of more representative faults of Durães}
+\iftoggle{long}{\red{Table of more representative faults of Durães}}
+
 	\hypertarget{mifs}{}
 	\subsubsection{\textbf{\acs{mifs}}} - \Acl{mifs} - \green{\textbf{Implemented}}
  	\bookmark[level=\thesubsubsection,dest=mifs]{\thesubsubsection \ \acs{mifs}}
@@ -277,7 +332,8 @@ I chose to use a set of the most representative faults, previously specified by 
 	\subsubsection{\textbf{\acs{mloc}}} - \Acl{mloc} - \green{\textbf{Implemented}}
 	\bookmark[level=\thesubsubsection,dest=mloc]{\thesubsubsection \ \acs{mloc}}
 
-	This operator emules the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. \red{acabar}
+	This operator emules the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. \iftoggle{long}{\red{acabar}}
+
 	\begin{itemize}
 		\item \textbf{\acs{c12}} - \Acl{c12}.
 	\end{itemize}
@@ -384,7 +440,7 @@ The operators above will be applied to source code of applications and will gene
 \clearpage
 \subsection{Constraints}
 
-The constraints defined below was specified by João Durães in ... .
+The constraints defined below were specified by João Durães in ... .
 
 \begin{table}[!ht]
 \centering
@@ -420,7 +476,7 @@ The constraints defined below was specified by João Durães in ... .
 \clearpage
 \subsection{Applications to inject faults}
 
-% \red{The same applications that João Durães have collect information?}
+% \red{The same applications that João Durães has collected information?}
 % \begin{itemize}
 % 	\item MinGW, Last Update: 2015-06-08
 % 	\item ScummVM, Last Update: 2015-05-17
@@ -454,26 +510,26 @@ Built three separated modules:
 
 \subsection{Compile programs}
 
-\red{Select five to ten programs to be tested.}
+\iftoggle{long}{\red{Select five to ten programs to be tested.}}
 
-\red{Justificar a utilização de patchs}
+\iftoggle{long}{\red{Justificar a utilização de patchs}}
 
 \subsection{Analyze the effects}
 
-\red{The fault injected results is equal to the real software faults?}
+\iftoggle{long}{\red{The fault injected results are equal to the real software faults?}}
 
-After the compilation and execution of the programs, the results need to be evaluated. For measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
+After the compilation and execution of the programs, the results need to be evaluated. To measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
 
 \begin{itemize}
 	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
 	\item \textbf{R}estart - Task or process hangs, requiring restart;
 	\item \textbf{A}bort - Task or process aborts abnormally (i.e. ``code dump'' or ``segmentation violation'');
-	\item \textbf{S}ilent - Test Process exits without an error code returned when one should be;
+	\item \textbf{S}ilent - Test Process exits without an error code returned when one should exist;
 	\item \textbf{H}indering - Test Process exits with an error code not relevant to the situation or incorrect error code returned;
 	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error code.
 \end{itemize}
 
 This \textit{CRASH Scale} is one way to show results of the effect of faults on an end-use system, mainly from the operating system perspective.
 
-\orange{Esta parte é particularmente importante: a classificação dos efeitos.
-Creio que há mais a dizer, pois fará parte do plano futuro de desenvolvimento classificar o que cada programa defeituoso faz.}
+\iftoggle{long}{\orange{Esta parte é particularmente importante: a classificação dos efeitos. Creio que há mais a dizer, pois fará parte do plano futuro de desenvolvimento classificar o que cada programa defeituoso faz.}}
+
