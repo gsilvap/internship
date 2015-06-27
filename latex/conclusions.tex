@@ -1,52 +1,109 @@
 %!TEX root = main.tex
-\clearpage
+% \clearpage
 \section{Conclusion}
 
 \subsection{Global Vision}
 
-In table \ref{tab:operators_status}, it's possible to understand the operators that were implemented in the first semester of this dissertation. As can be seen, I have implemented \red{five} of thirteen operators that João Durães specified.
-
-In table \ref{tab:constraints_status}, is also possible to check that I have implemented \red{three} of eleven constraints related to the thirteen operators.
+In table \ref{tab:operators_status}, it's possible to view at \green{green color}, the operators that were implemented in the first semester of this dissertation. As can be seen, I have implemented five of thirteen operators that João Durães specified. The first operator that I have implemented with sucess was the \ac{mifs}, and as the operators \ac{mia} and \ac{mieb} are similar and have some constraints in common, then I implemented them.
 
 % \clearpage
-\begin{table}[ht]
-\begin{tabular}{c}
-\includegraphics[width=1.1\textwidth]{img/operators_status.jpg}
+% \begin{table}[ht]
+% \begin{tabular}{c}
+% \includegraphics[width=1.1\textwidth]{img/operators_status.jpg}
+% \end{tabular}
+% \caption{\small \sl State of the operators and its constraints.\label{tab:operators_status}}
+% \end{table}
+
+
+\begin{table}[!ht]
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{Fault Type}		& \multicolumn{1}{c|}{\textbf{Description}}		\\ \hline \hline
+MFC        				& \Acl{mfc}  									\\ \hline
+\green{MIA}        		& \green{\Acl{mia}} 							\\ \hline
+\green{MIEB}       		& \green{\Acl{mieb}} 							\\ \hline
+\green{MIFS}       		& \green{\Acl{mifs}} 							\\ \hline
+\green{MLAC}       		& \green{\Acl{mlac}} 							\\ \hline
+\green{MLOC}       		& \green{\Acl{mloc}} 							\\ \hline
+MLPA       				& \Acl{mlpa} 									\\ \hline
+MVAE       				& \Acl{mvae} 									\\ \hline
+MVAV       				& \Acl{mvav} 									\\ \hline
+MVIV       				& \Acl{mviv} 									\\ \hline
+WAEP       				& \Acl{waep} 									\\ \hline
+WPFV       				& \Acl{wpfv} 									\\ \hline
+WVAV       				& \Acl{wvav} 									\\ \hline
 \end{tabular}
 \caption{\small \sl State of the operators and its constraints.\label{tab:operators_status}}
 \end{table}
 
+In table \ref{tab:constraints_status}, is also possible to check that I have implemented three of eleven constraints related to the thirteen operators, represented at \green{green color}.
 
-
-\begin{table}[ht]
-\begin{tabular}{c}
-\includegraphics[width=1.1\textwidth]{img/constraints_status.jpg}
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
+\textbf{C01}         & \Acl{c01} \\ \hline
+\green{\textbf{C02}} & \green{\Acl{c02}} \\ \hline
+\textbf{C03}         & \Acl{c03} \\ \hline
+\textbf{C04}         & \Acl{c04} \\ \hline
+\textbf{C05}         & \Acl{c05} \\ \hline
+\textbf{C06}         & \Acl{c06} \\ \hline
+\textbf{C07}         & \Acl{c07} \\ \hline
+\green{\textbf{C08}} & \green{\Acl{c08}} \\ \hline
+\green{\textbf{C09}} & \green{\Acl{c09}} \\ \hline
+\textbf{C10}         & \Acl{c10} \\ \hline
+\textbf{C11}         & \Acl{c11} \\ \hline
 \end{tabular}
 \caption{\small \sl State of the constraints.\label{tab:constraints_status}}
 \end{table}
 
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
+\green{\textbf{C08n}}         & \green{\Acl{c08n}} \\ \hline
+\green{\textbf{C12}}          & \green{\Acl{c12}} \\ \hline
+\end{tabular}
+\caption{\small \sl State of the other constraints.\label{tab:otherConstraints_status}}
+\end{table}
+
+% \begin{table}[ht]
+% \begin{tabular}{c}
+% \includegraphics[width=1.1\textwidth]{img/constraints_status.jpg}
+% \end{tabular}
+% \caption{\small \sl State of the operators and its constraints.\label{tab:constraints_status}}
+% \end{table}
+
 \clearpage
 \subsection{Future Work}
 
+
 \iftoggle{long}{\orange{Mais do que “future work” é necessário um plano para o segundo semestre, relativamente detalhado.}}
+
 
 \iftoggle{long}{\orange{Globalmente há várias coisas que não estão suficientemente bem explicadas:}}
 
+
 \iftoggle{long}{\orange{- exatamente quais são as características novas da cloud, que devem ser avaliadas por injeção de falhas (podemos conversar sobre isto)}}
 
-\iftoggle{long}{\orange{- qual a razão para se desenvolver algo novo, quando a ferramenta do Natella já faz muito (lembro-me que colecionámos muitos argumentos}}
 
-\iftoggle{long}{\orange{que estão anotados)}}
+\iftoggle{long}{\orange{- qual a razão para se desenvolver algo novo, quando a ferramenta do Natella já faz muito (lembro-me que colecionámos muitos argumentos que estão anotados)}}
+
 
 \iftoggle{long}{\orange{- como é que se vai dar uso ao que está implementado? far-se-ão experiências, os resultados serão classificados e analisados certamente}}
 
-\iftoggle{long}{\orange{- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source}}
 
-\iftoggle{long}{\orange{code, runtime, etc.)}}
+\iftoggle{long}{\orange{- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, runtime, etc.)}}
+
 
 \iftoggle{long}{\orange{- o texto deve ser clarificado, mas essencialmente é no plano das ideias que muitas vezes está pouco claro: por que razão se está a fazer isto?}}
 
-\iftoggle{long}{\orange{quais são as alternativas? como é feito? exatamente o que é feito}}
+
+\iftoggle{long}{\orange{- quais são as alternativas? como é feito? exatamente o que é feito}}
+
+
 
 In the future, I have planned to implement the other operators and constraints. In addition, apply this software in testing of open source software's that I will select.
 
@@ -64,14 +121,46 @@ I will use \red{regression testing} to verify if when I coded one new operator o
 
 \iftoggle{long}{\red{Unit tests}}
 
+
+\iftoggle{long}{\red{Performance analyses}}
+
 % \clearpage
 % \subsubsection{Applications to inject faults}
 
 \iftoggle{long}{
-	\hypertarget{Applications_to_inject_faults}{}
- 	\subsubsection{Applications to inject faults}
- 	\bookmark[level=\thesubsubsection,dest=Applications_to_inject_faults]{\thesubsubsection \ Applications to inject faults}
+	\hypertarget{experiments}{}
+ 	\subsubsection{Experiments}
+ 	\bookmark[level=\thesubsubsection,dest=experiments]{\thesubsubsection \ Experiments}
 }
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.2\textwidth]{test2.png}
+\caption{\small \sl First experiment.\label{fig:test2}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.2\textwidth]{test3.png}
+\caption{\small \sl Second experiment.\label{fig:test3}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{test1.png}
+\caption{\small \sl Third experiment.\label{fig:test1}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{test4.png}
+\caption{\small \sl Fourth experiment.\label{fig:test4}}
+\end{center}
+\end{figure}
+
 
 % \red{The same applications that João Durães has collected information?}
 % \begin{itemize}

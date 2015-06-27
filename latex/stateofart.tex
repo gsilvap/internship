@@ -16,9 +16,11 @@ There are many studies showing that the software faults\cite{avizzienisbasic} ar
 \textbf{Hardware} &          & HWIFI    \\ \hline
 \textbf{Software} & SWIFI    & SWIFI
 \end{tabular}
-\caption{Fault injection techniques and emulation environment.}
-\label{swifi_hwifi}
+\caption{\small \sl Fault injection techniques and emulation environment.}
+\label{tab:swifi_hwifi}
 \end{table}
+
+In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be user HWIFI technique to emulate hardware faults throught hardware.
 
 \begin{itemize}
 	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software; Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
@@ -69,24 +71,25 @@ of Robert Natella, named SAFE, that injects software faults, as I also intended 
 \subsection{Software Implemented Fault Injection of Software Faults}
 % \iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
 
+Above, I will describe some tools that use \ac{swifi} technique and made some improvements in the area of this research.
 
-\iftoggle{long}{
- 	\subsubsection{Doctor}
-	\hypertarget{Doctor}{}
- 	\bookmark[level=\thesubsubsection,dest=Doctor]{\thesubsubsection \ Doctor}
-}
+% \iftoggle{long}{
+%  	\subsubsection{Doctor}
+% 	\hypertarget{Doctor}{}
+%  	\bookmark[level=\thesubsubsection,dest=Doctor]{\thesubsubsection \ Doctor}
+% }
 
-\iftoggle{long}{
- 	\subsubsection{Ferrari}
-	\hypertarget{Ferrari}{}
- 	\bookmark[level=\thesubsubsection,dest=Ferrari]{\thesubsubsection \ Ferrari}
-}
+% \iftoggle{long}{
+%  	\subsubsection{Ferrari}
+% 	\hypertarget{Ferrari}{}
+%  	\bookmark[level=\thesubsubsection,dest=Ferrari]{\thesubsubsection \ Ferrari}
+% }
 
-\iftoggle{long}{
- 	\subsubsection{Ftape}
-	\hypertarget{Ftape}{}
- 	\bookmark[level=\thesubsubsection,dest=Ftape]{\thesubsubsection \ Ftape}
-}
+% \iftoggle{long}{
+%  	\subsubsection{Ftape}
+% 	\hypertarget{Ftape}{}
+%  	\bookmark[level=\thesubsubsection,dest=Ftape]{\thesubsubsection \ Ftape}
+% }
 
 \subsubsection{JACA Tool}
 \hypertarget{JACA Tool}{}
@@ -112,11 +115,11 @@ After that, write some files, variations of original files (code with simple mut
 Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
 
 
-\iftoggle{long}{
- 	\subsubsection{Xception}
-	\hypertarget{Xception}{}
- 	\bookmark[level=\thesubsubsection,dest=Xception]{\thesubsubsection \ Xception}
-}
+% \iftoggle{long}{
+%  	\subsubsection{Xception}
+% 	\hypertarget{Xception}{}
+%  	\bookmark[level=\thesubsubsection,dest=Xception]{\thesubsubsection \ Xception}
+% }
 
 \clearpage
 \subsection{ODC Model}
@@ -205,13 +208,13 @@ Four levels of Cloud Computing Service Models:
 
 Nevertheless, such as any computer system, cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
- 	\item Security attacks;
- 	\item Accidents;
- 	\item Power surges;
- 	\item Workload faults;
- 	\item Malfunction;
- 	\item Worms;
- 	\item \acl{ddos} attacks.
+ 	\item \textbf{Security attacks - } any try to gain unauthorized access;
+ 	\item \textbf{Accidents - } an unplanned event;
+ 	\item \textbf{Power surges - } an interruption of the flow of electricity;
+ 	% \item \textbf{Workload faults - } cenas;
+ 	\item \textbf{Malfunction - } bugs cause function wrongly, or not function at all;
+ 	\item \textbf{Worms - } malware computer program;
+ 	\item \textbf{\acl{ddos} attacks - } a try to make an network resource unavailable.
  \end{itemize}
 
 \clearpage
@@ -262,29 +265,6 @@ Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, 
 % Finally, I decided to use
 In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my abilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
 
-
-\iftoggle{long}{\red{Problems with the rewriting of tree}}
-
-
-\iftoggle{long}{\red{Reflection}}
-
-
-\iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
-
-
-\iftoggle{long}{\red{Performance analyses}}
-
-\newpage
-\section{Hard work}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.8\textwidth]{decisions.png}
-\caption{\small \sl Decision tree.\label{fig:decisions}}
-\end{center}
-\end{figure}
-
-
 \newpage
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
@@ -317,7 +297,7 @@ In the beginning of this project,
 
 \subsection{Generate derivations}
 
-I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation}, specified individually further down:
+I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation} according to his data-field results, specified individually further down:
 
 	\subsubsection{\textbf{\acs{mfc}}} - \Acl{mfc}
 	\hypertarget{mfc}{}
@@ -424,7 +404,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mviv}{}
 	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
 
-	As the name suggests, this operator represents the remotion of the initialization of a given local variable with a constant value. The fact that this operator only search for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply the fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verify if the assignment don't occurs inside a loop, because one assignment of this type occurs several times.
+	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only search for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verify if the assignment don't occurs inside a loop, because one assignment of this type occurs several times. But this operator has other associated constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -445,7 +425,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{waep}{}
 	\bookmark[level=\thesubsubsection,dest=waep]{\thesubsubsection \ \acs{waep}}
 
-
+	This operator represents the
 
 %	\hypertarget{wsut}{}
 %	\subsubsection{\textbf{\acs{wsut}}} - \Acl{wsut}
@@ -463,6 +443,8 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{wvav}{}
 	\bookmark[level=\thesubsubsection,dest=wvav]{\thesubsubsection \ \acs{wvav}}
 
+	As the name suggests, this operator simulate an assignment of a wrong value to a variable. To do that, the operator
+
 	\begin{itemize}
 		\item \textbf{\acs{c03}} - \Acl{c03};
 		\item \textbf{\acs{c04}} - \Acl{c04};
@@ -471,13 +453,6 @@ I chose to use a set of the most representative faults, previously specified by 
 
 The operators above will be applied to source code of applications and will generate modified files.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1\textwidth]{mockup.png}
-\caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
-\end{center}
-\end{figure}
-
 %\subsubsection{Fault Types - Extraneous}
 %\begin{itemize}
 %	\item \textbf{EVAV} - variable assignment using another variable
@@ -485,7 +460,7 @@ The operators above will be applied to source code of applications and will gene
 \clearpage
 \subsection{Constraints}
 
-\red{The constraints defined below were specified by João Durães in ... .}
+As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, that have been done by João Durães.
 
 \begin{table}[!ht]
 \centering
@@ -510,6 +485,7 @@ The operators above will be applied to source code of applications and will gene
 The constraint \textbf{C07} is similar to constraint \textbf{C04}, one is the negation of another. This happen too with the constraint \textbf{C08} and \textbf{C08n}.
 Constraint \textbf{c10} are the same as constraint \textbf{C09}, but with one additional restriction, the statements need to be contiguous and need to belong to the same code block.
 
+When was implementing the operators \textbf{\ac{mieb}} and \textbf{\ac{mloc}}, it was necessary to define the constraints \textbf{\ac{c08n}} and \textbf{\ac{c12}}. The constraint \textbf{\ac{c08n}} was created because of the operator \textbf{\ac{mieb}} cannot be applied to an \textit{if} without an \textit{else} construct and the constraint \textbf{\ac{c12}} was created because the operator \textbf{\ac{mloc}} can't be emulated in a branch with only one condition.
 
 \begin{table}[!ht]
 \centering
@@ -522,10 +498,32 @@ Constraint \textbf{c10} are the same as constraint \textbf{C09}, but with one ad
 \caption{\small \sl Other constraints.\label{tab:otherConstraints}}
 \end{table}
 
-The constraint defined above can be modified during the implementation of the other operators that aren't yet implemented.
+This constraints can be modified during the implementation of the other operators that aren't yet implemented.
 
 \clearpage
 \section{Work plan and implications}
+
+In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during the first semester of this dissertation. Since the beginning of this project, it was expected to create a fault injector.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{decisions.png}
+\caption{\small \sl Decision tree.\label{fig:decisions}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1\textwidth]{mockup.png}
+\caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
+\end{center}
+\end{figure}
+
+\iftoggle{long}{\red{Select five to ten programs to be tested.}}
+
+
+\iftoggle{long}{\red{Justificar a utilização de patchs}}
+
 
 Built three separated modules:
 
@@ -536,15 +534,20 @@ Built three separated modules:
 \end{itemize}
 
 
+\iftoggle{long}{\red{Problems with the rewriting of tree}}
+
+
+\iftoggle{long}{\red{Reflection}}
+
+
+
+\iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
 
 
 
 
-\subsection{Compile programs}
 
-\iftoggle{long}{\red{Select five to ten programs to be tested.}}
 
-\iftoggle{long}{\red{Justificar a utilização de patchs}}
 
 \subsection{Analyze the effects}
 
