@@ -68,80 +68,18 @@
 	"buffers":
 	[
 		{
-			"file": "latex/abstract.tex",
-			"settings":
-			{
-				"buffer_size": 1449,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "%!TEX root = main.tex\n\\newpage\n% \\chapter{Introduction}\n\\section{Introduction}\n\n\\red{In the next subsections will be introduced the context and the scope of this project.}\n\\orange{1,2 ou 3 paragrafos descritivos do problema}\n\n\\subsection{Contextualization}\n\\orange{Logo aqui deve ficar claro que os bugs existem, vão sempre existir, e que testar a capacidade de qualquer sistema crítico para lidar com bugs existentes é fundamental. Daí todo o trabalho. Não é claro por que razão (ou razões) isto é específico para a Cloud. Não é igual fazer-se para a Cloud ou para programas stand-alone clássicos?}\n\nThe present dissertation describes the work developed in the scope of Master of Science in Informatics Engineering. It is focused on ``Evaluate the robustness of Cloud'' and this is a very important issue nowadays, because of the increasing usage of this.\nIt's characterized by the placement of data and software on remote infrastructure. \\red{Despite the numerous benefits, the reliability of these platforms hasn't kept the needs, and users trust on their applications to systems outside of personal control.}\n\n\\orange{“in this context, the problem of … arises naturally”\nMuitas vezes o Inglês troca a ordem das palavras. Em poucas palavras, deve usar-se a voz ativa, portanto será de encontrar informação sobre essa forma de construção frásica.}\n\n\\red{In this context, naturally arises the problem of confidence in the entity that manages the platform where applications have been executed.} Any organization that put an application in the cloud (for example, Microsoft Azure or Amazon EC2) so should to accept the assurances given by the service provider.\n\n\\red{This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application.}\n%\\red{Although, there are solid virtualization platforms, fault tolerance is still a research problem.}\n%\\red{resilience}\n\n\n% \\citewwwbib{ref02}\n% \\cite{ref02}\n\n\\subsection{The project}\n\nThis project is based mainly in inject software faults. It was decided since there are already other people involved in the part of hardware faults.\n\n\\subsection{Objectives}\n\nThe main objective of this work is to evaluate the robustness of the cloud. To do that, I will design and implement a tool to inject software faults in source code of some applications.\n\nNevertheless, this objective is divided in some other goals:\n\n\\orange{Esta parte está bem, mas o passo de “evaluate the robustness of the cloud” para estes 3 objetivos é demasiado grande. Deve explicar-se um pouco mais, partindo de um objetivo grande, e progressivamente estabelecer o que aqui se chama “goals”.}\n\\begin{itemize}\n	\\item Generate derivations of main code of selected programs;\n	\\item Verify and analyze the effect of produced faults;\n	\\item Compile the programs with injected faults, by using make file.\n\\end{itemize}\n\n\n\\subsection{Document Structure}\n\nIn this document are specified all the related subjects with the project.\n\nThe second section presents the state-of-the-art in the related areas with particular emphasis to Cloud Computing and Fault Injection.\n\nThe third section is an important section of this report, because of the research involved in the execution of this work. It was necessary to take some important decisions based in research results, knowledge and my own experience.\n\nThe fourth section describes the work that has been done in Fault Injector, and the work that should be done in the next semester.\n\nThe fifth section explains other modules that need to be executed in this project to observe and evaluate the results of the fault injector.\n\nIn the last section, I will do an overview analyses of my work, in general the operators and the constraints developed. I will also talk about the work to be done in the next semester.\n\n",
-			"file": "latex/intro.tex",
-			"file_size": 3945,
-			"file_write_time": 130797060799788978,
-			"settings":
-			{
-				"buffer_size": 3910,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "%!TEX root = main.tex\n% \\newpage\n\\subsection{Management}\n\n\\red{In this section is described the planning of work developed in this dissertation.}\n\n\\subsubsection{Meetings}\nAbout the meetings, the supervisor Raul Barbosa and I agreed that meeting once every week was the best option. Moreover they were going on, with one or another change of schedule to reconcile with the other activities from both. In addition, I attended to some general meetings of the project. In them, we could discuss concepts and the direction of the project with colleagues and teachers, among them: Raul Barbosa (supervisor), Henrique Madeira (co-supervisor), João Durães and João André Ferro.\n\n\\subsubsection{Risks}\n\nThe main-risks of execution of this project are:\n\n%\\red{desenvolver um pouco mais...}\n\n\\begin{itemize}\n	\\item Equipment Failure;\n	\\item Data lost;\n	\\item Publication of similar research;\n	\\item Personal issues interfere with progress;\n	\\item Student loses interest;\n	\\item Dispute between student and supervisor;\n	\\item Supervisor takes excessive time to check final drafts;\n	\\item Student wants to submit thesis without supervisor approval.\n\\end{itemize}\n\n% \\red{Table of risks with cause, consequence and mitigation!!!}\n\nThe preventative measures and recovery measures can be seen at Appendix \\ref{App:B}.\n\n\\subsubsection{Planning and Tracking}\nIn Appendix \\ref{App:A}, is showed the Gantt diagram with the tasks that have been done during the first semester.\n%  to first and to second semester.I'm not showing here the planned Gantt\nI postponed this dissertation six months so, the scope and the context have changed. Now the two Gantt diagrams are incomparable.\n\n\n%I have prioritized the tasks using the nomenclature in Table \\ref{tab:classRequirements}:\n%\\begin{table}[!ht]\n%\\begin{tabular}{cc}\n%\\hline\n%\\textbf{Classification}                & \\textbf{Mean}                                                                                                                                                           \\\\ \\hline\n%\\multicolumn{1}{|c|}{\\textit{Must}}    & \\multicolumn{1}{c|}{\\begin{tabular}[c]{@{}c@{}}Must be implement at project finish,\\\\  and his implementation is priority.\\end{tabular}}                                \\\\ \\hline\n%\\multicolumn{1}{|c|}{\\textit{Nice}}    & \\multicolumn{1}{c|}{\\begin{tabular}[c]{@{}c@{}}May be part of the functionality implemented\\\\  at the end of project, and his implementation is optional.\\end{tabular}} \\\\ \\hline\n%\\multicolumn{1}{|c|}{\\textit{Wishful}} & \\multicolumn{1}{c|}{\\begin{tabular}[c]{@{}c@{}}It's specified but his implementation is \\\\not expected until the end of project.\\end{tabular}}                          \\\\ \\hline\n%\\end{tabular}\n%\\caption {Classification of requirements} \\label{tab:classRequirements}\n%\\end{table}\n\n% \\newpage\n%\\red{About the development of this project, I have used an \\emph{Agile Life Cycle} based in a \\emph{Incremental Model}.}\n\n%\\red{porque? ajuda? com que objectivo? foi uma boa opção? quais eram as alternativas? em que falhavam? porque nao foram escolhidas? }\n\n%\\red{What is the requirements of this project???}\n",
-			"file": "latex/management.tex",
-			"file_size": 3112,
-			"file_write_time": 130797060810199627,
-			"settings":
-			{
-				"buffer_size": 3106,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "internship.todo",
-			"settings":
-			{
-				"buffer_size": 6937,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 13990,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "latex/cover.tex",
-			"settings":
-			{
-				"buffer_size": 1642,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/acknowledgements.tex",
-			"settings":
-			{
-				"buffer_size": 1978,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "latex/utilities.tex",
-			"settings":
-			{
-				"buffer_size": 248,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "latex/stateofart.tex",
 			"settings":
 			{
-				"buffer_size": 23157,
+				"buffer_size": 28783,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "latex/main.tex",
+			"settings":
+			{
+				"buffer_size": 4606,
 				"line_ending": "Windows"
 			}
 		},
@@ -149,7 +87,15 @@
 			"file": "latex/appendix.tex",
 			"settings":
 			{
-				"buffer_size": 1410,
+				"buffer_size": 1289,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "latex/constraints.tex",
+			"settings":
+			{
+				"buffer_size": 1780,
 				"line_ending": "Windows"
 			}
 		},
@@ -157,16 +103,8 @@
 			"file": "latex/conclusions.tex",
 			"settings":
 			{
-				"buffer_size": 2875,
+				"buffer_size": 4060,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "latex/main.tex",
-			"settings":
-			{
-				"buffer_size": 4529,
-				"line_ending": "Windows"
 			}
 		},
 		{
@@ -194,10 +132,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 291.0,
-		"last_filter": "remove",
+		"height": 400.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"lo",
+				"Convert Case: Lower Case"
+			],
 			[
 				"remove",
 				"Package Control: Remove Package"
@@ -212,10 +154,6 @@
 			],
 			[
 				"lower",
-				"Convert Case: Lower Case"
-			],
-			[
-				"lo",
 				"Convert Case: Lower Case"
 			],
 			[
@@ -497,37 +435,38 @@
 	],
 	"file_history":
 	[
+		"/D/onedrive/mei/internship/latex/main.tex",
+		"/D/onedrive/mei/internship/latex/appendix.tex",
+		"/D/onedrive/mei/internship/latex/index.tex",
+		"/D/onedrive/mei/internship/latex/abbreviations.tex",
+		"/D/onedrive/mei/internship/latex/stateofart.tex",
+		"/D/onedrive/mei/internship/latex/utilities.tex",
+		"/D/onedrive/mei/internship/latex/acknowledgements.tex",
+		"/D/onedrive/mei/internship/latex/cover.tex",
+		"/D/onedrive/mei/internship/README.md",
+		"/D/onedrive/mei/internship/internship.todo",
+		"/D/onedrive/mei/internship/latex/management.tex",
+		"/D/onedrive/mei/internship/latex/intro.tex",
+		"/D/onedrive/mei/internship/latex/abstract.tex",
+		"/D/onedrive/mei/internship/latex/conclusions.tex",
+		"/D/onedrive/mei/internship/latex/main.lof",
+		"/D/onedrive/mei/internship/latex/constraints.tex",
+		"/D/onedrive/mei/internship/latex/operators.tex",
+		"/D/onedrive/mei/internship/Operators and Contraints.xls",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/GonçaloSilva/AppData/Roaming/SumatraPDF/SumatraPDF-settings.txt",
-		"/D/onedrive/mei/internship/latex/appendix.tex",
-		"/D/onedrive/mei/internship/latex/conclusions.tex",
-		"/D/onedrive/mei/internship/latex/abbreviations.tex",
-		"/D/onedrive/mei/internship/latex/cover.tex",
-		"/D/onedrive/mei/internship/latex/operators.tex",
-		"/D/onedrive/mei/internship/latex/constraints.tex",
 		"/C/Users/GonçaloSilva/AppData/Local/Temp/Rar$DIa0.140/Readme.txt",
 		"/C/Users/GonçaloSilva/Desktop/URET.nfo",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/GonçaloSilva/Desktop/detex 2.8/Makefile",
 		"/C/Users/GonçaloSilva/Desktop/latex/texto.txt",
 		"/D/onedrive/mei/internship/code/eclipse/.metadata/.plugins/org.jboss.tools.usage/events/central-showOnStartup-false",
-		"/D/onedrive/mei/internship/latex/index.tex",
-		"/D/onedrive/mei/internship/latex/main.lof",
-		"/D/onedrive/mei/internship/latex/main.tex",
-		"/D/onedrive/mei/internship/latex/intro.tex",
-		"/D/onedrive/mei/internship/latex/acknowledgements.tex",
-		"/D/onedrive/mei/internship/latex/management.tex",
-		"/D/onedrive/mei/internship/latex/stateofart.tex",
-		"/D/onedrive/mei/internship/latex/abstract.tex",
 		"/D/onedrive/mei/internship/latex/refs.bib",
 		"/D/onedrive/mei/internship/latex/main.bbl",
 		"/D/downs/google.csv",
-		"/D/onedrive/mei/internship/internship.todo",
 		"/D/onedrive/mei/internship/latex/glossary.tex",
-		"/D/onedrive/mei/internship/README.md",
 		"/D/onedrive/mei/internship/latex/main.gls",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
-		"/D/onedrive/mei/internship/latex/utilities.tex",
 		"/C/Strawberry/README.txt",
 		"/C/Users/GonçaloSilva/AppData/Roaming/Sublime Text 3/Packages/User/PlainTasks.sublime-settings",
 		"/D/onedrive/mei/internship/code/eclipse/.metadata/.plugins/org.jboss.tools.usage/events/0548c0f2-5c1f-3561-abbf-bc67a1ee9445",
@@ -623,8 +562,7 @@
 		"/run/media/master/data/onedrive/mei/internship/code/eclipse/cdt-master/doc/org.eclipse.cdt.doc.user/tasks/cdt_o_tasks.htm",
 		"/run/media/master/data/onedrive/mei/internship/code/eclipse/cdt-master/doc/org.eclipse.cdt.doc.user/topics_Tasks.xml",
 		"/run/media/master/data/onedrive/mei/internship/tools/xen-4.5.0/xen/common/tasklet.c",
-		"/run/media/master/data/onedrive/mei/internship/tools/xen-4.5.0/tools/qemu-xen/tests/tcg/lm32/test_add.S",
-		"/run/media/master/data/onedrive/mei/internship/tools/xen-4.5.0/tools/qemu-xen/translate-all.c"
+		"/run/media/master/data/onedrive/mei/internship/tools/xen-4.5.0/tools/qemu-xen/tests/tcg/lm32/test_add.S"
 	],
 	"find":
 	{
@@ -643,6 +581,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hypertarget{",
+			"hypertarget",
+			"MCPP",
+			" at ",
+			"at",
+			"Ftape",
+			"JACA Tool",
+			"Ftape",
+			"Doctor",
+			"Bison/Yacc",
+			"MCPP",
+			"Bison/Yacc",
+			"textbf",
+			"iftoggle{long}{",
+			"hwifi",
+			"hwfi",
+			"cloud",
+			"\\red",
 			"Orange",
 			"color",
 			"large",
@@ -752,25 +708,7 @@
 			",",
 			"}\n",
 			"printTree",
-			"isVisible",
-			"atomic",
-			"latexmk",
-			"command",
-			"entre",
-			"here",
-			"chapter",
-			" \"",
-			"\"",
-			"traditional",
-			"simple",
-			"141",
-			"-F",
-			"135         mp4",
-			"135         mp4       854x480",
-			"854x480",
-			"1280x720",
-			"best",
-			"list"
+			"isVisible"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -797,748 +735,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "latex/abstract.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1449,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1073,
-								1073
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"spell_check": true,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "latex/intro.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3910,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1167,
-								1888
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 120.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "latex/management.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3106,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								781,
-								781
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "internship.todo",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								692,
-								692
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"color_scheme": "Packages/PlainTasks/tasks.hidden-tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"spell_check": true,
-							"syntax": "Packages/PlainTasks/PlainTasks.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 54.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13990,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								667,
-								667
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",
-							"parser": "markdown",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage",
-							"tab_size": 4,
-							"target": "browser",
-							"translate_tabs_to_spaces": true,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 57.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "latex/cover.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1642,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								560,
-								560
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"parser": "markdown",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"target": "browser"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "latex/acknowledgements.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1978,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								864,
-								864
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "latex/utilities.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 248,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								205,
-								205
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
 					"file": "latex/stateofart.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 23157,
+						"buffer_size": 28783,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2232,
-								2232
+								17680,
+								17680
 							]
 						],
 						"settings":
@@ -1546,61 +760,61 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"side_bar_folders_auto_load_folder": 1,
@@ -1609,27 +823,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 114.0,
+						"translation.y": 6225.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "latex/appendix.tex",
+					"buffer": 1,
+					"file": "latex/main.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1410,
+						"buffer_size": 4606,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1154,
-								1154
+								3472,
+								3472
 							]
 						],
 						"settings":
@@ -1637,6 +851,280 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1575.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "latex/appendix.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1289,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								240,
+								240
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "latex/constraints.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1780,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1101,
+								1101
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"side_bar_folders_auto_load_folder": 1,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "latex/conclusions.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4060,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3103,
+								1946
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1652,16 +1140,21 @@
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -1672,218 +1165,30 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 435.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "latex/conclusions.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2875,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2429,
-								2429
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"side_bar_folders_auto_load_folder": 1,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 495.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "latex/main.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4529,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3351,
-								3351
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
+								"bh_curly_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"side_bar_folders_auto_load_folder": 1,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1232.0,
+						"translation.y": 690.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1894,8 +1199,8 @@
 						"selection":
 						[
 							[
-								6146,
-								6146
+								1316,
+								1316
 							]
 						],
 						"settings":
@@ -1903,61 +1208,61 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
-								"bh_tag_content"
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"default_dir": "D:\\onedrive\\mei\\internship",
@@ -1966,14 +1271,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3315.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 6,
 					"semi_transient": false,
 					"settings":
 					{
@@ -2058,7 +1363,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -2129,16 +1434,56 @@
 		"selected_items":
 		[
 			[
-				"main.t",
+				"main",
 				"latex\\main.tex"
+			],
+			[
+				"const",
+				"latex\\constraints.tex"
+			],
+			[
+				"app",
+				"latex\\appendix.tex"
+			],
+			[
+				"ind",
+				"latex\\index.tex"
+			],
+			[
+				"abb",
+				"latex\\abbreviations.tex"
+			],
+			[
+				"abbr",
+				"latex\\abbreviations.tex"
 			],
 			[
 				"state",
 				"latex\\stateofart.tex"
 			],
 			[
-				"main",
+				"intro.",
+				"latex\\intro.tex"
+			],
+			[
+				"main.t",
 				"latex\\main.tex"
+			],
+			[
+				"inde",
+				"latex\\index.tex"
+			],
+			[
+				"mai",
+				"latex\\main.tex"
+			],
+			[
+				"cons",
+				"latex\\constraints.tex"
+			],
+			[
+				"opera",
+				"latex\\operators.tex"
 			],
 			[
 				"utili",
@@ -2161,10 +1506,6 @@
 				"latex\\constraints.tex"
 			],
 			[
-				"cons",
-				"code\\eclipse\\.metadata\\.plugins\\org.jboss.tools.usage\\events\\central-showOnStartup-false"
-			],
-			[
 				"index",
 				"latex\\index.tex"
 			],
@@ -2173,32 +1514,12 @@
 				"latex\\operators.tex"
 			],
 			[
-				"app",
-				"latex\\appendix.tex"
-			],
-			[
 				"in",
 				"latex\\index.tex"
 			],
 			[
-				"abb",
-				"latex\\abbreviations.tex"
-			],
-			[
 				"inter",
 				"internship.todo"
-			],
-			[
-				"abbr",
-				"latex\\abbreviations.tex"
-			],
-			[
-				"ind",
-				"latex\\index.tex"
-			],
-			[
-				"inde",
-				"latex\\index.tex"
 			],
 			[
 				"refs",
