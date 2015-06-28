@@ -69,6 +69,8 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 \caption{\small \sl State of the other constraints.\label{tab:otherConstraints_status}}
 \end{table}
 
+\iftoggle{long}{\red{version number}}
+
 % \begin{table}[ht]
 % \begin{tabular}{c}
 % \includegraphics[width=1.1\textwidth]{img/constraints_status.jpg}
@@ -78,6 +80,16 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 
 \clearpage
 \subsection{Future Work}
+
+In the future, I have planned to implement the other operators and constraints. I will use regression testing to verify if when I coded one new operator or constraint I didn't mess with the operators and constraints previous implemented.
+
+
+\iftoggle{long}{\red{In addition, I planned to add to the fault injector an user interface, to turn this software more user-friendly.}}
+
+\textit{``The purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software.''}
+
+\red{From version to version, I use a regression testing to test the fault injector to guarantee that application doesn't regarded.}
+
 
 
 \iftoggle{long}{\orange{Mais do que “future work” é necessário um plano para o segundo semestre, relativamente detalhado.}}
@@ -95,7 +107,7 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 \iftoggle{long}{\orange{- como é que se vai dar uso ao que está implementado? far-se-ão experiências, os resultados serão classificados e analisados certamente}}
 
 
-\iftoggle{long}{\orange{- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, runtime, etc.)}}
+% \iftoggle{long}{\orange{- o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, runtime, etc.)}}
 
 
 \iftoggle{long}{\orange{- o texto deve ser clarificado, mas essencialmente é no plano das ideias que muitas vezes está pouco claro: por que razão se está a fazer isto?}}
@@ -103,16 +115,6 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 
 \iftoggle{long}{\orange{- quais são as alternativas? como é feito? exatamente o que é feito}}
 
-
-
-In the future, I have planned to implement the other operators and constraints.
-% In addition, apply this software in testing of open source software's that I will select.
-
-I will use \red{regression testing} to verify if when I coded one new operator or constraint I didn't mess with the operators and constraints previous implemented.
-\red{From version to version, I use a regression testing to test the fault injector to guarantee that application doesn't regarded.}
-
-
-\textit{``The purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software.''}
 
 \iftoggle{long}{\red{Regression Testing}}
 

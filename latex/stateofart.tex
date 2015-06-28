@@ -5,6 +5,8 @@
 Nowadays, people use many services based in the cloud and many companies choose to use them too. By doing that, companies reduce the costs of IT infrastructure and not even need to buy ``physical storage'', neither care where the data is. The cloud service provides that the data is secure.
 However, like any system, the cloud has problems such any other computer system, software and hardware faults. The resilience of the cloud is very important too.
 \iftoggle{long}{\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}}
+
+
 The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
 
 There are many studies showing that the software faults\cite{avizzienisbasic} are the main cause of computer failures. But, the number of faults that can be emulated is directly related to the technique used.
@@ -23,19 +25,26 @@ There are many studies showing that the software faults\cite{avizzienisbasic} ar
 In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be user HWIFI technique to emulate hardware faults throught hardware.
 
 \begin{itemize}
-	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software; Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
+	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software. Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
 
-	\item \textbf{\ac{hwifi}} - this technique is related to the fault injections in the final system hardware. Examples: \ac{emp}, radiation.
+	\item \textbf{\ac{hwifi}} - this technique is related to the fault injections in the final system hardware. Examples: \ac{emp}, radiation, etc.
 
 \end{itemize}
 
-\Ac{swifi} are an attractive technique because won't require additional hardware (increase the cost of test). The targets of this technique are the applications and the operating systems, but, this technique don't have only advantages, can't inject faults in inaccessible areas of software and may disrupt or change the workload of the testing software. This technique can be used at:
+\Ac{swifi} are an attractive technique because won't require additional hardware (increase the cost of test). The targets of this technique are the applications and the operating systems, but this technique doesn't have only advantages, can't inject faults in inaccessible areas of software and may disrupt or change the workload of the testing software. This technique can be used at:
+
+\iftoggle{long}{\red{o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, run-time, etc.)}}
+
+
 
 \begin{itemize}
 	\item \textbf{Compilation time (object code level)} 		- Modify the structure of the program before the creation of executable file;
 	 % and can emulate Hardware faults, software faults;
 	\item \textbf{Execution environment (binary code level)} 	- Changing the binary code activated by a timeout, an exception or a trap. At this level, less than seventy percent of the software faults can be emulated \cite{madeira2000emulation}.
-	\item \textbf{Before compile time (source code level)} 		- Derivate the source code by removing, replacing or inserting some simple code before the compilation of program;
+	\item \textbf{Before compile time (source code level)} 		- Change the source code by removing, replacing or inserting some simple code before the compilation of program. At this level, all the software faults can be emulated;
+	\iftoggle{long}{\item \textbf{(instrumentação)};}
+
+
 \end{itemize}
 
 \iftoggle{long}{\red{With this work, I pretend to inject software faults and analyze how the system reacts to them.}}
@@ -44,7 +53,9 @@ In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIF
 
 
 \iftoggle{long}{\orange{O estilo continua com frases soltas, e pouco articuladas.
-Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns. Por que razão é que ``less than 70\% of the software faults can be emulated !?'' Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}}
+Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns.
+Por que razão é que ``less than 70\% of the software faults can be emulated !?''
+Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}}
 
 % \begin{table}[!ht]
 % \begin{tabular}{c}
@@ -111,8 +122,8 @@ Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't nee
 Safe is an application to inject realistic software faults in programs coded in C and C++.
 This tool uses MCPP as parser, to get the tree of code. The decision of using MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
 
-After that, write some files, variations of original files (code with simple mutations) with operators applied.
-Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but with the difference that Robert implemented at source code level, and João at binary level.\\
+After that, are written some files, variations of original files (code with simple mutations) with the operator applied.
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but Robert implemented at source code level, and João at binary level.\\
 
 
 % \iftoggle{long}{
@@ -123,7 +134,7 @@ Robert Natella implemented thirteen operators in SAFE, same as João Durães\cit
 
 \clearpage
 \subsection{ODC Model}
-\acl{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, via measurement and analysis.
+\acl{odc}\cite{bridge1998orthogonal} Model is a framework developed by IBM\cite{chillarege2004orthogonal}, created to improve the level of technology available to assist the decisions of a software engineer, by measurement and analysis.
 ODC can be used to classify and analyze defects during software development.
 
 %\cite{lyu1996handbook}
@@ -136,8 +147,8 @@ For that, this model has eight categories:
 	\item \textbf{Checking} - Based on the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
 	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
 	\item \textbf{Build/package/merge} - Errors that occur in the integration of library systems, management of changes, or in version control.
-	\item \textbf{Documentation} - Errors in the documentation, that can be propagated to publications and maintenance notes.
-	\item \textbf{Algorithm} - Problems that can be fixed by re-implementing an algorithm or local data structure, include efficiency or correctness that affect the task.
+	\item \textbf{Documentation} - Errors in the documentation can be propagated to publications and maintenance notes.
+	\item \textbf{Algorithm} - Problems that can be fixed by re-implementing an algorithm or local data structure, include efficiency or correctness that affects the task.
 \end{itemize}
 
 
@@ -154,24 +165,24 @@ To understand a little more what the Cloud Computing means:\\
 
 \textit{``Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.''}\cite{mell2011nist}.\\
 
-Cloud Computing is a new way to delivery IT services on-demand (utility-oriented and Internet-centric). This services include all the computational power, from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
+Cloud Computing is a new way to delivery IT services on-demand (utility-oriented and Internet-centric). This services include all the computational power: from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=0.8\textwidth]{cloudcomputing.jpg}
+\includegraphics[width=0.9\textwidth]{cloudcomputing.jpg}
 \caption{\small \sl Cloud computing overview.\label{fig:cloudcomputing}}
 \end{center}
 \end{figure}
 
-Below, I will describe it in relation to characteristics, deployment models and service models\cite{schouten2013ibm}.
+Below, it will be described in relation to characteristics, deployment models and service models\cite{schouten2013ibm}.
 
 The characteristics of Cloud Computing are:
 \begin{itemize}
-	\item \textbf{On demand self-service} 	- The users can request and manage their cloud computing resources without requiring human interaction, through a web-based self-service portal.
-	\item \textbf{Broad network access 	}	- Provide access over the network and using standard way through by several clients (e.g., mobile phones, tablets, laptops and workstations).
+	\item \textbf{On demand self-service} 	- The users can request and manage their cloud computing resources without requiring human interaction, over a web-based self-service portal.
+	\item \textbf{Broad network access 	}	- Provide access over the network and using standard way through by several costumers (e.g., mobile phones, tablets, laptops and workstations).
 	\item \textbf{Resource pooling 		}	- The computer resources are pooled to serve multiple customers through the safe separation of the resources at logical level.
 	\item \textbf{Rapid elasticity 		}	- Capability of resources to be elastically provisioned and released. Making sure that the application will have exactly the capacity that it needs at any point of time.
-	\item \textbf{Measured service 		}	- The service is monitored, measured, and reported transparently based on the usage. The clients pay in accordance with the service spent.
+	\item \textbf{Measured service 		}	- The service is monitored, measured, and reported transparently based on the usage. The costumers pay in accordance with the service spent.
 \end{itemize}
 
 Four models of deployment:
@@ -181,7 +192,7 @@ Four models of deployment:
 
 	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
 
-	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to clients private network (mostly the Internet) and data centers.
+	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to costumers private network (mostly the Internet) and data centers.
 
 	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that allows portability. Takes advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
@@ -189,27 +200,29 @@ Four models of deployment:
 Four levels of Cloud Computing Service Models:
 
 \begin{itemize}
-	\item \textbf{\acl{iaas}} - As the name suggests, provides a computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: Amazon EC2, Windows Azure.
+	\item \textbf{\acl{iaas}} - As the name suggests, provides a computing infrastructure, such as virtual machines, firewalls, load balancers, IP addresses, virtual local area networks and others. Examples: \textit{Amazon EC2}, \textit{Windows Azure}.
 
-	\item \textbf{\acl{paas}} - Provides a computing platform, normally includes operating system, programming language execution environment, database, web server and others. Examples: AWS Elastic Beanstalk, Windows Azure, Heroku.
+	\item \textbf{\acl{paas}} - Provides a computing platform that normally includes operating system, programming language execution environment, database, web server and others. Examples: \textit{AWS Elastic Beanstalk}, \textit{Windows Azure}, \textit{Heroku}.
 
-	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup, and run the application. Service provider does all those things for you. Examples: Google Apps, Microsoft Office 365.
+	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup or run the application.
+	% Service provider does all those things for you.
+	Examples: \textit{Google Apps}, \textit{Microsoft Office 365}.
 
-	\item \textbf{\acl{bpaas}} - This model provides an entire horizontal or vertical business process and builds on top of any of services previously described.
+	\item \textbf{\acl{bpaas}} - This model supply an entire horizontal or vertical business process and builds on top of any of services previously described.
 
 \end{itemize}
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1\textwidth]{cloud-computing-service-models2.png}
-\caption{\small \sl Cloud computing service models.\label{fig:cloudcomputingservicemodels}}
+\caption{\small \sl Cloud computing service models. \textit{Source: www.hanusoftware.com/}\label{fig:cloudcomputingservicemodels}}
 \end{center}
 \end{figure}
 
 Nevertheless, such as any computer system, cloud computing isn't free of external disturbances\cite{wolter2012resilience}, the most important are:
 \begin{itemize}
  	\item \textbf{Security attacks - } any try to gain unauthorized access;
- 	\item \textbf{Accidents - } an unplanned event;
+ 	\item \textbf{Accidents - } an unplanned incident, resulting in damage;
  	\item \textbf{Power surges - } an interruption of the flow of electricity;
  	% \item \textbf{Workload faults - } cenas;
  	\item \textbf{Malfunction - } bugs cause function wrongly, or not function at all;
@@ -222,7 +235,7 @@ Nevertheless, such as any computer system, cloud computing isn't free of externa
  % - GCC Parser, Bison and Eclipse CDT}
 
 In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
-For that, I thought that I could use the same tools that I have used in Compilers course, Lex and Yacc.\\
+For that, I thought that can be used the same tools that I used in Compilers course, Lex and Yacc.\\
 
 %\red{For parsing the code, analyze and modify it,}
 
@@ -238,8 +251,8 @@ For that, I thought that I could use the same tools that I have used in Compiler
 \hypertarget{Eclipse CDT}{}
 \bookmark[level=\thesubsubsection,dest=Eclipse CDT]{\thesubsubsection \ Eclipse CDT}
 
-Eclipse CDT, as the name suggests, is a plugin for Eclipse that provides a fully functional C and C++ Integrated Development Environment.
-Some of the features included in this plugin that are interesting for this project are:
+Eclipse CDT, as the name suggests, is a plugin for Eclipse that give a fully functional C and C++ Integrated Development Environment.
+Some of the features included in this plugin that are interesting for this project:
 \begin{itemize}
 	\item Source navigation;
 	\item Code editor with syntax highlighting;
@@ -273,7 +286,7 @@ In the end, I chose to use the Eclipse CDT Plugin as standalone (only importing 
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
 
-The Fault Injector currently in development is coded in Java using Eclipse CDT Plugin, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. However, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
+The Fault Injector currently in development is coded in Java using Eclipse CDT Plugin, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. Furthermore, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
 
 \begin{table}[!ht]
 \begin{tabular}{|l|p{12cm}|}
@@ -296,7 +309,33 @@ The Fault Injector currently in development is coded in Java using Eclipse CDT P
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
 
-In the beginning of this project, I considered all the eighteen operators more representative in the open source software. But, after collecting information and analyze them, I verify that I don't have all the necessary information to implement all the eighteen operators.
+In the beginning of this project, I considered all the eighteen operators more representative in the open source software. But, after collecting information and analyze them, I verify that I don't have all the necessary information to implement all the eighteen operators due to various reasons.
+The operators that will not be implemented can be seen in the table \ref{tab:otherfaultEmulationOperators}.
+
+\begin{table}[!ht]
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{Fault Type}		& \multicolumn{1}{c|}{\textbf{Description}}		\\ \hline \hline
+\acs{evav}        				& \Acl{evav}  									\\ \hline
+\acs{mfct}        				& \Acl{mfct}  									\\ \hline
+\acs{wall}       				& \Acl{wall} 									\\ \hline
+\acs{wlec}       				& \Acl{wlec} 									\\ \hline
+\acs{wsut}       				& \Acl{wsut} 									\\ \hline
+\end{tabular}
+\caption{\small \sl Other fault emulation operators.\label{tab:otherfaultEmulationOperators}}
+\end{table}
+
+The reasons for which they not be implemented are:
+
+\begin{itemize}
+	\item Production of a large number of mutations;
+	\item Definition of the operators inconclusive;
+	% \item Unfeasible implementation;
+	\item Little or no information about the cases where it is applied;
+	\item Can produce warnings or even errors while compiling;
+	\item Low representation in relation to the other operators (can be seen in field study of João Durães).
+\end{itemize}
+
 
 \iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
 
@@ -319,7 +358,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mia}{}
 	\bookmark[level=\thesubsubsection,dest=mia]{\thesubsubsection \ \acs{mia}}
 
-	This operator simulate a missing \textit{if} condition surrounding a set of statements. This causes that the statements are always executed and not only when the condition of \textit{if} is true.
+	This operator simulates a missing \textit{if} condition surrounding a set of statements. This causes that the statements are always executed and not only when the condition of \textit{if} is true.
 	\begin{itemize}
 		\item \textbf{\acs{c08}} - \Acl{c08};
 		\item \textbf{\acs{c09}} - \Acl{c09}.
@@ -334,7 +373,7 @@ I chose to use a set of the most representative faults, previously specified by 
 		\item \textbf{\acs{c08n}} - \Acl{c08n}.
 	\end{itemize}
 
-	This constraint does not exists in João Durães specification, but as this operator cannot be applied in all situations, I specified and implemented it.
+	This constraint doesn't exists in João Durães specification, but as this operator cannot be applied in all situations, I specified and implemented it.
 
 	\subsubsection{\textbf{\acs{mifs}}} - \Acl{mifs} - \green{\textbf{Implemented}}
 	\hypertarget{mifs}{}
@@ -361,7 +400,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mloc}{}
 	\bookmark[level=\thesubsubsection,dest=mloc]{\thesubsubsection \ \acs{mloc}}
 
-	This operator emulate the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. It is only necessary that one of the sub-expressions be true to the entire expression are evaluated as true. This operator have only one constraint:
+	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. It is only necessary that one of the sub-expressions be true to the entire expression are evaluated as true. This operator have only one constraint:
 
 	\begin{itemize}
 		\item \textbf{\acs{c12}} - \Acl{c12}.
@@ -371,7 +410,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mlpa}{}
 	\bookmark[level=\thesubsubsection,dest=mlpa]{\thesubsubsection \ \acs{mlpa}}
 
-	As the name suggests, this operator emulate the omission of a small and localized part of the algorithm.
+	As the name suggests, this operator emulates the omission of a small and localized part of the algorithm.
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -397,7 +436,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mvav}{}
 	\bookmark[level=\thesubsubsection,dest=mvav]{\thesubsubsection \ \acs{mvav}}
 
-	Operator \textbf{\ac{mvav}} is similar to operator \textbf{\ac{mvae}}, with the difference that it emulate the remotion of the assignment of a given local variable with a constant value instead of a expression. The constraints related with this operator are the same of \textbf{\ac{mvae}}:
+	Operator \textbf{\ac{mvav}} is similar to operator \textbf{\ac{mvae}}, with the difference that it emulates the remotion of the assignment of a given local variable with a constant value instead of a expression. The constraints related with this operator are the same of \textbf{\ac{mvae}}:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -410,7 +449,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mviv}{}
 	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
 
-	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only search for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verify if the assignment don't occurs inside a loop, because one assignment of this type occurs several times. But this operator has other associated constraints:
+	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. But this operator has other associated constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -488,8 +527,8 @@ As was discussed in the specification of the operators, the same can be applied 
 \caption{\small \sl Fault emulation contraints defined by João Durães.\label{tab:faultEmulationConstraintsDuraes}}
 \end{table}
 
-The constraint \textbf{C07} is similar to constraint \textbf{C04}, one is the negation of another. This happen too with the constraint \textbf{C08} and \textbf{C08n}.
-Constraint \textbf{c10} are the same as constraint \textbf{C09}, but with one additional restriction, the statements need to be contiguous and need to belong to the same code block.
+The constraint \textbf{C07} is similar to constraint \textbf{C04}, one is the negation of another. This happens too with the constraint \textbf{C08} and \textbf{C08n}.
+Constraint \textbf{c10} is the same as constraint \textbf{C09}, but with one additional restriction: the statements need to be contiguous and need to belong to the same code block.
 
 When was implementing the operators \textbf{\ac{mieb}} and \textbf{\ac{mloc}}, it was necessary to define the constraints \textbf{\ac{c08n}} and \textbf{\ac{c12}}. The constraint \textbf{\ac{c08n}} was created because of the operator \textbf{\ac{mieb}} cannot be applied to an \textit{if} without an \textit{else} construct and the constraint \textbf{\ac{c12}} was created because the operator \textbf{\ac{mloc}} can't be emulated in a branch with only one condition.
 
@@ -504,12 +543,21 @@ When was implementing the operators \textbf{\ac{mieb}} and \textbf{\ac{mloc}}, i
 \caption{\small \sl Other constraints.\label{tab:otherConstraints}}
 \end{table}
 
-This constraints can be modified during the implementation of the other operators that aren't yet implemented.
+This constraints can be modified during the implementation of the other operators that aren't implemented yet.
 
 \clearpage
 \section{Work plan and implications}
 
-In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during the first semester of this dissertation. Since the beginning of this project, it was expected to create a fault injector.
+In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during the first semester of this dissertation.
+
+Since the beginning of this project, it was expected that I create a fault injector. However, as stated earlier, in the beginning it was to inject faults in hardware but due to the postponement of six months, and the development of the project related to inject faults in hardware, the project was modified to inject faults in software.
+
+After take that decision, I had to choose the technique that would use injection at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. Selected source code level because there are made some tools which Inject faults in execution environment, p.e. by João Durães. Previously, Robert Natella had coded a tool from this type, using MCPP as C preprocessor at his thesis of PhD.
+All these reasons, would lead to inject faults at object code level in the compilation, but the use of this technique in the development of fault injector and the evaluation of the robustness of the cloud would be a great effort and too much work for a master's thesis. Hence, it was decided to inject fault before the compilation, at the source code of applications. The use of this technique provides the emulation of realistic software faults done by real programmers.
+
+Despite already exists Robert Natella tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and the easy to use, to inject faults in source code coded in C.
+
+The faults will be injected in C code because of the extensive knowledge of the supervisors and because of the work already done by João Durães, in the specification of the operators, be based on a field-study of open source software coded in that language.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -518,6 +566,10 @@ In the figure \ref{fig:decisions}, can be seen an overview of the main decisions
 \end{center}
 \end{figure}
 
+\clearpage
+
+Above, can be seen the figure \ref{fig:mockup}, thats represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where can be injected the fault, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1\textwidth]{mockup.png}
@@ -525,8 +577,7 @@ In the figure \ref{fig:decisions}, can be seen an overview of the main decisions
 \end{center}
 \end{figure}
 
-\iftoggle{long}{\red{Select five to ten programs to be tested.}}
-
+I chose to use the \textit{diff} tool, since the use of this tool the creation of smaller files with only the changes that are made, instead of using all the code with the modifications made in it.
 
 \iftoggle{long}{\red{Justificar a utilização de patchs}}
 
