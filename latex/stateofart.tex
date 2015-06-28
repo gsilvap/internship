@@ -71,7 +71,7 @@ of Robert Natella, named SAFE, that injects software faults, as I also intended 
 \subsection{Software Implemented Fault Injection of Software Faults}
 % \iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
 
-Above, I will describe some tools that use \ac{swifi} technique and made some improvements in the area of this research.
+Above, I will describe some tools that use \ac{swifi} technique and made some improvements in this area of research.
 
 % \iftoggle{long}{
 %  	\subsubsection{Doctor}
@@ -260,41 +260,47 @@ Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, 
  	\subsubsection{MCPP}
 	\hypertarget{MCPP}{}
  	\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
+
+	MCPP is a portable C preprocessor\\
 }
 
+
+
 % Finally, I decided to use
-In the end, I selected Eclipse CDT Plugin as standalone (only import libraries to project), because of my abilities in programming in Java Language, the maintainability of software, the low learning level than the developers need to modify it.\\
+In the end, I chose to use the Eclipse CDT Plugin as standalone (only importing libraries to project), because of my abilities in programming in Java Language, the maintainability of software developed in it and the low learning level that the developers need to modify it.\\
 
 \newpage
 % \section{Current work and preliminary results}
 \section{Fault Injector Development}
 
-The Fault Injector currently in development is coded in Java using Eclipse CDT, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. However, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
+The Fault Injector currently in development is coded in Java using Eclipse CDT Plugin, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. However, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
 
 \begin{table}[!ht]
 \begin{tabular}{|l|p{12cm}|}
 \hline
 \textbf{Fault Type}		& \multicolumn{1}{c|}{\textbf{Description}}		\\ \hline \hline
-MFC        				& \Acl{mfc}  									\\ \hline
-MIA        				& \Acl{mia}  									\\ \hline
-MIEB       				& \Acl{mieb} 									\\ \hline
-MIFS       				& \Acl{mifs} 									\\ \hline
-MLAC       				& \Acl{mlac} 									\\ \hline
-MLOC       				& \Acl{mloc} 									\\ \hline
-MLPA       				& \Acl{mlpa} 									\\ \hline
-MVAE       				& \Acl{mvae} 									\\ \hline
-MVAV       				& \Acl{mvav} 									\\ \hline
-MVIV       				& \Acl{mviv} 									\\ \hline
-WAEP       				& \Acl{waep} 									\\ \hline
-WPFV       				& \Acl{wpfv} 									\\ \hline
-WVAV       				& \Acl{wvav} 									\\ \hline
+\acs{mfc}        				& \Acl{mfc}  									\\ \hline
+\acs{mia}        				& \Acl{mia}  									\\ \hline
+\acs{mieb}       				& \Acl{mieb} 									\\ \hline
+\acs{mifs}       				& \Acl{mifs} 									\\ \hline
+\acs{mlac}       				& \Acl{mlac} 									\\ \hline
+\acs{mloc}       				& \Acl{mloc} 									\\ \hline
+\acs{mlpa}       				& \Acl{mlpa} 									\\ \hline
+\acs{mvae}       				& \Acl{mvae} 									\\ \hline
+\acs{mvav}       				& \Acl{mvav} 									\\ \hline
+\acs{mviv}       				& \Acl{mviv} 									\\ \hline
+\acs{waep}       				& \Acl{waep} 									\\ \hline
+\acs{wpfv}       				& \Acl{wpfv} 									\\ \hline
+\acs{wvav}       				& \Acl{wvav} 									\\ \hline
 \end{tabular}
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
 
-In the beginning of this project,
+In the beginning of this project, I considered all the eighteen operators more representative in the open source software. But, after collecting information and analyze them, I verify that I don't have all the necessary information to implement all the eighteen operators.
+
 \iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
 
+\clearpage
 \subsection{Generate derivations}
 
 I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation} according to his data-field results, specified individually further down:
@@ -328,7 +334,7 @@ I chose to use a set of the most representative faults, previously specified by 
 		\item \textbf{\acs{c08n}} - \Acl{c08n}.
 	\end{itemize}
 
-	This constraint does not exists in João Durães specification, but as this operator cannot be applied in all situations, I specify and implement it.
+	This constraint does not exists in João Durães specification, but as this operator cannot be applied in all situations, I specified and implemented it.
 
 	\subsubsection{\textbf{\acs{mifs}}} - \Acl{mifs} - \green{\textbf{Implemented}}
 	\hypertarget{mifs}{}
@@ -545,13 +551,11 @@ Built three separated modules:
 
 
 
-
-
-
-
+\clearpage
 \subsection{Analyze the effects}
 
 \iftoggle{long}{\red{The fault injected results are equal to the real software faults?}}
+
 
 After the compilation and execution of the programs, the results need to be evaluated. To measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
 

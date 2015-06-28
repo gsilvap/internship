@@ -1,7 +1,6 @@
 %!TEX root = main.tex
 
-\newpage
-\appendix
+% \newpage
 
 
 % \vspace*{\fill}
@@ -11,10 +10,11 @@
 % \vspace*{\fill}
 
 \newpage
+\appendix
 \begin{landscape}
 \global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 90}
 \section{Appendix}
-\subsection{Appendix A - Gantt diagrams} \label{App:A}
+\subsection{Gantt diagrams} \label{App:A}
 
 % \begin{figure}[!ht]
 % \begin{center}
@@ -32,7 +32,7 @@
 
 \clearpage
 
-\subsection{Appendix B - Risks table} \label{App:B}
+\subsection{Risks table} \label{App:B}
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1.5\textwidth]{risks.png}
@@ -44,16 +44,9 @@
 \global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 0}
 
 \clearpage
-
-% \subsection{Appendix C - Decision tree} \label{App:C}
-
-
-
-
-\clearpage
-\printacronyms[include-classes=abbrev,name={\subsection{Appendix C - Abbreviations} \label{App:C}}]
+\printacronyms[include-classes=abbrev,name={\subsection{Abbreviations} \label{App:C}}]
 % \iftoggle{long}{\acuseall}
 
 
-\printacronyms[include-classes=operator,name=Operators]
-\printacronyms[include-classes=constraint,name=Constraints]
+% \printacronyms[include-classes=operator,name=Operators]
+% \printacronyms[include-classes=constraint,name=Constraints]
