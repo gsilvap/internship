@@ -22,7 +22,7 @@ There are many studies showing that the software faults\cite{avizzienisbasic} ar
 \label{tab:swifi_hwifi}
 \end{table}
 
-In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be user HWIFI technique to emulate hardware faults throught hardware.
+In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be user HWIFI technique to emulate hardware faults through hardware.
 
 \begin{itemize}
 	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software. Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
@@ -142,7 +142,7 @@ For that, this model has eight categories:
 
 \begin{itemize}
 	\item \textbf{Function} - This defect affects significant capability, end-user features, product \acl{api}, interface with hardware architecture, or global structure(s). It would require a formal design change.
-	\item \textbf{Assignment} - Typically an assignment defect indicates an initialization of control blocks or a data structure.
+	\item \textbf{Assignment} - Typically, an assignment defect indicates an initialization of control blocks or a data structure.
 	\item \textbf{Interface} - Problems in the interaction with other components, modules, device drivers, call statements, control blocks, or parameter lists.
 	\item \textbf{Checking} - Based on the program logic that is checked and failed to validate data and values before the usage, loop conditions, etc.
 	\item \textbf{Timing/serialization} - Errors that happen in shared and real-time resources.
@@ -165,7 +165,7 @@ To understand a little more what the Cloud Computing means:\\
 
 \textit{``Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.''}\cite{mell2011nist}.\\
 
-Cloud Computing is a new way to delivery IT services on-demand (utility-oriented and Internet-centric). This services include all the computational power: from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
+Cloud Computing is a new way to delivery IT services on-demand (utility-oriented and Internet-centric). These services include all the computational power: from hardware infrastructure as a set of virtual machines to software services as development platforms and distributed applications.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -192,7 +192,7 @@ Four models of deployment:
 
 	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
 
-	\item \textbf{Public Cloud}    - It is available to the general public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to costumers private network (mostly the Internet) and data centers.
+	\item \textbf{Public Cloud}    - It is available to the public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to costumer private network (mostly the Internet) and data centers.
 
 	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that allows portability. Takes advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
@@ -204,7 +204,7 @@ Four levels of Cloud Computing Service Models:
 
 	\item \textbf{\acl{paas}} - Provides a computing platform that normally includes operating system, programming language execution environment, database, web server and others. Examples: \textit{AWS Elastic Beanstalk}, \textit{Windows Azure}, \textit{Heroku}.
 
-	\item \textbf{\acl{saas}} - Provides access to application softwares often referred as \textit{on-demand self-service} software. Use it without install, setup or run the application.
+	\item \textbf{\acl{saas}} - Provides access to application software often referred as \textit{on-demand self-service} software. Use it without install, setup or run the application.
 	% Service provider does all those things for you.
 	Examples: \textit{Google Apps}, \textit{Microsoft Office 365}.
 
@@ -400,7 +400,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mloc}{}
 	\bookmark[level=\thesubsubsection,dest=mloc]{\thesubsubsection \ \acs{mloc}}
 
-	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. It is only necessary that one of the sub-expressions be true to the entire expression are evaluated as true. This operator have only one constraint:
+	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. It is only necessary that one of the sub-expressions be true to the entire expression are evaluated as true. This operator has only one constraint:
 
 	\begin{itemize}
 		\item \textbf{\acs{c12}} - \Acl{c12}.
@@ -449,7 +449,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mviv}{}
 	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
 
-	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. But this operator has other associated constraints:
+	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. But, this operator has other associated constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -505,7 +505,7 @@ The operators above will be applied to source code of applications and will gene
 \clearpage
 \subsection{Constraints}
 
-As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, that have been done by João Durães.
+As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, that has been done by João Durães.
 
 \begin{table}[!ht]
 \centering
@@ -543,7 +543,7 @@ When was implementing the operators \textbf{\ac{mieb}} and \textbf{\ac{mloc}}, i
 \caption{\small \sl Other constraints.\label{tab:otherConstraints}}
 \end{table}
 
-This constraints can be modified during the implementation of the other operators that aren't implemented yet.
+These constraints can be modified during the implementation of the other operators that aren't implemented yet.
 
 \clearpage
 \section{Work plan and implications}
@@ -568,7 +568,7 @@ The faults will be injected in C code because of the extensive knowledge of the 
 
 \clearpage
 
-Above, can be seen the figure \ref{fig:mockup}, thats represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where can be injected the fault, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
+Above, can be seen the figure \ref{fig:mockup}, that represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where can be injected the fault, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
 
 \begin{figure}[!ht]
 \begin{center}
