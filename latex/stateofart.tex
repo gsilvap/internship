@@ -4,7 +4,7 @@
 
 Nowadays, people use many services based in the cloud and many companies choose to use them too. By doing that, companies reduce the costs of IT infrastructure and not even need to buy ``physical storage'', neither care where the data is. The cloud service provides that the data is secure.
 However, like any system, the cloud has problems such any other computer system, software and hardware faults. The resilience of the cloud is very important too.
-\iftoggle{long}{\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}}
+%\iftoggle{long}{\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}}
 
 
 The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
@@ -22,7 +22,7 @@ There are many studies showing that the software faults\cite{avizzienisbasic} ar
 \label{tab:swifi_hwifi}
 \end{table}
 
-In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be user HWIFI technique to emulate hardware faults through hardware.
+In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIFI technique to take software to emulate software and hardware faults, and can be used HWIFI technique to emulate hardware faults through hardware.
 
 \begin{itemize}
 	\item \textbf{\ac{swifi}} - the goal of this technique is to emulate errors at software level that happen during the execution environment, in hardware or software. Examples: Data corruption in registers, memory or hard drive; Communication problems in network or NoC; Software faults in binary code, in object files or in source code.
@@ -33,7 +33,7 @@ In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIF
 
 \Ac{swifi} are an attractive technique because won't require additional hardware (increase the cost of test). The targets of this technique are the applications and the operating systems, but this technique doesn't have only advantages, can't inject faults in inaccessible areas of software and may disrupt or change the workload of the testing software. This technique can be used at:
 
-\iftoggle{long}{\red{o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, run-time, etc.)}}
+% \iftoggle{long}{\red{o estado da arte deveria ponderar os prós e os contras de todas as técnicas para injeção de falhas de software (binário, instrumentação, source code, run-time, etc.)}}
 
 
 
@@ -47,15 +47,15 @@ In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIF
 
 \end{itemize}
 
-\iftoggle{long}{\red{With this work, I pretend to inject software faults and analyze how the system reacts to them.}}
+% \iftoggle{long}{\red{With this work, I pretend to inject software faults and analyze how the system reacts to them.}}
 
 %\iftoggle{long}{In Table \ref{tab:representative_faults}, are specified the most representative fault types, they represent a total of 67\% of all faults collected \cite{duraes2005thesis}.}
 
 
-\iftoggle{long}{\orange{O estilo continua com frases soltas, e pouco articuladas.
-Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns.
-Por que razão é que ``less than 70\% of the software faults can be emulated !?''
-Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}}
+% \iftoggle{long}{\orange{O estilo continua com frases soltas, e pouco articuladas.
+% Não sei se a maior parte das avarias são causadas por falhas de software. Há estudos que indicam que erros de operador são igualmente muito comuns.
+% Por que razão é que ``less than 70\% of the software faults can be emulated !?''
+% Podem ser todas emuladas. Algumas técnicas, p.ex. injeção no binário executável, é que podem não permitir injetar algumas falhas. No entanto, ao nível do código fonte, 100\% das software faults são emuláveis.}}
 
 % \begin{table}[!ht]
 % \begin{tabular}{c}
@@ -245,6 +245,8 @@ For that, I thought that can be used the same tools that I used in Compilers cou
  	\subsubsection{Bison/Yacc}
 	\hypertarget{Bison/Yacc}{}
  	\bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
+
+ 	\red{Explicar}
 }
 
 \subsubsection{Eclipse CDT}
@@ -266,6 +268,8 @@ Using it, I can code Fault Injector in Java, making the software more maintainab
 \subsubsection{GCC Parser}
 \hypertarget{GCC Parser}{}
 \bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
+ 	\red{Explicar}
+
 
 Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors.\\
 
@@ -275,6 +279,8 @@ Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, 
  	\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
 
 	MCPP is a portable C preprocessor\\
+ 	\red{Explicar}
+
 }
 
 
@@ -336,8 +342,9 @@ The reasons for which they not be implemented are:
 	\item Low representation in relation to the other operators (can be seen in field study of João Durães).
 \end{itemize}
 
+To overtake some of these reasons, it was necessary to obtain the data with which João Durães performed the field-study, or do a new field-study. But due to the time limit, it would be unfeasible at this time.
 
-\iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
+% \iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
 
 \clearpage
 \subsection{Generate derivations}
@@ -488,7 +495,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{wvav}{}
 	\bookmark[level=\thesubsubsection,dest=wvav]{\thesubsubsection \ \acs{wvav}}
 
-	As the name suggests, this operator simulate an assignment of a wrong value to a variable. To do that, the operator
+	As the name suggests, this operator simulate an assignment of a wrong value to a variable. This value is obtained by the inversion of bits of the least significant byte of the early value. To do that, the operator need to verify the following constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c03}} - \Acl{c03};
@@ -496,7 +503,8 @@ I chose to use a set of the most representative faults, previously specified by 
 		\item \textbf{\acs{c06}} - \Acl{c06}.
 	\end{itemize}
 
-The operators above will be applied to source code of applications and will generate modified files.
+The above operators may change, since they were specified for implementation at the binary level and in this project will be implemented at the source code level.
+After applying the operators in the code of tree, will be generated modified files to use in the testing process.
 
 %\subsubsection{Fault Types - Extraneous}
 %\begin{itemize}
@@ -512,17 +520,17 @@ As was discussed in the specification of the operators, the same can be applied 
 \begin{tabular}{|c|p{12cm}|}
 \hline
 \textbf{Constraints}            & \multicolumn{1}{c|}{\textbf{Description}}                                     \\ \hline \hline
-\textbf{C01}         & \Acl{c01} \\ \hline
-\textbf{C02}         & \Acl{c02} \\ \hline
-\textbf{C03}         & \Acl{c03} \\ \hline
-\textbf{C04}         & \Acl{c04} \\ \hline
-\textbf{C05}         & \Acl{c05} \\ \hline
-\textbf{C06}         & \Acl{c06} \\ \hline
-\textbf{C07}         & \Acl{c07} \\ \hline
-\textbf{C08}         & \Acl{c08} \\ \hline
-\textbf{C09}         & \Acl{c09} \\ \hline
-\textbf{C10}         & \Acl{c10} \\ \hline
-\textbf{C11}         & \Acl{c11} \\ \hline
+\textbf{C01}         			& \Acl{c01} \\ \hline
+\textbf{C02}         			& \Acl{c02} \\ \hline
+\textbf{C03}         			& \Acl{c03} \\ \hline
+\textbf{C04}         			& \Acl{c04} \\ \hline
+\textbf{C05}         			& \Acl{c05} \\ \hline
+\textbf{C06}         			& \Acl{c06} \\ \hline
+\textbf{C07}         			& \Acl{c07} \\ \hline
+\textbf{C08}         			& \Acl{c08} \\ \hline
+\textbf{C09}         			& \Acl{c09} \\ \hline
+\textbf{C10}         			& \Acl{c10} \\ \hline
+\textbf{C11}         			& \Acl{c11} \\ \hline
 \end{tabular}
 \caption{\small \sl Fault emulation contraints defined by João Durães.\label{tab:faultEmulationConstraintsDuraes}}
 \end{table}
@@ -555,40 +563,21 @@ Since the beginning of this project, it was expected that I create a fault injec
 After take that decision, I had to choose the technique that would use injection at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. Selected source code level because there are made some tools which Inject faults in execution environment, p.e. by João Durães. Previously, Robert Natella had coded a tool from this type, using MCPP as C preprocessor at his thesis of PhD.
 All these reasons, would lead to inject faults at object code level in the compilation, but the use of this technique in the development of fault injector and the evaluation of the robustness of the cloud would be a great effort and too much work for a master's thesis. Hence, it was decided to inject fault before the compilation, at the source code of applications. The use of this technique provides the emulation of realistic software faults done by real programmers.
 
-Despite already exists Robert Natella tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and the easy to use, to inject faults in source code coded in C.
+Despite already exists Robert Natella tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and the easy to use, to inject faults in source code coded in C language.
 
 The faults will be injected in C code because of the extensive knowledge of the supervisors and because of the work already done by João Durães, in the specification of the operators, be based on a field-study of open source software coded in that language.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.8\textwidth]{decisions.png}
-\caption{\small \sl Decision tree.\label{fig:decisions}}
-\end{center}
-\end{figure}
+In the next step, I evaluate the software possibilities to parse the code and get the AST tree. I chose to use the Eclipse CDT Plugin mainly because of my abilities in programming in Java Language, but also by the features that it have, such as source navigation, source code refactoring and code generation.
 
-\clearpage
-
-Above, can be seen the figure \ref{fig:mockup}, that represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where can be injected the fault, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=1\textwidth]{mockup.png}
-\caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
-\end{center}
-\end{figure}
-
-I chose to use the \textit{diff} tool, since the use of this tool the creation of smaller files with only the changes that are made, instead of using all the code with the modifications made in it.
-
-\iftoggle{long}{\red{Justificar a utilização de patchs}}
+ % as standalone (only importing libraries to project), because of my abilities in programming in Java Language, the maintainability of software developed in it and the low learning levelthat the developers need to modify it
 
 
-Built three separated modules:
-
+ \iftoggle{long}{\red{Built three separated modules:
 \begin{itemize}
 	\item Generate the derivations of main code of selected programs;
 	\item Verify and analyze the effect of produced faults;
 	\item Compile the programs with injected faults, by using make file.
-\end{itemize}
+\end{itemize}}}
 
 
 \iftoggle{long}{\red{Problems with the rewriting of tree}}
@@ -600,6 +589,28 @@ Built three separated modules:
 
 \iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
 
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{decisions.png}
+\caption{\small \sl Decision tree.\label{fig:decisions}}
+\end{center}
+\end{figure}
+
+\clearpage
+
+Above, can be seen the figure \ref{fig:mockup}, that represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where it can be injected, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=1\textwidth]{mockup.png}
+\caption{\small \sl Overview of the injection tool.\label{fig:mockup}}
+\end{center}
+\end{figure}
+
+% \iftoggle{long}{\red{Justificar a utilização de patchs}}
+I chose to use the \textit{diff} tool, since the use of this tool allows the creation of smaller files with only the changes that are made, instead of using all the code with the modifications made in it.
 
 
 \clearpage

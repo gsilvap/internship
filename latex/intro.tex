@@ -3,25 +3,41 @@
 % \chapter{Introduction}
 \section{Introduction}
 
-\iftoggle{long}{\red{In the next subsections will be introduced the context and the scope of this project.}
-\orange{1,2 ou 3 paragrafos descritivos do problema}}
+This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application. Will be injected faults in software in the cloud and collected results to be evaluated.
+% \iftoggle{long}{\red{In the next subsections will be introduced the context and the scope of this project.}
+% \orange{1,2 ou 3 paragrafos descritivos do problema}}
 
 \subsection{Contextualization}
-\iftoggle{long}{\orange{Logo aqui deve ficar claro que os bugs existem, vão sempre existir, e que testar a capacidade de qualquer sistema crítico para lidar com bugs existentes é fundamental. Daí todo o trabalho. Não é claro por que razão (ou razões) isto é específico para a Cloud. Não é igual fazer-se para a Cloud ou para programas stand-alone clássicos?}}
 
 
 The present dissertation describes the work developed in the scope of Master of Science in Informatics Engineering. It is focused on ``Evaluate the robustness of Cloud'' and this is a very important issue nowadays, because of the increasing usage of this.
 It's characterized by the placement of data and software on remote infrastructure. Despite the numerous benefits, the reliability of these platforms hasn't kept the needs, and users trust on their applications to systems outside of personal control.
 
-In this context, the problem of confidence in the entity that manages the platform where applications have been executed arises naturally. Any organization that put an application in the cloud (for example, Microsoft Azure or Amazon EC2) so should accept the assurances given by the service provider.
+In this context, the problem of the existence of bugs in the software of the entity that manages the platform where applications have been executed arises naturally. There are many reasons for software bugs existence, but the most important are:
 
-\iftoggle{long}{\red{This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application.}}
+\begin{itemize}
+	\item Miscommunication;
+	\item Software complexity;
+	\item Programming erros;
+	\item Changing requirements;
+	\item Time pressures;
+	\item Egotistical or overconfident people;
+	\item Poorly documented code;
+	\item Software development tools;
+	\item Obsolete automation scripts;
+	\item Lack of skilled testers.
+\end{itemize}
+
+So, the bugs will continue to exist and will always exist. For this, the test of the ability of a critical system to deal with existing bugs is critical. This is the motive for the existence of this dissertation.
+
+Any organization that put an application in the cloud, for example in Microsoft Azure or Amazon EC2 should accept the assurances given by the service provider.
+
+% \iftoggle{long}{\orange{Logo aqui deve ficar claro que os bugs existem, vão sempre existir, e que testar a capacidade de qualquer sistema crítico para lidar com bugs existentes é fundamental. Daí todo o trabalho. Não é claro por que razão (ou razões) isto é específico para a Cloud. Não é igual fazer-se para a Cloud ou para programas stand-alone clássicos?}}
 
 
-\iftoggle{long}{\red{Although, there are solid virtualization platforms, fault tolerance is still a research problem.}}
+Although there are solid virtualization platforms, fault tolerance is still a problem in research. The system's ability to recover from the failures existence, named resilience, is a critical factor in the cloud.
 
-
-\iftoggle{long}{\red{resilience}}
+% \iftoggle{long}{\red{resilience}}
 
 
 \subsection{The project}
@@ -34,19 +50,20 @@ The main objective of this work is to evaluate the robustness of the cloud. To d
 
 Nevertheless, this objective is divided in some other goals:
 
-\iftoggle{long}{\orange{Esta parte está bem, mas o passo de “evaluate the robustness of the cloud” para estes 3 objetivos é demasiado grande. Deve explicar-se um pouco mais, partindo de um objetivo grande, e progressivamente estabelecer o que aqui se chama “goals”.}}
+% \iftoggle{long}{\orange{Esta parte está bem, mas o passo de “evaluate the robustness of the cloud” para estes 3 objetivos é demasiado grande. Deve explicar-se um pouco mais, partindo de um objetivo grande, e progressivamente estabelecer o que aqui se chama “goals”.}}
 
 \begin{itemize}
 	\item Implement the thirteen operators specified by João Durães;
-	\item Use the fault injector to emulate faults in applications, running in the cloud;
-	\item Measure the time and the value obtained after running the app, in a normal scenario;
-	\item Inject a fault in application, measure the time and the value after running the app;
+	\item Use the fault injector to emulate faults in applications;
+	\item Measure the time and the value obtained after running the app, in normal conditions of cloud;
+	\item Inject a fault in application, measure the time and the value after running the app in the cloud;
 	\item Compare the time and value in a normal scenario and in a scenario with faults;
-	\item
+	\item Create a scenario with multiple virtual machines, and measure the value and the time with the application without faults and with faults;
+	\item Compare all the results and obtain conclusions.
 
-	\item Generate derivations of main code of selected programs;
-	\item Verify and analyze the effect of produced faults;
-	\item Compile the programs with injected faults, by using make file.
+	% \item Generate derivations of main code of selected programs;
+	% \item Verify and analyze the effect of produced faults;
+	% \item Compile the programs with injected faults, by using make file.
 \end{itemize}
 
 
