@@ -241,13 +241,11 @@ For that, I thought that can be used the same tools that I used in Compilers cou
 
 
 
-\iftoggle{long}{
- 	\subsubsection{Bison/Yacc}
-	\hypertarget{Bison/Yacc}{}
- 	\bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
+\subsubsection{Bison/Yacc}
+\hypertarget{Bison/Yacc}{}
+\bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
 
- 	\red{Explicar}
-}
+Yacc is a parser generator and Bison is a GNU version of Yacc. What yacc does is basically takes the tokens and build a tree from it to check the syntax of the program. The tokens are build by the lexer and they are declared in yacc specification file. To use this tool would be necessary to define the tokens and the grammar of the C language which would be laborious and time consuming, that is not the focus of this internship.
 
 \subsubsection{Eclipse CDT}
 \hypertarget{Eclipse CDT}{}
@@ -268,20 +266,14 @@ Using it, I can code Fault Injector in Java, making the software more maintainab
 \subsubsection{GCC Parser}
 \hypertarget{GCC Parser}{}
 \bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
- 	\red{Explicar}
 
+Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors. But to use this parser in the injector, the learning curve would be very high and it would take a long time, since it is very optimized.\\
 
-Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors.\\
+\subsubsection{MCPP}
+\hypertarget{MCPP}{}
+\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
 
-\iftoggle{long}{
- 	\subsubsection{MCPP}
-	\hypertarget{MCPP}{}
- 	\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
-
-	MCPP is a portable C preprocessor\\
- 	\red{Explicar}
-
-}
+MCPP is a portable C and C++ preprocessor with a lot of features related with validation. Robert Natella used it as workaround for some of shortcomings of the GCC's C preprocessor. But now, it is outdated, the last update was at 28-05-2013.\\
 
 
 
