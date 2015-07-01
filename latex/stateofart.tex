@@ -7,7 +7,7 @@ However, like any system, the cloud has problems such any other computer system,
 %\iftoggle{long}{\orange{Estas frases exemplificam um argumento pouco claro. Existe um “but” a unir as locuções, mas no entanto não há qualquer relação entre elas. Como resultado, é pouco claro o que se pretende dizer.}}
 
 
-The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
+The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins, increasing clock rates and because the cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
 
 There are many studies showing that the software faults\cite{avizzienisbasic} are the main cause of computer failures. Nevertheless, the number of faults that can be emulated is directly related to the technique used.
 
@@ -74,9 +74,7 @@ In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIF
 % \acl{g-swfit}
 % \acl{odc}
 
-I had the opportunity to access to the application (executable only)
-%not the source)
-of Robert Natella, named SAFE, that injects software faults, as I also intended to do (I will describe it in next section).
+I had the opportunity to access an application that inject faults before compile time (at source code level), named SAFE. I will describe it in next section, as well as others.
 
 \clearpage
 \subsection{Software Implemented Fault Injection of Software Faults}
@@ -102,6 +100,9 @@ After that, are written some files, variations of original files (code with simp
 Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but Robert implemented at source code level, and João at binary level.
 
 The fault injector under development will be similar in terms of output, code files with changes made in it. However, its creation is justified since we don't have access to the code developed by Robert Natella and the fault injector will be more maintainable and easy to use, using Java Language and not involving the MCCP prepocessor that is already outdated.\\
+
+
+% (executable only) of Robert Natella, named SAFE, that injects software faults, as I also intended to do ().
 
 
 \clearpage
@@ -209,21 +210,16 @@ Nevertheless, such as any computer system, cloud computing isn't free of externa
  % - GCC Parser, Bison and Eclipse CDT}
 
 In the beginning of planning the basic software without any user interface, it was necessary to research the best applications, as the best way for using them to obtain panned results (fault injector).
-For that, I thought that can be used the same tools that I used in Compilers course, Lex and Yacc.\\
+
+For that, I thought that can be used the same tools that I used in Compilers course, Lex and Yacc or use others like Eclipse CDT, GCC Parser or MCPP preprocessor.\\
 
 %\red{For parsing the code, analyze and modify it,}
 
-
-
 \subsubsection{Bison/Yacc}
-% \hypertarget{Bison/Yacc}{}
-% \bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
 
 Yacc is a parser generator and Bison is a GNU version of Yacc. What yacc does is takes the tokens and build a tree from it to check the syntax of the program. The tokens are built by the lexer and they are declared in yacc specification file. To use this tool would be necessary to define the tokens and the grammar of the C language which would be laborious and time consuming, that is not the focus of this internship.
 
 \subsubsection{Eclipse CDT}
-% \hypertarget{Eclipse CDT}{}
-% \bookmark[level=\thesubsubsection,dest=Eclipse CDT]{\thesubsubsection \ Eclipse CDT}
 
 Eclipse CDT, as the name suggests, is a plugin for Eclipse that give a fully functional C and C++ Integrated Development Environment.
 Some of the features included in this plugin that are interesting for this project:
@@ -238,24 +234,17 @@ Using it, I can code Fault Injector in Java, making the software more maintainab
 \\
 
 \subsubsection{GCC Parser}
-% \hypertarget{GCC Parser}{}
-% \bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
 
 Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors. Nevertheless, to use this parser in the injector, the learning curve would be very high and it would take a long time, since it is very optimized.\\
 
 \subsubsection{MCPP}
-% \hypertarget{MCPP}{}
-% \bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
 
 MCPP is a portable C and C++ preprocessor with many features related with validation. Robert Natella used it as workaround for some of shortcomings of the GCC's C preprocessor. Now, it is outdated, the last update was at 28-05-2013.\\
-
-
 
 % Finally, I decided to use
 In the end, I chose to use the Eclipse CDT Plugin as standalone (only importing libraries to project), because of my abilities in programming in Java Language, the maintainability of software developed in it and the low learning level that the developers need to modify it.\\
 
-\newpage
-% \section{Current work and preliminary results}
+\clearpage
 \section{Fault Injector Development}
 
 The Fault Injector currently in development is coded in Java using Eclipse CDT Plugin, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. Furthermore, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
@@ -455,7 +444,7 @@ After applying the operators in the code of tree, will be generated modified fil
 \clearpage
 \subsection{Constraints}
 
-As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, which has been done by João Durães.
+As was discussed in the specification of the operators, the operators cannot be applied in all the situations and need to complying with the specification in accordance with the field-data study, which has been done by João Durães. To do that, the operators need to verify the constraints below.
 
 \begin{table}[!ht]
 \centering
