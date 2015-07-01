@@ -84,40 +84,16 @@ of Robert Natella, named SAFE, that injects software faults, as I also intended 
 
 Above, I will describe some tools that use \ac{swifi} technique and made some improvements in this area of research.
 
-% \iftoggle{long}{
-%  	\subsubsection{Doctor}
-% 	\hypertarget{Doctor}{}
-%  	\bookmark[level=\thesubsubsection,dest=Doctor]{\thesubsubsection \ Doctor}
-% }
-
-% \iftoggle{long}{
-%  	\subsubsection{Ferrari}
-% 	\hypertarget{Ferrari}{}
-%  	\bookmark[level=\thesubsubsection,dest=Ferrari]{\thesubsubsection \ Ferrari}
-% }
-
-% \iftoggle{long}{
-%  	\subsubsection{Ftape}
-% 	\hypertarget{Ftape}{}
-%  	\bookmark[level=\thesubsubsection,dest=Ftape]{\thesubsubsection \ Ftape}
-% }
-
 \subsubsection{JACA Tool}
-\hypertarget{JACA Tool}{}
-\bookmark[level=\thesubsubsection,dest=JACA Tool]{\thesubsubsection \ JACA Tool}
 
 JACA\cite{regina2003jaca} is a tool that has been made to validate Java applications. It injects high-level software faults and is based on computational reflection to inject interface faults in Java applications
 \cite{martins2002jaca}. \\
 
 \subsubsection{J-SWFIT}
-\hypertarget{J-SWFIT}{}
-\bookmark[level=\thesubsubsection,dest=J-SWFIT]{\thesubsubsection \ J-SWFIT}
 
 Java Software Fault Injection Tool\cite{sanches2011j} is a tool that doesn't need the source code to perform the injection, the mutation of the code is performed directly at byte-code level.\\
 
 \subsubsection{SAFE by Robert Natella}
-\hypertarget{SAFE by Robert Natella}{}
-\bookmark[level=\thesubsubsection,dest=SAFE by Robert Natella]{\thesubsubsection \ SAFE by Robert Natella}
 
 Safe is an application to inject realistic software faults in programs coded in C and C++.
 This tool uses MCPP as parser, to get the tree of code. The decision of using MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
@@ -127,12 +103,6 @@ Robert Natella implemented thirteen operators in SAFE, same as João Durães\cit
 
 The fault injector under development will be similar in terms of output, code files with changes made in it. However, its creation is justified since we don't have access to the code developed by Robert Natella and the fault injector will be more maintainable and easy to use, using Java Language and not involving the MCCP prepocessor that is already outdated.\\
 
-
-% \iftoggle{long}{
-%  	\subsubsection{Xception}
-% 	\hypertarget{Xception}{}
-%  	\bookmark[level=\thesubsubsection,dest=Xception]{\thesubsubsection \ Xception}
-% }
 
 \clearpage
 \subsection{ODC Model}
@@ -214,6 +184,8 @@ Four levels of Cloud Computing Service Models:
 
 \end{itemize}
 
+In the figure \ref{fig:cloudcomputingservicemodels}, is possible to verify the differences between the different models.
+
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1\textwidth]{cloud-computing-service-models2.png}
@@ -244,14 +216,14 @@ For that, I thought that can be used the same tools that I used in Compilers cou
 
 
 \subsubsection{Bison/Yacc}
-\hypertarget{Bison/Yacc}{}
-\bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
+% \hypertarget{Bison/Yacc}{}
+% \bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
 
 Yacc is a parser generator and Bison is a GNU version of Yacc. What yacc does is takes the tokens and build a tree from it to check the syntax of the program. The tokens are built by the lexer and they are declared in yacc specification file. To use this tool would be necessary to define the tokens and the grammar of the C language which would be laborious and time consuming, that is not the focus of this internship.
 
 \subsubsection{Eclipse CDT}
-\hypertarget{Eclipse CDT}{}
-\bookmark[level=\thesubsubsection,dest=Eclipse CDT]{\thesubsubsection \ Eclipse CDT}
+% \hypertarget{Eclipse CDT}{}
+% \bookmark[level=\thesubsubsection,dest=Eclipse CDT]{\thesubsubsection \ Eclipse CDT}
 
 Eclipse CDT, as the name suggests, is a plugin for Eclipse that give a fully functional C and C++ Integrated Development Environment.
 Some of the features included in this plugin that are interesting for this project:
@@ -266,14 +238,14 @@ Using it, I can code Fault Injector in Java, making the software more maintainab
 \\
 
 \subsubsection{GCC Parser}
-\hypertarget{GCC Parser}{}
-\bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
+% \hypertarget{GCC Parser}{}
+% \bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
 
 Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors. Nevertheless, to use this parser in the injector, the learning curve would be very high and it would take a long time, since it is very optimized.\\
 
 \subsubsection{MCPP}
-\hypertarget{MCPP}{}
-\bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
+% \hypertarget{MCPP}{}
+% \bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
 
 MCPP is a portable C and C++ preprocessor with many features related with validation. Robert Natella used it as workaround for some of shortcomings of the GCC's C preprocessor. Now, it is outdated, the last update was at 28-05-2013.\\
 
@@ -346,8 +318,6 @@ To overtake some of these reasons, it was necessary to obtain the data with whic
 I chose to use a set of the most representative faults, previously specified by João Durães\cite{duraes2006emulation} according to his data-field results, specified individually further down:
 
 	\subsubsection{\textbf{\acs{mfc}}} - \Acl{mfc}
-	\hypertarget{mfc}{}
-	\bookmark[level=\thesubsubsection,dest=mfc]{\thesubsubsection \ \acs{mfc}}
 
 	The emulation of this operator is based in the remotion of a function call in a context where the returned value is not used. Nevertheless, to do the remotion, the constraints below need to be validated.
 	\begin{itemize}
@@ -356,8 +326,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mia}}} - \Acl{mia} - \green{\textbf{Implemented}}
-	\hypertarget{mia}{}
-	\bookmark[level=\thesubsubsection,dest=mia]{\thesubsubsection \ \acs{mia}}
 
 	This operator simulates a missing \textit{if} condition surrounding a set of statements. This causes that the statements are always executed and not only when the condition of \textit{if} is true.
 	\begin{itemize}
@@ -366,8 +334,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mieb}}} - \Acl{mieb} - \green{\textbf{Implemented}}
-	\hypertarget{mieb}{}
-	\bookmark[level=\thesubsubsection,dest=mieb]{\thesubsubsection \ \acs{mieb}}
 
 	This operator generates derivations of the source code of applications by removing the if construct plus statements plus else before statements. To apply this operator I need to verify the constraint above:
 	\begin{itemize}
@@ -377,8 +343,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	This constraint doesn't exists in João Durães specification, but as this operator cannot be applied in all situations, I specified and implemented it.
 
 	\subsubsection{\textbf{\acs{mifs}}} - \Acl{mifs} - \green{\textbf{Implemented}}
-	\hypertarget{mifs}{}
- 	\bookmark[level=\thesubsubsection,dest=mifs]{\thesubsubsection \ \acs{mifs}}
 
 	The application of this operator changes the source code with the remotion of one \textit{if} construct and the statements surrounded by it.
 	But, to do that, I need to verify the constraints above:
@@ -389,8 +353,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mlac}}} - \Acl{mlac} - \green{\textbf{Implemented}}
-	\hypertarget{mlac}{}
-	\bookmark[level=\thesubsubsection,dest=mlac]{\thesubsubsection \ \acs{mlac}}
 
 	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator AND. With an AND operator, if one of the sub-expressions is \textit{false} all the expression will be \textit{false} and the condition will fail.
 	\begin{itemize}
@@ -398,8 +360,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mloc}}} - \Acl{mloc} - \green{\textbf{Implemented}}
-	\hypertarget{mloc}{}
-	\bookmark[level=\thesubsubsection,dest=mloc]{\thesubsubsection \ \acs{mloc}}
 
 	This operator emulates the remotion of part of a logical expression used in a branch condition. To apply this operator, the code must have at least two branch conditions linked together with the logical operator OR. It is only necessary that one of the sub-expressions be true to the entire expression are evaluated as true. This operator has only one constraint:
 
@@ -408,8 +368,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mlpa}}} - \Acl{mlpa}
-	\hypertarget{mlpa}{}
-	\bookmark[level=\thesubsubsection,dest=mlpa]{\thesubsubsection \ \acs{mlpa}}
 
 	As the name suggests, this operator emulates the omission of a small and localized part of the algorithm.
 
@@ -421,8 +379,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	The constraint \textbf{\ac{c02}} guarantees that don't be removed all the statements in a block, because this would not correspond to a realistic fault. This type of faults never involved the remotion of \textit{if} or \textit{if-else} and loop constructs (the omitted statements were always function calls and assignments) guaranteed by constraint \textbf{\ac{c10}}.
 
 	\subsubsection{\textbf{\acs{mvae}}} - \Acl{mvae}
-	\hypertarget{mvae}{}
-	\bookmark[level=\thesubsubsection,dest=mvae]{\thesubsubsection \ \acs{mvae}}
 
 	This operator reproduces the omission of a given local variable with an expression. However, not when is the first assignment to a variable, an initialization, guaranteed by the constraint \textbf{\acs{c07}}.
 
@@ -434,8 +390,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mvav}}} - \Acl{mvav}
-	\hypertarget{mvav}{}
-	\bookmark[level=\thesubsubsection,dest=mvav]{\thesubsubsection \ \acs{mvav}}
 
 	Operator \textbf{\ac{mvav}} is similar to operator \textbf{\ac{mvae}}, with the difference that it emulates the remotion of the assignment of a given local variable with a constant value instead of an expression. The constraints related with this operator are the same of \textbf{\ac{mvae}}:
 
@@ -447,8 +401,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{mviv}}} - \Acl{mviv}
-	\hypertarget{mviv}{}
-	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
 
 	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. Nevertheless, this operator has other associated constraints:
 
@@ -468,8 +420,6 @@ I chose to use a set of the most representative faults, previously specified by 
 
 
 	\subsubsection{\textbf{\acs{waep}}} - \Acl{waep}
-	\hypertarget{waep}{}
-	\bookmark[level=\thesubsubsection,dest=waep]{\thesubsubsection \ \acs{waep}}
 
 	This operator represents the modification of the expression used as parameter of a function call.
 
@@ -477,8 +427,6 @@ I chose to use a set of the most representative faults, previously specified by 
 %	\subsubsection{\textbf{\acs{wsut}}} - \Acl{wsut}
 
 	\subsubsection{\textbf{\acs{wpfv}}} - \Acl{wpfv}
-	\hypertarget{wpfv}{}
-	\bookmark[level=\thesubsubsection,dest=wpfv]{\thesubsubsection \ \acs{wpfv}}
 
 	Operator \ac{wpfv}, as the name suggests, modify the variables used as parameter in a function call, given a wrong variable. The use of constraint \textbf{\acs{c11}} guarantee that there must be at least two variable in the module.
 
@@ -488,8 +436,6 @@ I chose to use a set of the most representative faults, previously specified by 
 	\end{itemize}
 
 	\subsubsection{\textbf{\acs{wvav}}} - \Acl{wvav}
-	\hypertarget{wvav}{}
-	\bookmark[level=\thesubsubsection,dest=wvav]{\thesubsubsection \ \acs{wvav}}
 
 	As the name suggests, this operator simulate an assignment of a wrong value to a variable. This value is obtained by the inversion of bits of the least significant byte of the early value. To do that, the operator needs to verify the following constraints:
 
