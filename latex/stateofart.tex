@@ -9,7 +9,7 @@ However, like any system, the cloud has problems such any other computer system,
 
 The increased use of cloud is related to a low usage of many dedicated servers, lower voltage levels, reduction of noise margins and increasing clock rates. The cloud provider offer resources ready to deliver \cite{wolter2012resilience}.
 
-There are many studies showing that the software faults\cite{avizzienisbasic} are the main cause of computer failures. But, the number of faults that can be emulated is directly related to the technique used.
+There are many studies showing that the software faults\cite{avizzienisbasic} are the main cause of computer failures. Nevertheless, the number of faults that can be emulated is directly related to the technique used.
 
 \begin{table}[h]
 \centering
@@ -194,7 +194,7 @@ Four models of deployment:
 
 	\item \textbf{Community Cloud} - It is shared by organizations with similar interests, supported by a specific community, sharing the same mission, security requirements, etc.
 
-	\item \textbf{Public Cloud}    - It is available to the public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, that delivers shared hardware and software to costumer private network (mostly the Internet) and data centers.
+	\item \textbf{Public Cloud}    - It is available to the public or to a group of a big company. It is a multi-tenant cloud solution owned by cloud service provider, which delivers shared hardware and software to costumer private network (mostly the Internet) and data centers.
 
 	\item \textbf{Hybrid Cloud}    - Composed by two or more services (private, community or public), together by standard technologies or proprietary that allows portability. Takes advantages from the best of private and public. Example: A client can implement a private cloud for applications with sensitive data and a public cloud for other data, non-sensitive.
 \end{itemize}
@@ -247,7 +247,7 @@ For that, I thought that can be used the same tools that I used in Compilers cou
 \hypertarget{Bison/Yacc}{}
 \bookmark[level=\thesubsubsection,dest=Bison/Yacc]{\thesubsubsection \ Bison/Yacc}
 
-Yacc is a parser generator and Bison is a GNU version of Yacc. What yacc does is basically takes the tokens and build a tree from it to check the syntax of the program. The tokens are build by the lexer and they are declared in yacc specification file. To use this tool would be necessary to define the tokens and the grammar of the C language which would be laborious and time consuming, that is not the focus of this internship.
+Yacc is a parser generator and Bison is a GNU version of Yacc. What yacc does is takes the tokens and build a tree from it to check the syntax of the program. The tokens are built by the lexer and they are declared in yacc specification file. To use this tool would be necessary to define the tokens and the grammar of the C language which would be laborious and time consuming, that is not the focus of this internship.
 
 \subsubsection{Eclipse CDT}
 \hypertarget{Eclipse CDT}{}
@@ -269,13 +269,13 @@ Using it, I can code Fault Injector in Java, making the software more maintainab
 \hypertarget{GCC Parser}{}
 \bookmark[level=\thesubsubsection,dest=GCC Parser]{\thesubsubsection \ GCC Parser}
 
-Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors. But to use this parser in the injector, the learning curve would be very high and it would take a long time, since it is very optimized.\\
+Nowadays, GCC use a hand-written parser to improve syntactic error diagnostics, giving people meaningful messages on syntax errors. Nevertheless, to use this parser in the injector, the learning curve would be very high and it would take a long time, since it is very optimized.\\
 
 \subsubsection{MCPP}
 \hypertarget{MCPP}{}
 \bookmark[level=\thesubsubsection,dest=MCPP]{\thesubsubsection \ MCPP}
 
-MCPP is a portable C and C++ preprocessor with a lot of features related with validation. Robert Natella used it as workaround for some of shortcomings of the GCC's C preprocessor. But now, it is outdated, the last update was at 28-05-2013.\\
+MCPP is a portable C and C++ preprocessor with many features related with validation. Robert Natella used it as workaround for some of shortcomings of the GCC's C preprocessor. Now, it is outdated, the last update was at 28-05-2013.\\
 
 
 
@@ -309,7 +309,7 @@ The Fault Injector currently in development is coded in Java using Eclipse CDT P
 \caption{\small \sl Fault emulation operators.\label{tab:faultEmulationOperators}}
 \end{table}
 
-In the beginning of this project, I considered all the eighteen operators more representative in the open source software. But, after collecting information and analyze them, I verify that I don't have all the necessary information to implement all the eighteen operators due to various reasons.
+In the beginning of this project, I considered all the eighteen operators more representative in the open source software. However, after collecting information and analyze them, I verify that I don't have all the necessary information to implement all the eighteen operators due to various reasons.
 The operators that will not be implemented can be seen in the table \ref{tab:otherfaultEmulationOperators}.
 
 \begin{table}[!ht]
@@ -332,11 +332,11 @@ The reasons for which they not be implemented are:
 	\item Definition of the operators inconclusive;
 	% \item Unfeasible implementation;
 	\item Little or no information about the cases where it is applied;
-	\item Can produce warnings or even errors while compiling;
+	\item Can produce warnings or even errors while compile;
 	\item Low representation in relation to the other operators (can be seen in field study of João Durães).
 \end{itemize}
 
-To overtake some of these reasons, it was necessary to obtain the data with which João Durães performed the field-study, or do a new field-study. But due to the time limit, it would be unfeasible at this time.
+To overtake some of these reasons, it was necessary to obtain the data with which João Durães performed the field-study, or do a new field-study. However, due to the time limit, it would be unfeasible at this time.
 
 % \iftoggle{long}{\orange{Convém explicar e contextualizar tudo isto. Nas notas ao longo do semestre creio que há muitos argumentos que fomos colecionando.}}
 
@@ -349,7 +349,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mfc}{}
 	\bookmark[level=\thesubsubsection,dest=mfc]{\thesubsubsection \ \acs{mfc}}
 
-	The emulation of this operator is based in the remotion of a function call in a context where the returned value is not used. But, to do the remotion, the constraints below need to be validated.
+	The emulation of this operator is based in the remotion of a function call in a context where the returned value is not used. Nevertheless, to do the remotion, the constraints below need to be validated.
 	\begin{itemize}
 		\item \textbf{\acs{c01}} - \Acl{c01};
 		\item \textbf{\acs{c02}} - \Acl{c02}.
@@ -424,7 +424,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mvae}{}
 	\bookmark[level=\thesubsubsection,dest=mvae]{\thesubsubsection \ \acs{mvae}}
 
-	This operator reproduces the omission of a given local variable with an expression. But not when is the first assignment to a variable, an initialization, guaranteed by the constraint \textbf{\acs{c07}}.
+	This operator reproduces the omission of a given local variable with an expression. However, not when is the first assignment to a variable, an initialization, guaranteed by the constraint \textbf{\acs{c07}}.
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -437,7 +437,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mvav}{}
 	\bookmark[level=\thesubsubsection,dest=mvav]{\thesubsubsection \ \acs{mvav}}
 
-	Operator \textbf{\ac{mvav}} is similar to operator \textbf{\ac{mvae}}, with the difference that it emulates the remotion of the assignment of a given local variable with a constant value instead of a expression. The constraints related with this operator are the same of \textbf{\ac{mvae}}:
+	Operator \textbf{\ac{mvav}} is similar to operator \textbf{\ac{mvae}}, with the difference that it emulates the remotion of the assignment of a given local variable with a constant value instead of an expression. The constraints related with this operator are the same of \textbf{\ac{mvae}}:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -450,7 +450,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{mviv}{}
 	\bookmark[level=\thesubsubsection,dest=mviv]{\thesubsubsection \ \acs{mviv}}
 
-	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. But, this operator has other associated constraints:
+	As the name suggests, this operator represents the remotion of a given local variable initialization with a constant value. The fact that this operator only searches for variable initialization induce that only the first occurrence of an assignment to a particular variable are readable to apply this type of fault, this is guaranteed by the constraint \textbf{\acs{c04}}. The constraint \textbf{\acs{c05}} verifies if the assignment doesn't occur inside a loop, because one assignment of this type occurs several times. Nevertheless, this operator has other associated constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c02}} - \Acl{c02};
@@ -480,7 +480,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{wpfv}{}
 	\bookmark[level=\thesubsubsection,dest=wpfv]{\thesubsubsection \ \acs{wpfv}}
 
-	Operator \ac{wpfv}, as the name suggests, modify the variables used as parameter in a function call, given a wrong variable. The use of contraint \textbf{\acs{c11}} guarantee that there must be at least two variable in the module.
+	Operator \ac{wpfv}, as the name suggests, modify the variables used as parameter in a function call, given a wrong variable. The use of constraint \textbf{\acs{c11}} guarantee that there must be at least two variable in the module.
 
 	\begin{itemize}
 		\item \textbf{\acs{c03}} - \Acl{c03};
@@ -491,7 +491,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{wvav}{}
 	\bookmark[level=\thesubsubsection,dest=wvav]{\thesubsubsection \ \acs{wvav}}
 
-	As the name suggests, this operator simulate an assignment of a wrong value to a variable. This value is obtained by the inversion of bits of the least significant byte of the early value. To do that, the operator need to verify the following constraints:
+	As the name suggests, this operator simulate an assignment of a wrong value to a variable. This value is obtained by the inversion of bits of the least significant byte of the early value. To do that, the operator needs to verify the following constraints:
 
 	\begin{itemize}
 		\item \textbf{\acs{c03}} - \Acl{c03};
@@ -509,7 +509,7 @@ After applying the operators in the code of tree, will be generated modified fil
 \clearpage
 \subsection{Constraints}
 
-As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, that has been done by João Durães.
+As was discussed in the specification of the operators, the same can be applied in all the situations and need to be applied in accordance with the field-data study, which has been done by João Durães.
 
 \begin{table}[!ht]
 \centering
