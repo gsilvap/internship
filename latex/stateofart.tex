@@ -123,7 +123,9 @@ Safe is an application to inject realistic software faults in programs coded in 
 This tool uses MCPP as parser, to get the tree of code. The decision of using MCPP instead of GCC parser was a workaround for some of the shortcomings of the GCC's C preprocessor.
 
 After that, are written some files, variations of original files (code with simple mutations) with the operator applied.
-Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but Robert implemented at source code level, and João at binary level.\\
+Robert Natella implemented thirteen operators in SAFE, same as João Durães\cite{duraes2006emulation}, but Robert implemented at source code level, and João at binary level.
+
+The fault injector under development will be similar in terms of output, code files with changes made in it. However, its creation is justified since we don't have access to the code developed by Robert Natella and the fault injector will be more maintainable and easy to use, using Java Language and not involving the MCCP prepocessor that is already outdated.\\
 
 
 % \iftoggle{long}{
@@ -469,7 +471,7 @@ I chose to use a set of the most representative faults, previously specified by 
 	\hypertarget{waep}{}
 	\bookmark[level=\thesubsubsection,dest=waep]{\thesubsubsection \ \acs{waep}}
 
-	This operator represents the
+	This operator represents the modification of the expression used as parameter of a function call.
 
 %	\hypertarget{wsut}{}
 %	\subsubsection{\textbf{\acs{wsut}}} - \Acl{wsut}
@@ -477,6 +479,8 @@ I chose to use a set of the most representative faults, previously specified by 
 	\subsubsection{\textbf{\acs{wpfv}}} - \Acl{wpfv}
 	\hypertarget{wpfv}{}
 	\bookmark[level=\thesubsubsection,dest=wpfv]{\thesubsubsection \ \acs{wpfv}}
+
+	Operator \ac{wpfv}, as the name suggests, modify the variables used as parameter in a function call, given a wrong variable. The use of contraint \textbf{\acs{c11}} guarantee that there must be at least two variable in the module.
 
 	\begin{itemize}
 		\item \textbf{\acs{c03}} - \Acl{c03};
