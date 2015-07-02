@@ -69,14 +69,16 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 \caption{\small \sl State of the other constraints.\label{tab:otherConstraints_status}}
 \end{table}
 
-\iftoggle{long}{\red{version number}}
+% \iftoggle{long}{\red{version number}}
+\break
+Below, in the figure \ref{tab:version} can be seen the numbering system of versions of fault injector. The ``b'' represents that are implemented two constraints which isn't specified by João Durães. For example, if I implement three, then will be ``c'', and so on. The current version of the injector also has five operators and three constraints implemented, from those specified by João Durães. When the version numbering achieve 0.13.11 then the injector will be in the version number one.
 
-% \begin{table}[ht]
-% \begin{tabular}{c}
-% \includegraphics[width=1.1\textwidth]{img/constraints_status.jpg}
-% \end{tabular}
-% \caption{\small \sl State of the operators and its constraints.\label{tab:constraints_status}}
-% \end{table}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{version.jpg}
+\caption{\small \sl Version number.\label{tab:version}}
+\end{center}
+\end{figure}
 
 \clearpage
 \subsection{Future Work}
@@ -84,7 +86,7 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 In the future, I have planned to implement the other operators and constraints. I will use regression testing to verify if when I coded one new operator or constraint I didn't mess with the operators and constraints previous implemented.
 
 
-In addition, I planned to add to the fault injector a user interface, to turn this software more user-friendly.
+In addition, I will add to the fault injector a user interface, to turn this software more user-friendly, and a name.
 
 % \textit{``The purpose of regression testing is to ensure that changes made to software, such as adding new features or modifying existing features, have not adversely affected features of the software that should not change. Regression testing is usually performed by running some, or all, of the test cases created to test modifications in previous versions of the software.''}
 % \red{From version to version, I use a regression testing to test the fault injector to guarantee that application doesn't regarded.}

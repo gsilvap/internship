@@ -487,18 +487,27 @@ These constraints can be modified during the implementation of the other operato
 \clearpage
 \section{Work plan and implications}
 
-In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during the first semester of this dissertation.
+In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during this semester.
 
-Since the beginning of this project, it was expected that I create a fault injector. However, as stated earlier, in the beginning it was to inject faults in hardware but due to the postponement of six months, and the development of the project related to inject faults in hardware, the project was modified to inject faults in software.
+Since the beginning of this project, it was expected that I should create a fault injector. However, as stated earlier, in the beginning it was to inject faults in hardware but due to the postponement of six months, and the development of the project related to inject faults in hardware, the project was modified to inject faults in software.
 
-After take that decision, I had to choose the technique that would use injection at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. Selected source code level because there are made some tools which Inject faults in execution environment, p.e. by João Durães. Previously, Robert Natella had coded a tool from this type, using MCPP as C preprocessor at his thesis of PhD.
-All these reasons, would lead to inject faults at object code level in the compilation, but the use of this technique in the development of fault injector and the evaluation of the robustness of the cloud would be a great effort and too much work for a master's thesis. Hence, it was decided to inject fault before the compilation, at the source code of applications. The use of this technique provides the emulation of realistic software faults done by real programmers.
+After take that decision, I had to choose the technique that would use injection faults, from three: at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. I selected source code level because there are made some tools which inject faults in execution environment, p.e. by João Durães. Previously, Robert Natella had coded a tool from this type, using MCPP as C preprocessor at his thesis of PhD.
+All these reasons would lead to inject faults at object code level in the compilation, but the use of this technique in the development of fault injector and the evaluation of the robustness of the cloud would be a great effort and too much work for a master's thesis. Hence, it was decided to inject fault before the compilation, at the source code of applications. The use of this technique provides the emulation of realistic software faults done by real programmers.
 
-Despite already exists Robert Natella tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and the easy to use, to inject faults in source code coded in C language.
+Despite already exists Robert's tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and the easy to use, to inject faults in source code coded in C language.
 
-The faults will be injected in C code because of the extensive knowledge of the supervisors and because of the work already done by João Durães, in the specification of the operators, be based on a field-study of open source software coded in that language.
+The faults will be injected in C code because of the extensive knowledge of the supervisors and because of the work already done by João Durães at PhD, in the specification of the operators, be based on a field-study of open source software coded in that language.
 
-In the next step, I evaluate the software possibilities to parse the code and get the AST tree. I chose to use the Eclipse CDT Plugin mainly because of my abilities in programming in Java Language, but also by the features that it have, such as source navigation, source code refactoring and code generation.
+Then, I evaluated the software possibilities to parse the code and get the AST tree. I chose to use the Eclipse CDT Plugin mainly because of my abilities in programming in Java Language, but also by the features that it has, such as source navigation, source code refactoring and code generation.
+
+In spite of the Eclipse CDT has many attractive characteristics for this project, the implementation of the first operator was not easy. After some time to understand the tool and the structure of classes through Javadoc, it was even necessary to obtain more information from those who know and really work with it, by accessing the list: cdt-dev@eclipse.org.
+
+After exchanging some emails with Thomas Corbat, I learned that the Eclipse CDT doesn't allow the creation of a new tree of code by making changes in the original tree. And I had two options, use reflection to get the modifications from ASTWriter and pass it to ASTRewrite to get the code with the changes done or get the source code of CDT and change it to avoid the use of reflection.
+
+Initially, I opted to use reflection, despite knowing that it's not a neat solution and is generally slower than equivalent native code, but after understand better the flow of Eclipse CDT, I get the source and change it to avoid the use of reflection.
+
+After that, I finally had the first operator implemented, using recursion. However, I can traverse the tree without using recursion, using the Visitor Pattern, making the code simpler, cleaner and safer. Then I modified all the recursion to the visitor pattern.
+
 
  % as standalone (only importing libraries to project), because of my abilities in programming in Java Language, the maintainability of software developed in it and the low learning levelthat the developers need to modify it
 
@@ -510,17 +519,9 @@ In the next step, I evaluate the software possibilities to parse the code and ge
 	\item Compile the programs with injected faults, by using make file.
 \end{itemize}}}
 
-
-\iftoggle{long}{\red{Problems with the rewriting of tree}}
-
-
-\iftoggle{long}{\red{Reflection}}
-
-
-
-\iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
-
-
+% \iftoggle{long}{\red{Problems with the rewriting of tree}}
+% \iftoggle{long}{\red{Reflection}}
+% \iftoggle{long}{\red{But I was forced to take decisions after that, for example, after creating the tree of code, I can go through the tree in the recursive way or using \textit{Visitor Pattern}.}}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -531,7 +532,7 @@ In the next step, I evaluate the software possibilities to parse the code and ge
 
 \clearpage
 
-Above, can be seen the figure \ref{fig:mockup}, that represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where it can be injected, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
+The figure \ref{fig:mockup}, represents an overview of the fault injection tool. Initially, the fault injector starts by read the source code of a file coded in C, it is analyzed and is created a AST tree. To inject a fault, the fault injector finds the node where it can be injected, and modify it, according to operator specification. After this, the AST tree is rewritten, getting the code again, now with modifications. Finally, with the comparison of the two codes, source code and source code with mutations, it is made a \textit{diff}, so obtaining a summary of the changes made between files.
 
 \begin{figure}[!ht]
 \begin{center}
