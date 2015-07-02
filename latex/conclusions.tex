@@ -130,7 +130,7 @@ Furthermore, in the next semester, I will study the hypervisor and I will implem
 
 \subsubsection{Experiments}
 
-In the next semester, additionally of the conclusion of the fault injector, I'll inject faults in the cloud using it. In the left of the figure \ref{fig:test1}, can be seen two environments where will be done the first and second experiment, with normal conditions and with a fault, respectively. An application will be selected, as shown in the figure as ``App''. This application will run in a normal environment and will be measured the runtime and the result of the execution. For later compare to the results obtained in other scenarios.
+In the next semester, additionally of the conclusion of the fault injector, I'll inject faults in the cloud. In the figure \ref{fig:test1}, can be seen two environments where will be done the first and second experiment, with normal conditions without faults and with faults, respectively. An application will be selected, as shown in the figure as ``App''. This application will run in a normal environment and will be measured the runtime and the result of the execution. For later compare to the results obtained in other scenarios.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -148,23 +148,20 @@ The scenario represented in the right of the figure \ref{fig:test1}, it's the sa
 % \end{center}
 % \end{figure}
 
-Above, in the figure \ref{fig:test3}, can be seen the third experiment with an Hosted Hypervisor. The goal of this scenario is whether through fault injection in one of the virtual machines, the others are affected.
+Above, in the figure \ref{fig:test3}, can be seen the third experiment with an Native Hypervisor. The goal of this scenario is whether through fault injection in one of the virtual machines, the others are affected. And if the virtual machine that don't have faults have the same behavior beside with a execution of a virtual machine with an ``App'' with faults and without faults.
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{test3.png}
-\caption{\small \sl Third experiment.\label{fig:test3}}
-\end{center}
-\end{figure}
-
-
-In the scenario represented in the figure \ref{fig:test4}, can be seen a Native Hypervisor.
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=0.5\textwidth]{test3.png}
+% \caption{\small \sl Third experiment.\label{fig:test3}}
+% \end{center}
+% \end{figure}
 
 
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=0.4\textwidth]{test4.png}
-\caption{\small \sl Fourth experiment.\label{fig:test4}}
+\caption{\small \sl Third experiment.\label{fig:test3}}
 \end{center}
 \end{figure}
 
