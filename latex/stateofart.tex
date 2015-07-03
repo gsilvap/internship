@@ -1,6 +1,6 @@
 %!TEX root = main.tex
 \newpage
-\section{State of the Art}
+\section{State of the art}
 
 Nowadays, people use many services based in the cloud and many companies choose to use them too. By doing that, companies reduce the costs of IT infrastructure and not even need to buy ``physical storage'', neither care where the data is. The cloud service provides that the data is secure.
 However, like any system, the cloud has problems such any other computer system, software and hardware faults. The resilience of the cloud is very important too.
@@ -77,7 +77,7 @@ In the Table \ref{tab:swifi_hwifi}, it is possible to view that can be used SWIF
 I had the opportunity to access an application that inject faults before compile time (at source code level), named SAFE. I will describe it in next section, as well as others.
 
 \clearpage
-\subsection{Software Implemented Fault Injection of Software Faults}
+\subsection{Software implemented fault injection of software faults}
 % \iftoggle{long}{\red{In the next subsections, I will describe some fault injectors that have been previously done.}\\}
 
 Above, I will describe some tools that use \ac{swifi} technique and made some improvements in this area of research.
@@ -101,9 +101,7 @@ Robert Natella implemented thirteen operators in SAFE, same as João Durães\cit
 
 The fault injector under development will be similar in terms of output, code files with changes made in it. However, its creation is justified since we don't have access to the code developed by Robert Natella and the fault injector will be more maintainable and easy to use, using Java Language and not involving the MCCP prepocessor that is already outdated.\\
 
-
 % (executable only) of Robert Natella, named SAFE, that injects software faults, as I also intended to do ().
-
 
 \clearpage
 \subsection{ODC Model}
@@ -124,8 +122,33 @@ For that, this model has eight categories:
 	\item \textbf{Algorithm} - Problems that can be fixed by re-implementing an algorithm or local data structure, include efficiency or correctness that affects the task.
 \end{itemize}
 
+This model was used by João Durães, in his field-study, as a starting point for fault classification.
 
-\newpage
+\clearpage
+\subsection{CRASH Scale}
+% \subsection{Analyze the effects}
+
+\iftoggle{long}{\red{The fault injected results are equal to the real software faults?}}
+
+
+After the compilation and execution of the programs, the results need to be evaluated. To measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
+
+\begin{itemize}
+	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
+	\item \textbf{R}estart - Task or process hangs, requiring restart;
+	\item \textbf{A}bort - Task or process aborts abnormally (i.e. ``code dump'' or ``segmentation violation'');
+	\item \textbf{S}ilent - Test Process exits without an error code returned when one should exist;
+	\item \textbf{H}indering - Test Process exits with an error code not relevant to the situation or incorrect error code returned;
+	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error code.
+\end{itemize}
+
+The order of the letters in the word CRASH represents the impact to the operating system (Catastrophic is the worse and Hindering the least severe).
+
+This \textit{CRASH Scale} is a way to group the results of the effect of faults on an end-use system, mainly from the operating system perspective, by the severity.
+
+\iftoggle{long}{\orange{Esta parte é particularmente importante: a classificação dos efeitos. Creio que há mais a dizer, pois fará parte do plano futuro de desenvolvimento classificar o que cada programa defeituoso faz.}}
+
+\clearpage
 \section{Research objectives and approach method}
 
 In this section are discussed the main aspects in study.
@@ -245,7 +268,7 @@ MCPP is a portable C and C++ preprocessor with many features related with valida
 In the end, I chose to use the Eclipse CDT Plugin as standalone (only importing libraries to project), because of my abilities in programming in Java Language, the maintainability of software developed in it and the low learning level that the developers need to modify it.\\
 
 \clearpage
-\section{Fault Injector Development}
+\section{Fault injector development}
 
 The Fault Injector currently in development is coded in Java using Eclipse CDT Plugin, and it will have thirteen operators (can be seen in Table \ref{tab:faultEmulationOperators})\cite{duraes2005thesis}. Furthermore, the fault injector can have two schema's of trigger the faults: spatial and temporal. In the temporal way, the insertion of the fault is given by the time associate with the execution in system. Whereas, in the spatial way, the fault is injected when reaches the specified zone where the particular operator can be applied.
 
@@ -485,7 +508,7 @@ When was implementing the operators \textbf{\ac{mieb}} and \textbf{\ac{mloc}}, i
 These constraints can be modified during the implementation of the other operators that aren't implemented yet.
 
 \clearpage
-\section{Work plan and implications}
+\section{Work and implications}
 
 In the figure \ref{fig:decisions}, can be seen an overview of the main decisions that I did during this semester.
 
@@ -543,28 +566,3 @@ The figure \ref{fig:mockup}, represents an overview of the fault injection tool.
 
 % \iftoggle{long}{\red{Justificar a utilização de patchs}}
 I chose to use the \textit{diff} tool, since the use of this tool allows the creation of smaller files with only the changes that are made, instead of using all the code with the modifications made in it.
-
-
-\clearpage
-\subsection{Analyze the effects}
-
-\iftoggle{long}{\red{The fault injected results are equal to the real software faults?}}
-
-
-After the compilation and execution of the programs, the results need to be evaluated. To measure that, I will use the \textit{Koopman's CRASH Scale}\cite{koopman1997comparing}:
-
-\begin{itemize}
-	\item \textbf{C}atastrophic - Operating System crashed or multiple tasks affected;
-	\item \textbf{R}estart - Task or process hangs, requiring restart;
-	\item \textbf{A}bort - Task or process aborts abnormally (i.e. ``code dump'' or ``segmentation violation'');
-	\item \textbf{S}ilent - Test Process exits without an error code returned when one should exist;
-	\item \textbf{H}indering - Test Process exits with an error code not relevant to the situation or incorrect error code returned;
-	\item \textbf{P}ass - The module exits properly, possibly with an appropriate error code.
-\end{itemize}
-
-The order of the letters in the word CRASH represents the impact to the operating system (Catastrophic is the worse and Hindering the least severe).
-
-This \textit{CRASH Scale} is a way to group the results of the effect of faults on an end-use system, mainly from the operating system perspective, by the severity.
-
-\iftoggle{long}{\orange{Esta parte é particularmente importante: a classificação dos efeitos. Creio que há mais a dizer, pois fará parte do plano futuro de desenvolvimento classificar o que cada programa defeituoso faz.}}
-
