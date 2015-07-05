@@ -4,7 +4,7 @@
 
 \subsection{Global vision}
 
-In table \ref{tab:operators_status}, it's possible to view at \green{green color}, the operators that were implemented in the first semester of this dissertation. As can be seen, I have implemented five of thirteen operators that João Durães specified. The first operator that I have implemented with success was the \ac{mifs}, and as the operators \ac{mia} and \ac{mieb} are similar and have some constraints in common, then I implemented them.
+In table \ref{tab:operators_status}, it is possible to view (marked green), the operators that were implemented in the first semester of this dissertation. As it can be seen, I have implemented five of the thirteen operators that João Durães specified. The first operator that I have implemented with success was the \ac{mifs} one, and as the operators \ac{mia} and \ac{mieb} are similar and have some constraints in common, I also implemented them.
 
 % \clearpage
 % \begin{table}[ht]
@@ -36,7 +36,7 @@ WVAV       				& \Acl{wvav} 									\\ \hline
 \caption{\small \sl State of the operators.\label{tab:operators_status}}
 \end{table}
 
-In table \ref{tab:constraints_status}, is also possible to check that I have implemented three of eleven constraints related to the thirteen operators, represented at \green{green color}.
+In table \ref{tab:constraints_status}, is also possible to check that I have implemented three of the eleven constraints related to the thirteen operators, represented in \green{green}.
 
 \begin{table}[!ht]
 \centering
@@ -71,7 +71,7 @@ In table \ref{tab:constraints_status}, is also possible to check that I have imp
 
 % \iftoggle{long}{\red{version number}}
 \break
-Below, in the figure \ref{tab:version} can be seen the numbering system of versions of fault injector. The ``b'' represents that are implemented two constraints which is not specified by João Durães. For example, if I implement three, then will be ``c'', and so on. The current version of the injector also has five operators and three constraints implemented, from those specified by João Durães. When the version numbering achieves 0.13.11 then the injector will be in the version number one.
+Below, in figure \ref{tab:version}, it can be seen the version numbering system of this fault injector. The ``b'' letter states that there are two constraints implemented which are not specified by João Durães. For instance, if I had implement three constraints, then it will be ``c'', and so on. The current version of the injector also has five operators and three constraints implemented, from those specified by João Durães. When the version numbering reaches 0.13.11 then the injector will be in version number one.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -83,8 +83,8 @@ Below, in the figure \ref{tab:version} can be seen the numbering system of versi
 \clearpage
 \subsection{Future work and experiments}
 
-In the future, I have planned to implement the other operators and constraints. I will use regression testing to verify if when I coded one new operator or constraint I did not mess with the operators and constraints previous implemented.
-In addition, I will add to the fault injector a user interface, to turn this software more user-friendly, and a name.
+In the future, I have planned to implement the remaining operators and constraints. I will use regression testing to verify that when I code one new operator or constraint I do not mess with the operators and constraints previously implemented.
+In addition to this, I will add to the fault injector a user interface, in order to make it more user-friendly, and a name.
 
 Furthermore, in the next semester, I will study the hypervisor and I will implement some scenarios to evaluate the behavior of the cloud with and without faults.
 
@@ -131,7 +131,7 @@ Furthermore, in the next semester, I will study the hypervisor and I will implem
 % \subsubsection{Experiments}
 
 % In the next semester, additionally of the conclusion of the fault injector, I'll inject faults in the cloud.
-In the figure \ref{fig:test1}, can be seen two environments where will be done the first and second experiment, with normal conditions without faults and with faults, respectively. An application will be selected, as shown in the figure as ``App''. This application will run in a normal environment and will be measured the runtime and the result of the execution. For later compare to the results obtained in other scenarios.
+In figure \ref{fig:test1}, it can be seen two environments where the first and second experiments will be done, under normal conditions (without faults) and with faults, respectively. An application will be selected, as shown in the figure as ``App''. This application will run in a normal environment and it will be measured the runtime and the result of the execution, for later comparison with the results obtained in other scenarios.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -140,7 +140,7 @@ In the figure \ref{fig:test1}, can be seen two environments where will be done t
 \end{center}
 \end{figure}
 
-The scenario represented in the right of the figure \ref{fig:test1}, it's the same as in the left, with the difference that this have a fault injected in the ``App''. Depending on the type of fault injected into the ``App'', it will have different behaviors, which will be assessed by the \emph{CRASH Scale}.
+The scenario represented in the right side of figure \ref{fig:test1} is similar to the one in the left side, with the slight  difference that the latter one has a fault injected into the ``App''. Depending on the type of fault injected into the ``App'', it will have different behaviors, which will be assessed by the \emph{CRASH Scale}.
 
 % \begin{figure}[!ht]
 % \begin{center}
@@ -149,7 +149,7 @@ The scenario represented in the right of the figure \ref{fig:test1}, it's the sa
 % \end{center}
 % \end{figure}
 
-Above, in the figure \ref{fig:test3}, can be seen the third experiment with an Native Hypervisor. The goal of this scenario is whether through fault injection in one of the virtual machines, the others are affected. Moreover, if the virtual machine that don't have faults have the same behavior beside with an execution of a virtual machine with an ``App'' with faults and without faults.
+Below, in figure \ref{fig:test3}, it is represented the third experiment with an Native Hypervisor. The goal of this scenario is to evaluate whether through fault injection in one of the virtual machines, the others are affected. It will also try to evaluate if the virtual machine without faults exhibits the same behavior when running side by side with a virtual machine that has an ``App'' with faults and without faults.
 
 % \begin{figure}[!ht]
 % \begin{center}
