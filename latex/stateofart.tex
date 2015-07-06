@@ -213,7 +213,7 @@ In figure \ref{fig:cloudcomputingservicemodels}, it is possible to verify the di
 \begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=1\textwidth]{cloud-computing-service-models2.png}
-\caption{\small \sl Cloud computing service models. \textit{Source: www.hanusoftware.com/}\label{fig:cloudcomputingservicemodels}}
+\caption[\small \sl Cloud computing service models]{\small \sl Cloud computing service models. \textit{Source: www.hanusoftware.com/}\label{fig:cloudcomputingservicemodels}}
 \end{center}
 \end{figure}
 
@@ -516,7 +516,10 @@ In figure \ref{fig:decisions}, it can be seen an overview of the main decisions 
 
 Since the beginning of this project, I was expected to implement a fault injector. However, as stated earlier, in the beginning it was supposed to inject hardware faults, but due to the postponement of six months, and the development of the project related to hardware faults injection, the project was then modified to inject software faults.
 
-After taking that decision, I had to choose the technique that I would use to inject faults, from three different ones: at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. I have selected the source code level technique because there are some available tools, which inject faults in execution environment, e.g. by João Durães. Previously, Robert Natella had coded a similar tool, using MCPP as a C preprocessor during his PhD thesis.
+After taking that decision, I had to choose the technique that I would use to inject faults, from three different ones: at binary code level in the execution environment, at object code level in the compilation or before the compilation at source code. There are some available tools, which inject faults in execution environment (e.g. by João Durães). Also, Robert Natella had previously coded a tool which injects faults at source code level, using MCPP as a C preprocessor during his PhD thesis.
+
+% I have selected the source code level technique because there are some available tools,
+
 Taking all these factors into account could lead to the conclusion that choosing to inject faults at object code level (i.e., during compilation time) would be the best option, in what concerns research innovation. However, the use of this technique in the development of this fault injector and the evaluation of the robustness of the cloud would be a great effort and too much work for a master's thesis. Hence, it was decided to inject faults before compilation time, at the source code of applications. The use of this technique provides the emulation of realistic software faults done by real programmers.
 
 Despite the existence of Robert's tool to inject faults at source code, the injector under development will use the capabilities of Java, such as the maintainability and its easy of use, to inject faults in source code coded in the C language.
