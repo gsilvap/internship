@@ -3,8 +3,8 @@
 % \chapter{Introduction}
 \section{Introduction}
 
-This internship deals with the challenge of assessing the robustness of cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application.
-Faults will be injected in software running in the cloud and collected results will be evaluated.
+This internship deals with the challenge of assessing the robustness of the cloud platforms. The computing service provider uses virtualization to manage and allocate computing power to meet present needs of the application.
+Faults will be injected in the software running in the cloud and the collected results will be evaluated.
 % Will be injected faults in software in the cloud and collected results to be evaluated.
 % \iftoggle{long}{\red{In the next subsections will be introduced the context and the scope of this project.}
 % \orange{1,2 ou 3 paragrafos descritivos do problema}}
@@ -17,7 +17,7 @@ It is characterized by the placement of data, software and services on remote in
 Despite its numerous benefits, the reliability and resilience of these platforms doesn't always answer the users' needs, as there is always a certain degree of trust in systems outside of their personal control.
 % reliability
 
-In this context, the problem of the existence of bugs in software of the entity managing the platform where applications are executed arises naturally. There are many reasons for the existence of these software bugs, the most important being:
+In this context, the problem of the existence of bugs in software of the entity managing the platform where applications are executed arises naturally. There are many reasons for the existence of these software bugs, but the most important are:
 
 \begin{itemize}
 	\item Miscommunication;
@@ -32,7 +32,7 @@ In this context, the problem of the existence of bugs in software of the entity 
 	\item Lack of skilled testers.
 \end{itemize}
 
-Therefore, the bugs will continue to exist and will always exist. Because of this, the test of the ability of a critical system to deal with existing bugs is critical. This is the main reason for the existence of this dissertation.
+Therefore, the bugs will continue existing and will always exist. Because of this, the test of the ability of a critical system to deal with existing bugs is critical. This is the main reason of this dissertation.
 
 Any organization that puts an application in the cloud (for instance in Microsoft Azure or Amazon EC2) should accept the assurances given by the service provider.
 
@@ -60,9 +60,9 @@ Nevertheless, this main objective is divided in some other goals:
 	\item Implement the thirteen operators specified by João Durães;
 	\item Use the fault injector to emulate faults in applications;
 	\item Measure the time and the value obtained after running the application, in normal conditions;
-	\item Inject a fault in an application, verify and analyze the effect. Measure the value and the time running the application with and without faults;
+	\item Inject a fault in the application, verify and analyze the effect. Measure the value and the time running the application with and without faults;
 	\item Compare the time and value in a normal scenario and in a scenario with faults;
-	\item Create a scenario with multiple virtual machines, verify and analyze the effect. Measure the value and the time with the application without faults and with faults;
+	\item Create a scenario with multiple virtual machines, verify and analyze the effect. Measure the value and the time with the application, without faults and with faults;
 	\item Compare all the results and obtain conclusions.
 
 	% \item Generate derivations of main code of selected programs;
@@ -73,15 +73,15 @@ Nevertheless, this main objective is divided in some other goals:
 
 \subsection{Document structure}
 
-In this document are specified all the related subjects with the project.
+All the related subjects with the project are specified in this document.
 
 The second section presents the state-of-the-art in the related areas with particular emphasis to the fault injectors of software faults.
 
-The third section is an important section of this report, because of the research involved in the execution of this work. It was necessary to take some important decisions based in research results, knowledge and my own experience.
+The third section is an important section of this report, because of the research involved in the execution of this work. It was necessary to take some important decisions based on research results, knowledge and my own experience.
 
-The fourth section describes the work that has been done in Fault Injector, and the work that should be done in the next semester.
+The fourth section describes the work that has been done in Fault Injector, and the work that should be done during the next semester.
 
 The fifth section explains other modules that need to be executed in this project to observe and evaluate the results of the fault injector.
 
-In the last section, I will do an overview analysis of my work, in general the operators and the constraints developed. I will also talk about the work to be done in the next semester.
+In the last section, I will do an overview analysis of my work, in general the operators and the constraints developed. I will also talk about the work that will be done in the next semester.
 
